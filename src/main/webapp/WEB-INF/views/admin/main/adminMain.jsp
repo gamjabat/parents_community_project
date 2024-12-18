@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -40,79 +42,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- 예시 데이터 -->
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>홍길동2</td>
-						<td>박영희</td>
-						<td>hong2@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
-<tr  data-member-no="1" data-id="parmhani" data-name="팜하니" data-email="pag@gmail.com" data-nickname="팜닉네임" data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집" data-birth="2000-11-11"  
-data-create-date="2024-01-15" data-status=false data-posts="12" data-update-date="2024-01-15"  data-delete-date="2024-01-15" 
-data-comments="45" data-isDelete="false">
-						<td>팜하니</td>
-						<td>홍길동</td>
-						<td>pag@gmail.com</td>
-						<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
-					</tr>
+				<c:if test="${not empty members}">
+					<c:forEach var="member" items="${members}">
+						<tr>
+							<td>${member.memberNo}</td>
+							<td>${member.name}</td>
+							<td>${member.email}</td>
+							<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
+						</tr>
+					</c:forEach>
+				</c:if>
 				</tbody>
 			</table>
 		</section>
@@ -136,66 +75,6 @@ data-comments="45" data-isDelete="false">
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-member-no="1" data-id="parmhani" data-name="팜하니"
-						data-email="pag@gmail.com" data-nickname="팜닉네임"
-						data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집"
-						data-birth="2000-11-11" data-create-date="2024-01-15"
-						data-status=false data-posts="12" data-update-date="2024-01-15"
-						data-delete-date="2024-01-15" data-comments="45"
-						data-isDelete=false>
-						<td>1</td>
-						<td>홍길동</td>
-						<td>우치하</td>
-						<td>댓글</td>
-						<td>디자인 너무 짜친다고 욕했어요....</td>
-						<td>2024-11-22</td>
-						<td>처리중</td>
-					</tr>
-					<tr data-member-no="1" data-id="parmhani" data-name="팜하니"
-						data-email="pag@gmail.com" data-nickname="팜닉네임"
-						data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집"
-						data-birth="2000-11-11" data-create-date="2024-01-15"
-						data-status=false data-posts="12" data-update-date="2024-01-15"
-						data-delete-date="2024-01-15" data-comments="45"
-						data-isDelete=false>
-						<td>2</td>
-						<td>팜하니</td>
-						<td>유xx</td>
-						<td>게시글</td>
-						<td>강사님이 광고글을 유표(유포 아님 유표하심!(삼국지 유표))하셨어요....</td>
-						<td>2024-11-10</td>
-						<td>처리완료</td>
-					</tr>
-					<tr data-member-no="1" data-id="parmhani" data-name="팜하니"
-						data-email="pag@gmail.com" data-nickname="팜닉네임"
-						data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집"
-						data-birth="2000-11-11" data-create-date="2024-01-15"
-						data-status=false data-posts="12" data-update-date="2024-01-15"
-						data-delete-date="2024-01-15" data-comments="45"
-						data-isDelete=false>
-						<td>3</td>
-						<td>사스케</td>
-						<td>나루토</td>
-						<td>게시글</td>
-						<td>탈주했어요....</td>
-						<td>2024-11-22</td>
-						<td>처리중</td>
-					</tr>
-					<tr data-member-no="1" data-id="parmhani" data-name="팜하니"
-						data-email="pag@gmail.com" data-nickname="팜닉네임"
-						data-phone="010-8282-1004" data-address="경기도 화성시 남양읍 미뇨니집"
-						data-birth="2000-11-11" data-create-date="2024-01-15"
-						data-status=false data-posts="12" data-update-date="2024-01-15"
-						data-delete-date="2024-01-15" data-comments="45"
-						data-isDelete=false>
-						<td>4</td>
-						<td>샹크스</td>
-						<td>루피</td>
-						<td>댓글</td>
-						<td>새시대에 두고왔다....</td>
-						<td>2024-11-22</td>
-						<td>처리중</td>
-					</tr>
 				</tbody>
 			</table>
 			<table id="inquiry-table" onclick="hideInquery();"
@@ -212,50 +91,6 @@ data-comments="45" data-isDelete="false">
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-id="1" data-name="팜하니" data-email="pag@gmail.com"
-						data-join-date="2024-01-15" data-status=false data-posts="12"
-						data-comments="45">
-						<td>1</td>
-						<td>홍길동</td>
-						<td>우치하</td>
-						<td>댓글</td>
-						<td>디자인 너무 짜친다고 욕했어요....</td>
-						<td>2024-11-22</td>
-						<td>처리중</td>
-					</tr>
-					<tr data-id="2" data-name="팜하니" data-email="pag@gmail.com"
-						data-join-date="2024-01-15" data-status=false data-posts="12"
-						data-comments="45">
-						<td>2</td>
-						<td>팜하니</td>
-						<td>유xx</td>
-						<td>게시글</td>
-						<td>강사님이 광고글을 유표(유포 아님 유표하심!(삼국지 유표))하셨어요....</td>
-						<td>2024-11-10</td>
-						<td>처리완료</td>
-					</tr>
-					<tr data-id="3" data-name="팜하니" data-email="pag@gmail.com"
-						data-join-date="2024-01-15" data-status=false data-posts="12"
-						data-comments="45">
-						<td>3</td>
-						<td>사스케</td>
-						<td>나루토</td>
-						<td>게시글</td>
-						<td>탈주했어요....</td>
-						<td>2024-11-22</td>
-						<td>처리중</td>
-					</tr>
-					<tr data-id="4" data-name="홍길동2" data-email="hong2@gmail.com"
-						data-join-date="2023-12-01" data-status="탈퇴" data-posts="5"
-						data-comments="10">
-						<td>4</td>
-						<td>샹크스</td>
-						<td>루피</td>
-						<td>댓글</td>
-						<td>새시대에 두고왔다....</td>
-						<td>2024-11-22</td>
-						<td>처리중</td>
-					</tr>
 				</tbody>
 			</table>
 		</section>
@@ -300,8 +135,14 @@ data-comments="45" data-isDelete="false">
 			// 팝업 URL에 데이터 전달 (쿼리스트링 사용)
 			const popupUrl = `${pageContext.request.contextPath}/admin/memberInfo.do?memberNo=\${userData.memberNo}&id=\${userData.uid}&name=\${userData.name}&email=\${userData.email}&phone=\${userData.phone}&address=\${userData.address}&birth=\${userData.birth}&nick=\${userData.nick}&createDate=\${userData.createDate}&updateDate=\${userData.updateDate}&deleteDate=\${userData.deleteDate}&isDelete=\${userData.isDelete}`
 			// 팝업 열기
+			
+			const popupW = 300;
+			const popupH = 450;
+			const left = Math.ceil((window.screen.width - popupW)/2);
+			const top = Math.ceil((window.screen.height - popupH)/2);
+			
 			open(popupUrl, "_blank",
-					"width=400px,height=800,scrollbars=yes");
+					"width="+popupW+',height='+popupH+'left='+left+',top='+top+',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		}
 	</script>
 </body>

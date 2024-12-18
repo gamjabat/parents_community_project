@@ -41,6 +41,11 @@
         button:hover {
             background-color: #bba78a;
         }
+        
+        #btn_container{
+        	text-align: center;
+        }
+        
     </style>
 
 
@@ -62,8 +67,9 @@
         <p><strong>정보수정일:</strong>${member.updateDate}<span id="popup-id"></span></p>
         <%-- <p><strong>탈퇴여부:</strong>${member.isDelete?"탈퇴":"미탈퇴"}<span id="popup-id"></span></p> --%>
         <p><strong>탈퇴일:</strong>${member.deleteDate!=null?member.deleteDate:""}<span id="popup-id"></span></p>
-        
-        <button onclick="window.close()">닫기</button>
+        <div id="btn_container">
+        	<button onclick="window.close()">닫기</button>
+        </div> 
     </main>
     <script>
    /*      // URL에서 데이터 가져오기
@@ -77,6 +83,8 @@
          document.getElementById("popup-status").textContent = params.get("status");
          document.getElementById("popup-posts").textContent = params.get("posts");
          document.getElementById("popup-comments").textContent = params.get("comments"); */
+         
+         
     </script>
     
 </body>

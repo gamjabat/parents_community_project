@@ -39,7 +39,7 @@ public class AdminMainServlet extends HttpServlet {
 		ArrayList<Member> m = new ArrayList<>();
 		
 		
-//		String strDate = "20200806";
+		String strDate = "20200806";
 //		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyyMMdd");
 //		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
 //		// String 타입을 Date 타입으로 변환
@@ -51,18 +51,26 @@ public class AdminMainServlet extends HttpServlet {
 //			e.printStackTrace();
 //		}
 //		
-//		
-//		for(int i=1;i<=100;i++) {
-//			Member m1 = Member.builder()
-//					.memberNo("user"+i).memberId("userId"+i)
-//					.address("우리")
-//					.birthday(formatDate)
-//					.address("우리집!!!")
-//					.email("asd3dasf@asdf.com")
-//					.phone("102-213-2332")
-//					.nickName("asdfa").createDate(formatDate)
-//					.updateDate(formatDate).build();
-//		}
+		
+		for(int i=1;i<=100;i++) {
+			Member m1 = Member.builder()
+					.memberNo("user"+i).memberId("userId"+i)
+					.name("이름"+i)
+					.address("우리")
+					.birthday(strDate)
+					.address("우리집!!!")
+					.email("asd3dasf@asdf.com")
+					.phone("102-213-2332")
+					.nickName("asdfa").createDate(strDate)
+					.updateDate(strDate).build();
+			m.add(m1);
+		}
+		
+		System.out.println(m.size());
+		
+		request.setAttribute("members", m);
+		
+		
 //		
 		request.getRequestDispatcher("/WEB-INF/views/admin/main/adminMain.jsp").forward(request, response);
 	}
