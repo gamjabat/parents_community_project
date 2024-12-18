@@ -13,14 +13,19 @@
 </head>
 <body>
 	<div class="container">
-		<div class="left-panel"></div>
+		<div class="left-panel">
+			<img src="${path}/resources/images/logo.png" class="logo" alt="Logo" onclick="mainPage();">
+			<div class="login-message">에듀라에 오신 것을</div>
+			<div class="login-message">환영합니다!</div>
+		</div>
 		<div class="right-panel">
-			<input type="text" id="userId" placeholder="ID"> <input
-				type="password" id="userPwd" placeholder="PASSWORD"> <span
-				id="inputEmptyCheck"></span>
+			<input class="login-input" type="text" id="userId" placeholder="ID">
+			<input class="login-input" type="password" id="userPwd" placeholder="PASSWORD">
+			<span id="inputEmptyCheck" class="error"></span>
 			<div class="text-right small-text">
-				<a href="#">ID찾기</a> <a href="${path }/login/findpassword.do">비밀번호
-					찾기</a> <a href="${path }/login/signup.do">회원가입</a>
+				<a href="${path }/login/findpassword.do">비밀번호 찾기</a>
+				<a href="#">ID찾기</a>
+				<a href="${path }/login/signup.do">회원가입</a>
 			</div>
 			<button id="loginBtn">LOGIN</button>
 		</div>
@@ -34,7 +39,6 @@
 			
 			if(userId==''|| userPwd==''){
 				$("#inputEmptyCheck").text('아이디/비밀번호를 입력하세요');
-				$("#inputEmptyCheck").css('color','red');
 				
 			}else{
 				location.assign("${path}/login/loginCheck.do?userId="+userId+"&userPwd"+userPwd);			
