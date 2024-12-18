@@ -17,7 +17,9 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<header class="admin-header">
@@ -55,13 +57,20 @@
 					</c:if>
 				</tbody>
 			</table>
+			<div class="pagination">
+				<a href="#" class="page-link">&lt;&lt;</a> <a href="#"
+					class="page-link">&lt;</a> <a href="#" class="page-link active">1</a>
+				<a href="#" class="page-link">2</a> <a href="#" class="page-link">3</a>
+				<a href="#" class="page-link">&gt;</a> <a href="#" class="page-link">&gt;&gt;</a>
+			</div>
 		</section>
 		<section id="posts">
 			<h2>게시글 관리</h2>
 			<nav>
 				<button type="button" onclick="hideDeclaration();"
 					class="btn btn-primary">문의글</button>
-				<button type="button" class="btn btn-danger" onclick="hideInquery();">신고글</button>
+				<button type="button" class="btn btn-danger"
+					onclick="hideInquery();">신고글</button>
 			</nav>
 			<table id="inquiry-table">
 				<thead>
@@ -91,7 +100,7 @@
 					</c:if>
 				</tbody>
 			</table>
-			<table id="declaration-table" style="display:none;">
+			<table id="declaration-table" style="display: none;">
 				<thead>
 					<tr>
 						<th>신고글 id</th>
@@ -104,22 +113,30 @@
 					</tr>
 				</thead>
 				<tbody>
-	 				<c:if test="${not empty reportboards}">
+					<c:if test="${not empty reportboards}">
 						<c:forEach var="rboard" items="${reportboards}">
 							<tr>
 								<td>${rboard.reportNo}</td>
- 								<td>${rboard.reportMember.memberId}</td>
- 								<td>${rboard.suspectMember.memberId}</td>
+								<td>${rboard.reportMember.memberId}</td>
+								<td>${rboard.suspectMember.memberId}</td>
 								<td>${rboard.reportCode}</td>
 								<td>${rboard.reportTitle}</td>
 								<td>${rboard.reportContent}</td>
-								 <td>${rboard.reportStatus}</td> 
+								<td>${rboard.reportStatus}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 				</tbody>
 			</table>
+
 		</section>
+		<div class="pagination">
+			<a href="#" class="page-link">&lt;&lt;</a> <a href="#"
+				class="page-link">&lt;</a> <a href="#" class="page-link active">1</a>
+			<a href="#" class="page-link">2</a> <a href="#" class="page-link">3</a>
+			<a href="#" class="page-link">&gt;</a> <a href="#" class="page-link">&gt;&gt;</a>
+		</div>
+
 	</main>
 
 	<footer>

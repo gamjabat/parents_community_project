@@ -53,6 +53,8 @@ public class AdminMainServlet extends HttpServlet {
 //		}
 //		
 		
+		
+		
 		for(int i=1;i<=5;i++) {
 			Member m1 = Member.builder()
 					.memberNo("user"+i).memberId("userId"+i)
