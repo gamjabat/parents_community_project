@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f4ee;
+    font-family: Arial, sans-serif;
+  }
+   /*로그인 container*/
+  .container {
+    display: flex;
+    width: 600px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .left-panel {
+    flex: 1;
+    background-color: #4d4d3d;
+  }
+  
+  .right-panel {
+    flex: 1;
+    background-color: #7ba37e;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 80px 20px;
+  }
+  
+  /* 폼 스타일 */
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #fefefe;
+    font-size: 10px;
+  }
+  
+  button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4d4d3d;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #333;
+  }
+  
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-right {
+    text-align: right;
+    float: right;
+  }
+  
+  .small-text {
+    font-size: 10px;
+    color: #ffffff;
+    opacity: 0.9;
+  }
+  
+  .small-text a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 10px;
+    float: right;
+  }
+  
+  .small-text a:hover {
+    text-decoration: underline;
+  }
+  
+  /* 페이지별 스타일 */
+  .title {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom:3px solid white;
+  }
+  
+  .description {
+    font-size: 10px;
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  .flex-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .flex-row button {
+    flex: 1;
+    margin: 0 10px;
+  }

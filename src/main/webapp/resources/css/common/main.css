@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+/* 메인컨테이너 */
+#main-container{
+	padding: 0px 50px;
+	display: flex;
+	flex-direction: row;
+}
+
+/* 서브컨테이너 */
+#sub-container{
+	display : flex;
+	flex-direction: column;
+	flex : 1;
+}
+
+/* 게시글리스트 */
+#boardlist-container{
+	flex : 3;
+}
+
+/* 테이블 */
+table{
+	width: 100%;
+}
+
+table>tbody *, .list-title *{
+	background-color: #F6F2ED !important;
+}
+
+
+/* 게시글 tr 클릭 */
+.boardlist tr{
+	cursor: pointer; 
+}
+
+/* 게시판 제목 */
+.list-title{
+	justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	padding: 0px 10px;
+}
+
+.nav-link{
+	color:black;
+	font-weight: bold;
+}
+
+.nav-link:hover{
+	color : #5A8B63 !important; 
+}
+
+.nav-link.active{
+	color : #5A8B63 !important; 
+}
+
+/* 더보기 버튼 */
+.more-list{
+	font-size: small;
+	font-weight: normal;
+}
+
+.more-list:hover{
+	cursor: pointer;
+}
+
+/* 카테고리명 */
+.boardcategory{
+	width: 20%;
+}
+
+/* 게시글 제목 */
+.boardtitle{
+	width : 60%;
+}
+
+.boardlist tr{
+	width: 100%;
+}
+
+/* 좋아요수, 조회수 */
+.likecount, .viewcount{
+	width: 10%;
+}
+
+/* 아이콘 크기 설정 */
+.likecount svg, .viewcount svg {
+    width: 16px; /* 아이콘 너비 */
+    height: 16px; /* 아이콘 높이 */
+    fill: currentColor; /* SVG 색상 상속 */
+    flex-shrink: 0; /* 아이콘 축소 방지 */
+}
+
+/* 로그인 박스 */
+.login-container{
+	border: 1px solid #ADB5BD;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-button{
+	border-radius: 10px;
+	background-color: #5A8B63 !important;
+	color: white;
+	width: 100%;
+	height: 50px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-button:hover{
+	background-color: #3D6A47 !important;
+	cursor: pointer;
+	
+}
+
+.login-container .login-menu{
+	display: flex;
+  	justify-content: center;
+}
+
+.table-hover td {
+    vertical-align: middle; /* 세로 중앙 정렬 */
+    text-align: center; /* 가로 중앙 정렬 */
+    padding: 10px; /* 셀 내부 간격 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+
