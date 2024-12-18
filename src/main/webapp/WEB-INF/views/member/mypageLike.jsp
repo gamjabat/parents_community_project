@@ -4,7 +4,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>	
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-<link rel="stylesheet" href="${path}/resources/css/member/mypageBoardList.css">
+<link rel="stylesheet" href="${path}/resources/css/member/mypageLike.css">
 
 	<div class="mypage-container">
 	    <div class="mypage-sidebar">
@@ -19,8 +19,8 @@
 		     	</ul>
 		 </div>
     	 <div class="mypage-content">
-     		<h2>나의 게시물</h2>
-     		 <div class="board-content">
+     		<h2>나의 좋아요</h2>
+     		 <div class="like-content">
      		 </div>
      	</div>
      	
