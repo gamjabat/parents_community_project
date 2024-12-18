@@ -9,23 +9,24 @@
 <link rel="stylesheet" href="${path }/resources/css/login/login.css">
 <link rel="stylesheet" href="${path }/resources/css/login/findIdPassword.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
-<title>비밀번호 찾기</title>
+<title>아이디 찾기</title>
 </head>
 <body>
 	<div class="container">
     <div class="left-panel">
-		<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#5A8B63" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
-		  <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
+		<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#5A8B63" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+		  <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
+		  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
 		</svg>
-		<div class="login-message">비밀번호를 잊으셨나요?</div>
+		<div class="login-message">아이디를 잊으셨나요?</div>
     </div>
     <div class="right-panel">
-      <div class="title" >비밀번호 찾기</div>
+      <div class="title" >아이디 찾기</div>
       <div class="email-auth-container">
       	<div class="sub-title">본인확인 이메일로 인증</div>
       	<div class="description">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,<br> 인증번호를 받을 수 있습니다.</div>
-      	<form class="email-auth-input">
-      		<input type="text" placeholder="id">
+      	<form class="email-auth-input" action="${path }/login/findidsuccess.do">
+      		<input type="text" placeholder="name">
       		<div class="email-input">
 		      	<input type="email" name="email" placeholder="email">
 		        <button>인증번호 발송</button>
