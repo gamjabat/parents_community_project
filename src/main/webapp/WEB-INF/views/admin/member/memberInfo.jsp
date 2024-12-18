@@ -84,8 +84,6 @@
          document.getElementById("popup-posts").textContent = params.get("posts");
          document.getElementById("popup-comments").textContent = params.get("comments"); */
          
-        	
-         
          
     </script>
     
