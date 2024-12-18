@@ -25,7 +25,7 @@
 			<div class="member-idbox">
 				<label class="member-id">아이디</label>
 				<label class="member-id">유저아이디</label>
-				<button class="member-id-btn">변경</button>
+				<button class="member-id-btn"><div>변경</div></button>
 			</div>
 			
 			<div class="member-namebox">
@@ -35,13 +35,13 @@
 			
 			<div class="member-pwbox">
 				<label class="member-pw">비밀번호</label>
-				<button class="member-pw-btn">변경</button>
+				<button class="member-pw-btn"><div>변경</div></button>
 			</div>
 			
 			<div class="member-emailbox">
 				<label class="member-email">이메일</label>
 				<label class="member-email">유저이메일</label>
-				<button class="member-email-btn">변경</button>
+				<button class="member-email-btn"><div>변경</div></button>
 			</div>
 			
 			<div class="member-phonebox">
@@ -52,7 +52,7 @@
 			<div class="member-addressbox">
 				<label class="member-address">주소</label>
 				<label class="member-address">인천 부평구 덤벼.</label>
-				<button class="member-address-btn">변경</button>
+				<button class="member-address-btn"><div>변경</div></button>
 			</div>
 			
 			<div class="member-btdaybox">

@@ -24,7 +24,7 @@
 		        <div class="mypage-form">
 		        <h3>비밀번호 재확인</h3>
 		        <p>회원 정보를 안전하게 보호하기 위해 회원 비밀번호를 다시 확인합니다.</p>
-		            <form action="${path}/member/mypageinfoupdate.do" method="post">
+		            <form action="${path}/member/mypageinfoupdate.do" class="forms" method="post">
 		           <label class="idlabel">
 		           		아이디<input type="text" class="myId" value="useruser1" readonly/>
 		           </label>

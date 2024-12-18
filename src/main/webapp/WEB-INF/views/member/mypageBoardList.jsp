@@ -18,9 +18,20 @@
 	            	<li><a href="${path}/member/mypagelike.do">나의 좋아요</a></li>
 		     	</ul>
 		 </div>
+		 
     	 <div class="mypage-content">
      		<h2>나의 게시물</h2>
      		 <div class="board-content">
+     		 <table class="board-table">
+     		 	 <tr class="board-colums">
+		            <td class="board-no">번호</td>
+		            <td class="board-title">제목</td>
+		            <td class="board-writer">작성자</td>
+		            <td class="board-startwriter">작성일</td>
+		            <td class="board-like">좋아요</td>
+		            <td class="board-viewcount">조회수</td>
+       			 </tr>
+     		 </table>
      		 </div>
      	</div>
      	
