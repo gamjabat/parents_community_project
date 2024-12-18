@@ -45,24 +45,26 @@ public class AdminMemberInfoServlet extends HttpServlet {
 		String deleteDate = request.getParameter("deleteDate");
 		boolean isDelete = Boolean.parseBoolean(request.getParameter("isDelete"));
 		
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		Date barthDt;
-		Date createDt;
-		Date updateDt;
-		Date deleteDt;
-		try {
-			barthDt=new Date(sdf.parse(birthday).getTime());
-			createDt=new Date(sdf.parse(createDate).getTime());
-			updateDt=new Date(sdf.parse(updateDate).getTime());
-			deleteDt=new Date(sdf.parse(deleteDate).getTime());
-		}catch(ParseException | NullPointerException e) {
-			e.printStackTrace();
-			barthDt=null;
-			createDt=null;
-			updateDt=null;
-			deleteDt=null;
-		}
+//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//		Date barthDt;
+//		Date createDt;
+//		Date updateDt;
+//		Date deleteDt;
+//		try {
+//			barthDt=new Date(sdf.parse(birthday).getTime());
+//			createDt=new Date(sdf.parse(createDate).getTime());
+//			updateDt=new Date(sdf.parse(updateDate).getTime());
+//			deleteDt=new Date(sdf.parse(deleteDate).getTime());
+//		}catch(ParseException | NullPointerException e) {
+//			e.printStackTrace();
+//			barthDt=null;
+//			createDt=null;
+//			updateDt=null;
+//			deleteDt=null;
+//		}
 		
+		// 우선 DB연결전에 날짜 값을 스트링으로 했기때문에 나중에 매핑을 바꿔줘야함.
+		// 현재 createDate값으로 날짜값을 통일함 
 		
 		Member member = Member.builder()
 				.memberNo(memberNo)
@@ -71,11 +73,11 @@ public class AdminMemberInfoServlet extends HttpServlet {
 				.email(email)
 				.phone(phone)
 				.address(address)
-				.birthday(deleteDt)
+				.birthday(createDate)
 				.nickName(nickName)
-				.createDate(createDt)
-				.updateDate(updateDt)
-				.deleteDate(deleteDt)
+				.createDate(createDate)
+				.updateDate(createDate)
+				.deleteDate(createDate)
 				.isDelete(isDelete)
 				.build();
 		
