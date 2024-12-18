@@ -300,8 +300,14 @@ data-comments="45" data-isDelete="false">
 			// 팝업 URL에 데이터 전달 (쿼리스트링 사용)
 			const popupUrl = `${pageContext.request.contextPath}/admin/memberInfo.do?memberNo=\${userData.memberNo}&id=\${userData.uid}&name=\${userData.name}&email=\${userData.email}&phone=\${userData.phone}&address=\${userData.address}&birth=\${userData.birth}&nick=\${userData.nick}&createDate=\${userData.createDate}&updateDate=\${userData.updateDate}&deleteDate=\${userData.deleteDate}&isDelete=\${userData.isDelete}`
 			// 팝업 열기
+			
+			const popupW = 300;
+			const popupH = 450;
+			const left = Math.ceil((window.screen.width - popupW)/2);
+			const top = Math.ceil((window.screen.height - popupH)/2);
+			
 			open(popupUrl, "_blank",
-					"width=400px,height=800,scrollbars=yes");
+					"width="+popupW+',height='+popupH+'left='+left+',top='+top+',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		}
 	</script>
 </body>
