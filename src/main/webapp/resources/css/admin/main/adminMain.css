@@ -187,7 +187,13 @@ main{
     border-radius: 5px;
 }
 
-footer{
+/* footer{
 	text-align:center;
-}
+} */
 
+footer {
+    background-color: #d7c9a6;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
