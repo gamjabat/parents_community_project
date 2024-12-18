@@ -19,7 +19,6 @@
             <li><a href="${path}/member/mypagelike.do">나의 좋아요</a></li>
         </ul>
     </div>
-	
 	 <div class="mypage-content">
 	        <h2>나의 정보 수정</h2>
 		        <div class="mypage-form">
