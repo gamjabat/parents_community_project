@@ -43,7 +43,7 @@ body {
 section {
     margin : 30px;
     padding: 10px;
-    overflow: auto;
+/*     overflow: auto; */
     max-height: 500px;
 }
 
