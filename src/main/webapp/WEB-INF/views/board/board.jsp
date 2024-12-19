@@ -17,7 +17,7 @@
         <div class="board-category">
             <button class="btn-category">전체글</button>
             <button class="btn-category hot">HOT</button>
-            <span class="category-depth">카테고리 div !@@!#!@</span>
+            <span class="category-depth"></span>
         </div>
         <a href="${path}/boardwrite.do" class="write-btn">글쓰기</a>
     </div>
