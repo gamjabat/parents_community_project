@@ -22,6 +22,44 @@
     	 <div class="mypage-content">
      		<h2>나의 댓글</h2>
      		 <div class="comment-content">
+     		 		<table class="comment-table" width="100%">
+		     		  <thead>
+		     		 	 <tr class="comment-col">
+				            <th scope="col">No</th>
+				            <th scope="col">내용</th>
+				            <th scope="col">작성자</th>
+				            <th scope="col">작성일</th>
+				            <th scope="col">좋아요</th>
+				            <th scope="col">조회수</th>
+		       			 </tr>
+		       		 </thead>
+		       		 <tbody>
+		     		 	 <tr>
+				            <td>1</td>
+				            <td>댓글잼.</td>
+				            <td>감자</td>
+				            <td>2024-12-18</td>
+				            <td>2</td>
+				            <td>3</td>
+		       			 </tr>
+		       			 <tr>
+				            <td>2</td>
+				            <td>모르겠어요.</td>
+				            <td>감자</td>
+				            <td>2024-12-18</td>
+				            <td>2</td>
+				            <td>3</td>
+		       			 </tr>
+		       			 <tr>
+				            <td>3</td>
+				            <td>뷁</td>
+				            <td>감자</td>
+				            <td>2024-12-18</td>
+				            <td>242955</td>
+				            <td>3904494</td>
+		       			 </tr>
+		       		 </tbody>
+	     		 </table>
      		 </div>
      	</div>
 	</div>

@@ -21,6 +21,44 @@
     	 <div class="mypage-content">
      		<h2>나의 좋아요</h2>
      		 <div class="like-content">
+     		 		<table class="like-table" width="100%">
+		     		  <thead>
+		     		 	 <tr class="like-col">
+				            <th scope="col">No</th>
+				            <th scope="col">제목</th>
+				            <th scope="col">작성자</th>
+				            <th scope="col">작성일</th>
+				            <th scope="col">좋아요</th>
+				            <th scope="col">조회수</th>
+		       			 </tr>
+		       		 </thead>
+		       		 <tbody>
+		     		 	 <tr>
+				            <td>1</td>
+				            <td>좋아요 한 글의 제목입니다.</td>
+				            <td>감자</td>
+				            <td>2024-12-18</td>
+				            <td>2</td>
+				            <td>3</td>
+		       			 </tr>
+		       			 <tr>
+				            <td>2</td>
+				            <td>모르겠어요.</td>
+				            <td>감자</td>
+				            <td>2024-12-18</td>
+				            <td>2</td>
+				            <td>3</td>
+		       			 </tr>
+		       			 <tr>
+				            <td>3</td>
+				            <td>뷁</td>
+				            <td>감자</td>
+				            <td>2024-12-18</td>
+				            <td>242955</td>
+				            <td>3904494</td>
+		       			 </tr>
+		       		 </tbody>
+	     		 </table>
      		 </div>
      	</div>
      	
