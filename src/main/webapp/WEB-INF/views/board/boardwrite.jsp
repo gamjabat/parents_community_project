@@ -32,8 +32,8 @@
         <form action="${path }/board/boardwriteend.do" method="post">
             <div class="form-group">
                 <label for="category">카테고리를 선택해 주세요.</label>
-                 <div class="select-container">
-                <select id="category" class="form-control" name="category">
+              <div class="select-container" style="padding:0;">
+                <select id="category" class="form-control " name="category">
                 
                 	<option value="공지">공지</option>
                     <option value="잡담">잡담</option>
@@ -45,7 +45,7 @@
                     <option value="정보">정보</option>
                     <option value="질문">질문</option> 
                 </select>
-            </div>
+            	</div>
 			</div>
 			
             <div class="form-group">
@@ -84,7 +84,7 @@
     <script>
         var quill = new Quill('#editor-container', {
             theme: 'snow',
-            placeholder: '내용을 입력해 주세요...',
+            placeholder: '   내용을 입력해 주세요...',
             modules: {
                 toolbar: [['bold', 'italic', 'underline'], [{ 'header': 1 }, { 'header': 2 }], [{ 'list': 'ordered' }, { 'list': 'bullet' }], ['link', 'image']]
             }

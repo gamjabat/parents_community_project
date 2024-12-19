@@ -8,7 +8,6 @@
 .signup-container {
 	width: 70%;
 	background-color: #F6F2ED;
-	padding: 20px 30px;
 	border-radius: 10px;
 }
 
@@ -52,6 +51,7 @@
 	width: 100%;
 	display: flex;
 	gap: 10px; /* 요소 사이의 간격 */
+	height: 38px;
 }
 
 .form-select.email-domain {
@@ -60,11 +60,12 @@
 
 .form-group input, .form-group select {
 	height: 38px; /* 높이를 통일 */
-	line-height: 38px; /* 텍스트를 중앙에 위치 */ box-sizing : border-box;
+	box-sizing : border-box;
 	border: 1px solid #5A8B63;
 	border-radius: 5px !important;
 	font-size: 14px;
 	flex: 1;
+	width: 100%;
 }
 
 .form-group .error {
