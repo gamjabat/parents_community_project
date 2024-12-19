@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class ReportBoard {
 	private String reportNo;
 	private String reportCode;
+	private String reportTitle;
 	private String reportContent;
 	private String createDate;
 	private String resolvedDate;

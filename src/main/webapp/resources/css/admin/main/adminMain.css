@@ -41,9 +41,9 @@ body {
 }
 
 section {
-    margin : 30px;
+    margin : 100px;
     padding: 10px;
-    overflow: auto;
+/*     overflow: auto; */
     max-height: 500px;
 }
 
@@ -58,6 +58,7 @@ table {
     border-collapse: collapse;
     margin-top: 1rem;
     padding:10%;
+    align-content: center
 }
 
 table th, table td {
@@ -158,3 +159,41 @@ canvas {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+main{
+	align-content:center;
+}
+
+/* =========================
+   페이징바 스타일
+   ========================= */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.pagination .page-link {
+    padding: 8px 12px;
+    margin: 0 4px;
+    color: #333;
+    text-decoration: none;
+    border: none;
+}
+
+.pagination .page-link:hover,
+.pagination .page-link.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+/* footer{
+	text-align:center;
+} */
+
+footer {
+    background-color: #d7c9a6;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}

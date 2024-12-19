@@ -67,18 +67,18 @@ public class AdminMemberInfoServlet extends HttpServlet {
 		// 현재 createDate값으로 날짜값을 통일함 
 		
 		Member member = Member.builder()
-				.memberNo(memberNo)
-				.memberId(memberId)
-				.name(name)
-				.email(email)
-				.phone(phone)
-				.address(address)
-				.birthday(createDate)
-				.nickName(nickName)
-				.createDate(createDate)
-				.updateDate(createDate)
-				.deleteDate(createDate)
-				.isDelete(isDelete)
+				.memberNo("1")
+				.memberId("mickySung")
+				.name("성윤모")
+				.email("ironDrogon@ndn.com")
+				.phone("011-1111-1112")
+				.address("고니는 가지마")
+				.birthday("1922-11-11")
+				.nickName("곽철용")
+				.createDate("1922-11-11")
+				.updateDate("1922-11-11")
+				.deleteDate("2024-12-29")
+				.isDelete(false)
 				.build();
 		
 		
