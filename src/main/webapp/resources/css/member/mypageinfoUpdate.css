@@ -85,12 +85,10 @@
 
 .memberinfo-container {
 	width: 70%;
-	height: 67%;
 	font-size :11px;
 	font-weight: bold;
-	
-}
 
+}
 
 /* 각 div 바텀 라인 */
 
@@ -130,16 +128,19 @@
 	display : flex;
 }
 
+.change-pwbox label, .change-pwbox input {
+    display: block; /* 라벨과 인풋을 각각 한 줄씩 배치 */
+    margin-bottom: 10px; /* 간격 추가 */
+}
 
 /* 버튼 크기, 스타일 적용 */
 .member-end-btn {
 	font-size : 10px;
-	width: 150px;
-	height: 40px; 
+	width: 20%;
+	height: 14%; 
 	background-color: #5c8f51;
     border-radius: 15px;
     border-right: 1px solid #ddd;
-    margin-top : 30px;
 }
 
 .member-id-btn {
@@ -193,9 +194,6 @@
     border-radius: 15px;
     border-right: 1px solid #ddd;
 }
-
-
-
 
 /* 라벨관리 */
 .member-id {

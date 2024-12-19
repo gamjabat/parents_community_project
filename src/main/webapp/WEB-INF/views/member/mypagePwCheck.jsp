@@ -36,7 +36,7 @@
 				           </label>
 				         </div>   
 				         <div class="bt">
-				       	   <button type="submit">확인</button>
+				       	   <button type="submit" class="btn">확인</button>
 				        </div>
 				   </form>
 		    </div>
