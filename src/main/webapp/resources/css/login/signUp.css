@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.agreement-text{
+	max-height: 200px;
+	border: 1px solid #5A8B63;
+}
+
+
 .search-form, .category-bar{
 	display: none;
 }
@@ -91,4 +97,11 @@
 
 .signup-btn:hover {
 	background-color: #4d4d3d;
+}
+
+.agree-radio-container{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 0px 10px;
 }

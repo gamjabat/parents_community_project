@@ -23,7 +23,7 @@
 			<input class="login-input" type="password" id="userPwd" placeholder="PASSWORD">
 			<span id="inputEmptyCheck" class="error"></span>
 			<div class="text-right small-text">
-				<a href="${path }/login/signup.do">회원가입</a>
+				<a href="${path }/login/signupagreement.do">회원가입</a>
 				<a href="${path }/login/findid.do">아이디 찾기</a>
 				<a href="${path }/login/findpassword.do">비밀번호 찾기</a>
 			</div>
