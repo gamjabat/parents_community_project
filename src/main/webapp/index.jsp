@@ -87,7 +87,7 @@
 	 			Edura 로그인
 	 		</div>
 	 		<div class="login-menu">
-		      	<div><a href="#">아이디 찾기</a></div>
+		      	<div><a href="${path }/login/findid.do">아이디 찾기</a></div>
 		      	<div><a href="${path }/login/findpassword.do">비밀번호 찾기</a></div>
 		      	<div><a href="${path }/login/signup.do">회원가입</a></div>
       		</div>
