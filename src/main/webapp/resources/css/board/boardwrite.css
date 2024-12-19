@@ -75,7 +75,7 @@ button#submit-btn:hover {
 
 /* 폼 컨트롤 */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
 }
 
 label {
@@ -95,9 +95,14 @@ label {
 }
 
 
-
 #title.form-control {
     font-size: 16px;
+    width: 600px;
+}
+
+
+#tags.form-control {
+    font-size: 16px; 
     width: 600px;
 }
 
