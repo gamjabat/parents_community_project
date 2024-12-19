@@ -22,7 +22,7 @@
     </div>
     <div class="right-panel">
       <div class="title" >아이디 찾기</div>
-      <div class="email-auth-container">
+      <div class="input-container">
       	<div class="description">입력하신 사용자 정보와 일치하는 아이디 정보입니다.</div>
       	<div class="id-info-container">
       		<div>아이디 : woogamja</div>

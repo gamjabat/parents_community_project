@@ -22,7 +22,7 @@
     </div>
     <div class="right-panel">
       <div class="title" >아이디 찾기</div>
-      <div class="email-auth-container">
+      <div class="input-container">
       	<div class="sub-title">본인확인 이메일로 인증</div>
       	<div class="description">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,<br> 인증번호를 받을 수 있습니다.</div>
       	<form class="email-auth-input" action="${path }/login/findidsuccess.do">
