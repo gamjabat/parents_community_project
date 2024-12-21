@@ -46,7 +46,7 @@ public class BoardWriteDataServlet extends HttpServlet {
             hashtags = new String[0];  // 태그가 없는 경우 빈 배열을 할당
         }
 
-        String boardNo = "1";
+//        String boardNo = "2";
         int boardLikeCount = 0; // 좋아요 수 초기값
         int viewCount = 0; // 조회수 초기값
         Timestamp created_at = new Timestamp(System.currentTimeMillis()); // 생성 시각
@@ -72,7 +72,7 @@ public class BoardWriteDataServlet extends HttpServlet {
             .build();*/
         
         Board insertBoard = Board.builder()
-        		.boardNo(boardNo)
+        		//.boardNo(boardNo)
                 .title(title)
                 .content(content)
                 .likeCount(boardLikeCount)
