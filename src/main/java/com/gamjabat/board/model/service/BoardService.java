@@ -2,6 +2,8 @@ package com.gamjabat.board.model.service;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.board.model.dao.BoardDao;
@@ -23,4 +25,32 @@ public class BoardService{
 	return result;
 }
 	
+	public List<Board> selectBoardAll() {
+		
+		SqlSession session = getSession();
+		List<Board> boards = dao.selectBoardAll(session);
+		session.close();
+		return boards;
+		
+	}
+	
+
+	 public Board selectByBoardNo(String boardNo) {
+		 
+		 SqlSession session = getSession();
+		 Board b = dao.selectByBoardNo(session, boardNo);
+		 session.close();
+		 return b;
+		
+	    
+	}
+
+	 
+	 public void deleteBoard(String boardNo) {
+		 SqlSession session = getSession();
+	     dao.deleteBoard(session, boardNo);
+	    }
+	 
+			
+			
 }

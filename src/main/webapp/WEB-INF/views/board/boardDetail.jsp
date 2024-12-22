@@ -11,7 +11,7 @@
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
             	<div>
-	                <h5><strong>[잡담]</strong> <strong>안녕하세요!</strong></h5>
+	                <h5><strong>[잡담]</strong> <strong>${board.title}</strong></h5>
             	</div>
             	 <!-- 드롭다운 -->
 		        <div class="dropdown">
@@ -23,16 +23,18 @@
 		            </a>
 		            <!-- 드롭다운 메뉴 -->
 		            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		                <li><a class="dropdown-item" href="#">글 수정</a></li>
-		                <li><a class="dropdown-item" href="#">글 삭제</a></li>
+		                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
+		                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
 		            </ul>
 		        </div>
             </div>
             <!-- 게시글 정보 -->
             <div class="board-meta text-muted py-1 mb-3">
             	<div class="w-100">
-            		<span>작성자: ku | </span>
-	                <span>작성일: 2024.11.25 14:25</span>
+            		<div class="w-100">
+				    <span>작성자: "a" | </span>
+				    <span>작성일: <fmt:formatDate value="${board.createdAt}" pattern="yyyy.MM.dd HH:mm"/></span>
+				</div>
             	</div>
             	<div class="d-flex flex-row justify-content-end flex-shrink-1">
             		<div class="d-flex justify-content-center align-items-center px-1">
@@ -71,7 +73,8 @@
                 <img src="https://via.placeholder.com/200" alt="고양이 이미지" class="img-fluid rounded">
             </div> -->
             <!-- 내용 -->
-            <p>안녕하세요 ㅠㅠ</p>
+            <!-- 내용 -->
+			<p>${board.content}</p>
             <!-- 해시태그 -->
             <div class="hashtag-container d-flex flex-row justify-content-start">
             	<div>#인사</div>
