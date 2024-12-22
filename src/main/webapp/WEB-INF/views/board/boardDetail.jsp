@@ -25,7 +25,7 @@
 		            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 		                <li><a class="dropdown-item" href="#">글 수정</a></li>
 		                <li><a class="dropdown-item" href="#">글 삭제</a></li>
-		                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-id="BD_0001" data-title="문제 게시글 제목">글 신고</a></li>
+		                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">글 신고</a></li>
 		            </ul>
 		        </div>
             </div>
@@ -141,7 +141,7 @@
 					            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
 					                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
-					                <li><a class="dropdown-item" href="#">댓글 신고</a></li>
+					                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
 					            </ul>
 					        </div>
 	                	</div>
@@ -174,6 +174,7 @@
 							            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 							                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
 							                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+							                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
 							            </ul>
 							        </div>
 			                	</div>
@@ -282,42 +283,40 @@
        
         
         <!-- 신고 모달 -->
-		<!-- 신고 모달 -->
-<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>게시글 제목:</strong> <span id="reportTitle"></span></p>
-        <form id="reportForm">
-          <input type="hidden" id="postId" name="postId" value="">
-          <div class="mb-3">
-            <label for="reportReason" class="form-label">신고 사유</label>
-            <select class="form-select" id="reportReason" name="reason" required>
-              <option value="" selected disabled>신고 사유를 선택하세요</option>
-              <option value="spam">스팸</option>
-              <option value="abusive">욕설 및 비방</option>
-              <option value="inappropriate">부적절한 내용</option>
-              <option value="other">기타</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="reportDetails" class="form-label">상세 내용</label>
-            <textarea class="form-control" id="reportDetails" name="details" rows="3" placeholder="신고 내용을 입력하세요"></textarea>
-          </div>
-          <!-- 버튼 중앙 정렬 -->
-          <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-danger  me-2">신고 제출</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+		<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <form id="reportForm">
+		          <div class="mb-3">
+		            <label for="reportReason" class="form-label">신고 사유</label>
+		            <select class="form-select" id="reportReason" required>
+		              <option value="" selected disabled>신고 사유를 선택하세요</option>
+		              <option value="spam">스팸</option>
+		              <option value="abusive">욕설 및 비방</option>
+		              <option value="inappropriate">부적절한 내용</option>
+		              <option value="other">기타</option>
+		            </select>
+		          </div>
+		          <div class="mb-3">
+		            <label for="reportDetails" class="form-label">상세 내용</label>
+		            <textarea class="form-control" id="reportDetails" rows="3" placeholder="신고 내용을 입력하세요"></textarea>
+		          </div>
+		          <!-- 버튼 중앙 정렬 -->
+		          <div class="text-center">
+		            <button type="submit" class="btn btn-danger">신고 제출</button>
+		            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">취소</button>
+		          </div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 
 		
         
@@ -398,39 +397,27 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-//신고 버튼 클릭 이벤트
-document.querySelectorAll('.report-btn').forEach(button => {
-  button.addEventListener('click', function () {
-    // 버튼의 data 속성에서 값 가져오기
-    const postId = this.getAttribute('data-id');
-    const postTitle = this.getAttribute('data-title');
 
-    // 모달 요소에 값 전달
-    document.getElementById('reportTitle').textContent = postTitle; // 제목 설정
-    document.getElementById('postId').value = postId; // 숨겨진 필드에 ID 설정
-  });
-});
-
-// 폼 제출 이벤트 (AJAX 예시)
-document.getElementById('reportForm').addEventListener('submit', function (event) {
-  event.preventDefault(); // 기본 폼 제출 방지
+document.getElementById('reportForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // 기본 제출 방지
 
   // 폼 데이터 가져오기
-  const postId = document.getElementById('postId').value;
-  console.log(postId);
   const reason = document.getElementById('reportReason').value;
   const details = document.getElementById('reportDetails').value;
 
-  // 예제: AJAX로 데이터 전송
-  console.log('신고 데이터 전송:', { postId, reason, details });
+  // 예제: 데이터 콘솔 출력
+  console.log('신고 사유:', reason);
+  console.log('신고 상세 내용:', details);
 
   // 모달 닫기
   const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
   reportModal.hide();
 
-  // 사용자 알림
+  // 사용자에게 알림
   alert('신고가 접수되었습니다.');
 });
+</script>
+
 	
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
