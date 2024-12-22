@@ -93,7 +93,7 @@ public class BoardWriteDataServlet extends HttpServlet {
 
  
         // 리다이렉트~~~~~~~~~~~~~~~~~~ 홈으로!
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect(request.getContextPath() + "/board.do" );
         
     }
 
