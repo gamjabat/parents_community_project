@@ -12,14 +12,14 @@
 <div class="container d-flex flex-column align-items-center justify-content-center">
         <div class="signup-container">
     <div class="signup-title">회원가입</div>
-    <form method="post" action="${path}/login/loginend.do" onsubmit="return fn_invalidate();">
+    <form method="post" action="${path}/login/signupend.do" onsubmit="return fn_invalidate();">
       <div class="form-group">
         <div class="input-label">
         	<label for="name">이름</label>
         	<span style="color: red;">*</span>
         </div>
         <div class="input-group">
-	        <input type="text" id="name" placeholder="이름 입력">
+	        <input type="text" id="name" name="name" placeholder="이름 입력">
         </div>
       </div>
 
@@ -29,7 +29,7 @@
         	<span style="color: red;">*</span>
         </div>
         <div class="input-group d-flex flex-column">
-	        <input type="text" id="id" placeholder="아이디 입력">
+	        <input type="text" id="id" name="id" placeholder="아이디 입력">
 	        <div class="error"></div>
         </div>
       </div>
@@ -39,7 +39,7 @@
         	<label for="nickname">닉네임</label>
         </div>
         <div class="input-group">
-	        <input type="text" id="nickname" placeholder="닉네임 입력 (선택 사항)">
+	        <input type="text" id="nickname" name="nickname" placeholder="닉네임 입력 (선택 사항)">
         </div>
       </div>
       
@@ -48,8 +48,8 @@
         	<label for="password">비밀번호</label>
         	<span style="color: red;">*</span>
         </div>
-        <div class="input-group">
-        	<input type="password" id="password" placeholder="비밀번호 입력">
+        <div class="input-group d-flex flex-column">
+        	<input type="password" id="password" name="password" placeholder="비밀번호 입력">
         	<small class="error"></small>
         </div>
       </div>
@@ -71,7 +71,7 @@
         	<span style="color: red;">*</span>
         </div>
         <div class="input-group">
-          <input type="email" id="email" placeholder="이메일 입력">
+          <input type="email" id="email" name="email" placeholder="이메일 입력">
         </div>
       </div>
       
@@ -81,13 +81,13 @@
             <span style="color: red;">*</span>
         </div>
         <div class="input-group my-2" style="display: flex; gap: 10px;">
-            <select id="birth-year" class="form-select">
+            <select id="birth-year" name="birth-year" class="form-select">
                 <option value="">년도</option>
             </select>
-            <select id="birth-month" class="form-select">
+            <select id="birth-month" name="birth-month" class="form-select">
                 <option value="">월</option>
             </select>
-            <select id="birth-day" class="form-select">
+            <select id="birth-day" name="birth-day" class="form-select">
                 <option value="">일</option>
             </select>
         </div>
@@ -99,7 +99,7 @@
         	<span style="color: red;">*</span>
         </div>
         <div class="input-group d-flex flex-column">
-        	<input type="text" id="phone" placeholder="휴대폰 번호 입력 (예: 01012345678)">
+        	<input type="text" id="phone" name="phone" placeholder="휴대폰 번호 입력 (예: 01012345678)">
         	<small class="error"></small>
         </div>
       </div>

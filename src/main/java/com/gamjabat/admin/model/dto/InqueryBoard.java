@@ -1,5 +1,7 @@
 package com.gamjabat.admin.model.dto;
 
+import com.gamjabat.model.dto.member.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

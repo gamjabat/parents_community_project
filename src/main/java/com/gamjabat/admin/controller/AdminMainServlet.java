@@ -1,6 +1,7 @@
 package com.gamjabat.admin.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gamjabat.admin.model.dto.InqueryBoard;
-import com.gamjabat.admin.model.dto.Member;
-import com.gamjabat.admin.model.dto.ReportBoard;
+import com.gamjabat.model.dto.board.Board;
+import com.gamjabat.model.dto.member.Member;
+import com.gamjabat.model.dto.report.ReportBoard;
 
 /**
  * Servlet implementation class AdminMainServlet
@@ -40,7 +42,8 @@ public class AdminMainServlet extends HttpServlet {
 		ArrayList<InqueryBoard> ibs = new ArrayList<>();
 		
 		
-		String strDate = "20200806";
+		String strDate = "2020-08-06";
+		Date birthDate = Date.valueOf(strDate);
 //		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyyMMdd");
 //		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
 //		// String 타입을 Date 타입으로 변환
@@ -58,28 +61,28 @@ public class AdminMainServlet extends HttpServlet {
 		for(int i=1;i<=5;i++) {
 			Member m1 = Member.builder()
 					.memberNo("user"+i).memberId("userId"+i)
-					.name("이름"+i)
+					.memberName("이름"+i)
 					.address("우리")
-					.birthday(strDate)
+					.birthday(birthDate)
 					.address("우리집!!!")
 					.email("asd3dasf@asdf.com")
 					.phone("102-213-2332")
-					.nickName("asdfa").createDate(strDate)
-					.updateDate(strDate).build();
+					.nickName("asdfa")
+					.build();
 			m.add(m1);
 		}
 		
 		Member rf = Member.builder().memberId("user"+1).build();
-		Member sf = Member.builder().memberId("user"+2).build();
+		Board bf = Board.builder().boardNo("BD_0100").build();
 		for(int i=1;i<=5;i++) {
 			
 			ReportBoard rb = ReportBoard.builder().reportNo(i+1+"")
 							.postNo(i+1+"")
-							.reportCode("댓글")
-							.reportTitle("탈주각"+i)
+							.reportReasonCode("댓글")
 							.reportContent("그때는 진짜 깡패가 되는거야!"+i)
-							.createDate("2024-01-01")
-							.reportStatus("처리중").reportMember(rf).suspectMember(sf)
+							.reportStatus("처리중")
+							.reportMemberNo(rf)
+							.reportBoardNo(bf)
 							.build();
 			rbs.add(rb);
 		}
