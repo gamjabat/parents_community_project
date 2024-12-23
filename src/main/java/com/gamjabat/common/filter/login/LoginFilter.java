@@ -49,6 +49,9 @@ public class LoginFilter extends HttpFilter implements Filter {
 		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 	
 		
 //		String saveId=request.getParameter("saveId");
@@ -87,6 +90,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 //			.forward(request,response);
 //		}
 		
+		System.out.println("userId:::::::"+userId);
 		
 		
 		

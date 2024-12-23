@@ -49,7 +49,7 @@
 						<c:forEach var="member" items="${members}">
 							<tr>
 								<td>${member.memberNo}</td>
-								<td>${member.name}</td>
+								<td>${member.memberName}</td>
 								<td>${member.email}</td>
 								<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
 							</tr>
@@ -57,12 +57,9 @@
 					</c:if>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<a href="#" class="page-link">&lt;&lt;</a> <a href="#"
-					class="page-link">&lt;</a> <a href="#" class="page-link active">1</a>
-				<a href="#" class="page-link">2</a> <a href="#" class="page-link">3</a>
-				<a href="#" class="page-link">&gt;</a> <a href="#" class="page-link">&gt;&gt;</a>
-			</div>
+		    <div id="pageBar">
+		    	${pageBar }
+		    </div>
 		</section>
 		<section id="posts">
 			<h2>게시글 관리</h2>
