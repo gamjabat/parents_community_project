@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.board.model.dao.BoardDao;
 import com.gamjabat.board.model.dto.Board;
+import com.gamjabat.board.model.dto.BoardComments;
 
 public class BoardService{
 	
@@ -51,6 +52,14 @@ public class BoardService{
 	     dao.deleteBoard(session, boardNo);
 	    }
 	 
-			
+	
+	 public int insertBoardComment(BoardComments bc) {
+			SqlSession session=getSession();
+			int result=dao.insertBoardComment(session,bc);
+			if(result>0) session.commit();
+		    else session.rollback();
+			session.close();
+			return result;
+		}
 			
 }
