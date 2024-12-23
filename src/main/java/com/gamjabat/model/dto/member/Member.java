@@ -22,7 +22,7 @@ public class Member {
 	private String phone;
 	private String address;
 	private Date birthday;
-	private String nickName;
+	private String nickname;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private Timestamp deletedAt;

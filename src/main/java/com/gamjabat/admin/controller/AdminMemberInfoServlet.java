@@ -72,7 +72,7 @@ public class AdminMemberInfoServlet extends HttpServlet {
 				.phone("011-1111-1112")
 				.address("고니는 가지마")
 				.birthday(Date.valueOf("1922-11-11"))
-				.nickName("곽철용")
+				.nickname("곽철용")
 				.isDeleted(false)
 				.build();
 		
