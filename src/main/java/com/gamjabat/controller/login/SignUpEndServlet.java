@@ -31,66 +31,6 @@ public class SignUpEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String name = request.getParameter("name");
-//		String id = request.getParameter("id");
-//		String nickname = request.getParameter("nickname");
-//		String password = request.getParameter("password");
-//		String email = request.getParameter("email");
-//		String birthYear = request.getParameter("birth-year");
-//		String birthMonth = request.getParameter("birth-month");
-//		String birthDay = request.getParameter("birth-day");
-//		System.out.println(birthMonth);
-//		System.out.println(birthDay);
-//		// 월, 일이 한 자리인 경우 앞에 0 추가
-//        if (birthMonth != null && birthMonth.length() == 1) {
-//            birthMonth = "0" + birthMonth;
-//        }
-//        if (birthDay != null && birthDay.length() == 1) {
-//            birthDay = "0" + birthDay;
-//        }
-//		String birthDateStr = birthYear + "-" + birthMonth + "-" + birthDay;
-//		System.out.println("날짜: "+birthDateStr);
-//		Date birthDate = Date.valueOf(birthDateStr);
-//		String phone = request.getParameter("phone");
-//		String sido = request.getParameter("sido");
-//		String gugun = request.getParameter("gugun");
-//		String address = sido + " " + gugun;
-//		
-//		Member insertMember = Member.builder()
-//								.memberName(name)
-//								.memberId(id)
-//								.nickName(nickname)
-//								.memberPwd(password)
-//								.email(email)
-//								.birthday(birthDate)
-//								.phone(phone)
-//								.address(address)
-//								.build();
-//		
-//		MemberService service = new MemberService();
-//		
-//		String msg, loc ="/";
-//		try {
-//			int result = service.signupMember(insertMember);
-//			msg="회원가입을 성공하였습니다.";
-//			loc="/";
-//		} catch(RuntimeException e) {
-//			msg="회원가입 실패하였습니다. 다시 시도해주세요.";
-//			loc="/login/signupend.do";
-//		}
-//		
-//		response.setContentType("text/html;charset=utf-8");
-//		
-//		request.setAttribute("msg", msg);
-//		request.setAttribute("loc", loc);
-//
-//		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
 		String nickname = request.getParameter("nickname");
@@ -124,7 +64,7 @@ public class SignUpEndServlet extends HttpServlet {
 								.email(email)
 								.birthday(birthDate)
 								.phone(phone)
-								.address(address)
+								.address(address.equals("시/도 선택 구/군 선택")? null : address)
 								.build();
 		
 		MemberService service = new MemberService();
@@ -135,6 +75,7 @@ public class SignUpEndServlet extends HttpServlet {
 			msg="회원가입을 성공하였습니다.";
 			loc="/";
 		} catch(RuntimeException e) {
+			e.printStackTrace();
 			msg="회원가입 실패하였습니다. 다시 시도해주세요.";
 			loc="/login/signupagreement.do";
 		}
@@ -145,6 +86,13 @@ public class SignUpEndServlet extends HttpServlet {
 		request.setAttribute("loc", loc);
 
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

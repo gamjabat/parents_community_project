@@ -15,10 +15,8 @@ public class PasswordEncoding extends HttpServletRequestWrapper{
 	@Override
 	public String getParameter(String name) {
 		String oriVal = super.getParameter(name);
-		System.out.println("전: " + oriVal);
 		if(name.equals("password")) {
 			String encStr = getSHA512(oriVal);
-			System.out.println("후: " + encStr);
 			return encStr;
 		}
 		
