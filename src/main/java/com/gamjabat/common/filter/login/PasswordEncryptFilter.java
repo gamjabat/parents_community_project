@@ -18,7 +18,7 @@ import com.gamjabat.common.PasswordEncoding;
  * Servlet Filter implementation class PasswordEncryptFilter
  */
 @WebFilter(servletNames = {
-		"signUpEndServlet"
+		"signUpEndServlet", "loginEndServlet"
 })
 public class PasswordEncryptFilter extends HttpFilter implements Filter {
        

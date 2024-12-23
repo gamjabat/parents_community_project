@@ -20,7 +20,7 @@ import com.gamjabat.admin.model.dto.Member;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(servletNames= {"loginCheckServlet"})
+@WebFilter(servletNames= {"loginCheckServlet", "loginEndServlet"})
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**
@@ -47,9 +47,10 @@ public class LoginFilter extends HttpFilter implements Filter {
 //		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
 //		HttpServletResponse httpServletResponse = (HttpServletResponse)response;
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-	
+		String userId = request.getParameter("memberId");
+		String userPwd = request.getParameter("password");
+		
+		System.out.println("userId:" + userId + "userPwd" + userPwd);
 		
 //		String saveId=request.getParameter("saveId");
 //		System.out.println(saveId);
@@ -87,16 +88,14 @@ public class LoginFilter extends HttpFilter implements Filter {
 //			.forward(request,response);
 //		}
 		
-		
-		
-		
-		
-		if(userId.equals("admin")) {			
-			request.getRequestDispatcher("/admin/main.do").forward(request, response);
-		}else {
-			request.getRequestDispatcher("/main/login.do").forward(request, response);
-		}
-			chain.doFilter(request, response);
+
+//		 if(userId.equals("admin")) {
+//			 request.getRequestDispatcher("/admin/main.do").forward(request, response);
+//		 }else { request.getRequestDispatcher("/main/login.do").forward(request,
+//				 response); }
+		 
+		//request.getRequestDispatcher("/main/login.do").forward(request, response);
+		chain.doFilter(request, response);
 	}
 
 	/**
