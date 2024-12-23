@@ -15,7 +15,7 @@ import com.gamjabat.service.member.MemberService;
 /**
  * Servlet implementation class SignUpEndServlet
  */
-@WebServlet("/login/signupend.do")
+@WebServlet(name="signUpEndServlet", urlPatterns="/login/signupend.do")
 public class SignUpEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
