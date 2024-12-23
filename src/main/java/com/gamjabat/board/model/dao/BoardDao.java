@@ -30,6 +30,16 @@ public class BoardDao {
             session.delete("board.deleteBoard", boardNo);
             session.commit();
             
-        }
+     }
+    
+    
+    public void updateBoard(SqlSession session, Board board) {
+        
+            session.update("Board.updateBoard", board);
+            session.commit();
+    
+     }
+       
+    
     }
     
