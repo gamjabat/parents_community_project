@@ -26,6 +26,7 @@
 		                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
 		                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
 		                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">글 신고</a></li>
+
 		            </ul>
 		        </div>
             </div>
@@ -255,8 +256,9 @@
 					            </a>
 					            <!-- 드롭다운 메뉴 -->
 					            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-					                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+					                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
+					                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
+					                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-id="BD_0001" data-title="문제 게시글 제목">글 신고</a></li>
 					            </ul>
 					        </div>
 	                	</div>
