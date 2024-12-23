@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+
+import com.gamjabat.board.model.dto.BoardComments;
 import com.gamjabat.model.dto.board.Board;
+
 
 public class BoardDao {
 
@@ -31,5 +34,10 @@ public class BoardDao {
             session.commit();
             
         }
+    
+    public int insertBoardComment(SqlSession session,BoardComments bc) {
+		return session.insert("board.insertBoardComment",bc);
+	}
+    
     }
     

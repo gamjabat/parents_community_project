@@ -8,8 +8,9 @@
 </head>
 <body>
 	<script>
-		alert('${msg}');
-		location.replace('${pageContext.request.contextPath}${loc}');
+		alert('${msg}'); /* msg 키 가지고 있는애가 있으면 가져와. */
+		location.replace('${pageContext.request.contextPath}${loc}'); /* loc 키값 있으면 불러와. */
 	</script>
+
 </body>
 </html>

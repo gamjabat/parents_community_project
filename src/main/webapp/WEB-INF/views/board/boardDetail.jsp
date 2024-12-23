@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/board/boardDetail.css">
 <section id="main-container">
+${board }
 	<div class="board-container px-4">
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
@@ -116,8 +117,13 @@
 		                	<div class="fs-6 fw-bold me-2">닉네임</div>
 	                	</div>
 	                	<div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
-	                		<textarea></textarea>
-		                	<div class="comment-btn ms-2 d-flex align-items-center justify-content-center">등록</div>
+	                	<form action="${path}/board/insertcomment.do" method="post">
+	                		<input type="hidden" name="commentBoardNo" value="${board.boardNo} "/>
+	                		<input type="hidden" name="level" value="1"/>
+	                		<input type="hidden" name="commentMemberNo" value="${member.MEMBER_NO}"/>
+	                		<textarea name="content" cols="50" rows="3"></textarea>
+		                	<button class="comment-btn ms-2 d-flex align-items-center justify-content-center">등록</button>
+		                	</form>
 	                	</div>
 	            </div>
             	<div class="d-flex justify-content-end">
