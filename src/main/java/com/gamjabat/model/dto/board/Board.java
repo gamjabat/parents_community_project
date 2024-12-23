@@ -1,4 +1,4 @@
-package com.gamjabat.board.model.dto;
+package com.gamjabat.model.dto.board;
 
 import java.sql.Timestamp;
 

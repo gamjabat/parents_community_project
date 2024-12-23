@@ -1,6 +1,7 @@
-package com.gamjabat.admin.model.dto;
+package com.gamjabat.model.dto.member;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,14 +16,15 @@ import lombok.NoArgsConstructor;
 public class Member {
 	private String memberNo;
 	private String memberId;
-	private String name;
+	private String memberPwd;
+	private String memberName;
 	private String email;
 	private String phone;
 	private String address;
-	private String birthday;
+	private Date birthday;
 	private String nickName;
-	private String createDate;
-	private String updateDate;
-	private String deleteDate;
-	private boolean isDelete;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
+	private Timestamp deletedAt;
+	private boolean isDeleted;
 }
