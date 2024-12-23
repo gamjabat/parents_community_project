@@ -36,6 +36,7 @@ public class BoardWriteDataServlet extends HttpServlet {
         String category = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        content = content.replaceAll("<[^>]*>", ""); // HTML 태그 제거
         String tagsInput = request.getParameter("tags");  // 'tags' 파라미터 값을 먼저 변수에 저장
         String[] hashtags;  // 배열 선언
 
@@ -92,7 +93,7 @@ public class BoardWriteDataServlet extends HttpServlet {
 
  
         // 리다이렉트~~~~~~~~~~~~~~~~~~ 홈으로!
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect(request.getContextPath() + "/board.do" );
         
     }
 
