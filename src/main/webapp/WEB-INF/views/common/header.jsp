@@ -33,9 +33,10 @@
 		</div>
       
       	<div class="login-menu">
-      		<!-- 로그인시에만 보이게 처리 -->
-	      	<div><a href="${path}/member/mypagepwcheck.do">마이페이지</a></div>
-	      	<div><a href="#">로그아웃</a></div>
+      		<c:if test="${sessionScope.loginMember!=null }">
+		      	<div><a href="${path}/member/mypagepwcheck.do">마이페이지</a></div>
+		      	<div><a href="${path}/login/logout.do">로그아웃</a></div>
+	      	</c:if>
       	</div>
     </div>
     <nav class="category-bar">

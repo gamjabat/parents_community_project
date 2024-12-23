@@ -43,10 +43,11 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//로그인 요청 정보 받기(아이디, 비밀번호) 
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+
+		String userId = request.getParameter("memberId");
+		String userPwd = request.getParameter("password");
 		
+
 		
 		//request 인코딩 utf-8로 변환 
 		request.setCharacterEncoding("utf-8");
@@ -55,9 +56,6 @@ public class LoginFilter extends HttpFilter implements Filter {
 //		Member m = Member.builder().memberId(userId).build();
 		
 		HttpSession session = request.getSession();
-		
-	
-		
 		
 		if(userId.equals("admin")) {			
 			request.getRequestDispatcher("/admin/main.do").forward(request, response);
@@ -68,13 +66,12 @@ public class LoginFilter extends HttpFilter implements Filter {
 			System.out.println("checkMember:::"+checkMember);
 			Member invlidMember = service.loginInvalidCheck(checkMember);
 			
+			System.out.println("invlidMember::::"+invlidMember);
+			
 			if(invlidMember!=null) {
 				session.setAttribute("loginMember", invlidMember);
-				request.getRequestDispatcher("/main/login.do").forward(request, response);
-			}else {
-				request.setAttribute("loginFail", false);
-				request.getRequestDispatcher("/login/loginpage.do").forward(request, response);
 			}
+			request.getRequestDispatcher("/main/login.do").forward(request, response);
 		}
 			chain.doFilter(request, response);
 	}
