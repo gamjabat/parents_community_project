@@ -1,5 +1,7 @@
 package com.gamjabat.admin.model.dto;
 
+import com.gamjabat.model.dto.member.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +20,10 @@ public class InqueryBoard {
 	private String createDate;
 	private String resolvedDate;
 	private String postNo;
-	private String status;
+	// 신고한 사용자 정보
+	// 신고당한 사용자 정보
+	private Member suspectMember;
+	// 신고상태
+	private String reportStatus;
 
 }

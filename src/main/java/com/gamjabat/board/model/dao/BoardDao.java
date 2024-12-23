@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.gamjabat.board.model.dto.Board;
+
+import com.gamjabat.board.model.dto.BoardComments;
+import com.gamjabat.model.dto.board.Board;
+
 
 public class BoardDao {
 
@@ -30,6 +33,7 @@ public class BoardDao {
             session.delete("board.deleteBoard", boardNo);
             session.commit();
             
+
      }
     
     
@@ -40,6 +44,13 @@ public class BoardDao {
     
      }
        
+
+     
+    
+    public int insertBoardComment(SqlSession session,BoardComments bc) {
+		return session.insert("board.insertBoardComment",bc);
+	}
+
     
     }
     

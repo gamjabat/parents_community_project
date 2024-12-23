@@ -2,8 +2,6 @@ package com.gamjabat.admin.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamjabat.admin.model.dto.Member;
+import com.gamjabat.model.dto.member.Member;
 
 /**
  * Servlet implementation class AdminMemberInfoServlet
@@ -63,22 +61,19 @@ public class AdminMemberInfoServlet extends HttpServlet {
 //			deleteDt=null;
 //		}
 		
-		// 우선 DB연결전에 날짜 값을 스트링으로 했기때문에 나중에 매핑을 바꿔줘야함.
+		
 		// 현재 createDate값으로 날짜값을 통일함 
 		
 		Member member = Member.builder()
 				.memberNo("1")
 				.memberId("mickySung")
-				.name("성윤모")
+				.memberName("성윤모")
 				.email("ironDrogon@ndn.com")
 				.phone("011-1111-1112")
 				.address("고니는 가지마")
-				.birthday("1922-11-11")
-				.nickName("곽철용")
-				.createDate("1922-11-11")
-				.updateDate("1922-11-11")
-				.deleteDate("2024-12-29")
-				.isDelete(false)
+				.birthday(Date.valueOf("1922-11-11"))
+				.nickname("곽철용")
+				.isDeleted(false)
 				.build();
 		
 		

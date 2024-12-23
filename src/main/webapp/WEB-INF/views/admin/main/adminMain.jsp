@@ -49,7 +49,7 @@
 						<c:forEach var="member" items="${members}">
 							<tr>
 								<td>${member.memberNo}</td>
-								<td>${member.name}</td>
+								<td>${member.memberName}</td>
 								<td>${member.email}</td>
 								<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
 							</tr>
@@ -57,17 +57,15 @@
 					</c:if>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<a href="#" class="page-link">&lt;&lt;</a> <a href="#"
-					class="page-link">&lt;</a> <a href="#" class="page-link active">1</a>
-				<a href="#" class="page-link">2</a> <a href="#" class="page-link">3</a>
-				<a href="#" class="page-link">&gt;</a> <a href="#" class="page-link">&gt;&gt;</a>
-			</div>
+		    <div id="pageBar">
+		    	${pageBar }
+		    </div>
 		</section>
 		<section id="posts">
 			<h2>게시글 관리</h2>
 			<nav>
-				<button type="button" onclick="hideDeclaration();"
+				<button type="button" 
+				onclick="hideDeclaration();"
 					class="btn btn-primary">문의글</button>
 				<button type="button" class="btn btn-danger"
 					onclick="hideInquery();">신고글</button>
@@ -87,15 +85,17 @@
 				<tbody>
 					<c:if test="${not empty inqueryboards}">
 						<c:forEach var="board" items="${inqueryboards}">
-							<tr>
-								<td>${board.inqueryNo}</td>
-								<td>${board.inqueryMember.memberId}</td>
-								<td>${board.inqueryCode}</td>
-								<td>${board.inqueryTitle}</td>
-								<td>${board.inqueryContent}</td>
-								<td>${board.createDate}</td>
-								<td>${board.status}</td>
-							</tr>
+							<a href="javascript:inqueryDetailSearch();">
+								<tr>
+									<td>${board.inqueryNo}</td>
+									<td>${board.inqueryMember.memberId}</td>
+									<td>${board.inqueryCode}</td>
+									<td>${board.inqueryTitle}</td>
+									<td>${board.inqueryContent}</td>
+									<td>${board.createDate}</td>
+									<td>${board.status}</td>
+								</tr>
+							</a>
 						</c:forEach>
 					</c:if>
 				</tbody>
@@ -207,6 +207,24 @@
 			$("#inquiry-table").hide();
 			$("#declaration-table").show();
 		}
+		
+		
+		
+/* 		const inqueryDetailSearch = ()=>{
+			console.log('inquery 상세 클릭 ')
+		
+		
+		} */
+		
+/*  		const searchInqueryboard=()=>{
+			$.get("${pageContext.request.contextPath}/admin/searchInqueryboard.do")
+			.done(data=>{
+				data.forEach(v=>JSON.parse(v));			
+			})
+			.fail(response=>{console.log(response)})
+			
+		}  */
+		
 		
 		
 	</script>

@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/board/boardDetail.css">
 <section id="main-container">
+${board }
 	<div class="board-container px-4">
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
@@ -25,6 +26,8 @@
 		            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 		                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
 		                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
+		                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">글 신고</a></li>
+
 		            </ul>
 		        </div>
             </div>
@@ -114,8 +117,13 @@
 		                	<div class="fs-6 fw-bold me-2">닉네임</div>
 	                	</div>
 	                	<div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
-	                		<textarea></textarea>
-		                	<div class="comment-btn ms-2 d-flex align-items-center justify-content-center">등록</div>
+	                	<form action="${path}/board/insertcomment.do" method="post">
+	                		<input type="hidden" name="commentBoardNo" value="${board.boardNo} "/>
+	                		<input type="hidden" name="level" value="1"/>
+	                		<input type="hidden" name="commentMemberNo" value="${member.MEMBER_NO}"/>
+	                		<textarea name="content" cols="50" rows="3"></textarea>
+		                	<button class="comment-btn ms-2 d-flex align-items-center justify-content-center">등록</button>
+		                	</form>
 	                	</div>
 	            </div>
             	<div class="d-flex justify-content-end">
@@ -143,6 +151,7 @@
 					            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
 					                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+					                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
 					            </ul>
 					        </div>
 	                	</div>
@@ -175,6 +184,7 @@
 							            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 							                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
 							                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+							                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
 							            </ul>
 							        </div>
 			                	</div>
@@ -252,8 +262,9 @@
 					            </a>
 					            <!-- 드롭다운 메뉴 -->
 					            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-					                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+					                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
+					                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
+					                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-id="BD_0001" data-title="문제 게시글 제목">글 신고</a></li>
 					            </ul>
 					        </div>
 	                	</div>
@@ -280,6 +291,47 @@
                 </ul>
             </nav>
         </div>
+       
+        
+        <!-- 신고 모달 -->
+		<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <form id="reportForm">
+		          <div class="mb-3">
+		            <label for="reportReason" class="form-label">신고 사유</label>
+		            <select class="form-select" id="reportReason" required>
+		              <option value="" selected disabled>신고 사유를 선택하세요</option>
+		              <option value="spam">스팸</option>
+		              <option value="abusive">욕설 및 비방</option>
+		              <option value="inappropriate">부적절한 내용</option>
+		              <option value="other">기타</option>
+		            </select>
+		          </div>
+		          <div class="mb-3">
+		            <label for="reportDetails" class="form-label">상세 내용</label>
+		            <textarea class="form-control" id="reportDetails" rows="3" placeholder="신고 내용을 입력하세요"></textarea>
+		          </div>
+		          <!-- 버튼 중앙 정렬 -->
+		          <div class="text-center">
+		            <button type="submit" class="btn btn-danger">신고 제출</button>
+		            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">취소</button>
+		          </div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+
+		
+        
+        
 </section>
 <script>
 //아이콘을 담고 있는 요소 선택
@@ -355,5 +407,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+
+document.getElementById('reportForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // 기본 제출 방지
+
+  // 폼 데이터 가져오기
+  const reason = document.getElementById('reportReason').value;
+  const details = document.getElementById('reportDetails').value;
+
+  // 예제: 데이터 콘솔 출력
+  console.log('신고 사유:', reason);
+  console.log('신고 상세 내용:', details);
+
+  // 모달 닫기
+  const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
+  reportModal.hide();
+
+  // 사용자에게 알림
+  alert('신고가 접수되었습니다.');
+});
+</script>
+
+	
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

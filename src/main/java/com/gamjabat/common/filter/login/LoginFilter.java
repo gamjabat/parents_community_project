@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.gamjabat.common.PasswordEncoding;
+import com.gamjabat.model.dto.member.Member;
+import com.gamjabat.service.member.MemberService;
+
 /**
  * Servlet Filter implementation class LoginFilter
  */
@@ -38,20 +42,36 @@ public class LoginFilter extends HttpFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
+	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+		String userId = request.getParameter("memberId");
+		String userPwd = request.getParameter("password");
 		
-		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-		HttpServletResponse httpServletResponse = (HttpServletResponse)response;
+
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		//request 인코딩 utf-8로 변환 
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		
+//		Member m = Member.builder().memberId(userId).build();
+		
+		HttpSession session = request.getSession();
 		
 		if(userId.equals("admin")) {			
-			httpServletRequest.getRequestDispatcher("/admin/main.do").forward(httpServletRequest, httpServletResponse);
+			request.getRequestDispatcher("/admin/main.do").forward(request, response);
 		}else {
-			httpServletRequest.getRequestDispatcher("/main/login.do").forward(httpServletRequest, httpServletResponse);
+			PasswordEncoding pe = new PasswordEncoding(request);
+			MemberService service = new MemberService();
+			Member checkMember = Member.builder().memberId(userId).memberPwd(pe.getParameter(userPwd)).build();
+			System.out.println("checkMember:::"+checkMember);
+			Member invlidMember = service.loginInvalidCheck(checkMember);
+			
+			System.out.println("invlidMember::::"+invlidMember);
+			
+			if(invlidMember!=null) {
+				session.setAttribute("loginMember", invlidMember);
+			}
+			request.getRequestDispatcher("/main/login.do").forward(request, response);
 		}
 			chain.doFilter(request, response);
 	}
