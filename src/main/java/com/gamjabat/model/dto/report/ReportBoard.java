@@ -2,7 +2,7 @@ package com.gamjabat.model.dto.report;
 
 import java.sql.Timestamp;
 
-import com.gamjabat.model.dto.board.Board;
+import com.gamjabat.admin.model.dto.Board;
 import com.gamjabat.model.dto.member.Member;
 
 import lombok.AllArgsConstructor;
