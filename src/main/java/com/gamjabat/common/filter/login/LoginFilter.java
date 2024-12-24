@@ -21,7 +21,7 @@ import com.gamjabat.service.member.MemberService;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(servletNames= {"loginCheckServlet"})
+@WebFilter(servletNames= {"loginCheckServlet","loginEndServlet"})
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**
@@ -47,6 +47,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 		String userId = request.getParameter("memberId");
 		String userPwd = request.getParameter("password");
 		
+		System.out.println("userPwd::"+userPwd);
 
 		
 		//request 인코딩 utf-8로 변환 
@@ -62,14 +63,18 @@ public class LoginFilter extends HttpFilter implements Filter {
 		}else {
 			PasswordEncoding pe = new PasswordEncoding(request);
 			MemberService service = new MemberService();
-			Member checkMember = Member.builder().memberId(userId).memberPwd(pe.getParameter(userPwd)).build();
+			Member checkMember = Member.builder().memberId(userId).memberPwd(pe.getParameter("password")).build();
 			System.out.println("checkMember:::"+checkMember);
+			System.out.println("pe.getParameter(userPwd)::"+pe.getParameter(userPwd));
 			Member invlidMember = service.loginInvalidCheck(checkMember);
 			
 			System.out.println("invlidMember::::"+invlidMember);
 			
+			
+			
 			if(invlidMember!=null) {
 				session.setAttribute("loginMember", invlidMember);
+				request.setAttribute("loginMember", invlidMember);
 			}
 			request.getRequestDispatcher("/main/login.do").forward(request, response);
 		}
