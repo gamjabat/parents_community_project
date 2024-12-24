@@ -80,18 +80,19 @@
 	 	</div>
 	 </div>
 	 <div id="sub-container">
-	 	<!-- 로그인 전 화면 -->
-	 	<div class="login-container">
-	 		<div style="font-weight:bold">지금 에듀라를 시작해보세요!</div>
-	 		<div class="login-button" onclick="loginPage();">
-	 			Edura 로그인
-	 		</div>
-	 		<div class="login-menu">
-		      	<div><a href="${path }/login/findid.do">아이디 찾기</a></div>
-		      	<div><a href="${path }/login/findpassword.do">비밀번호 찾기</a></div>
-		      	<div><a href="${path }/login/signupagreement.do">회원가입</a></div>
-      		</div>
-	 	</div>
+	 	<c:if test="${sessionScope.loginMember==null}">
+		 	<div class="login-container">
+		 		<div style="font-weight:bold">지금 에듀라를 시작해보세요!</div>
+		 		<div class="login-button" onclick="loginPage();">
+		 			Edura 로그인
+		 		</div>
+		 		<div class="login-menu">
+			      	<div><a href="${path }/login/findid.do">아이디 찾기</a></div>
+			      	<div><a href="${path }/login/findpassword.do">비밀번호 찾기</a></div>
+			      	<div><a href="${path }/login/signupagreement.do">회원가입</a></div>
+	      		</div>
+		 	</div>
+	 	</c:if>
 	 	<div class="ranking-container">
 	 		<div class="list-title">
 	 			<div style="border-bottom: 2px solid #5A8B63">공감 TOP10</div>

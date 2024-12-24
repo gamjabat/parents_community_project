@@ -9,18 +9,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.gamjabat.admin.model.dto.Member;
+import com.gamjabat.common.PasswordEncoding;
+import com.gamjabat.model.dto.member.Member;
+import com.gamjabat.service.member.MemberService;
 
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(servletNames= {"loginCheckServlet"})
+@WebFilter(servletNames= {"loginCheckServlet","loginEndServlet"})
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**
@@ -42,15 +43,14 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-//		
-//		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-//		HttpServletResponse httpServletResponse = (HttpServletResponse)response;
+
+		String userId = request.getParameter("memberId");
+		String userPwd = request.getParameter("password");
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-	
+		System.out.println("userPwd::"+userPwd);
+
 		
+
 //		String saveId=request.getParameter("saveId");
 //		System.out.println(saveId);
 //		if(saveId!=null) {
@@ -90,10 +90,34 @@ public class LoginFilter extends HttpFilter implements Filter {
 		
 		
 		
+
+		//request 인코딩 utf-8로 변환 
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
+//		Member m = Member.builder().memberId(userId).build();
+		
+		HttpSession session = request.getSession();
+
 		
 		if(userId.equals("admin")) {			
 			request.getRequestDispatcher("/admin/main.do").forward(request, response);
 		}else {
+			PasswordEncoding pe = new PasswordEncoding(request);
+			MemberService service = new MemberService();
+			Member checkMember = Member.builder().memberId(userId).memberPwd(pe.getParameter("password")).build();
+			System.out.println("checkMember:::"+checkMember);
+			System.out.println("pe.getParameter(userPwd)::"+pe.getParameter(userPwd));
+			Member invlidMember = service.loginInvalidCheck(checkMember);
+			
+			System.out.println("invlidMember::::"+invlidMember);
+			
+			
+			
+			if(invlidMember!=null) {
+				session.setAttribute("loginMember", invlidMember);
+				request.setAttribute("loginMember", invlidMember);
+			}
 			request.getRequestDispatcher("/main/login.do").forward(request, response);
 		}
 			chain.doFilter(request, response);

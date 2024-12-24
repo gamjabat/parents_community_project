@@ -28,9 +28,12 @@
         	<label for="id">아이디</label>
         	<span style="color: red;">*</span>
         </div>
-        <div class="input-group d-flex flex-column">
-	        <input type="text" id="id" name="id" placeholder="아이디 입력">
-	        <div class="error"></div>
+        <div class="input-group d-flex flex-column ">
+	        <div class="input-group id-group d-flex flex-row w-100" style="gap: 10px;">
+		        <input type="text" id="id" name="id" placeholder="아이디 입력" class="form-control">
+		        <button type="button" id="check-id-btn" class="btn btn-secondary" onclick="checkDuplicate();">중복 확인</button>
+		    </div>
+	        <small class="error"></small>
         </div>
       </div>
       
@@ -215,7 +218,7 @@ $(document).ready(function () {
 	const passwordInput = document.getElementById('password');
 	const confirmPasswordInput = document.getElementById('confirm-password');
 	const phoneInput = document.getElementById('phone');
-	const idError = idInput.nextElementSibling;
+	const idError = document.querySelector('.id-group').nextElementSibling;
 	const passwordError = passwordInput.nextElementSibling;
 	const confirmPasswordError = confirmPasswordInput.nextElementSibling;
 	const phoneError = phoneInput.nextElementSibling;
@@ -285,6 +288,7 @@ $(document).ready(function () {
 	    const birthMonthSelect = document.getElementById('birth-month');
 	    const birthDaySelect = document.getElementById('birth-day');
 	    const phoneInput = document.getElementById('phone');
+	    const idError = document.querySelector('.id-group').nextElementSibling;
 		
 		if (nameInput.value.trim() === "") {
             alert("이름을 입력해주세요.");
@@ -297,6 +301,12 @@ $(document).ready(function () {
             idInput.focus();
             return false;
         }
+		
+		if (idError.textContent === "이미 사용 중인 아이디입니다.") {
+	        alert("이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
+	        idInput.focus();
+	        return false;
+	    }
 		
 		if (passwordInput.value.trim() === "") {
             alert("비밀번호를 입력해주세요.");
@@ -351,6 +361,37 @@ $(document).ready(function () {
 		
         return true;
     }
+	
+	
+	const checkDuplicate=()=> {
+	    const idInput = document.getElementById("id");
+	    const idError = document.querySelector('.id-group').nextElementSibling;
+	    const idValue = idInput.value.trim();
+
+	    if (!validateId()) {
+	        return; // 유효성 검사에 실패하면 중복 확인 요청을 하지 않음
+	    }
+
+	    $.ajax({
+	        url: `${path}/member/idduplicate.do`, // 서버 요청 URL
+	        type: "POST",
+	        data: { id: idValue }, // 전송 데이터
+	        success: function (response) {
+	            // 서버에서 반환된 JSON 데이터 처리
+	            if (response.isDuplicate) {
+	                idError.textContent = "이미 사용 중인 아이디입니다.";
+	                idError.style.color = "red";
+	            } else {
+	                idError.textContent = "사용 가능한 아이디입니다.";
+	                idError.style.color = "green";
+	            }
+	        },
+	        error: function () {
+	            idError.textContent = "아이디 확인 중 문제가 발생했습니다.";
+	            idError.style.color = "red";
+	        }
+	    });
+	}
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

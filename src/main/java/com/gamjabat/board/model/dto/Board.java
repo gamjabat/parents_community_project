@@ -1,4 +1,4 @@
-package com.gamjabat.model.dto.board;
+package com.gamjabat.board.model.dto;
 
 import java.sql.Timestamp;
 
@@ -30,8 +30,9 @@ public class Board {
 	    private String memberNo;
 	    private String boardTypeNumber;
 	    
-	    /*private String category;
-	    private String[] hashTag;*/
+	    private String category;
+	    
+	    private String[] tag;
 	    
 
 

@@ -7,9 +7,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.board.model.dao.BoardDao;
+import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.board.model.dto.BoardComments;
-
-import com.gamjabat.model.dto.board.Board;
 
 
 public class BoardService{
@@ -48,6 +47,17 @@ public class BoardService{
 	     dao.deleteBoard(session, boardNo);
 	    }
 	 
+
+	 
+	 
+	 
+	 public void updateBoard(Board board) {
+		 SqlSession session = getSession();
+	     dao.updateBoard(session, board);
+	    }
+	 
+			
+
 	
 	 public int insertBoardComment(BoardComments bc) {
 			SqlSession session=getSession();
@@ -57,14 +67,16 @@ public class BoardService{
 			session.close();
 			return result;
 		}
+
 	 
 	 //감자가 추가한 comments 코드입니다. 구현중.
 	 public List<BoardComments> selectBoardComment(String boardNo) {
-			SqlSession session=getSession();
+			SqlSession session=getSession();	
 			List<BoardComments> comments=dao.selectBoardComment(session,boardNo);
 			session.close();
 			return comments;
 			
 		}
+
 			
 }

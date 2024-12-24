@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.gamjabat.admin.model.dto.Member;
+import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.board.model.dto.BoardComments;
 import com.gamjabat.board.model.service.BoardService;
-import com.gamjabat.model.dto.board.Board;
 
 /**
  * Servlet implementation class BoardDetailServlet

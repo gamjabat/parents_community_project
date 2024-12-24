@@ -18,9 +18,9 @@
 			<div class="login-message">에듀라에 오신 것을</div>
 			<div class="login-message">환영합니다!</div>
 		</div>
-		<div class="right-panel">
-			<input class="login-input" type="text" id="userId" placeholder="ID">
-			<input class="login-input" type="password" id="userPwd" placeholder="PASSWORD">
+		<form class="right-panel" action="${path }/login/loginend.do">
+			<input class="login-input" type="text" id="userId" name="memberId" placeholder="ID">
+			<input class="login-input" type="password" id="userPwd" name="password" placeholder="PASSWORD">
 			<span id="inputEmptyCheck" class="error"></span>
 			<div class="text-right small-text">
 				<a href="${path }/login/signupagreement.do">회원가입</a>
@@ -28,10 +28,10 @@
 				<a href="${path }/login/findpassword.do">비밀번호 찾기</a>
 			</div>
 			<button id="loginBtn">LOGIN</button>
-		</div>
+		</form>
 	</div>
 	<script>
-		$("#loginBtn").on("click",e=>{
+		/* $("#loginBtn").on("click",e=>{
 			
 		    const userId = $("#userId").val();
 		    const userPwd =$("#userPwd").val();
@@ -41,9 +41,9 @@
 				$("#inputEmptyCheck").text('아이디/비밀번호를 입력하세요');
 				
 			}else{
-				location.assign("${path}/login/loginCheck.do?userId="+userId+"&userPwd"+userPwd);			
+				location.assign("${path}/login/loginCheck.do?userId="+userId+"&userPwd="+userPwd);			
 			}
-		});
+		}); */
   </script>
 </body>
 </html>

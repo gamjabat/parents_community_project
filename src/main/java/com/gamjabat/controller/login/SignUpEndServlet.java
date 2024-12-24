@@ -15,7 +15,7 @@ import com.gamjabat.service.member.MemberService;
 /**
  * Servlet implementation class SignUpEndServlet
  */
-@WebServlet("/login/signupend.do")
+@WebServlet(name="signUpEndServlet", urlPatterns="/login/signupend.do")
 public class SignUpEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,8 +39,6 @@ public class SignUpEndServlet extends HttpServlet {
 		String birthYear = request.getParameter("birth-year");
 		String birthMonth = request.getParameter("birth-month");
 		String birthDay = request.getParameter("birth-day");
-		System.out.println(birthMonth);
-		System.out.println(birthDay);
 		// 월, 일이 한 자리인 경우 앞에 0 추가
         if (birthMonth != null && birthMonth.length() == 1) {
             birthMonth = "0" + birthMonth;
@@ -49,7 +47,6 @@ public class SignUpEndServlet extends HttpServlet {
             birthDay = "0" + birthDay;
         }
 		String birthDateStr = birthYear + "-" + birthMonth + "-" + birthDay;
-		System.out.println("날짜: "+birthDateStr);
 		Date birthDate = Date.valueOf(birthDateStr);
 		String phone = request.getParameter("phone");
 		String sido = request.getParameter("sido");
@@ -59,7 +56,7 @@ public class SignUpEndServlet extends HttpServlet {
 		Member insertMember = Member.builder()
 								.memberName(name)
 								.memberId(id)
-								.nickName(nickname)
+								.nickname(nickname)
 								.memberPwd(password)
 								.email(email)
 								.birthday(birthDate)

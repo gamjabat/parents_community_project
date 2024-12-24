@@ -83,7 +83,7 @@
 	padding: 0 !important;
 }
 
-.signup-btn {
+.signup-btn{
 	width: 100%;
 	padding: 10px;
 	border: none;
@@ -95,6 +95,24 @@
 	cursor: pointer;
 }
 
+.id-group{
+	align-items: center;
+	justify-content: center;
+}
+
+
+#check-id-btn{
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	background-color: #7ba37e;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	height: 38px;
+}
+
 .signup-btn:hover {
 	background-color: #4d4d3d;
 }
@@ -104,4 +122,8 @@
 	flex-direction: column;
 	align-items: flex-end;
 	padding: 0px 10px;
+}
+
+#id{
+	width: 60%;
 }

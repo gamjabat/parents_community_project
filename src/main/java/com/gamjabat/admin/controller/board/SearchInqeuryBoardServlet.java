@@ -45,18 +45,6 @@ public class SearchInqeuryBoardServlet extends HttpServlet {
 		Gson gson = new Gson();
 
 		Member inqueryMember = Member.builder().memberId("user" + 1).build();
-//		for (int i = 1; i <= 5; i++) {
-//
-//			InqueryBoard ib = InqueryBoard.builder().inqueryNo(i + 1 + "").postNo(i + 1 + "").inqueryCode("댓글")
-//					.inqueryTitle("탈주각" + i).inqueryContent("그때는 진짜 깡패가 되는거야!" + i).createDate("2024-01-01")
-//					.reportStatus("처리중").inqueryMember(inqueryMember).build();
-//			ibs.add(ib);
-//		}
-//
-//		String jsonData = gson.toJson(ibs);
-//
-//		response.getWriter().print(jsonData);
-
 	}
 
 	/**
