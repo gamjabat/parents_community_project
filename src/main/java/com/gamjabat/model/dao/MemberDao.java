@@ -1,5 +1,7 @@
 package com.gamjabat.model.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.model.dto.member.Member;
@@ -11,5 +13,9 @@ public class MemberDao {
 	
 	public Member selectMemberById(SqlSession session, String id) {
 		return session.selectOne("member.selectMemberById", id);
+	}
+	
+	public Member selectMemberByNameAndEmail(SqlSession session, Map<String, String> param) {
+		return session.selectOne("member.selectMemberByNameAndEmail", param);
 	}
 }
