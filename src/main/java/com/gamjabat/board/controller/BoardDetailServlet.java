@@ -52,21 +52,21 @@ public class BoardDetailServlet extends HttpServlet {
         request.setAttribute("board", board);
 	    
 	    }
-		Member m = Member.builder()
-				.memberId("jbag")
-				.memberNo("MB_0012")
-				.build();
-				
-				
-		HttpSession session = request.getSession();
-		session.setAttribute("loginMember", m);
+//		Member m = Member.builder()
+//				.memberId("jbag")
+//				.memberNo("MB_0012")
+//				.build();
+//				
+//				
+	    //감자가 추가한 comments 코드입니다. 구현중.
+	    List<BoardComments> comments=new BoardService().selectBoardComment(boardNo);
+	    request.setAttribute("comments", comments);
+//		HttpSession session = request.getSession();
+//		session.setAttribute("loginMember", m);
 	    // boardDetail.jsp 페이지로 forward 메소드를 사용하여 요청과 응답을 전달
 	    request.getRequestDispatcher(getServletContext().getInitParameter("viewpath") + "/board/boardDetail.jsp").forward(request, response);
 	
 	    
-	    //감자가 추가한 comments 코드입니다. 구현중.
-	    List<BoardComments> comments=new BoardService().selectBoardComment(boardNo);
-		request.setAttribute("comments", comments);
 	
 	}
 		
