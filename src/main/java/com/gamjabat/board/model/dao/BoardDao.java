@@ -29,7 +29,7 @@ public class BoardDao {
 	
     public void deleteBoard(SqlSession session, String boardNo) {
         
-            session.delete("board.deleteBoard", boardNo);
+            session.update("board.logicalDeleteBoard", boardNo);
             session.commit();
             
 

@@ -35,15 +35,15 @@
               <div class="select-container" style="padding:0;">
                 <select id="category" class="form-control " name="category">
                 
-                	<option value="공지">공지</option>
-                    <option value="잡담">잡담</option>
-                    <option value="책">책</option>
-                    <option value="진학">진학</option>
-                    <option value="진로">진로</option>
-                    <option value="유아">유아</option>
-                    <option value="입시">입시</option>
-                    <option value="정보">정보</option>
-                    <option value="질문">질문</option> 
+                	<option value="CAT-1">공지</option>
+                    <option value="CAT-2">잡담</option>
+                    <option value="CAT-3">책</option>
+                    <option value="CAT-4">진학</option>
+                    <option value="CAT-5">진로</option>
+                    <option value="CAT-6">유아</option>
+                    <option value="CAT-7">입시</option>
+                    <option value="CAT-8">정보</option>
+                    <option value="CAT-9">질문</option> 
                 </select>
             	</div>
 			</div>

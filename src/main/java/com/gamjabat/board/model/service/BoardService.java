@@ -42,10 +42,28 @@ public class BoardService{
 		 session.close();
 		 return b;   
 	}
-	 public void deleteBoard(String boardNo) {
+	 
+	 
+	 
+	/* public void deleteBoard(String boardNo) {
 		 SqlSession session = getSession();
 	     dao.deleteBoard(session, boardNo);
+	    }*/
+	 
+	 
+	 public void deleteBoard(String boardNo) {
+	        SqlSession session = getSession();
+	        try {
+	            dao.deleteBoard(session, boardNo);  // 세션을 통해 논리적 삭제 수행
+	            session.commit();
+	        } catch (Exception e) {
+	            session.rollback();
+	            throw e;
+	        } finally {
+	            session.close();
+	        }
 	    }
+	
 	 
 
 	 

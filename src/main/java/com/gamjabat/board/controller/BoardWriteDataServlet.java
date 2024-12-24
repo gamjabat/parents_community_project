@@ -34,7 +34,7 @@ public class BoardWriteDataServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 
-        String category = request.getParameter("category");
+        String boardTypeNumber = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         content = content.replaceAll("<[^>]*>", ""); // HTML 태그 제거
@@ -57,7 +57,7 @@ public class BoardWriteDataServlet extends HttpServlet {
         String isDeleted = "N"; // 삭제 여부 초기값
         String member_No = "MB_0004"; // 멤버 번호 예시
         
-        String boardTypeNumber = "BTN-1";  // 정수를 문자열로 변환
+    
         
         
         /* Board insertBoard = Board.builder()

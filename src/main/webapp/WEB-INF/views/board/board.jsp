@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <link rel="stylesheet" href="${path}/resources/css/board/board.css">
-
+${sessionScope.loginMember}
 <div class="board-header">
     <div class="board-category">
         <button class="btn-category">전체글</button>
