@@ -47,8 +47,8 @@
 				<tbody>
 					<c:if test="${not empty members}">
 						<c:forEach var="member" items="${members}">
-							<tr>
-								<td>${member.memberNo}</td>
+							<tr data-no="${member.memberNo}" data-id="${member.memberId}">
+								<td >${member.memberNo}</td>
 								<td>${member.memberName}</td>
 								<td>${member.email}</td>
 								<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
@@ -87,7 +87,7 @@
 						<c:forEach var="board" items="${inqueryboards}">
 							<a href="javascript:inqueryDetailSearch();">
 								<tr>
-									<td>${board.inqueryNo}</td>
+									<td data-no="">${board.inqueryNo}</td>
 									<td>${board.inqueryMember.memberId}</td>
 									<td>${board.inqueryCode}</td>
 									<td>${board.inqueryTitle}</td>
@@ -160,23 +160,15 @@
 			 }; */
 
 			// 사용자 데이터 추출
-			const userData = {
-				memberNo : row.dataset.memberNo,
-				uid : row.dataset.id,
-				name : row.dataset.name,
-				email : row.dataset.email,
-				phone : row.dataset.phone,
-				address : row.dataset.address,
-				birth : row.dataset.birth,
-				nickName : row.dataset.nickname,
-				createDate : row.dataset.createDate,
-				updateDate : row.dataset.updateDate,
-				deleteDate : row.dataset.deleteDate,
-				isDelete : row.dataset.status
-			};
+ 			const userData = {
+				memberNo : row.dataset.no,
+				memberId : row.dataset.id
+			}; 
+			 
+			 
 
 			// 팝업 URL에 데이터 전달 (쿼리스트링 사용)
-			const popupUrl = `${pageContext.request.contextPath}/admin/memberInfo.do?memberNo=\${userData.memberNo}&id=\${userData.uid}&name=\${userData.name}&email=\${userData.email}&phone=\${userData.phone}&address=\${userData.address}&birth=\${userData.birth}&nick=\${userData.nick}&createDate=\${userData.createDate}&updateDate=\${userData.updateDate}&deleteDate=\${userData.deleteDate}&isDelete=\${userData.isDelete}`
+			const popupUrl = `${pageContext.request.contextPath}/admin/memberInfo.do?memberNo=\${userData.memberNo}&memberId=\${userData.memberId}`
 			// 팝업 열기
 
 			const popupW = 300;
@@ -197,6 +189,7 @@
 							+ top
 							+ ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		}
+		
 		
 		const hideDeclaration=()=>{
 			$("#declaration-table").hide();
