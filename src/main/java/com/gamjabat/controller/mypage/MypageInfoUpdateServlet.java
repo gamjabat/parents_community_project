@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.gamjabat.common.PasswordEncoding;
 import com.gamjabat.model.dto.member.Member;
+import com.gamjabat.service.member.MemberService;
 
 /**
  * Servlet implementation class MypageInfoUpdateServlet
@@ -40,7 +41,10 @@ public class MypageInfoUpdateServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
+		Member memberInfo = new MemberService().selectMemberById(loginMember.getMemberId());
+		
 		if(loginMember != null && password.equals(loginMember.getMemberPwd())) {
+			request.setAttribute("memberInfo", memberInfo);
 			request.getRequestDispatcher("/WEB-INF/views/member/mypageInfoUpdate.jsp")
 			.forward(request, response);
 			

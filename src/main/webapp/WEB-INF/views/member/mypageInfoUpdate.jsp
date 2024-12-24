@@ -12,52 +12,54 @@
 	    <ul>
 	    	<li class="mypage-texttitle">마이 페이지</li>
 	    </ul>
-	        <ul>
-		        <li><a href="${path}/member/mypageinfoupdate.do">나의 정보 수정</a></li>
-            	<li><a href="${path}/member/mypageboardlist.do">나의 게시글</a></li>
-            	<li><a href="${path}/member/mypagecomment.do">나의 댓글</a></li>
-            	<li><a href="${path}/member/mypagelike.do">나의 좋아요</a></li>
-	        </ul>
+        <ul>
+	        <li><a href="${path}/member/mypageinfoupdate.do">나의 정보 수정</a></li>
+           	<li><a href="${path}/member/mypageboardlist.do">나의 게시글</a></li>
+           	<li><a href="${path}/member/mypagecomment.do">나의 댓글</a></li>
+           	<li><a href="${path}/member/mypagelike.do">나의 좋아요</a></li>
+        </ul>
 	    </div>
 	    <div class="mypageinfo-content">
 	   <h2>나의 정보 수정</h2>
 		<div class="memberinfo-container">
 			<div class="member-idbox">
 				<label class="member-id">아이디</label>
-				<label class="member-id">유저아이디</label>
-				<button class="member-id-btn"><div>변경</div></button>
+				<div class="member-id" id="id">${memberInfo.memberId }</div>
+				<button class="member-info-btn member-id-btn">변경</button>
 			</div>
 			
 			<div class="member-namebox">
 				<label class="member-name">이름</label>
-				<label class="member-name">유저이름</label>
+				<div class="member-name">${memberInfo.memberName}</div>
 			</div>
 			
 			<div class="member-pwbox">
 				<label class="member-pw">비밀번호</label>
-				<button class="member-pw-btn"><div>변경</div></button>
+				<button class="member-info-btn member-pw-btn">변경</button>
 			</div>
 			
 			<div class="member-emailbox">
 				<label class="member-email">이메일</label>
-				<label class="member-email">유저이메일</label>
-				<button class="member-email-btn"><div>변경</div></button>
+				<div class="member-email">${memberInfo.email }</div>
+				<button class="member-info-btn">변경</button>
 			</div>
 			
 			<div class="member-phonebox">
 				<label class="member-phone">전화번호</label>
-				<label class="member-phone">010-5403-2139</label>
+				<div class="member-phone">${memberInfo.phone }</div>
 			</div>
 			
 			<div class="member-addressbox">
 				<label class="member-address">주소</label>
-				<label class="member-address">인천 부평구 덤벼.</label>
-				<button class="member-address-btn"><div>변경</div></button>
+				<c:if test="${memberInfo.address != null }">
+					<div class="member-address">${memberInfo.address }</div>
+				</c:if>
+				<button class="member-info-btn">변경</button>
 			</div>
 			
 			<div class="member-btdaybox">
 				<label class="member-btday">생일</label>
-				<label class="member-btday">0805</label>
+				<div class="member-btday">${memberInfo.birthday }</div>
 			</div>
 		</div>
 		<button class="member-end-btn">회원 정보 수정</button>
@@ -65,18 +67,26 @@
 </div>
 
 <script>
-// ID 변경 버튼 로직
+//ID 변경 버튼 로직
 const idChangeButton = document.querySelector('.member-id-btn');
 const memberIdBox = document.querySelector('.member-idbox'); // member-idbox 선택
+const memberIdValue = document.querySelector('#id'); // 현재 아이디 표시 영역
 let idDynamicContainer = null; // 동적 컨테이너 변수
 
 idChangeButton.addEventListener('click', () => {
-    // 동적 컨테이너가 이미 존재하면 다시 생성하지 않음
-    if (idDynamicContainer) return;
+    // 이미 생성된 경우 제거(토글 기능)
+    if (idDynamicContainer) {
+        idDynamicContainer.remove(); // 동적 요소 제거
+        idDynamicContainer = null; // 컨테이너 상태 초기화
+        idChangeButton.style.backgroundColor = "#5c8f51"; // 원래 색상
+        idChangeButton.style.color = "#fff"; // 원래 글자 색상
+        idChangeButton.textContent = "변경"; // 버튼 텍스트 복원
+        return;
+    }
 
     // div 생성
     idDynamicContainer = document.createElement('div');
-    idDynamicContainer.className = 'change-idbox';
+    idDynamicContainer.className = 'change-idbox change-box';
 
     // 라벨 생성
     const idLabel = document.createElement('label');
@@ -96,10 +106,21 @@ idChangeButton.addEventListener('click', () => {
 
     // 완료 버튼 클릭 이벤트
     idCompleteButton.addEventListener('click', () => {
-        alert(`입력된 아이디 값: ${idInput.value}`);
-        // 입력 후 동적 요소 제거
+        if (!idInput.value.trim()) {
+            alert('아이디를 입력하세요.');
+            return;
+        }
+        // 입력된 값으로 ${memberInfo.memberId } 업데이트
+        memberIdValue.textContent = idInput.value;
+
+        // 동적 요소 제거
         idDynamicContainer.remove();
-        idDynamicContainer = null; // 컨테이너 상태 초기화
+        idDynamicContainer = null;
+
+        // 버튼 상태 복원
+        idChangeButton.style.backgroundColor = "#5c8f51"; // 원래 색상
+        idChangeButton.style.color = "#fff"; // 원래 글자 색상
+        idChangeButton.textContent = "변경"; // 버튼 텍스트 복원
     });
 
     // div에 요소 추가
@@ -109,21 +130,37 @@ idChangeButton.addEventListener('click', () => {
 
     // member-idbox 아래에 동적 div 추가
     memberIdBox.insertAdjacentElement('afterend', idDynamicContainer);
+
+    // 버튼 스타일 변경
+    idChangeButton.style.backgroundColor = "#fff"; // 하얀 바탕
+    idChangeButton.style.color = "red"; // 빨간 글씨
+    idChangeButton.style.border = "1px solid red"; // 빨간 테두리
+    idChangeButton.textContent = "취소"; // 버튼 텍스트 변경
 });
 
-// PW 변경 버튼 로직
+//PW 변경 버튼 로직
 const pwChangeButton = document.querySelector('.member-pw-btn');
 const memberPwBox = document.querySelector('.member-pwbox'); // member-pwbox 선택
 let pwDynamicContainer = null; // 동적 컨테이너 변수
 
 pwChangeButton.addEventListener('click', () => {
-    if (pwDynamicContainer) return;
+    // 이미 생성된 경우 제거(토글 기능)
+    if (pwDynamicContainer) {
+        pwDynamicContainer.remove(); // 동적 요소 제거
+        pwDynamicContainer = null; // 컨테이너 상태 초기화
+        pwChangeButton.style.backgroundColor = "#5c8f51"; // 원래 색상
+        pwChangeButton.style.color = "#fff"; // 원래 글자 색상
+        pwChangeButton.textContent = "변경"; // 버튼 텍스트 복원
+        return;
+    }
 
     // div 생성
     pwDynamicContainer = document.createElement('div');
     pwDynamicContainer.className = 'change-pwbox';
 
     // 첫 번째 라벨과 인풋 생성
+    const pwInputContainer1 = document.createElement('div');
+    pwInputContainer1.className = 'pw-input-container change-box';
     const pwLabel1 = document.createElement('label');
     pwLabel1.className = 'change-label';
     pwLabel1.textContent = '새로운 비밀번호 :';
@@ -133,7 +170,14 @@ pwChangeButton.addEventListener('click', () => {
     pwInput1.className = 'change-input';
     pwInput1.placeholder = '비밀번호 입력';
 
+    // 유효성 검사 메시지
+    const pwValidationMessage = document.createElement('div');
+    pwValidationMessage.className = 'validation-message error-msg';
+    pwValidationMessage.style.color = 'red'; // 초기 상태는 경고 메시지
+
     // 두 번째 라벨과 인풋 생성
+    const pwInputContainer2 = document.createElement('div');
+    pwInputContainer2.className = 'pw-input-container change-box';
     const pwLabel2 = document.createElement('label');
     pwLabel2.className = 'change-label';
     pwLabel2.textContent = '새로운 비밀번호 확인 :';
@@ -143,33 +187,106 @@ pwChangeButton.addEventListener('click', () => {
     pwInput2.className = 'change-input';
     pwInput2.placeholder = '비밀번호 확인';
 
+    // 비밀번호 일치 메시지
+    const pwMatchMessage = document.createElement('div');
+    pwMatchMessage.className = 'match-message error-msg';
+
     // 완료 버튼 생성
     const pwCompleteButton = document.createElement('button');
     pwCompleteButton.className = 'complete-btn';
     pwCompleteButton.textContent = '입력 완료';
 
+    // 유효성 검사 함수
+    function validatePassword(password) {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+        return regex.test(password);
+    }
+
+    // 비밀번호 입력 실시간 검사
+    pwInput1.addEventListener('input', () => {
+        if (validatePassword(pwInput1.value)) {
+            pwValidationMessage.textContent = '비밀번호가 유효합니다.';
+            pwValidationMessage.style.color = 'green';
+        } else {
+            pwValidationMessage.textContent =
+                '비밀번호는 8자리 이상, 대소문자, 숫자, 특수문자(!@#$%^&*)를 각각 포함해야 합니다.';
+            pwValidationMessage.style.color = 'red';
+        }
+    });
+
+    // 비밀번호 일치 실시간 검사
+    pwInput2.addEventListener('input', () => {
+        if (pwInput1.value === pwInput2.value) {
+            pwMatchMessage.textContent = '비밀번호가 일치합니다.';
+            pwMatchMessage.style.color = 'green';
+        } else {
+            pwMatchMessage.textContent = '비밀번호가 일치하지 않습니다.';
+            pwMatchMessage.style.color = 'red';
+        }
+    });
+
     // 완료 버튼 클릭 이벤트
     pwCompleteButton.addEventListener('click', () => {
+        if (!validatePassword(pwInput1.value)) {
+            alert('유효한 비밀번호를 입력하세요.');
+            return;
+        }
         if (pwInput1.value !== pwInput2.value) {
             alert('비밀번호가 일치하지 않습니다.');
             return;
         }
-        alert(`입력된 비밀번호 값: ${pwInput1.value}`);
+
+     // 기존에 존재하던 #password 요소 제거 (중복 방지)
+        const existingPasswordDiv = document.querySelector('.member-pw#password');
+        if (existingPasswordDiv) {
+            existingPasswordDiv.remove();
+        }
+
+        // 비밀번호가 변경되었을 때만 새로운 div 추가
+        const passwordDiv = document.createElement('div');
+        passwordDiv.className = 'member-pw';
+        passwordDiv.id = 'password';
+        passwordDiv.textContent = '비밀번호가 성공적으로 변경되었습니다.';
+
+        // pwBox 내부에 추가
+        pwChangeButton.insertAdjacentElement('beforebegin', passwordDiv);
+
+        // 동적 요소 제거
         pwDynamicContainer.remove();
         pwDynamicContainer = null;
+
+        // 버튼 상태 복원
+        pwChangeButton.style.backgroundColor = "#5c8f51"; // 원래 색상
+        pwChangeButton.style.color = "#fff"; // 원래 글자 색상
+        pwChangeButton.textContent = "변경"; // 버튼 텍스트 복원
     });
 
     // div에 요소 추가
-    pwDynamicContainer.appendChild(pwLabel1);
-    pwDynamicContainer.appendChild(pwInput1);
-    pwDynamicContainer.appendChild(pwLabel2);
-    pwDynamicContainer.appendChild(pwInput2);
-    pwDynamicContainer.appendChild(pwCompleteButton);
+    pwInputContainer1.appendChild(pwLabel1);
+    pwInputContainer1.appendChild(pwInput1);
+    pwDynamicContainer.appendChild(pwInputContainer1);
+    pwDynamicContainer.appendChild(pwValidationMessage); // 유효성 검사 메시지 추가 (컨테이너 다음)
+
+    pwInputContainer2.appendChild(pwLabel2);
+    pwInputContainer2.appendChild(pwInput2);
+    pwInputContainer2.appendChild(pwCompleteButton); // 완료 버튼은 맨 아래
+    pwDynamicContainer.appendChild(pwInputContainer2);
+    pwDynamicContainer.appendChild(pwMatchMessage); // 비밀번호 일치 메시지 추가 (컨테이너 다음)
 
     // member-pwbox 아래에 동적 div 추가
     memberPwBox.insertAdjacentElement('afterend', pwDynamicContainer);
+
+    // 버튼 스타일 변경
+    pwChangeButton.style.backgroundColor = "#fff"; // 하얀 바탕
+    pwChangeButton.style.color = "red"; // 빨간 글씨
+    pwChangeButton.style.border = "1px solid red"; // 빨간 테두리
+    pwChangeButton.textContent = "취소"; // 버튼 텍스트 변경
 });
 
+
+
+
+/* 
 // Email 변경 버튼 로직
 const emailChangeButton = document.querySelector('.member-email-btn');
 const memberEmailBox = document.querySelector('.member-emailbox');
@@ -242,7 +359,7 @@ addressChangeButton.addEventListener('click', () => {
     addressDynamicContainer.appendChild(addressCompleteButton);
 
     memberAddressBox.insertAdjacentElement('afterend', addressDynamicContainer);
-});
+}); */
 </script>
 	
 
