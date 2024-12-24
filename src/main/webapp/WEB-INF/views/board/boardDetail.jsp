@@ -119,6 +119,7 @@
 	                	<div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
 	                	<form action="${path}/board/insertcomment.do" method="post">
 	                		<input type="hidden" name="commentBoardNo" value="${board.boardNo}"/>
+	                		<input type="hidden" name="parentCommentNo" value="0"/>
 	                		<input type="hidden" name="level" value="1"/>
 	                		<input type="hidden" name="commentMemberNo" value="${sessionScope.loginMember.memberNo}"/>
 	                		<textarea name="content" cols="50" rows="3"></textarea>
@@ -133,170 +134,87 @@
 					  <option value="2">등록순</option>
 					</select>
             	</div>
-            	<!-- 댓글 목록 -->
             	
-            	<div id="tbl-comment">
-            		<div class="comments">
-            			<c:if test="${not empty comments}">
-	            		<!-- 댓글 반복문 -->
-	            		<c:forEach var="comment" items="${comments}"> 
-		                	<div class="comment">
-		                	<!-- 작성자 아이디 -->
-		                	<div class="d-flex justify-content-between">
-			                	<div class="fs-6 fw-bold me-2">${comment.commentMemberNo}</div>
-		                		<!-- 드롭다운 -->
-						        <div class="dropdown">
-						            <!-- 아이콘 버튼 -->
-						            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-						                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
-						                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-						                </svg>
-						            </a>
-						            <!-- 드롭다운 메뉴 -->
-						            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-						                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
-						                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
-						            </ul>
-						        </div>
-		                	</div>
-		                	<!-- 댓글 내용 -->
-		                	<div class="comment-content">
-		                		${comment.commentContent}
-		                	</div>
-		                	<!-- 댓글 날짜 -->
-		                	<div class="comment-meta pb-2">
-		                		<div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
-		                		<div class="sub-comment-btn">대댓글 쓰기</div>
-		                	</div>
-		                	</div>
-		                </c:forEach>
-		               </c:if>
-	             </div>
-					
-		                <!--여기 조정할 예정. 대댓글 -->
-		              <!--   <div class="sub-comment d-flex flex-row">
-		                	<div class="mx-2">
-		                		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-								  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-								</svg>
-		                	</div>
-		                	<div class="comment d-flex flex-column flex-grow-1">
-			                	<div class="d-flex justify-content-between">
-				                	<div class="fs-6 fw-bold me-2">닉네임님</div>
-			                		드롭다운
-							        <div class="dropdown">
-							            아이콘 버튼
-							            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-							                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
-							                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-							                </svg>
-							            </a>
-							            드롭다운 메뉴
-							            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-							                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
-							                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
-							            </ul>
-							        </div>
-			                	</div>
-			                	<div class="comment-content">
-			                		안녕하세요ㅠ
-			                	</div>
-			                	<div class="comment-meta pb-2">
-			                		<div class="d-flex align-items-end justify-content-center">2024.11.25 14:25</div>
-			                	</div>
-		                	</div>
-		                </div>
-		                 -->
-		                
-		                
-		                <!-- 대댓글 -->
-		               <!--  <div class="sub-comment d-flex flex-row">
-		                	<div class="mx-2">
-		                		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-								  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-								</svg>
-		                	</div>
-		                	<div class="comment d-flex flex-column flex-grow-1">
-			                	<div class="d-flex justify-content-between">
-				                	<div class="fs-6 fw-bold me-2">닉네임님</div>
-			                		드롭다운
-							        <div class="dropdown">
-							            아이콘 버튼
-							            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-							                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
-							                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-							                </svg>
-							            </a>
-							            드롭다운 메뉴
-							            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							                <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-							                <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
-							            </ul>
-							        </div>
-			                	</div>
-			                	<div class="comment-content">
-			                		안녕하세요ㅠ
-			                	</div>
-			                	<div class="comment-meta pb-2">
-			                		<div class="d-flex align-items-end justify-content-center">2024.11.25 14:25</div>
-			                	</div>
-		                	</div>
-		                </div> -->
-		                <!-- 대댓글 입력 -->
-		                <!-- <div class="sub-comment d-flex flex-row">
-		                	<div class="mx-2">
-		                		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-								  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-								</svg>
-		                	</div>
-		                	<div class="comment-form pb-3 mb-3">
-		                	<div class="d-flex justify-content-between">
-			                	<div class="fs-6 fw-bold me-2">닉네임</div>
-		                	</div>
-		                	<div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
-		                		<textarea></textarea>
-			                	<div class="comment-btn ms-2 d-flex align-items-center justify-content-center">등록</div>
-		                	</div>
-		            		</div>
-		                </div> -->
-	               <!--  </div> -->
-	                
-	                <!-- 댓글 -->
-	             <%--     <div class="comment">
-	                	<div class="d-flex justify-content-between">
-		                	<div class="fs-6 fw-bold me-2">닉네임님</div>
-	                		<!-- 드롭다운 -->
-					        <div class="dropdown">
-					            <!-- 아이콘 버튼 -->
-					            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-					                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
-					                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-					                </svg>
-					            </a>
-					            <!-- 드롭다운 메뉴 -->
-					            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
-					                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
-					                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-id="BD_0001" data-title="문제 게시글 제목">글 신고</a></li>
-					            </ul>
-					        </div>
-	                	</div>
-	                	<div class="comment-content">
-	                		안녕하세요ㅠ
-	                	</div>
-	                	<div class="comment-meta pb-2">
-	                		<div class="d-flex align-items-end justify-content-center">2024.11.25 14:25</div>
-	                		<div class="sub-comment-btn">대댓글 쓰기</div>
-	                	</div>
-	                </div>
-            	</div>
-            </div> 
-            
-             --%>
-            
-            
+          <!-- 댓글시작  -->  	
+		  <div id="tbl-comment">
+		    <div class="comments">
+		        <c:if test="${not empty comments}">
+		            <!-- 댓글 반복문 -->
+		            <c:forEach var="comment" items="${comments}">
+		                <!-- 댓글 (레벨 1) -->
+		                <c:if test="${comment.commentLevel == 1}">
+		                    <div class="comment">
+		                        <!-- 작성자 아이디 -->
+		                        <div class="d-flex justify-content-between">
+		                            <div class="fs-6 fw-bold me-2">${comment.commentMemberNo}</div>
+		                            <!-- 드롭다운 -->
+		                            <div class="dropdown">
+		                                <!-- 아이콘 버튼 -->
+		                                <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+		                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
+		                                        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+		                                    </svg>
+		                                </a>
+		                                <!-- 드롭다운 메뉴 -->
+		                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+		                                    <li><a class="dropdown-item" href="#">댓글 수정</a></li>
+		                                    <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+		                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
+		                                </ul>
+		                            </div>
+		                        </div>
+		                        <!-- 댓글 내용 -->
+		                        <div class="comment-content">
+		                            ${comment.commentContent}
+		                        </div>
+		                        <!-- 댓글 날짜 -->
+		                        <div class="comment-meta pb-2">
+		                            <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
+		                            <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
+		                            <button  class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">대댓글 쓰기</button>
+		                        </div>
+		                    </div>
+		                </c:if>
+		                <!-- 대댓글 (레벨 2) -->
+		                <c:if test="${comment.commentLevel == 2}">
+		                    <div class="sub-comment d-flex flex-row">
+		                        <div class="mx-2">
+		                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+		                                <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
+		                            </svg>
+		                        </div>
+		                        <div class="comment d-flex flex-column flex-grow-1">
+		                            <div class="d-flex justify-content-between">
+		                                <div class="fs-6 fw-bold me-2">${comment.commentMemberNo}</div>
+		                                <!-- 드롭다운 -->
+		                                <div class="dropdown">
+		                                    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+		                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
+		                                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+		                                        </svg>
+		                                    </a>
+		                                    <!-- 드롭다운 메뉴 -->
+		                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+		                                        <li><a class="dropdown-item" href="#">댓글 수정</a></li>
+		                                        <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+		                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
+		                                    </ul>
+		                                </div>
+		                            </div>
+		                            <div class="comment-content">
+		                                ${comment.commentContent}
+		                            </div>
+		                            <div class="comment-meta pb-2">
+		                                <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </c:if>
+		            </c:forEach>
+		        </c:if>
+		    </div>
+		</div>
+
             <!-- 페이지네이션 -->
             <nav aria-label="Page navigation" class="mt-4">
                 <ul class="pagination justify-content-center">
@@ -348,11 +266,25 @@
 		</div>
 		
 
+
 		
         
         
 </section>
-<script>
+	<script>
+	
+	$(".btn-insert2").click(e=>{
+		
+		const $parent=$(e.target).parents("div.comment");
+		console.log($parent);
+		const $form=$(".comment-input>form").clone();
+		console.log($form);
+		
+		$parent.after($form);
+	})
+
+
+
 //아이콘을 담고 있는 요소 선택
 const heartIcon = document.getElementById("heart-icon");
 
@@ -383,8 +315,7 @@ heartIcon.addEventListener("click", () => {
 });
 
 
-/* 대댓글 입력창 */
-document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
     // "대댓글 쓰기" 버튼에 이벤트 리스너 추가
     document.querySelectorAll(".sub-comment-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
