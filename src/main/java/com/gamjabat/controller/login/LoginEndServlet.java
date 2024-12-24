@@ -36,6 +36,7 @@ public class LoginEndServlet extends HttpServlet {
 		
 		Member loginMember = (Member)request.getAttribute("loginMember");
 		
+		
 		System.out.println("loginMember::"+loginMember);
 		
 		// origin code
@@ -53,6 +54,7 @@ public class LoginEndServlet extends HttpServlet {
 		if(loginMember!=null) {
 			// 아이디가 일치하는 회원이 있음 -> 로그인 성공
 			// 세션에 저장해줘야 함
+			System.out.println("로그인성공 !!!!!!");
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
 			// 메인화면을 리다이렉트 시킴
@@ -60,6 +62,9 @@ public class LoginEndServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 			
 		} else {
+			
+			System.out.println("로그인실패 !!!!!!");
+			
 			// 로그인 실패
 			request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
 			request.setAttribute("loc","/");
