@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.board.model.service.BoardService;
 
+
 /**
  * Servlet implementation class BoardWriteDataServlet
  */
