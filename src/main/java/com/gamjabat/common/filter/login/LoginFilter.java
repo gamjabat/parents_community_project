@@ -68,11 +68,11 @@ public class LoginFilter extends HttpFilter implements Filter {
 //		}
 //		
 //		
-		
-		Member m = Member.builder().memberId(userId).build();
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("loginMember", m);
+//		Member m = Member.builder().memberId(userId).build();
+//
+//		HttpSession session = request.getSession();
+//		session.setAttribute("loginMember", m);
+
 ////		Member m=new MemberService().selectMemberById(userId);
 //		if(m!=null&&m.getPassword().equals(password)) {
 //			//아이디가 일치하는 회원이 있음 -> 로그인 성공

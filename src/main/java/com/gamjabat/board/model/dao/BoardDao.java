@@ -39,5 +39,11 @@ public class BoardDao {
 		return session.insert("board.insertBoardComment",bc);
 	}
     
+    	//감자가 추가한 comments 코드입니다. 구현중.
+    	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
+    	return session.selectList("board.selectBoardComment",boardNo);
+    	}
+    
+    
     }
     

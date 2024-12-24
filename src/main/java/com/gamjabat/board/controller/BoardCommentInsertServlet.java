@@ -1,6 +1,7 @@
 package com.gamjabat.board.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,12 +34,12 @@ public class BoardCommentInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String content=request.getParameter("content");
-		String cmbNo=request.getParameter("commentBoardNo");
-		int level=Integer.parseInt(request.getParameter("commentLevel"));
+		String boardNo=request.getParameter("commentBoardNo");
+		int level=Integer.parseInt(request.getParameter("level"));
 		String writer=request.getParameter("commentMemberNo");
-	    
+		
 		BoardComments bc=BoardComments.builder()
-				.commentBoardNo(cmbNo)
+				.commentBoardNo(boardNo)
 				.commentLevel(level)
 				.commentMemberNo(writer)
 				.commentContent(content)
@@ -46,7 +47,7 @@ public class BoardCommentInsertServlet extends HttpServlet {
 		
 		int result=new BoardService().insertBoardComment(bc);
 		
-		String msg, loc="/board/boardDetail.do?boardNo="+cmbNo;
+		String msg, loc="/board/boarddetail.do?boardNo="+boardNo;
 		if(result>0) {
 			msg="댓글 등록 성공";
 		}else {
@@ -57,9 +58,9 @@ public class BoardCommentInsertServlet extends HttpServlet {
 
 		request.getRequestDispatcher(getServletContext().getInitParameter("viewpath")+"/common/msg.jsp")
 		.forward(request, response);
+		
+//		response.sendRedirect(loc);
 	}
-	
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -36,19 +36,13 @@ public class BoardService{
 		return boards;
 		
 	}
-	
-
 	 public Board selectByBoardNo(String boardNo) {
 		 
 		 SqlSession session = getSession();
 		 Board b = dao.selectByBoardNo(session, boardNo);
 		 session.close();
-		 return b;
-		
-	    
+		 return b;   
 	}
-
-	 
 	 public void deleteBoard(String boardNo) {
 		 SqlSession session = getSession();
 	     dao.deleteBoard(session, boardNo);
@@ -62,6 +56,15 @@ public class BoardService{
 		    else session.rollback();
 			session.close();
 			return result;
+		}
+	 
+	 //감자가 추가한 comments 코드입니다. 구현중.
+	 public List<BoardComments> selectBoardComment(String boardNo) {
+			SqlSession session=getSession();
+			List<BoardComments> comments=dao.selectBoardComment(session,boardNo);
+			session.close();
+			return comments;
+			
 		}
 			
 }
