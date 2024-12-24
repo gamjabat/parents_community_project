@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.board.model.service.BoardService;
-import com.gamjabat.model.dto.board.Board;
 
 /**
  * Servlet implementation class Board
@@ -37,6 +37,7 @@ public class BoardServlet extends HttpServlet {
         
         List<Board> board = new BoardService().selectBoardAll();
         request.setAttribute("board", board);
+        
         
         // 게시판 페이지로 포워딩
         request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
