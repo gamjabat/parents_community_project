@@ -28,7 +28,17 @@
  * 
  *//**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
+
+//	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+//		// TODO Auto-generated method stub
+//		request.setCharacterEncoding("utf-8");
+//		response.setCharacterEncoding("utf-8");
+//		// pass the request along the filter chain
+//		chain.doFilter(request, response);
+//	}
+
+	/**
+=======
 /*
  * public void doFilter(ServletRequest request, ServletResponse response,
  * FilterChain chain) throws IOException, ServletException { // TODO
@@ -37,6 +47,7 @@
  * chain chain.doFilter(request, response); }
  * 
  *//**
+>>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project
 	 * @see Filter#init(FilterConfig)
 	 *//*
 		 * public void init(FilterConfig fConfig) throws ServletException { // TODO

@@ -33,11 +33,24 @@ public class BoardDao {
             session.delete("board.deleteBoard", boardNo);
             session.commit();
             
-        }
+
+     }
+    
+    
+    public void updateBoard(SqlSession session, Board board) {
+        
+            session.update("Board.updateBoard", board);
+            session.commit();
+    
+     }
+       
+
+     
     
     public int insertBoardComment(SqlSession session,BoardComments bc) {
 		return session.insert("board.insertBoardComment",bc);
 	}
+
     
     }
     

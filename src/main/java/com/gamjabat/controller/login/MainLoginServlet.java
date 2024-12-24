@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.gamjabat.admin.model.dto.Member;
+import com.gamjabat.model.dto.member.Member;
+
 
 /**
  * Servlet implementation class MainLoginServlet

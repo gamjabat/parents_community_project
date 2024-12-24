@@ -25,6 +25,13 @@ public class MemberService {
 
 		return result;
 	}
+
+	public Member loginInvalidCheck(Member checkMember) {
+		SqlSession session = getSession();
+		
+		Member invalidMember = dao.loginInvlidCheck(session,checkMember);
+		return invalidMember;
+	}
 	
 	public Member selectMemberById(String id) {
 		SqlSession session = getSession();

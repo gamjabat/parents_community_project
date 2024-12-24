@@ -54,6 +54,17 @@ public class BoardService{
 	     dao.deleteBoard(session, boardNo);
 	    }
 	 
+
+	 
+	 
+	 
+	 public void updateBoard(Board board) {
+		 SqlSession session = getSession();
+	     dao.updateBoard(session, board);
+	    }
+	 
+			
+
 	
 	 public int insertBoardComment(BoardComments bc) {
 			SqlSession session=getSession();
@@ -63,5 +74,6 @@ public class BoardService{
 			session.close();
 			return result;
 		}
+
 			
 }

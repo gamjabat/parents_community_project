@@ -41,7 +41,7 @@
 				$("#inputEmptyCheck").text('아이디/비밀번호를 입력하세요');
 				
 			}else{
-				location.assign("${path}/login/loginCheck.do?userId="+userId+"&userPwd"+userPwd);			
+				location.assign("${path}/login/loginCheck.do?userId="+userId+"&userPwd="+userPwd);			
 			}
 		}); */
   </script>
