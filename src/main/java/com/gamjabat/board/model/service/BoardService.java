@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.gamjabat.board.model.dao.BoardDao;
 import com.gamjabat.board.model.dto.BoardComments;
 
-import com.gamjabat.model.dto.board.Board;
+import com.gamjabat.board.model.dto.Board;
 
 
 public class BoardService{

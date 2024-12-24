@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.board.model.service.BoardService;
-import com.gamjabat.model.dto.board.Board;
+
 
 /**
  * Servlet implementation class BoardDetailServlet
@@ -32,7 +33,7 @@ public class BoardDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		
+	
 		// 게시물 번호를 요청 파라미터에서 가져옵니다.
 	    String boardNo = request.getParameter("boardNo");
 	    

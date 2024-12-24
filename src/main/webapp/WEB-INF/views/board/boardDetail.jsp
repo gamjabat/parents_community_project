@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/board/boardDetail.css">
 <section id="main-container">
-${board }
+
 	<div class="board-container px-4">
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
