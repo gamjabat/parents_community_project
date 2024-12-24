@@ -1,7 +1,6 @@
 package com.gamjabat.admin.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamjabat.model.dto.member.Member;
+import com.gamjabat.admin.model.dto.Member;
+import com.gamjabat.admin.model.service.AdminMemberService;
 
 /**
  * Servlet implementation class AdminMemberInfoServlet
@@ -30,56 +30,15 @@ public class AdminMemberInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberNo = request.getParameter("memberNo");
-		String memberId = request.getParameter("id");
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
-		String birthday = request.getParameter("birth");
-		String nickName = request.getParameter("nickName");
-		String createDate = request.getParameter("createDate");
-		String updateDate = request.getParameter("updateDate");
-		String deleteDate = request.getParameter("deleteDate");
-		boolean isDelete = Boolean.parseBoolean(request.getParameter("isDelete"));
+		String memberId = request.getParameter("memberId");
 		
-//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-//		Date barthDt;
-//		Date createDt;
-//		Date updateDt;
-//		Date deleteDt;
-//		try {
-//			barthDt=new Date(sdf.parse(birthday).getTime());
-//			createDt=new Date(sdf.parse(createDate).getTime());
-//			updateDt=new Date(sdf.parse(updateDate).getTime());
-//			deleteDt=new Date(sdf.parse(deleteDate).getTime());
-//		}catch(ParseException | NullPointerException e) {
-//			e.printStackTrace();
-//			barthDt=null;
-//			createDt=null;
-//			updateDt=null;
-//			deleteDt=null;
-//		}
+		System.out.println("memberId ::::"+memberId);
 		
+		Member searchMember = new AdminMemberService().selectMemberById(memberId);
 		
-		// 현재 createDate값으로 날짜값을 통일함 
-		
-		Member member = Member.builder()
-				.memberNo("1")
-				.memberId("mickySung")
-				.memberName("성윤모")
-				.email("ironDrogon@ndn.com")
-				.phone("011-1111-1112")
-				.address("고니는 가지마")
-				.birthday(Date.valueOf("1922-11-11"))
-				.nickname("곽철용")
-				.isDeleted(false)
-				.build();
-		
-		
-		System.out.println(member.toString());
-		
-		request.setAttribute("member", member);
+		System.out.println("searchMember++::"+searchMember);
+		http://localhost:8080/parents_community_project/admin/memberInfo.do?memberNo=MB_0001&memberId=john_doe
+		request.setAttribute("member", searchMember);
 		
 		request.getRequestDispatcher("/WEB-INF/views/admin/member/memberInfo.jsp").forward(request, response);
 	

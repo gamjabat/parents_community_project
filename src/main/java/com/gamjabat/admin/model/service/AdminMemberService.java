@@ -32,4 +32,10 @@ public class AdminMemberService {
 		session.close();
 		return count;
 	}
+
+	public Member selectMemberById(String memberId) {
+		SqlSession session = getSession();
+		Member searchMember = memberDao.selectMemberByid(session, memberId);
+		return searchMember;
+	}
 }

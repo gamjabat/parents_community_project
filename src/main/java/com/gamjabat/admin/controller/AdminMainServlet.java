@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.gamjabat.admin.model.dto.Member;
 import com.gamjabat.admin.model.service.AdminMemberService;
@@ -34,6 +35,8 @@ public class AdminMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		AdminMemberService memberService = new AdminMemberService();
+		
+		
 		
 		//DB의 member테이블의 전체 데이터를 가져와 출력해주는 기능
 				int cPage;
@@ -138,5 +141,7 @@ public class AdminMainServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
+
 
 }

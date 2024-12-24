@@ -58,8 +58,10 @@ public class LoginFilter extends HttpFilter implements Filter {
 		
 		HttpSession session = request.getSession();
 		
-		if(userId.equals("admin")) {			
+		if(userId.equals("admin")) {
+			System.out.println("userId"+userId);
 			request.getRequestDispatcher("/admin/main.do").forward(request, response);
+			chain.doFilter(request, response);
 		}else {
 			PasswordEncoding pe = new PasswordEncoding(request);
 			MemberService service = new MemberService();
@@ -77,8 +79,9 @@ public class LoginFilter extends HttpFilter implements Filter {
 				request.setAttribute("loginMember", invlidMember);
 			}
 			request.getRequestDispatcher("/main/login.do").forward(request, response);
-		}
 			chain.doFilter(request, response);
+		}
+
 	}
 
 	/**
