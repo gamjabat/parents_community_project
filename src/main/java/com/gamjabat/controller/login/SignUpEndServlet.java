@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gamjabat.common.PasswordEncoding;
 import com.gamjabat.model.dto.member.Member;
 import com.gamjabat.service.member.MemberService;
 
@@ -31,10 +32,13 @@ public class SignUpEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		PasswordEncoding pe = new PasswordEncoding(request);
+		
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
 		String nickname = request.getParameter("nickname");
-		String password = request.getParameter("password");
+		String password = pe.getParameter("password");
 		String email = request.getParameter("email");
 		String birthYear = request.getParameter("birth-year");
 		String birthMonth = request.getParameter("birth-month");

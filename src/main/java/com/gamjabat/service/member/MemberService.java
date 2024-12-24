@@ -2,6 +2,8 @@ package com.gamjabat.service.member;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.model.dao.MemberDao;
@@ -34,6 +36,13 @@ public class MemberService {
 	public Member selectMemberById(String id) {
 		SqlSession session = getSession();
 		Member m = dao.selectMemberById(session, id);
+		session.close();
+		return m;
+	}
+	
+	public Member selectMemberByNameAndEmail(Map<String, String> param) {
+		SqlSession session = getSession();
+		Member m = dao.selectMemberByNameAndEmail(session, param);
 		session.close();
 		return m;
 	}

@@ -20,7 +20,7 @@
 // */
 //
 //@WebFilter(servletNames = {
-////		"signUpEndServlet", "loginEndServlet"
+//		"signUpEndServlet"
 //})
 //public class PasswordEncryptFilter extends HttpFilter implements Filter {
 //       
@@ -45,7 +45,7 @@
 //	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 //		// TODO Auto-generated method stub
 //		// place your code here
-//		//PasswordEncoding pe = new PasswordEncoding(request);
+//		PasswordEncoding pe = new PasswordEncoding(request);
 //		// pass the request along the filter chain
 //		chain.doFilter(request, response);
 //	}
