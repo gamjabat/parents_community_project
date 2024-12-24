@@ -37,13 +37,17 @@ public class BoardCommentInsertServlet extends HttpServlet {
 		String boardNo=request.getParameter("commentBoardNo");
 		int level=Integer.parseInt(request.getParameter("level"));
 		String writer=request.getParameter("commentMemberNo");
+		String boardCommentRef=request.getParameter("boardCommentRef");  
 		
 		BoardComments bc=BoardComments.builder()
 				.commentBoardNo(boardNo)
 				.commentLevel(level)
 				.commentMemberNo(writer)
 				.commentContent(content)
+				.parentCommentNo(boardCommentRef!=""?boardCommentRef:null)
 				.build();
+		
+		
 		
 		int result=new BoardService().insertBoardComment(bc);
 		
