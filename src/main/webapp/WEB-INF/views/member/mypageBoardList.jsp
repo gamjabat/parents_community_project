@@ -55,6 +55,9 @@
 		       		 </tbody>
 	     		 </table>
      		 </div>
+     		 <div id="pageBar">
+	        	${pageBar }
+	         </div>
      	</div>
 	</div>
     

@@ -1,6 +1,7 @@
 package com.gamjabat.board.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -57,8 +58,16 @@ public class BoardDao {
     	}
     
     	
-    public List<Board> selectBoardAllByMemberNo(SqlSession session, String memberNo){	
-    	return session.selectList("board.selectBoardAllByMemberNo", memberNo);
+    public List<Board> selectBoardAllByMemberNo(SqlSession session, Map<String, Object> param){	
+    	int cPage = (int)param.get("cPage");
+		int numPerPage = (int)param.get("numPerPage");
+		String memberNo = (String)param.get("memberNo");
+    	
+    	return session.selectList("board.selectBoardAllByMemberNo", Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage, "memberNo", memberNo));
+    }
+    
+    public int selectBoardAllByMemberNoCount(SqlSession session, String memberNo){	
+    	return session.selectOne("board.selectBoardAllByMemberNoCount", memberNo);
     }
     
 }

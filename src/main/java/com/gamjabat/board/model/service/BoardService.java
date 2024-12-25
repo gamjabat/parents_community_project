@@ -3,6 +3,7 @@ package com.gamjabat.board.model.service;
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -78,11 +79,18 @@ public class BoardService{
 			
 		}
 	 
-	 public List<Board> selectBoardAllByMemberNo(String memberNo){
+	 public List<Board> selectBoardAllByMemberNo(Map<String, Object> param){
 		 	SqlSession session = getSession();
-			List<Board> boards = dao.selectBoardAllByMemberNo(session, memberNo);
+			List<Board> boards = dao.selectBoardAllByMemberNo(session, param);
 			session.close();
 			return boards;
 	 }
+	 
+	 public int selectBoardAllByMemberNoCount(String memberNo) {
+			SqlSession session = getSession();
+			int count = dao.selectBoardAllByMemberNoCount(session, memberNo);
+			session.close();
+			return count;
+		}
 			
 }

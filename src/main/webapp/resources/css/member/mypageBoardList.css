@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-*{
-	border: 1px solid red;
-}
-
 /* 바디 레이아웃 */
 .mypage-container {
     display: flex;
@@ -89,10 +85,11 @@
 	border-color: #5c8f51;
 }
 
-thead {
+thead th {
 	font-size: 15px;
 	text-align: center;
-	box-shadow: 1px 1px 1px #5c8f51;
+	border-bottom: 2px solid #5c8f51;
+	padding: 10px 0px;
 }
 
 tbody {
