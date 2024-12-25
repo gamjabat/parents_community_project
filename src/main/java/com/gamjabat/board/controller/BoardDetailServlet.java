@@ -66,7 +66,7 @@ public class BoardDetailServlet extends HttpServlet {
 	    // boardDetail.jsp 페이지로 forward 메소드를 사용하여 요청과 응답을 전달
 	    request.getRequestDispatcher(getServletContext().getInitParameter("viewpath") + "/board/boardDetail.jsp").forward(request, response);
 	
-	    
+	 
 	
 	}
 		
