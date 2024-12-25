@@ -40,9 +40,9 @@ public class MemberService {
 		return m;
 	}
 	
-	public Member selectMemberByNameAndEmail(Map<String, String> param) {
+	public Member selectMemberToFindIdPwd(Map<String, String> param) {
 		SqlSession session = getSession();
-		Member m = dao.selectMemberByNameAndEmail(session, param);
+		Member m = dao.selectMemberToFindIdPwd(session, param);
 		session.close();
 		return m;
 	}

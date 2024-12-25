@@ -25,22 +25,105 @@
       	<div class="sub-title">본인확인 이메일로 인증</div>
       	<div class="description">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,<br> 인증번호를 받을 수 있습니다.</div>
       	<form class="email-auth-input" action="${path }/login/newpassword.do">
-      		<input type="text" placeholder="id">
-      		<div class="email-input">
-		      	<input type="email" name="email" placeholder="email">
-		        <button>인증번호 발송</button>
+      		<input type="text" name="id" placeholder="ID">
+      		<div class="email-input mb-0">
+      			<div class="input-btn">
+			      	<input type="email" name="email" placeholder="email">
+			        <button type="button" onclick="sendEmail();">인증번호 발송</button>
+      			</div>
+		        <small class="error"></small>
       		</div>
       		<div class="checkNum-input">
-		      	<input type="text" name="checkNum" placeholder="인증번호 6자리 숫자 입력">
-		        <div class="error">인증번호를 다시 확인해주세요.</div>
+      			<div class="input-btn">
+			      	<input type="text" name="checkNum" placeholder="인증번호 6자리 숫자 입력" disabled>
+			      	<button type="button" onclick="verifyCode();" disabled>인증</button>
+      			</div>
+		        <small class="error"></small>
       		</div>
       		<div class="page-btns">
 	      		<button type="button" onclick="history.back()">이전</button>
-	      		<button type="submit">다음</button>
+	      		<button type="submit" disabled>다음</button>
       		</div>
       	</form>
       </div>
     </div>
   </div>
+  <script>
+	const sendEmail = () => {
+	    const email = document.querySelector('input[name="email"]').value.trim();
+	    const errorElement = document.querySelector('.error');
+	    const checkNumInput = document.querySelector('input[name="checkNum"]'); // 인증번호 입력 필드
+	    const verifyButton = document.querySelector('.checkNum-input button'); // 인증 버튼
+
+	    if (!email) {
+	        errorElement.textContent = "이메일 주소를 입력해주세요.";
+	        errorElement.style.color = "red";
+	        return;
+	    }
+
+	    $.ajax({
+	        url: `${path}/login/sendcodebyemail.do`,
+	        type: "POST",
+	        data: { email: email },
+	        success: function (response) {
+	            if (response.success) {
+	                errorElement.textContent = "인증번호가 발송되었습니다. 이메일을 확인하세요.";
+	                errorElement.style.color = "white";
+	                
+	                checkNumInput.disabled = false;
+	                verifyButton.disabled = false;
+	            } else {
+	                errorElement.textContent = response.message || "인증번호 발송에 실패했습니다. 다시 시도하세요.";
+	                errorElement.style.color = "red";
+
+	                checkNumInput.disabled = true;
+	                verifyButton.disabled = true;
+	            }
+	        },
+	        error: function () {
+	            errorElement.textContent = "서버 요청 중 문제가 발생했습니다. 다시 시도해주세요.";
+	            errorElement.style.color = "red";
+	            
+                checkNumInput.disabled = true;
+                verifyButton.disabled = true;
+	        }
+	    });
+	}
+	
+	const verifyCode = () => {
+	    const email = document.querySelector('input[name="email"]').value;
+	    const checkNum = document.querySelector('input[name="checkNum"]').value;
+	    const errorElement = document.querySelector('.checkNum-input .error');
+	    const nextBtn = document.querySelector('button[type="submit"]');
+
+	    if (!checkNum) {
+	        errorElement.textContent = "인증번호를 입력해주세요.";
+	        errorElement.style.color = "red";
+	        return;
+	    }
+
+	    $.ajax({
+	        url: `${path}/login/verifycode.do`, // 서버 요청 URL
+	        type: "POST",
+	        data: { email: email, checkNum: checkNum }, // 전송 데이터
+	        success: function (response) {
+	            if (response.success) {
+	                errorElement.textContent = "인증번호가 확인되었습니다.";
+	                errorElement.style.color = "white";
+
+	                // 다음 단계로 이동
+	                nextBtn.disabled = false;
+	            } else {
+	                errorElement.textContent = response.message || "인증번호가 일치하지 않습니다.";
+	                errorElement.style.color = "red";
+	            }
+	        },
+	        error: function () {
+	            errorElement.textContent = "서버 요청 중 문제가 발생했습니다. 다시 시도해주세요.";
+	            errorElement.style.color = "red";
+	        }
+	    });
+	};
+	</script>
 </body>
 </html>

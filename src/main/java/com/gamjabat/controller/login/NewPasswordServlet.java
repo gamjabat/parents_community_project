@@ -1,11 +1,17 @@
 package com.gamjabat.controller.login;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.gamjabat.model.dto.member.Member;
+import com.gamjabat.service.member.MemberService;
 
 /**
  * Servlet implementation class NewPasswordServlet
@@ -26,8 +32,27 @@ public class NewPasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher(getServletContext().getInitParameter("viewpath")+"/login/newPassword.jsp")
-		.forward(request, response);
+		String memberId = request.getParameter("id");
+		String email = request.getParameter("email");
+		
+		Map<String, String> param = Map.of("memberId", memberId, "email", email);
+		
+		Member m = new MemberService().selectMemberToFindIdPwd(param);
+		
+		if(m != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("findPwdMemberNo", m.getMemberNo());
+			
+			request.getRequestDispatcher("/WEB-INF/views/login/newPassword.jsp")
+			.forward(request, response);
+			
+		} else {
+			// 로그인 실패
+			request.setAttribute("msg", "존재하지 않는 회원입니다. 회원가입 창으로 이동합니다.");
+			request.setAttribute("loc","/login/signupagreement.do");
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
+			.forward(request, response);
+		}
 	}
 
 	/**
