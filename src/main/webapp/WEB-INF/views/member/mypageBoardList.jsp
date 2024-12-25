@@ -21,7 +21,7 @@
 		 </div>
 		 
     	 <div class="mypage-content">
-     		<h2>나의 게시물</h2>
+     		<h2>나의 게시글</h2>
      		 <div class="board-content">
 	     		 <table class="board-table" width="100%">
 		     		  <thead>
