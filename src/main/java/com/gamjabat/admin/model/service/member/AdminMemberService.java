@@ -1,4 +1,4 @@
-package com.gamjabat.admin.model.service;
+package com.gamjabat.admin.model.service.member;
 
 import static com.gamjabat.admin.common.SqlSessionTemplate.getSession;
 

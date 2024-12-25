@@ -18,18 +18,20 @@ import lombok.NoArgsConstructor;
 public class ReportBoard {
 	private String reportNo;
 	private String reportReasonCode;
+	private String reportTitle;
 	private String reportContent;
 	// 신고상태
 	private String reportStatus;
-	private Timestamp createdAt;
-	private Timestamp updatedAt;
-	private Timestamp deletedAt;
+	private String createdAt;
+	private String updatedAt;
+	private String deletedAt;
 	private boolean isDeleted;
 	private String postNo;
 	// 신고한 사용자 정보
-	private Member reportMemberNo;
+	private String reportMemberId;
 	// 신고당한 게시글
 	private Board reportBoardNo;
 	// 신고당한 댓글
 	//private Comment reportCommentNo;
+	private String status;
 }

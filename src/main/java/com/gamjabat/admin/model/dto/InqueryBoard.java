@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class InqueryBoard {
 	private String inqueryNo;
-	private Member inqueryMember;
+	private String inqueryMember;
 	private String inqueryCode;
 	private String inqueryTitle;
 	private String inqueryContent;
@@ -22,8 +22,7 @@ public class InqueryBoard {
 	private String postNo;
 	// 신고한 사용자 정보
 	// 신고당한 사용자 정보
-	private Member suspectMember;
 	// 신고상태
-	private String reportStatus;
+	private String status;
 
 }
