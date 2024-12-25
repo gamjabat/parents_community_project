@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gamjabat.admin.model.dto.InqueryBoard;
 import com.gamjabat.admin.model.dto.Member;
-import com.gamjabat.admin.model.service.AdminMemberService;
+import com.gamjabat.admin.model.dto.ReportBoard;
+import com.gamjabat.admin.model.service.board.AdminBoardService;
+import com.gamjabat.admin.model.service.member.AdminMemberService;
 
 /**
  * Servlet implementation class AdminMainServlet
@@ -34,8 +37,13 @@ public class AdminMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		AdminMemberService memberService = new AdminMemberService();
+		AdminBoardService boardService = new AdminBoardService();
 		
-		//DB의 member테이블의 전체 데이터를 가져와 출력해주는 기능
+		
+		
+				//DB의 member테이블의 전체 데이터를 가져와 출력해주는 기능
+			
+				//Member 페이징 처리 //////////////////////////////////////
 				int cPage;
 				try {
 					cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -49,9 +57,12 @@ public class AdminMainServlet extends HttpServlet {
 					numPerPage=5;
 				}
 				
+				
 				Map<String,Integer> param=Map.of("cPage",cPage,"numPerPage",numPerPage);
 				
 				List<Member> members=memberService.selectMemberAll(param);
+				List<InqueryBoard> inqueryboards = boardService.selectInqueryBoardAll(param); 
+				List<ReportBoard> reportBoards = boardService.selectReportBoardAll(param); 
 				
 				//pageBar생성하기
 				int totalData=new AdminMemberService().selectMemberCount();
@@ -118,6 +129,7 @@ public class AdminMainServlet extends HttpServlet {
 //		List<>
 		
 		System.out.println("members :: "+ members);
+		System.out.println("inqueryboards :: "+ inqueryboards);
 		System.out.println("페이지 :: "+ pageBar);
 	
 		
@@ -125,6 +137,8 @@ public class AdminMainServlet extends HttpServlet {
 		
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("members", members);
+		request.setAttribute("inqueryboards", inqueryboards);
+		request.setAttribute("reportBoards", reportBoards);
 		
 		
 
@@ -138,5 +152,7 @@ public class AdminMainServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
+
 
 }

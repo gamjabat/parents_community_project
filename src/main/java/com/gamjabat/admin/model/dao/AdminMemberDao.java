@@ -23,4 +23,8 @@ public class AdminMemberDao {
 		return session.selectOne("admin.selectMemberCount");
 	}
 
+	public Member selectMemberByid(SqlSession session, String memberId) {
+		return session.selectOne("admin.selectMemberByid",memberId);
+	}
+
 }

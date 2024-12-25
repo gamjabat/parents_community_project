@@ -27,12 +27,12 @@
 					<form action="${path}/member/mypageinfoupdate.do" method="post">
 				         <div class="id_box">
 				           <label class="idlabel">아이디
-				           <input type="text" class="myId" value="useruser1" readonly/>
+				           <input type="text" class="myId" name="id" value="${loginMember.memberId }" readonly/>
 				           </label>
 				         </div>
 				         <div class="pw_box">
 				           <label class="pwlabel">비밀번호
-				           <input type="password" class="myPw" placeholder="비밀번호 입력" required />
+				           <input type="password" class="myPw" name="password" placeholder="비밀번호 입력" required />
 				           </label>
 				         </div>   
 				         <div class="bt">

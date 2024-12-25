@@ -1,4 +1,4 @@
-package com.gamjabat.admin.model.service;
+package com.gamjabat.admin.model.service.member;
 
 import static com.gamjabat.admin.common.SqlSessionTemplate.getSession;
 
@@ -31,5 +31,11 @@ public class AdminMemberService {
 		int count=memberDao.selectMemberCount(session);
 		session.close();
 		return count;
+	}
+
+	public Member selectMemberById(String memberId) {
+		SqlSession session = getSession();
+		Member searchMember = memberDao.selectMemberByid(session, memberId);
+		return searchMember;
 	}
 }

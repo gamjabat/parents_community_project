@@ -1,27 +1,27 @@
-package com.gamjabat.admin.controller;
+package com.gamjabat.controller.mypage;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.gamjabat.admin.model.dto.Member;
-import com.gamjabat.admin.model.service.member.AdminMemberService;
+import com.gamjabat.common.PasswordEncoding;
+import com.gamjabat.model.dto.member.Member;
 
 /**
- * Servlet implementation class AdminMemberInfoServlet
+ * Servlet implementation class UpdateMemberInfoServlet
  */
-@WebServlet("/admin/memberInfo.do")
-public class AdminMemberInfoServlet extends HttpServlet {
+@WebServlet("/member/updateMemberInfo.do")
+public class UpdateMemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberInfoServlet() {
+    public UpdateMemberInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +30,20 @@ public class AdminMemberInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
+		request.setCharacterEncoding("utf-8");
+		PasswordEncoding pe = new PasswordEncoding(request);
 		
-		System.out.println("memberId ::::"+memberId);
+		String passwordInput = request.getParameter("password");
+		String password = pe.getParameter(passwordInput);
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
 		
-		Member searchMember = new AdminMemberService().selectMemberById(memberId);
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		
-		System.out.println("searchMember++::"+searchMember);
-		http://localhost:8080/parents_community_project/admin/memberInfo.do?memberNo=MB_0001&memberId=john_doe
-		request.setAttribute("member", searchMember);
+		//동적쿼리로 업데이트 구현
 		
-		request.getRequestDispatcher("/WEB-INF/views/admin/member/memberInfo.jsp").forward(request, response);
-	
+		System.out.println(password+ phone+ address);
 	}
 
 	/**

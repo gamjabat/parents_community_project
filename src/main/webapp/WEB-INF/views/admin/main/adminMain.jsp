@@ -47,8 +47,8 @@
 				<tbody>
 					<c:if test="${not empty members}">
 						<c:forEach var="member" items="${members}">
-							<tr>
-								<td>${member.memberNo}</td>
+							<tr data-no="${member.memberNo}" data-id="${member.memberId}">
+								<td >${member.memberNo}</td>
 								<td>${member.memberName}</td>
 								<td>${member.email}</td>
 								<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
@@ -87,8 +87,8 @@
 						<c:forEach var="board" items="${inqueryboards}">
 							<a href="javascript:inqueryDetailSearch();">
 								<tr>
-									<td>${board.inqueryNo}</td>
-									<td>${board.inqueryMember.memberId}</td>
+									<td data-no="">${board.inqueryNo}</td>
+									<td>${board.inqueryMember}</td>
 									<td>${board.inqueryCode}</td>
 									<td>${board.inqueryTitle}</td>
 									<td>${board.inqueryContent}</td>
@@ -113,29 +113,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${not empty reportboards}">
-						<c:forEach var="rboard" items="${reportboards}">
+					<c:if test="${not empty reportBoards}">
+						<c:forEach var="rboard" items="${reportBoards}">
 							<tr>
 								<td>${rboard.reportNo}</td>
-								<td>${rboard.reportMember.memberId}</td>
-								<td>${rboard.suspectMember.memberId}</td>
-								<td>${rboard.reportCode}</td>
+								<td>${reboard.reportMemberId}</td>
+								<td>${rboard.reportReasonCode}</td>
 								<td>${rboard.reportTitle}</td>
 								<td>${rboard.reportContent}</td>
-								<td>${rboard.reportStatus}</td>
+								<td>${rboard.createdAt}</td>
+								<td>${rboard.status}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 				</tbody>
 			</table>
-
+			<div id="pageBar">
+		    	${pageBar }
+		    </div>
 		</section>
-		<div class="pagination">
+<!-- 		<div class="pagination">
 			<a href="#" class="page-link">&lt;&lt;</a> <a href="#"
 				class="page-link">&lt;</a> <a href="#" class="page-link active">1</a>
 			<a href="#" class="page-link">2</a> <a href="#" class="page-link">3</a>
 			<a href="#" class="page-link">&gt;</a> <a href="#" class="page-link">&gt;&gt;</a>
-		</div>
+		</div> -->
 
 	</main>
 
@@ -160,23 +162,15 @@
 			 }; */
 
 			// 사용자 데이터 추출
-			const userData = {
-				memberNo : row.dataset.memberNo,
-				uid : row.dataset.id,
-				name : row.dataset.name,
-				email : row.dataset.email,
-				phone : row.dataset.phone,
-				address : row.dataset.address,
-				birth : row.dataset.birth,
-				nickName : row.dataset.nickname,
-				createDate : row.dataset.createDate,
-				updateDate : row.dataset.updateDate,
-				deleteDate : row.dataset.deleteDate,
-				isDelete : row.dataset.status
-			};
+ 			const userData = {
+				memberNo : row.dataset.no,
+				memberId : row.dataset.id
+			}; 
+			 
+			 
 
 			// 팝업 URL에 데이터 전달 (쿼리스트링 사용)
-			const popupUrl = `${pageContext.request.contextPath}/admin/memberInfo.do?memberNo=\${userData.memberNo}&id=\${userData.uid}&name=\${userData.name}&email=\${userData.email}&phone=\${userData.phone}&address=\${userData.address}&birth=\${userData.birth}&nick=\${userData.nick}&createDate=\${userData.createDate}&updateDate=\${userData.updateDate}&deleteDate=\${userData.deleteDate}&isDelete=\${userData.isDelete}`
+			const popupUrl = `${pageContext.request.contextPath}/admin/memberInfo.do?memberNo=\${userData.memberNo}&memberId=\${userData.memberId}`
 			// 팝업 열기
 
 			const popupW = 300;
@@ -197,6 +191,7 @@
 							+ top
 							+ ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		}
+		
 		
 		const hideDeclaration=()=>{
 			$("#declaration-table").hide();

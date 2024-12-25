@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+*{
+	border: 1px solid red;
+}
+
 /* 바디 레이아웃 */
 .mypage-container {
     display: flex;
@@ -19,20 +23,21 @@
 
 /* 사이드바 타이틀 */
 .mypage-texttitle {
-	font-size : 12px;
+	font-size : 20px;
 	font-weight: bold;
 	color : #5c8f51;
 }
 
 /* 사이드바 크키 */
 .mypage-sidebar {
-    width: 16%;
+    width: 20%;
     background-color: rgba(90, 139, 99, 0.1);
     border-radius: 15px;
     padding: 15px;
     border-right: 1px solid #ddd;
     margin-top: 15px;
     margin-bottom: 15px;
+    white-space: nowrap;
 }
 
 
@@ -46,7 +51,7 @@
 }
 
 .mypage-sidebar a {
-	font-size: 11px;
+	font-size: 15px;
 	font-weight: 400;
     text-decoration: none;
     color: #333;
@@ -61,7 +66,7 @@
 
 /* 나의 정보 수정 타이틀 */
 .mypageinfo-content h2 {
-	font-size: 14px;
+	font-size: 25px;
 	font-weight: bold;
     margin-top: 20px;
     margin-left: 20px;
@@ -85,9 +90,16 @@
 
 .memberinfo-container {
 	width: 70%;
-	font-size :11px;
-	font-weight: bold;
+	font-size :15px;
 
+}
+
+.memberinfo-container>div{
+	display: flex;
+	align-items: center;
+}
+.memberinfo-container label{
+	font-weight: bold;
 }
 
 /* 각 div 바텀 라인 */
@@ -133,67 +145,29 @@
     margin-bottom: 10px; /* 간격 추가 */
 }
 
+form:last-child{
+	justify-content: center;
+}
+
 /* 버튼 크기, 스타일 적용 */
 .member-end-btn {
-	font-size : 10px;
-	width: 20%;
-	height: 14%; 
+	font-size : 15px;
 	background-color: #5c8f51;
     border-radius: 15px;
     border-right: 1px solid #ddd;
 }
 
-.member-id-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
+.member-info-btn {
+	font-size :12px;
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
 	justify-content: center ;
 	background-color: #5c8f51;
     border-radius: 15px;
-    border-right: 1px solid #ddd;
+    width: 20px;
 }
 
-.member-pw-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-	justify-content: center ;
-	background-color: #5c8f51;
-    border-radius: 15px;
-    border-right: 1px solid #ddd;
-}
-
-.member-email-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-	justify-content: center ;
-	background-color: #5c8f51;
-    border-radius: 15px;
-    border-right: 1px solid #ddd;
-}
-
-.member-address-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-	justify-content: center ;
-	background-color: #5c8f51;
-    border-radius: 15px;
-    border-right: 1px solid #ddd;
-}
 
 /* 라벨관리 */
 .member-id {
@@ -224,4 +198,43 @@
 	margin-right : 46px;
 }
 
+.complete-btn {
+	font-size :12px;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	justify-content: center;
+    border-radius: 15px;
+    width: 20%;
+}
+
+.change-box{
+	gap: 5px;
+	display: flex;
+	
+}
+
+.change-input{
+	width: 180px !important;
+	font-size : 13px !important;
+}
+
+
+.change-pwbox{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start !important;
+}
+
+.pw-input-container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-bottom: 0px;
+}
+
+.error-msg{
+	font-size: 12px;
+	padding: 0px 10px;
+}
 
