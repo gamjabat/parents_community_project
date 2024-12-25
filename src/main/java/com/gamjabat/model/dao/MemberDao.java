@@ -22,4 +22,7 @@ public class MemberDao {
 	public Member selectMemberByNameAndEmail(SqlSession session, Map<String, String> param) {
 		return session.selectOne("member.selectMemberByNameAndEmail", param);
 	}
+	public int updateMemberInfo(SqlSession session, Map<String, Object> param) {
+		return session.update("member.updateMemberInfo", param);
+	}
 }

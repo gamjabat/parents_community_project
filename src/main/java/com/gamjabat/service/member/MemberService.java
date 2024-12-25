@@ -47,4 +47,13 @@ public class MemberService {
 		return m;
 	}
 	
+	public int updateMemberInfo(Map<String, Object> param) {
+		SqlSession session = getSession();
+		int result = dao.updateMemberInfo(session, param);
+		if (result > 0) session.commit();
+		else session.rollback();
+		session.close();
+		return result;
+	}
+	
 }

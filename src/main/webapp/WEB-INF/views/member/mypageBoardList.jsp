@@ -12,7 +12,7 @@
 		    	<li class="mypage-texttitle">마이 페이지</li>
 		    </ul>
 	        	<ul>
-			        <li><a href="${path}/member/mypageinfoupdate.do">나의 정보 수정</a></li>
+			        <li><a href="${path}/member/mypagepwcheck.do">나의 정보 수정</a></li>
 	            	<li><a href="${path}/member/mypageboardlist.do">나의 게시글</a></li>
 	            	<li><a href="${path}/member/mypagecomment.do">나의 댓글</a></li>
 	            	<li><a href="${path}/member/mypagelike.do">나의 좋아요</a></li>

@@ -14,20 +14,21 @@
 
 /* 사이드바 타이틀 */
 .mypage-texttitle {
-	font-size : 12px;
+	font-size : 20px;
 	font-weight: bold;
 	color : #5c8f51;
 }
 
 /* 사이드바 크키 */
 .mypage-sidebar {
-    width: 16%;
+    width: 20%;
     background-color: rgba(90, 139, 99, 0.1);
     border-radius: 15px;
     padding: 15px;
     border-right: 1px solid #ddd;
     margin-top: 15px;
     margin-bottom: 15px;
+    white-space: nowrap;
 }
 
 
@@ -41,12 +42,19 @@
 }
 
 .mypage-sidebar a {
-	font-size: 11px;
+	font-size: 15px;
 	font-weight: 400;
     text-decoration: none;
     color: #333;
     font-weight: 400;
 }
+
+.active-sidebar a{
+	color: #5c8f51;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 
 .mypage-sidebar a:hover {
     color: #5c8f51;
