@@ -88,7 +88,7 @@
 							<a href="javascript:inqueryDetailSearch();">
 								<tr>
 									<td data-no="">${board.inqueryNo}</td>
-									<td>${board.inqueryMember.memberId}</td>
+									<td>${board.inqueryMember}</td>
 									<td>${board.inqueryCode}</td>
 									<td>${board.inqueryTitle}</td>
 									<td>${board.inqueryContent}</td>
@@ -113,29 +113,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${not empty reportboards}">
-						<c:forEach var="rboard" items="${reportboards}">
+					<c:if test="${not empty reportBoards}">
+						<c:forEach var="rboard" items="${reportBoards}">
 							<tr>
 								<td>${rboard.reportNo}</td>
-								<td>${rboard.reportMember.memberId}</td>
-								<td>${rboard.suspectMember.memberId}</td>
-								<td>${rboard.reportCode}</td>
+								<td>${reboard.reportMemberId}</td>
+								<td>${rboard.reportReasonCode}</td>
 								<td>${rboard.reportTitle}</td>
 								<td>${rboard.reportContent}</td>
-								<td>${rboard.reportStatus}</td>
+								<td>${rboard.createdAt}</td>
+								<td>${rboard.status}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 				</tbody>
 			</table>
-
+			<div id="pageBar">
+		    	${pageBar }
+		    </div>
 		</section>
-		<div class="pagination">
+<!-- 		<div class="pagination">
 			<a href="#" class="page-link">&lt;&lt;</a> <a href="#"
 				class="page-link">&lt;</a> <a href="#" class="page-link active">1</a>
 			<a href="#" class="page-link">2</a> <a href="#" class="page-link">3</a>
 			<a href="#" class="page-link">&gt;</a> <a href="#" class="page-link">&gt;&gt;</a>
-		</div>
+		</div> -->
 
 	</main>
 
