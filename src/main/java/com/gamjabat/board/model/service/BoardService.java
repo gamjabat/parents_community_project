@@ -77,6 +77,12 @@ public class BoardService{
 			return comments;
 			
 		}
-
+	 
+	 public List<Board> selectBoardAllByMemberNo(String memberNo){
+		 	SqlSession session = getSession();
+			List<Board> boards = dao.selectBoardAllByMemberNo(session, memberNo);
+			session.close();
+			return boards;
+	 }
 			
 }

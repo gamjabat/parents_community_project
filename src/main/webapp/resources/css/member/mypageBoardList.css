@@ -100,4 +100,24 @@ tbody {
 	text-align: center;
 }
 
+td{
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.board-table a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board-table a:hover {
+    text-decoration: underline;
+}
+
+.no-content{
+	font-size: 15px;
+	padding: 240px 0;
+	border-bottom: none;
+}
+
 

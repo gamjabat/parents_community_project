@@ -56,6 +56,10 @@ public class BoardDao {
     	return session.selectList("board.selectBoardComment",boardNo);
     	}
     
-    
+    	
+    public List<Board> selectBoardAllByMemberNo(SqlSession session, String memberNo){	
+    	return session.selectList("board.selectBoardAllByMemberNo", memberNo);
     }
+    
+}
     

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
 <c:set var="path" value="${pageContext.request.contextPath }"/>	
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -34,30 +35,23 @@
 		       			 </tr>
 		       		 </thead>
 		       		 <tbody>
-		     		 	 <tr>
-				            <td>1</td>
-				            <td>프로젝트 기간 너무 빡빡한거 아니에요 ?</td>
-				            <td>감자</td>
-				            <td>2024-12-18</td>
-				            <td>2</td>
-				            <td>3</td>
-		       			 </tr>
-		       			 <tr>
-				            <td>2</td>
-				            <td>포기하고 싶어질 때 보는 글....</td>
-				            <td>감자</td>
-				            <td>2024-12-18</td>
-				            <td>2</td>
-				            <td>3</td>
-		       			 </tr>
-		       			 <tr>
-				            <td>3</td>
-				            <td>나는 가끔 눈물을 흘린다....</td>
-				            <td>감자</td>
-				            <td>2024-12-18</td>
-				            <td>242955</td>
-				            <td>3904494</td>
-		       			 </tr>
+		       		 	<c:if test="${not empty myBoards }">
+		       		 		<c:forEach var="b" items="${myBoards }" varStatus="idx">
+				     		 	 <tr>
+						            <td>${idx.index + 1}</td>
+						            <td><a href="${path}/board/boarddetail.do?boardNo=${b.boardNo}">${b.title}</a></td>
+						            <td>${b.memberNo }</td>
+						            <td>${fn:substring(b.createdAt, 0, 10)}</td>
+						            <td>${b.likeCount }</td>
+						            <td>${b.viewCount }</td>
+				       			 </tr>
+		       		 		</c:forEach>
+		       		 	</c:if>
+		       		 	<c:if test="${empty myBoards }">
+		       		 		<tr>
+		       		 			<td colspan="6" class="no-content">작성하신 게시물이 없습니다.</td>
+		       		 		</tr>
+		       		 	</c:if>
 		       		 </tbody>
 	     		 </table>
      		 </div>
