@@ -3,11 +3,8 @@
 /* 바디 레이아웃 */
 .mypage-container {
     display: flex;
-   /*  justify-content: space-between; */
    	width : 100%;
     max-width: 100%;
-    height : 100%;
-    max-height : 100%;
     background-color: #F6F2ED;
 }
 
@@ -19,20 +16,21 @@
 
 /* 사이드바 타이틀 */
 .mypage-texttitle {
-	font-size : 12px;
+	font-size : 20px;
 	font-weight: bold;
 	color : #5c8f51;
 }
 
 /* 사이드바 크키 */
 .mypage-sidebar {
-    width: 16%;
+    width: 20%;
     background-color: rgba(90, 139, 99, 0.1);
     border-radius: 15px;
     padding: 15px;
     border-right: 1px solid #ddd;
     margin-top: 15px;
     margin-bottom: 15px;
+    white-space: nowrap;
 }
 
 
@@ -46,11 +44,17 @@
 }
 
 .mypage-sidebar a {
-	font-size: 11px;
+	font-size: 15px;
 	font-weight: 400;
     text-decoration: none;
     color: #333;
-    font-weight: 400;
+}
+
+.active-sidebar a{
+	color: #5c8f51;
+    font-weight: 600;
+    text-decoration: underline;
+    
 }
 
 .mypage-sidebar a:hover {
@@ -61,7 +65,7 @@
 
 /* 나의 정보 수정 타이틀 */
 .mypageinfo-content h2 {
-	font-size: 14px;
+	font-size: 25px;
 	font-weight: bold;
     margin-top: 20px;
     margin-left: 20px;
@@ -85,47 +89,19 @@
 
 .memberinfo-container {
 	width: 70%;
-	font-size :11px;
+	font-size :15px;
+	display: flex;
+    flex-direction: column;
+    align-items: center; /* 모든 자식을 가로로 가운데 정렬 */
+
+}
+
+.memberinfo-container>div{
+	display: flex;
+	align-items: center;
+}
+.memberinfo-container label{
 	font-weight: bold;
-
-}
-
-/* 각 div 바텀 라인 */
-
-.member-idbox {
-	border-bottom: 1px solid #ddd;
-	display : flex;
-}
-
-.member-namebox {
-	border-bottom: 1px solid #ddd;
-	display : flex;
-}
-
-.member-pwbox {
-	border-bottom: 1px solid #ddd;
-	display : flex;
-}
-
-.member-emailbox {
-	border-bottom: 1px solid #ddd;
-	display : flex;
-}
-
-
-.member-phonebox {
-	border-bottom: 1px solid #ddd;
-	display : flex;
-}
-
-.member-addressbox {
-	border-bottom: 1px solid #ddd;
-	display : flex;
-}
-
-.member-btdaybox {
-	border-bottom: 1px solid #ddd;
-	display : flex;
 }
 
 .change-pwbox label, .change-pwbox input {
@@ -133,67 +109,34 @@
     margin-bottom: 10px; /* 간격 추가 */
 }
 
+form:last-child{
+	justify-content: center;
+}
+
 /* 버튼 크기, 스타일 적용 */
 .member-end-btn {
-	font-size : 10px;
-	width: 20%;
-	height: 14%; 
+	font-size : 15px;
 	background-color: #5c8f51;
     border-radius: 15px;
     border-right: 1px solid #ddd;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px; /* 버튼과 위 요소 간격 */
+    align-self: center; /* 버튼을 가운데 정렬 */
 }
 
-.member-id-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
+.member-info-btn {
+	font-size :12px;
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
 	justify-content: center ;
 	background-color: #5c8f51;
     border-radius: 15px;
-    border-right: 1px solid #ddd;
+    width: 20px;
 }
 
-.member-pw-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-	justify-content: center ;
-	background-color: #5c8f51;
-    border-radius: 15px;
-    border-right: 1px solid #ddd;
-}
-
-.member-email-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-	justify-content: center ;
-	background-color: #5c8f51;
-    border-radius: 15px;
-    border-right: 1px solid #ddd;
-}
-
-.member-address-btn {
-	font-size : 8px;
-	width: 50px;
-	height: 20px; 
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-	justify-content: center ;
-	background-color: #5c8f51;
-    border-radius: 15px;
-    border-right: 1px solid #ddd;
-}
 
 /* 라벨관리 */
 .member-id {
@@ -222,6 +165,59 @@
 
 .member-btday {
 	margin-right : 46px;
+}
+
+.complete-btn {
+	font-size :12px;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	justify-content: center;
+    border-radius: 15px;
+    width: 20%;
+}
+
+.change-box{
+	gap: 5px;
+	display: flex;
+	
+}
+
+.change-input{
+	width: 180px !important;
+	font-size : 13px !important;
+}
+
+
+.change-pwbox{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start !important;
+}
+
+.pw-input-container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-bottom: 0px;
+}
+
+.error-msg{
+	font-size: 12px;
+	padding: 0px 10px;
+}
+
+.memberinfo-container > div {
+    display: flex; /* 플렉스 박스를 유지 */
+    justify-content: flex-start; /* 자식 요소들을 오른쪽 정렬 */
+    width: 100%; /* 오른쪽 정렬 적용을 위한 가로 크기 */
+    padding-left: 100px;
+    border-bottom: 1px solid #ddd;
+}
+
+.change-addressbox {
+    display: flex; /* Flexbox 레이아웃 활성화 */
+    gap: 15px; /* 요소 간 간격 설정 */
 }
 
 

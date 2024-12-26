@@ -37,7 +37,7 @@ public class FindIdSuccessServlet extends HttpServlet {
 		
 		Map<String, String> param = Map.of("memberName", memberName, "email", email);
 		
-		Member m = new MemberService().selectMemberByNameAndEmail(param);
+		Member m = new MemberService().selectMemberToFindIdPwd(param);
 		
 		if(m != null) {
 			HttpSession session = request.getSession();

@@ -4,8 +4,12 @@ import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+import java.util.Map;
+>>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -108,6 +112,7 @@ public class BoardService{
 			return comments;
 			
 		}
+<<<<<<< HEAD
 
 	 // 파일 추가
 	  public String uploadFile(HttpServletRequest request) throws ServiceException {
@@ -206,4 +211,21 @@ public class BoardService{
 
 
 	    
+
+	 
+	 public List<Board> selectBoardAllByMemberNo(Map<String, Object> param){
+		 	SqlSession session = getSession();
+			List<Board> boards = dao.selectBoardAllByMemberNo(session, param);
+			session.close();
+			return boards;
+	 }
+	 
+	 public int selectBoardAllByMemberNoCount(String memberNo) {
+			SqlSession session = getSession();
+			int count = dao.selectBoardAllByMemberNoCount(session, memberNo);
+			session.close();
+			return count;
+		}
+			
+
 }

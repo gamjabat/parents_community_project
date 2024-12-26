@@ -1,6 +1,8 @@
-package com.gamjabat.controller.mypage;
+package com.gamjabat.controller.login;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +16,16 @@ import com.gamjabat.model.dto.member.Member;
 import com.gamjabat.service.member.MemberService;
 
 /**
- * Servlet implementation class MypageInfoUpdateServlet
+ * Servlet implementation class NewPasswordEndServlet
  */
-@WebServlet("/member/mypageinfoupdate.do")
-public class MypageInfoUpdateServlet extends HttpServlet {
+@WebServlet("/login/newpasswordend.do")
+public class NewPasswordEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageInfoUpdateServlet() {
+    public NewPasswordEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +35,37 @@ public class MypageInfoUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-	
 		PasswordEncoding pe = new PasswordEncoding(request);
 		
 		String password = pe.getParameter("password");
 		
 		HttpSession session = request.getSession();
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		String memberNo = (String) session.getAttribute("findPwdMemberNo");
 		
-		Member memberInfo = new MemberService().selectMemberById(loginMember.getMemberId());
+		Map<String, Object> param = new HashMap<>();
 		
-		if(loginMember != null && password.equals(loginMember.getMemberPwd())) {
-			request.setAttribute("memberInfo", memberInfo);
-			request.getRequestDispatcher("/WEB-INF/views/member/mypageInfoUpdate.jsp")
-			.forward(request, response);
-			
-		} else {
-			String msg, loc = "/member/mypagepwcheck.do";
-			msg = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-
-			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		param.put("memberNo", memberNo);
+		param.put("memberPwd", password);
+		
+		int result = new MemberService().updateMemberInfo(param);
+		
+		String msg, loc = "/login/findpasswordend.do";
+		
+		if(result > 0) {
+			msg = "새로운 비밀번호로 설정 되었습니다. 로그인 페이지로 이동합니다.";
+			loc = "/login/loginpage.do";
+		}else {
+			msg = "새로운 비밀번호 설정이 실패되었습니다. 다시 시도해주세요.";
+			loc= "/login/findpassword.do";
 		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

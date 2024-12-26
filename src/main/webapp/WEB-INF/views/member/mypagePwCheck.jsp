@@ -13,7 +13,7 @@
 		    	<li class="mypage-texttitle">마이 페이지</li>
 		    </ul>
 	        	<ul>
-			        <li><a href="${path}/member/mypageinfoupdate.do">나의 정보 수정</a></li>
+			        <li class="active-sidebar"><a href="${path}/member/mypagepwcheck.do">나의 정보 수정</a></li>
 	            	<li><a href="${path}/member/mypageboardlist.do">나의 게시글</a></li>
 	            	<li><a href="${path}/member/mypagecomment.do">나의 댓글</a></li>
 	            	<li><a href="${path}/member/mypagelike.do">나의 좋아요</a></li>
@@ -27,12 +27,12 @@
 					<form action="${path}/member/mypageinfoupdate.do" method="post">
 				         <div class="id_box">
 				           <label class="idlabel">아이디
-				           <input type="text" class="myId" value="useruser1" readonly/>
+				           <input type="text" class="myId" name="id" value="${loginMember.memberId }" readonly/>
 				           </label>
 				         </div>
 				         <div class="pw_box">
 				           <label class="pwlabel">비밀번호
-				           <input type="password" class="myPw" placeholder="비밀번호 입력" required />
+				           <input type="password" class="myPw" name="password" placeholder="비밀번호 입력" required />
 				           </label>
 				         </div>   
 				         <div class="bt">

@@ -24,22 +24,72 @@
       <div class="input-container">
       	<div class="sub-title">새 비밀번호를 입력해주세요</div>
       	<div class="description">최소 8자 이상,<br> 특수문자(!@#$%^&*) 중 1개 이상 포함,<br>대문자, 소문자, 숫자를 각각 1개 이상 포함해주세요</div>
-      	<div class="newpassword-input">
-      		<input type="password" placeholder="새 비밀번호 입력">
+      	<form class="newpassword-input" method="post" action="${path }/login/newpasswordend.do" onsubmit="return fn_invalidate();">
       		<div class="checkPw-input">
-		      	<input type="password" placeholder="새 비밀번호 재입력">
-		        <div class="error">비밀번호를 다시 확인해주세요.</div>
+	      		<input type="password" id="password" name="password" placeholder="새 비밀번호 입력">
+	      		<div class="error"></div>
+      		</div>
+      		<div class="checkPw-input">
+		      	<input type="password" id="confirm-password" placeholder="새 비밀번호 재입력">
+		        <div class="error"></div>
       		</div>
       		<div class="page-btns">
-	      		<button onclick="loginPage();">로그인</button>
+	      		<button type="submit">비밀번호 변경</button>
       		</div>
-      	</div>
+      	</form>
       </div>
     </div>
   </div>
   <script>
-  const loginPage = () =>{
-		location.assign("${path }/login/loginpage.do");
+  	/* 실시간 유효성 검사 */
+  	const passwordInput = document.getElementById('password');
+	const confirmPasswordInput = document.getElementById('confirm-password');
+	const passwordError = passwordInput.nextElementSibling;
+	const confirmPasswordError = confirmPasswordInput.nextElementSibling;
+	
+	function validatePassword() {
+		  const passwordValue = passwordInput.value.trim();
+		  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/; // 최소 8자, 특수문자, 대소문자, 숫자 포함
+		  if (!passwordRegex.test(passwordValue)) {
+		    passwordError.textContent = '비밀번호는 8자리 이상, 대소문자, 숫자, 특수문자(!@#$%^&*)를 각각 포함해야 합니다.';
+		    return false;
+		  }
+		  passwordError.textContent = '';
+		  return true;
+		}
+
+	function validateConfirmPassword() {
+		  if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
+		    confirmPasswordError.textContent = '비밀번호가 일치하지 않습니다.';
+		    return false;
+		  }
+		  confirmPasswordError.textContent = '비밀번호가 일치합니다.';
+		  confirmPasswordError.style.color = 'white';
+		  return true;
+		}
+	
+	passwordInput.addEventListener('input', validatePassword);
+	confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+	
+	
+	const fn_invalidate=()=>{
+		if (passwordInput.value.trim() === "") {
+            alert("비밀번호를 입력해주세요.");
+            passwordInput.focus();
+            return false;
+        }
+        if (confirmPasswordInput.value.trim() === "") {
+            alert("비밀번호 확인을 입력해주세요.");
+            confirmPasswordInput.focus();
+            return false;
+        }
+        if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
+            alert("비밀번호가 일치하지 않습니다.");
+            confirmPasswordInput.focus();
+            return false;
+        }
+		
+		return true;
 	};
   </script>
 </body>

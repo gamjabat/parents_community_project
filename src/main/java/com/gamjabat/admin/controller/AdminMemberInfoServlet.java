@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gamjabat.admin.model.dto.Member;
-import com.gamjabat.admin.model.service.AdminMemberService;
+import com.gamjabat.admin.model.service.member.AdminMemberService;
 
 /**
  * Servlet implementation class AdminMemberInfoServlet
