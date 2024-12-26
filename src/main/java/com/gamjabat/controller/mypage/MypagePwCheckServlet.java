@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MypageMainServlet
  */
-@WebServlet("/member/mypagepwcheck.do")
+@WebServlet(name = "MypagePwCheckServlet" , urlPatterns = {"/member/mypagepwcheck.do"})
 public class MypagePwCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -13,7 +13,7 @@ import com.gamjabat.board.model.service.BoardService;
 /**
  * Servlet implementation class BoardCommentDeleteServlet
  */
-@WebServlet("/board/deletecomment.do")
+@WebServlet(name = "BoardCommentDeleteServlet" , urlPatterns = {"/board/deletecomment.do"})
 public class BoardCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
