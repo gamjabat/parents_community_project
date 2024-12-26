@@ -62,7 +62,7 @@ public class BoardDao {
 
     	
     	 public void insertAttachment(SqlSession session, Attachment attachment) {
- 	        session.insert("board.insertAttachment", attachment);
+ 	        session.insert("attachment.insertAttachment", attachment);
  	        session.commit();
  	    }
     
