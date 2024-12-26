@@ -3,13 +3,12 @@ package com.gamjabat.board.model.service;
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import java.util.Map;
-
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -117,7 +116,7 @@ public class BoardService{
 	 // 파일 추가
 	  public String uploadFile(HttpServletRequest request) throws ServiceException {
 	        String imageUrl = null;
-	        SqlSession session = getSession();
+//	        SqlSession session = getSession();
 
 	        try {
 	            if (!ServletFileUpload.isMultipartContent(request)) {
@@ -129,7 +128,7 @@ public class BoardService{
 	                if (!item.isFormField()) {
 	                    String originalName = item.getName();
 	                    String storedFileName = generateStoredFileName(originalName);
-	                    String uploadPath = request.getServletContext().getRealPath("uploads");
+	                    String uploadPath = request.getServletContext().getRealPath("/uploads/board/");
 	                    File storeFile = new File(uploadPath + File.separator + storedFileName);
 	                    item.write(storeFile);
 
@@ -139,23 +138,24 @@ public class BoardService{
 	                    attachment.setFilePath(uploadPath);
 	                    // 여기서 게시글 ID 등의 추가 정보도 설정할 수 있습니다.
 
-	                    dao.insertAttachment(session, attachment);
+	                   // dao.insertAttachment(session, attachment);
 
-	                    imageUrl = request.getContextPath() + "/uploads/" + storedFileName;
+	                    imageUrl = request.getContextPath() + "/uploads/board/" + storedFileName;
 	                    break;
 	                }
 	            }
 	        } catch (Exception e) {
 	            throw new ServiceException("File upload failed", e);
-	        } finally {
-	            if (session != null) session.close();
-	        }
+	        } 
 	        return imageUrl;
 	    }
 
 	    private String generateStoredFileName(String originalName) {
 	        // 파일 이름 생성 로직 구현
-	        return "newFileNameBasedOnSomeLogic";
+	    	String ext=originalName.substring(originalName.lastIndexOf("."));
+	    	int rnd=(int)(Math.random()*1000)+1;
+	    	SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmssSSS");
+	        return "BD_"+sdf.format(new Date())+"_"+rnd+ext;
 	    }
 
 	    
@@ -166,23 +166,41 @@ public class BoardService{
 	        dao.increaseViewCount(session, boardNo);
 	    }
 		
-	    private static final Logger logger = Logger.getLogger(BoardService.class.getName());
 
-	    public boolean toggleLike(String boardNo, String memberNo) {
+	    public int toggleLike(String boardNo, String memberNo) {
 	        SqlSession session = getSession();
 	        try {
 	            boolean isLiked = dao.isLiked(session, boardNo, memberNo);
 	            if (isLiked) {
-	                dao.removeLike(session, boardNo, memberNo);
+	                int result2=dao.removeLike(session, boardNo, memberNo);
+	                if(result2>0) {
+	                	result2=dao.decreseLike(session, boardNo);
+	                	if(result2>0) {
+	                		session.commit();
+	                		return 0;
+	                	}
+	                	else session.rollback();
+	                }else {
+	                	session.rollback();
+	                }
 	            } else {
-	                dao.addLike(session, boardNo, memberNo);
+	                int result2=dao.addLike(session, boardNo, memberNo);
+	                if(result2>0) {
+	                	result2=dao.increaseLikeCount(session, boardNo);
+	                	if(result2>0) {
+	                		session.commit();
+	                		return 1;
+	                	}
+	                	else session.rollback();
+	                }else {
+	                	session.rollback();
+	                }
 	            }
-	            session.commit();
-	            return true;
+	            return 2;
 	        } catch (Exception e) {
+	        	e.printStackTrace();
 	            session.rollback();
-	            logger.log(Level.SEVERE, "Error toggling like", e);
-	            return false;
+	            return 2;
 	        } finally {
 	            session.close();
 	        }
@@ -198,11 +216,11 @@ public class BoardService{
 	    }
 	    
 	    
-	    public boolean isLiked(String boardNo, String memberNo) {
+	    public int isLiked(String boardNo, String memberNo) {
 	        SqlSession session = getSession();
-	        boolean isLiked = false;
+	        int isLiked = 0;
 	        try {
-	            isLiked = dao.checkIfLiked(session, boardNo, memberNo);
+	           isLiked = dao.checkIfLiked(session, boardNo, memberNo);
 	        } finally {
 	            session.close();
 	        }
@@ -228,4 +246,12 @@ public class BoardService{
 		}
 			
 
+	 public String getWriterMemberNo(String boardNo) {
+		    SqlSession session = getSession();
+		    String writerMemberNo = dao.getWriterMemberNo(session, boardNo);
+		    session.close();
+		    return writerMemberNo;
+		}
+
+	 
 }

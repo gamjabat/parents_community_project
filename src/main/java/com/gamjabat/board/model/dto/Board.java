@@ -36,8 +36,9 @@ public class Board {
 	    
 	    
 	    private String[] tag;
+	    private String writerMemberNo;
 	    
-	    
+
 
 
 	}
