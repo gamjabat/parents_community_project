@@ -31,9 +31,20 @@ public class BoardDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-			String boardNo = request.getParameter("boardNo");
-			
-			
+		
+		 String boardNo = request.getParameter("boardNo");
+	        if (boardNo != null && !boardNo.isEmpty()) {
+	            BoardService boardService = new BoardService();
+	            boardService.deleteBoard(boardNo);  // 논리적 삭제 메소드 호출
+	            
+	            response.sendRedirect(request.getContextPath() + "/board.do");  // 삭제 후 게시판 목록으로 리다이렉트
+	        } else {
+	            response.sendRedirect(request.getContextPath() + "/board.do");
+	        }
+	    
+	
+		
+		/*	String boardNo = request.getParameter("boardNo");
 			
 			 if (boardNo != null && !boardNo.isEmpty()) {
 		            BoardService boardService = new BoardService(); // BoardService 인스턴스 생성
@@ -46,27 +57,9 @@ public class BoardDeleteServlet extends HttpServlet {
 		            // 오류 처리
 		            //response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Board Number");
 		        	response.sendRedirect(request.getContextPath() + "/board.do");
-		        }
+		        }*/
 		  
-
-			 
-			
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-
+		
 	    
 	}
 

@@ -16,8 +16,17 @@
         <button class="btn-category hot">HOT</button>
         <span class="category-depth"></span>
     </div>
+    
+    <c:if test="${sessionScope.loginMember!=null }">
     <a href="${path}/boardwrite.do" class="write-btn">글쓰기</a>
+    </c:if>    
+    <c:if test="${sessionScope.loginMember == null}">
+    <p class="info-message">로그인 상태에서만 게시글을 작성할 수 있습니다.</p>
+	</c:if>
+    
+  
 </div>
+
 
 
 <div class="board-container">
@@ -36,8 +45,8 @@
             <c:forEach var="board" items="${board}">
                 <tr>
                     <td>${board.boardNo}</td>
-			        <td><a href="${path}/board/boarddetail.do?boardNo=${board.boardNo}">${board.title}</a></td>
-			        <td>${member.memberId}</td>
+			        <td><a href="${path}/board/boarddetail.do?boardNo=${board.boardNo}">[${board.categoryName}]  ${board.title}</a></td>
+			         <td>${board.writerNickname}</td>		      
 			        <td><fmt:formatDate value="${board.createdAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			        <td>${board.likeCount}</td>
 			        <td>${board.viewCount}</td>
@@ -58,5 +67,7 @@
     <a href="#" class="page-link">&gt;</a>
     <a href="#" class="page-link">&gt;&gt;</a>
 </div>
+
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

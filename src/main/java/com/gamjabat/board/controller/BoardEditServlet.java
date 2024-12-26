@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.board.model.service.BoardService;
+import com.gamjabat.model.dto.member.Member;
 
 /**
  * Servlet implementation class BoardEditServlet
@@ -32,17 +33,28 @@ public class BoardEditServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 String boardNo = request.getParameter("boardNo");
-		 
-		 BoardService boardService = new BoardService(); // BoardService 인스턴스 생성
-		 
-	     Board board = boardService.selectByBoardNo(boardNo);
-		 
-	     request.setAttribute("board", board);
+    	String boardNo = request.getParameter("boardNo");
+
+        // 세션에서 로그인한 사용자 정보 가져오기
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+        if (loginMember == null) {
+            response.sendRedirect(request.getContextPath() + "/login.do");
+            return;
+        }
+
+        BoardService boardService = new BoardService();
+        Board board = boardService.selectByBoardNo(boardNo);
+
+        // 작성자인지 확인
+        if (!board.getWriter().equals(loginMember.getMemberNo())) {
+            response.sendRedirect(request.getContextPath() + "/board.do");
+            return;
+        }
+
+        request.setAttribute("board", board);
+        request.getRequestDispatcher("/WEB-INF/views/board/boardEdit.jsp").forward(request, response);
+    }
 	     
-	     request.getRequestDispatcher("/WEB-INF/views/board/boardEdit.jsp").forward(request, response);
-	     
-	}
 
 	
     /**
