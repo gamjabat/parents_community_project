@@ -398,9 +398,9 @@ const heartIcon = document.getElementById("heart-icon");
 	// 현재 상태 (true: 좋아요, false: 좋아요 해제)
 	let isLiked = false;
 	
-<<<<<<< HEAD
 
-=======
+
+
 	// 클릭 이벤트 리스너 추가
 	heartIcon.addEventListener("click", () => {
 	    // 상태 토글
@@ -502,7 +502,7 @@ const heartIcon = document.getElementById("heart-icon");
 	});
 
 </script>
->>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
+
 
 
 
