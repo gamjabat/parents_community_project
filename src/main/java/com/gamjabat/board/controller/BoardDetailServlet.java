@@ -44,13 +44,16 @@ public class BoardDetailServlet extends HttpServlet {
 	    
 	    // boardNo가 null이거나 빈 문자열이 아닐 경우에만 처리
 	    if(boardNo != null && !boardNo.isEmpty()) {
-	    	
+	    BoardService service = new BoardService();
         // 데이터베이스에서 게시물 상세 정보를 조회
         Board board = new BoardService().selectByBoardNo(boardNo); // boardService는 게시물 정보를 가져오는 서비스 클래스의 인스턴스
 
         // 조회된 게시물 정보를 request 객체에 속성으로 설정
         request.setAttribute("board", board);
 	    
+        // 조회수 증가
+        service.increaseViewCount(boardNo);
+        
 	    }
 //		Member m = Member.builder()
 //				.memberId("jbag")

@@ -30,6 +30,10 @@
         <!-- 섹션 1: 카테고리 & 제목 입력 -->
         <div class="section">
         <form action="${path }/board/boardwriteend.do" method="post">
+         
+         <!-- 로그인한 사용자의 멤버 번호를 전송하기 위한 숨겨진 입력 필드 -->
+    <input type="hidden" name="memberNo" value="${sessionScope.loginMember.memberNo}"/>
+        
             <div class="form-group">
                 <label for="category">카테고리를 선택해 주세요.</label>
               <div class="select-container" style="padding:0;">
@@ -79,7 +83,7 @@
 		</form>
     </div>
 
-    <!-- Quill.js 라이브러리 -->
+   <!-- <!-- Quill.js 라이브러리 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         var quill = new Quill('#editor-container', {
@@ -94,7 +98,56 @@
             document.getElementById("content").value=content;
            
         });
-    </script>
+    </script> -->
+    
+    
+<!-- Quill.js 라이브러리 -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    var quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: '내용을 입력해 주세요...',
+        modules: {
+            toolbar: {
+                container: [['bold', 'italic', 'underline'], [{ 'header': 1 }, { 'header': 2 }], [{ 'list': 'ordered'}, {'list': 'bullet'}], ['link', 'image']],
+                handlers: {
+                    'image': imageHandler
+                }
+            }
+        }
+    });
+
+    function imageHandler() {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/*');
+      input.click();
+      input.onchange = async () => {
+        const file = input.files[0];
+        if (file) {
+          const formData = new FormData();
+          formData.append('image', file);
+          try {
+            const response = await fetch('${path}/board/boardattachment.do', {
+              method: 'POST',
+              body: formData
+            });
+            const data = await response.json();
+            const range = this.quill.getSelection(true);
+            this.quill.insertEmbed(range.index, 'image', data.imageUrl);
+          } catch (error) {
+            console.error('Failed to upload image:', error);
+          }
+        }
+      };
+    }
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        var content = quill.root.innerHTML;
+        document.getElementById("content").value = content;
+    });
+</script> 
+    
     
 </body>
 </html>

@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
 public class Board {
 
 		private String boardNo;
-	    
+		private String writer;
+
 	    private String title;
 	    private String content;
 	    
@@ -29,10 +30,13 @@ public class Board {
 	    private String isDeleted;
 	    private String memberNo;
 	    private String boardTypeNumber;
+	    private String categoryName; // 추가된 카테고리 이름 필드
 	    
+	    private String writerNickname; // 작성자 닉네임 필드 추가
 	    
 	    
 	    private String[] tag;
+	    
 	    
 
 

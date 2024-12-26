@@ -2,11 +2,21 @@ package com.gamjabat.board.model.service;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
+import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.ibatis.session.SqlSession;
 
+import com.gamjabat.board.exception.ServiceException;
 import com.gamjabat.board.model.dao.BoardDao;
+import com.gamjabat.board.model.dto.Attachment;
 import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.board.model.dto.BoardComments;
 
@@ -71,8 +81,11 @@ public class BoardService{
 	 
 	 public void updateBoard(Board board) {
 		 SqlSession session = getSession();
-	     dao.updateBoard(session, board);
-	    }
+		        dao.updateBoard(session, board);
+		       
+		    }
+		
+
 	 
 			
 
@@ -96,5 +109,101 @@ public class BoardService{
 			
 		}
 
-			
+	 // 파일 추가
+	  public String uploadFile(HttpServletRequest request) throws ServiceException {
+	        String imageUrl = null;
+	        SqlSession session = getSession();
+
+	        try {
+	            if (!ServletFileUpload.isMultipartContent(request)) {
+	                throw new ServiceException("Content type is not multipart/form-data");
+	            }
+
+	            List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+	            for (FileItem item : multiparts) {
+	                if (!item.isFormField()) {
+	                    String originalName = item.getName();
+	                    String storedFileName = generateStoredFileName(originalName);
+	                    String uploadPath = request.getServletContext().getRealPath("uploads");
+	                    File storeFile = new File(uploadPath + File.separator + storedFileName);
+	                    item.write(storeFile);
+
+	                    Attachment attachment = new Attachment();
+	                    attachment.setOriginalFileName(originalName);
+	                    attachment.setStoredFileName(storedFileName);
+	                    attachment.setFilePath(uploadPath);
+	                    // 여기서 게시글 ID 등의 추가 정보도 설정할 수 있습니다.
+
+	                    dao.insertAttachment(session, attachment);
+
+	                    imageUrl = request.getContextPath() + "/uploads/" + storedFileName;
+	                    break;
+	                }
+	            }
+	        } catch (Exception e) {
+	            throw new ServiceException("File upload failed", e);
+	        } finally {
+	            if (session != null) session.close();
+	        }
+	        return imageUrl;
+	    }
+
+	    private String generateStoredFileName(String originalName) {
+	        // 파일 이름 생성 로직 구현
+	        return "newFileNameBasedOnSomeLogic";
+	    }
+
+	    
+	    
+	    //조회수 증가
+	    public void increaseViewCount(String boardNo) {
+	        SqlSession session = getSession();
+	        dao.increaseViewCount(session, boardNo);
+	    }
+		
+	    private static final Logger logger = Logger.getLogger(BoardService.class.getName());
+
+	    public boolean toggleLike(String boardNo, String memberNo) {
+	        SqlSession session = getSession();
+	        try {
+	            boolean isLiked = dao.isLiked(session, boardNo, memberNo);
+	            if (isLiked) {
+	                dao.removeLike(session, boardNo, memberNo);
+	            } else {
+	                dao.addLike(session, boardNo, memberNo);
+	            }
+	            session.commit();
+	            return true;
+	        } catch (Exception e) {
+	            session.rollback();
+	            logger.log(Level.SEVERE, "Error toggling like", e);
+	            return false;
+	        } finally {
+	            session.close();
+	        }
+	    }
+
+	    public int getLikeCount(String boardNo) {
+	        SqlSession session = getSession();
+	        try {
+	            return dao.getLikeCount(session, boardNo);
+	        } finally {
+	            session.close();
+	        }
+	    }
+	    
+	    
+	    public boolean isLiked(String boardNo, String memberNo) {
+	        SqlSession session = getSession();
+	        boolean isLiked = false;
+	        try {
+	            isLiked = dao.checkIfLiked(session, boardNo, memberNo);
+	        } finally {
+	            session.close();
+	        }
+	        return isLiked;
+	    }
+
+
+	    
 }
