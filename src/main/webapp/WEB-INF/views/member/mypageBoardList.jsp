@@ -28,7 +28,6 @@
 		     		 	 <tr class="board-col">
 				            <th scope="col">No</th>
 				            <th scope="col">제목</th>
-				            <th scope="col">작성자</th>
 				            <th scope="col">작성일</th>
 				            <th scope="col">좋아요</th>
 				            <th scope="col">조회수</th>
@@ -40,7 +39,6 @@
 				     		 	 <tr>
 						            <td>${idx.index + 1}</td>
 						            <td><a href="${path}/board/boarddetail.do?boardNo=${b.boardNo}">${b.title}</a></td>
-						            <td>${b.memberNo }</td>
 						            <td>${fn:substring(b.createdAt, 0, 10)}</td>
 						            <td>${b.likeCount }</td>
 						            <td>${b.viewCount }</td>
