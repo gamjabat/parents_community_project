@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MypageLikeServlet
  */
-@WebServlet("/member/mypagelike.do")
+@WebServlet(name = "MypageLikeServlet" , urlPatterns = {"/member/mypagelike.do"})
 public class MypageLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

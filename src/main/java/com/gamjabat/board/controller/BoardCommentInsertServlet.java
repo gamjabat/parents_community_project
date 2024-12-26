@@ -17,7 +17,7 @@ import com.gamjabat.board.model.service.BoardService;
  */
 
 
-@WebServlet(asyncSupported = true, urlPatterns = { "/board/insertcomment.do" })
+@WebServlet(name = "BoardCommentInsertServlet" ,asyncSupported = true, urlPatterns = { "/board/insertcomment.do" })
 public class BoardCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
