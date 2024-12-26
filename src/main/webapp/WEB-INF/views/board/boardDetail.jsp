@@ -11,6 +11,7 @@
 	<div class="board-container px-4">
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
+            	<input type="hidden" name="currentBoardNo" value="${board.boardNo }"/>
             	<div>
 	                <h5><strong>[${board.categoryName}]</strong> <strong>${board.title}</strong></h5>
             	</div>
@@ -26,7 +27,7 @@
 		            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 		                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
 		                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
-		                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">글 신고</a></li>
+		                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-board-no="${board.boardNo}">글 신고</a></li>
 
 		            </ul>
 		        </div>
@@ -158,7 +159,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="#">댓글 수정</a></li>
                                     <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-comment-no="${comment.commentNo}">댓글 신고</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -258,22 +259,23 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        <form id="reportForm">
+		        <form id="reportForm" action="${path }/board/report.do" method="post" onsubmit="return fn_invalidate();">
+		        	<input type="hidden" name="boardNo" value="${boardNo || ''}">
+		        	<input type="hidden" name="commentNo" value="${commentNo || ''}">
 		          <div class="mb-3">
 		            <label for="reportReason" class="form-label">신고 사유</label>
-		            <select class="form-select" id="reportReason" required>
+		            <select class="form-select" id="reportReason" name="reason" required>
 		              <option value="" selected disabled>신고 사유를 선택하세요</option>
-		              <option value="spam">스팸</option>
-		              <option value="abusive">욕설 및 비방</option>
-		              <option value="inappropriate">부적절한 내용</option>
-		              <option value="other">기타</option>
+		              <option value="RRN-2">스팸</option>
+		              <option value="RRN-1">욕설 및 비방</option>
+		              <option value="RRN-3">부적절한 내용</option>
+		              <option value="RRN-4">기타</option>
 		            </select>
 		          </div>
 		          <div class="mb-3">
 		            <label for="reportDetails" class="form-label">상세 내용</label>
-		            <textarea class="form-control" id="reportDetails" rows="3" placeholder="신고 내용을 입력하세요"></textarea>
+		            <textarea class="form-control" id="reportDetails" name="details" rows="3" placeholder="신고 내용을 입력하세요"></textarea>
 		          </div>
-		          <!-- 버튼 중앙 정렬 -->
 		          <div class="text-center">
 		            <button type="submit" class="btn btn-danger">신고 제출</button>
 		            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">취소</button>
@@ -317,57 +319,114 @@
 	
 	
 
-//아이콘을 담고 있는 요소 선택
-const heartIcon = document.getElementById("heart-icon");
-
-// 현재 상태 (true: 좋아요, false: 좋아요 해제)
-let isLiked = false;
-
-// 클릭 이벤트 리스너 추가
-heartIcon.addEventListener("click", () => {
-    // 상태 토글
-    isLiked = !isLiked;
-
-    // 상태에 따라 아이콘 변경
-    if (isLiked) {
-        // 빨간 하트
-        heartIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-            </svg>
-        `;
-    } else {
-        // 빈 하트
-        heartIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
-                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-            </svg>
-        `;
-    }
-});
-
-document.getElementById('reportForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // 기본 제출 방지
-
-  // 폼 데이터 가져오기
-  const reason = document.getElementById('reportReason').value;
-  const details = document.getElementById('reportDetails').value;
-
-  // 예제: 데이터 콘솔 출력
-  console.log('신고 사유:', reason);
-  console.log('신고 상세 내용:', details);
-
-  // 모달 닫기
-  const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
-  reportModal.hide();
-
-  // 사용자에게 알림
-  alert('신고가 접수되었습니다.');
-});
-</script>
-
+	//아이콘을 담고 있는 요소 선택
+	const heartIcon = document.getElementById("heart-icon");
 	
+	// 현재 상태 (true: 좋아요, false: 좋아요 해제)
+	let isLiked = false;
+	
+	// 클릭 이벤트 리스너 추가
+	heartIcon.addEventListener("click", () => {
+	    // 상태 토글
+	    isLiked = !isLiked;
+	
+	    // 상태에 따라 아이콘 변경
+	    if (isLiked) {
+	        // 빨간 하트
+	        heartIcon.innerHTML = `
+	            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+	                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+	            </svg>
+	        `;
+	    } else {
+	        // 빈 하트
+	        heartIcon.innerHTML = `
+	            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+	                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+	            </svg>
+	        `;
+	    }
+	});
+	
+	
+	/* 신고 모달 관련 javascript*/
+	document.getElementById('reportForm').addEventListener('submit', function(event) {
+	  event.preventDefault(); // 기본 제출 방지
+	  
+	  const loginMember = ${loginMember != null ? 'true' : 'false'};
+	    if (!loginMember) {
+	        alert("로그인 후 신고 가능합니다.");
+	        location.assign("${path}/login/loginpage.do");
+	        return;
+	    }
+	  
+	
+	  const reasonInput = document.getElementById('reportReason');
+	  const detailsInput = document.getElementById('reportDetails');
+	
+	  // 신고 사유 확인
+	  if (!reasonInput.value.trim()) {
+	      alert("신고 유형을 선택해주세요.");
+	      reasonInput.focus();
+	      return;
+	  }
+	
+	  // 신고 내용 확인
+	  if (!detailsInput.value.trim()) {
+	      alert("신고 내용을 입력해주세요.");
+	      detailsInput.focus();
+	      return;
+	  }
+	
+	  this.submit();
+	  // 모달 닫기
+	  const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
+	  reportModal.hide();
+	});
+	
+	document.addEventListener('DOMContentLoaded', () => {
+	    // 신고 모달 열릴 때
+	    const reportModal = document.getElementById('reportModal');
+	    reportModal.addEventListener('show.bs.modal', (event) => {
+	        const button = event.relatedTarget; // 모달을 열 때 클릭한 버튼
+	        const boardNo = button.getAttribute('data-board-no'); // 글번호
+	        const commentNo = button.getAttribute('data-comment-no'); // 댓글번호
+	
+	        console.log('신고 대상 글번호:', boardNo);
+	        console.log('신고 대상 댓글번호:', commentNo);
+	
+	        // 숨겨진 input에 글번호나 댓글번호 설정
+	        const form = document.getElementById('reportForm');
+	
+	        // 기존의 필드를 제거하고 새로 추가
+	        form.querySelectorAll('input[name="boardNo"], input[name="commentNo"]').forEach(input => input.remove());
+	
+	        if (boardNo) {
+	            const boardNoInput = document.createElement('input');
+	            boardNoInput.type = 'hidden';
+	            boardNoInput.name = 'boardNo';
+	            boardNoInput.value = boardNo;
+	            form.appendChild(boardNoInput);
+	        }
+	
+	        if (commentNo) {
+	            const commentNoInput = document.createElement('input');
+	            commentNoInput.type = 'hidden';
+	            commentNoInput.name = 'commentNo';
+	            commentNoInput.value = commentNo;
+	            form.appendChild(commentNoInput);
+	        }
+	    });
+	
+	    // 모달 닫힐 때 숨겨진 필드 초기화
+	    reportModal.addEventListener('hide.bs.modal', () => {
+	        const form = document.getElementById('reportForm');
+	        form.querySelectorAll('input[name="boardNo"], input[name="commentNo"]').forEach(input => input.remove());
+	    });
+	});
+
 </script>
+
 
 
 

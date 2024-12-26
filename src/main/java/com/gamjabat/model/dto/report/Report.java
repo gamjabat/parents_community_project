@@ -15,21 +15,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReportBoard {
+public class Report {
 	private String reportNo;
-	private String reportReasonCode;
+	private String reportReasonType;
 	private String reportContent;
 	// 신고상태
 	private String reportStatus;
+	private String reportResult;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private Timestamp deletedAt;
 	private boolean isDeleted;
-	private String postNo;
 	// 신고한 사용자 정보
-	private Member reportMemberNo;
+	private String reportMemberNo;
 	// 신고당한 게시글
-	private Board reportBoardNo;
+	private String reportBoardNo;
 	// 신고당한 댓글
-	//private Comment reportCommentNo;
+	private String reportCommentNo;
 }
