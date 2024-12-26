@@ -105,13 +105,12 @@
 					<tr>
 						<th>신고글 id</th>
 						<th>신고한 회원id</th>
-						<th>글 유형</th>
 						<th>신고 내용</th>
+						<th>글 유형</th>
+						<th>tlsrh 유형</th>
 						<th>신고 날짜</th>
 						<th>처리상태</th>
 					</tr>
-					
-					${reportBoards}
 				</thead>
 				<tbody>
 					<c:if test="${not empty reportBoards}">
@@ -119,9 +118,9 @@
 							<tr>
 								<td>${rboard.reportNo}</td>
 								<td>${rboard.reportMemberId}</td>
-								<td>${rboard.reportReasonCode}</td>
-								<td>${rboard.reportTitle}</td>
 								<td>${rboard.reportContent}</td>
+								<td>${rboard.reportBoardType}</td>
+								<td>${rboard.reportReasonCode}</td>
 								<td>${rboard.createdAt}</td>
 								<td>${rboard.status}</td>
 							</tr>
