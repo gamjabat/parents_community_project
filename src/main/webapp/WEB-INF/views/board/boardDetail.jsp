@@ -159,21 +159,28 @@
                                 <!-- 드롭다운 메뉴 -->
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-                                    <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+                                    <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                 </ul>
                             </div>
                         </div>
                         <!-- 댓글 내용 -->
-                        <div class="comment-content">
-                            ${comment.commentContent}
-                        </div>
+                         <div class="comment-content">
+                                <c:choose>
+                                    <c:when test="${comment.isDeleted eq 'Y'}">
+                                        <p class="deleted-comment">삭제되었습니다.</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${comment.commentContent}
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                         <!-- 댓글 날짜 -->
                         <div class="comment-meta pb-2">
                             <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
                             <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
                           
-                            <button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">대댓글 쓰기</button>
+                            <button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">답글</button>
                         </div>
                     </div>
                 </c:if>
@@ -199,16 +206,27 @@
                                     <!-- 드롭다운 메뉴 -->
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-                                        <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+                                        <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                     </ul>
                                 </div>
                             </div> 
-                            <div class="comment-content">
-                                ${comment.commentContent}
-                            </div>
+                            <!-- 댓글 내용 -->
+                             <div class="comment-content">
+	                            <c:choose>
+	                                <c:when test="${comment.isDeleted eq 'Y'}">
+	                                    <p class="deleted-comment">삭제되었습니다.</p>
+	                                </c:when>
+	                                <c:otherwise>
+	                                    ${comment.commentContent}
+	                                </c:otherwise>
+	                            </c:choose>
+	                        </div>
                             <div class="comment-meta pb-2">
                                 <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
+                                 <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
+                          
+                            	<button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">답글</button>
                             </div>
                         </div>
                     </div>
@@ -275,18 +293,8 @@
         
 </section>
 	<script>
-	
-	/* $(".btn-insert2").click(e=>{
-		
-		const $parent=$(e.target).parents("div.comment");
-		console.log($parent);
-		const $form=$(".comment-input>form").clone();
-		console.log($form);
-		
-		$parent.after($form);
-	}) */
 
-	
+	//  대댓글 기능 스크립트.
 	$(".btn-insert2").click(e => {
 	    const $parent = $(e.target).parents("div.comment");
 	    console.log($parent);
@@ -339,51 +347,6 @@ heartIcon.addEventListener("click", () => {
         `;
     }
 });
-/* 
-
- document.addEventListener("DOMContentLoaded", () => {
-    // "대댓글 쓰기" 버튼에 이벤트 리스너 추가
-    document.querySelectorAll(".sub-comment-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            // 부모 .comment 요소 찾기
-            const commentElement = btn.closest(".comment");
-
-            // 대댓글 입력 요소가 이미 있는지 확인
-            const existingSubCommentForm = commentElement.querySelector(".sub-comment.comment-form");
-
-            if (existingSubCommentForm) {
-                // 이미 존재하면 제거 (토글 기능)
-                existingSubCommentForm.remove();
-            } else {
-                // 새 대댓글 입력 요소 생성
-                const subCommentForm = document.createElement("div");
-                subCommentForm.classList.add("sub-comment", "d-flex", "flex-row", "comment-form");
-
-                subCommentForm.innerHTML = `
-                    <div class="mx-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-                        </svg>
-                    </div>
-                    <div class="comment-form pb-3 mb-3">
-                        <div class="d-flex justify-content-between">
-                            <div class="fs-6 fw-bold me-2">닉네임</div>
-                        </div>
-                        <div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
-                            <textarea></textarea>
-                            <div class="comment-btn ms-2 d-flex align-items-center justify-content-center">등록</div>
-                        </div>
-                    </div>
-                `;
-
-                // 새 요소를 comment의 마지막 자식으로 추가
-                commentElement.appendChild(subCommentForm);
-            }
-        });
-    });
-});
-
- */
 
 document.getElementById('reportForm').addEventListener('submit', function(event) {
   event.preventDefault(); // 기본 제출 방지

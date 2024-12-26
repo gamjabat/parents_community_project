@@ -49,20 +49,24 @@ public class BoardDao {
      
     
     public int insertBoardComment(SqlSession session,BoardComments bc) {
-		return session.insert("board.insertBoardComment",bc);
+		return session.insert("comments.insertBoardComment",bc);
 	}
 
     
-    	//감자가 추가한 comments 코드입니다. 구현중.
-    	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
-    	return session.selectList("board.selectBoardComment",boardNo);
-    	}
+
+    
+
+	//감자가 추가한 comments 코드입니다.
+	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
+		return session.selectList("comments.selectBoardComment",boardNo);
+	}
+
     
 
 
     	
     	 public void insertAttachment(SqlSession session, Attachment attachment) {
- 	        session.insert("board.insertAttachment", attachment);
+ 	        session.insert("attachment.insertAttachment", attachment);
  	        session.commit();
  	    }
     
@@ -135,10 +139,35 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllByMemberNoCount", memberNo);
     }
     
+
     public String getWriterMemberNo(SqlSession session, String boardNo) {
         return session.selectOne("board.getWriterMemberNo", boardNo);
     }
 
     
+
+
+    	
+    public int deleteBoardComment(SqlSession session, String commnetNo) {
+        
+        return session.update("comments.deleteBoardComment", commnetNo);
+        
+    }
+
+    public List<Board> selectBoardAllLikeKeyword(SqlSession session, Map<String, Object> param){	
+    	int cPage = (int)param.get("cPage");
+		int numPerPage = (int)param.get("numPerPage");
+		String keyword = (String)param.get("keyword");
+    	
+    	return session.selectList("board.selectBoardAllLikeKeyword", Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage, "keyword", keyword));
+
+    }
+    
+    public int selectBoardAllLikeKeywordCount(SqlSession session, String keyword){	
+    	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
+    }
+    
+
+
 }
     

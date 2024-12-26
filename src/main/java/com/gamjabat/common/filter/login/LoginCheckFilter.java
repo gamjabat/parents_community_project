@@ -12,20 +12,34 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.gamjabat.common.PasswordEncoding;
+import com.gamjabat.model.dto.member.Member;
+import com.gamjabat.service.member.MemberService;
 
 /**
- * Servlet Filter implementation class PasswordEncryptFilter
+ * Servlet Filter implementation class LoginFilter
  */
 
-@WebFilter(servletNames = {"signUpEndServlet"})
-public class PasswordEncryptFilter extends HttpFilter implements Filter {
+//@WebFilter(servletNames= {"loginEndServlet"})
+@WebFilter(
+		servletNames = {
+			"BoardCommentInsertServlet"
+			,"BoardCommentDeleteServlet"
+			,"MypageBoardListServlet"
+			,"MypageCommentServlet"
+			,"MypageInfoUpdateServlet"
+			,"MypageLikeServlet"
+			,"MypagePwCheckServlet"
+			,"UpdateMemberInfoServlet"
+		} )
+public class LoginCheckFilter extends HttpFilter implements Filter {
        
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public PasswordEncryptFilter() {
+    public LoginCheckFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,11 +55,24 @@ public class PasswordEncryptFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-		PasswordEncoding pe = new PasswordEncoding(request);
-		// pass the request along the filter chain
+
+		
+		HttpSession session  = request.getSession();
+		
+		if(session.getAttribute("loginMember")==null) {
+			System.out.println("로그인실패 !!!!!!");
+
+			// 로그인 실패
+			request.setAttribute("msg", "로그인후 이용가능합니다. 로그인하세요.");
+			request.setAttribute("loc", "/login/loginpage.do");
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		}
+		
+		
+		
+		
 		chain.doFilter(request, response);
+
 	}
 
 	/**
@@ -56,4 +83,3 @@ public class PasswordEncryptFilter extends HttpFilter implements Filter {
 	}
 
 }
-

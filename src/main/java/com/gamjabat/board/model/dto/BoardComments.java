@@ -19,7 +19,7 @@ public class BoardComments {
 		    private Date createdAt;          // 생성일
 		    private Date updatedAt;          // 수정일
 		    private Date deletedAt;          // 삭제일 (nullable)
-		    private char isDeleted;            // 삭제 여부 ('Y', 'N')
+		    private String isDeleted;            // 삭제 여부 ('Y', 'N')
 		    
 		    //왜래키
 		    private String commentMemberNo;    // 댓글 작성자 (MEMBER 테이블의 MEMBER_NO 참조)
