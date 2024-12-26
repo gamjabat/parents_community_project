@@ -93,4 +93,9 @@ public class BoardService{
 			return count;
 		}
 			
+	 
+	 public void deleteBoardComment(String commentNo) {
+		 SqlSession session = getSession();
+	     dao.deleteBoardComment(session, commentNo);
+	    }
 }

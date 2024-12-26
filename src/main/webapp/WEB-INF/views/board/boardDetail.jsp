@@ -197,7 +197,7 @@
                                     <!-- 드롭다운 메뉴 -->
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-                                        <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+                                        <li><a class="dropdown-item" href="">댓글 삭제</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                     </ul>
                                 </div>

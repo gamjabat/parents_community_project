@@ -55,7 +55,7 @@ public class BoardDao {
     	//감자가 추가한 comments 코드입니다. 구현중.
     	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
     	return session.selectList("board.selectBoardComment",boardNo);
-    	}
+    }
     
     	
     public List<Board> selectBoardAllByMemberNo(SqlSession session, Map<String, Object> param){	
@@ -70,5 +70,11 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllByMemberNoCount", memberNo);
     }
     
+    	
+    public void deleteBoardComment(SqlSession session, String boardNo) {
+        
+        session.delete("board.deleteBoard", boardNo);
+        session.commit();
+    }
 }
     
