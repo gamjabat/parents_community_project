@@ -171,6 +171,7 @@ public class BoardDao {
     
     public List<Board> selectBoardsByCategory(SqlSession session, String typeNo) {
         return session.selectList("board.selectBoardsByCategory", typeNo);
+    }
 
     public List<Board> selectBoardsByType(SqlSession session, Map<String, Object> param) {
         return session.selectList("board.selectBoardsByType", param);

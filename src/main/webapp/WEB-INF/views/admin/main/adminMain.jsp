@@ -105,19 +105,20 @@
 					<tr>
 						<th>신고글 id</th>
 						<th>신고한 회원id</th>
-						<th>신고당한 회원id</th>
 						<th>글 유형</th>
 						<th>신고 내용</th>
 						<th>신고 날짜</th>
-						<th>처리중</th>
+						<th>처리상태</th>
 					</tr>
+					
+					${reportBoards}
 				</thead>
 				<tbody>
 					<c:if test="${not empty reportBoards}">
 						<c:forEach var="rboard" items="${reportBoards}">
 							<tr>
 								<td>${rboard.reportNo}</td>
-								<td>${reboard.reportMemberId}</td>
+								<td>${rboard.reportMemberId}</td>
 								<td>${rboard.reportReasonCode}</td>
 								<td>${rboard.reportTitle}</td>
 								<td>${rboard.reportContent}</td>
