@@ -18,7 +18,7 @@ import com.gamjabat.service.member.MemberService;
 /**
  * Servlet implementation class UpdateMemberInfoServlet
  */
-@WebServlet("/member/updateMemberInfo.do")
+@WebServlet(name = "UpdateMemberInfoServlet" , urlPatterns = {"/member/updateMemberInfo.do"})
 public class UpdateMemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -20,7 +20,7 @@ import com.gamjabat.board.model.service.BoardService;
 /**
  * Servlet implementation class BoardAttachmentServlet
  */
-@WebServlet("/board/Boardattachment.do")
+@WebServlet("/board/boardattachment.do")
 public class BoardAttachmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -58,6 +58,7 @@ public class BoardAttachmentServlet extends HttpServlet {
             String imageUrl = boardService.uploadFile(request);
             out.println("{ \"imageUrl\": \"" + imageUrl + "\" }");
         } catch (Exception ex) {
+        	ex.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             out.println("{ \"error\": \"File upload failed due to : " + ex.getMessage() + "\"}");
         } finally {

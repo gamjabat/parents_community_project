@@ -25,10 +25,11 @@
 		            </a>
 		            <!-- 드롭다운 메뉴 -->
 		            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
-		                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
-		                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-board-no="${board.boardNo}">글 신고</a></li>
-
+		                <c:if test="${sessionScope.loginMember!=null }">
+			                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
+			                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
+			                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-board-no="${board.boardNo}">글 신고</a></li>
+   					 	</c:if>
 		            </ul>
 		        </div>
             </div>
@@ -319,8 +320,60 @@
 	
 	
 
+<<<<<<< HEAD
 	//아이콘을 담고 있는 요소 선택
 	const heartIcon = document.getElementById("heart-icon");
+=======
+//아이콘을 담고 있는 요소 선택
+const heartIcon = document.getElementById("heart-icon");
+
+// 현재 상태 (true: 좋아요, false: 좋아요 해제)
+/* let isLiked = false; */
+
+// 클릭 이벤트 리스너 추가
+/* heartIcon.addEventListener("click", () => {
+    // 상태 토글
+    isLiked = !isLiked;
+
+    // 상태에 따라 아이콘 변경
+    if (isLiked) {
+        // 빨간 하트
+        heartIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+            </svg>
+        `;
+    } else {
+        // 빈 하트
+        heartIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+            </svg>
+        `;
+    }
+}); */
+
+document.getElementById('reportForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // 기본 제출 방지
+
+  // 폼 데이터 가져오기
+  const reason = document.getElementById('reportReason').value;
+  const details = document.getElementById('reportDetails').value;
+
+  // 예제: 데이터 콘솔 출력
+  console.log('신고 사유:', reason);
+  console.log('신고 상세 내용:', details);
+
+  // 모달 닫기
+  const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
+  reportModal.hide();
+
+  // 사용자에게 알림
+  alert('신고가 접수되었습니다.');
+});
+</script>
+
+>>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
 	
 	// 현재 상태 (true: 좋아요, false: 좋아요 해제)
 	let isLiked = false;
@@ -442,7 +495,14 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(data => {
         isLikeStatus = data.isLiked; // 좋아요 상태 변수 업데이트
-        updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
+        if(isLikeStatus==1||isLikeStatus==0){   
+        	updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
+        	const count=data.newLikeCount;
+        	$("#heart-icon+span").text("좋아요 "+count);
+        }
+        else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
+        
+        
     })
     .catch(error => console.error('좋아요 상태 로드 실패:', error));
 });
@@ -452,7 +512,7 @@ const likeCount = document.getElementById("likeCount");
 
 // 하트 클릭 시 좋아요 상태 토글
 heartIcon1.addEventListener("click", () => {
-    isLikeStatus = !isLikeStatus; // 상태 토글
+    //isLikeStatus = !isLikeStatus; // 상태 토글
     updateLikeStatus(); // 서버로 요청 보내기
 });
 
@@ -463,8 +523,8 @@ function updateLikeStatus() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            boardNo: "BD_0085", // 실제 boardNo를 동적으로 전달
-            memberNo: "MB_0106" // 실제 memberNo를 동적으로 전달
+            boardNo: "${board.boardNo}", // 실제 boardNo를 동적으로 전달
+            memberNo: "${sessionScope.loginMember.memberNo}" // 실제 memberNo를 동적으로 전달
         })
     })
     .then(response => {
@@ -474,13 +534,13 @@ function updateLikeStatus() {
         return response.json();
     })
     .then(data => {
-        if (data.success) {
-            likeCount.textContent = `좋아요 ${data.newLikeCount}`;
-            updateHeartIcon(isLikeStatus);
-        } else {
-            console.error('좋아요 토글 실패:', data.error);
-            alert('좋아요 변경 실패');
-        }
+    	 isLikeStatus = data.success; // 좋아요 상태 변수 업데이트
+         if(isLikeStatus==1||isLikeStatus==0){   
+         	updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
+         	const count=data.newLikeCount;
+         	$("#heart-icon+span").text("좋아요 "+count);
+         }
+         else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
     })
     .catch(error => {
         console.error('좋아요 상태 업데이트 중 오류:', error);
@@ -492,7 +552,7 @@ function updateLikeStatus() {
 
 // 하트 아이콘 업데이트 함수
 function updateHeartIcon(isLikeStatus) {
-    heartIcon1.innerHTML = isLikeStatus ? 
+    heartIcon1.innerHTML = isLikeStatus==1 ? 
     `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
     </svg>` : 

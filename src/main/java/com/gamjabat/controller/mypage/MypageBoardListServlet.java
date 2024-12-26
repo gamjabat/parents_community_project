@@ -18,7 +18,7 @@ import com.gamjabat.model.dto.member.Member;
 /**
  * Servlet implementation class MypageBoardListServlet
  */
-@WebServlet("/member/mypageboardlist.do")
+@WebServlet(name = "MypageBoardListServlet" , urlPatterns = {"/member/mypageboardlist.do"})
 public class MypageBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

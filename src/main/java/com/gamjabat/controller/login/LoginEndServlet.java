@@ -48,7 +48,6 @@ public class LoginEndServlet extends HttpServlet {
 		
 		Member invlidMember = service.loginInvalidCheck(checkMember);
 		
-		System.out.println("invlidMember::"+invlidMember);
 
 		// request로 요청된 정보가 있을 경우,
 		if (invlidMember != null) {
