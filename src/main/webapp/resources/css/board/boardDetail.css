@@ -133,3 +133,8 @@
 	margin-top: 5px;
 	border-top: 1px solid #ADB5BD;
 }
+
+.modal-content {
+	padding: 20px !important;
+}
+

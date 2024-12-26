@@ -10,15 +10,15 @@
 	 <div id="boardlist-container">
 	 	<div class="list-title">
 		 	<ul class="nav nav-tabs">
-			  <li class="nav-item">
-			    <a class="nav-link active" aria-current="page" href="#">핫 게시물</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#">최신 게시물</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#">많이 본 게시물</a>
-			  </li>
+			    <li class="nav-item">
+			        <a class="nav-link active" data-type="hot" onclick="loadBoardList('hot')">핫 게시물</a>
+			    </li>
+			    <li class="nav-item">
+			        <a class="nav-link" data-type="latest" onclick="loadBoardList('latest')">최신 게시물</a>
+			    </li>
+			    <li class="nav-item">
+			        <a class="nav-link" data-type="most-viewed" onclick="loadBoardList('most-viewed')">많이 본 게시물</a>
+			    </li>
 			</ul>
 	 		<div class="more-list" onclick="location.assign('#')">
 	 			더보기
@@ -30,51 +30,7 @@
 	 	<div class="boardlist">
 	 		<table class="table table-hover">
 	 			<tbody>
-	 				<tr onclick="location.assign('${path}/board/boarddetail.do')">
-		 				<td class="boardcategory">[초등]</td>
-		 				<td class="boardtitle">게시글 제목이 보일 곳</td>
-		 				<td class="likecount">
-		 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-  								<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-							</svg> 000
-						</td>
-		 				<td class="viewcount">
-		 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-							  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-							  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-							</svg> 000
-						</td>
-	 				</tr>
-	 				<tr onclick="location.assign('#')">
-		 				<td class="boardcategory">[초등]</td>
-		 				<td class="boardtitle">게시글 제목이 보일 곳</td>
-		 				<td class="likecount">
-		 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-  								<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-							</svg> 000
-						</td>
-		 				<td class="viewcount">
-		 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-							  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-							  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-							</svg> 000
-						</td>
-	 				</tr>
-	 				<tr onclick="location.assign('#')">
-		 				<td class="boardcategory">[초등]</td>
-		 				<td class="boardtitle">게시글 제목이 보일 곳</td>
-		 				<td class="likecount">
-		 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-  								<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-							</svg> 000
-						</td>
-		 				<td class="viewcount">
-		 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-							  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-							  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-							</svg> 000
-						</td>
-	 				</tr>
+	 				<!-- 동적 테이블 자리 -->
 	 			</tbody>
 	 		</table>
 	 	</div>
@@ -199,6 +155,53 @@
 	const loginPage = () =>{
 		location.assign("${path }/login/loginpage.do");
 	};
+	
+    const loadBoardList = (type) => {
+    	const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('data-type') === type) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+        
+        fetch(`${path}/board/loadboardlist.do?type=` + type)
+            .then(response => response.json()) // JSON 응답 처리
+            .then(data => {
+                const tbody = document.querySelector('.boardlist tbody');
+                tbody.innerHTML = ''; // 기존 내용 초기화
+
+                // 새로운 데이터 렌더링
+                data.forEach((board, index) => {
+                    const tr = document.createElement('tr');
+                    tr.setAttribute('onclick', `location.assign('${path}/board/boarddetail.do?boardNo=\${board.boardNo}')`);
+                    tr.innerHTML = `
+                        <td class="boardcategory">[\${board.categoryName}]</td>
+                        <td class="boardtitle">\${board.title}</td>
+                        <td class="likecount">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                            </svg> \${board.likeCount}
+                        </td>
+                        <td class="viewcount">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                            </svg> \${board.viewCount}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error('Error loading board list:', error));
+    };
+
+    // 페이지 로드 시 기본 탭 호출
+    document.addEventListener('DOMContentLoaded', () => {
+        loadBoardList('hot');
+    });
 	
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

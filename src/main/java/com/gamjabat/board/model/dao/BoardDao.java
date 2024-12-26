@@ -167,11 +167,19 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
     }
     
+
     
     public List<Board> selectBoardsByCategory(SqlSession session, String typeNo) {
         return session.selectList("board.selectBoardsByCategory", typeNo);
+
+    public List<Board> selectBoardsByType(SqlSession session, Map<String, Object> param) {
+        return session.selectList("board.selectBoardsByType", param);
+
     }
 
+    public int updateBoardComment(SqlSession session, BoardComments comment) {
+        return session.update("comments.updateBoardComment", comment);
+    }
 
 }
     
