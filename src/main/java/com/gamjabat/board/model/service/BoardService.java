@@ -4,12 +4,12 @@ import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
 import java.util.List;
-<<<<<<< HEAD
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-=======
+
 import java.util.Map;
->>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
+
 
 import javax.servlet.http.HttpServletRequest;
 
