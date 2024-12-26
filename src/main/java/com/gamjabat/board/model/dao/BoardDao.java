@@ -143,6 +143,19 @@ public class BoardDao {
     public String getWriterMemberNo(SqlSession session, String boardNo) {
         return session.selectOne("board.getWriterMemberNo", boardNo);
     }
+    
+    public List<BoardComments> selectCommentsAllByMemberNo(SqlSession session, Map<String, Object> param){	
+    	int cPage = (int)param.get("cPage");
+		int numPerPage = (int)param.get("numPerPage");
+		String memberNo = (String)param.get("memberNo");
+    	
+    	return session.selectList("comments.selectCommentsAllByMemberNo", Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage, "memberNo", memberNo));
+
+    }
+    
+    public int selectCommentsAllByMemberNoCount(SqlSession session, String memberNo){	
+    	return session.selectOne("comments.selectCommentsAllByMemberNoCount", memberNo);
+    }
 
     
 

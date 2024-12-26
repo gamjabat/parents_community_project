@@ -39,7 +39,7 @@
 				     		 	 <tr>
 						            <td>${idx.index + 1}</td>
 						            <td><a href="${path}/board/boarddetail.do?boardNo=${b.boardNo}">${b.title}</a></td>
-						            <td>${fn:substring(b.createdAt, 0, 10)}</td>
+						            <td>${fn:substring(b.createdAt, 0, 19)}</td>
 						            <td>${b.likeCount }</td>
 						            <td>${b.viewCount }</td>
 				       			 </tr>
