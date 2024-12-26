@@ -156,7 +156,7 @@
                                 </a>
                                 <!-- 드롭다운 메뉴 -->
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">댓글 수정</a></li>
+                                    <li><a class="dropdown-item" href="${path}/board/updatecomment.do?commentNo=${comment.commentNo}">댓글 수정</a></li>
                                     <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                 </ul>
@@ -173,6 +173,17 @@
                                     </c:otherwise>
                                 </c:choose>
                             </div>
+                            
+                           <!-- 댓글 수정 폼 (숨김 처리) -->
+		                        <div class="edit-form" id="editForm-${comment.commentNo}" style="display: none;">
+		                            <form action="${path}/board/updatecomment.do" method="POST">
+		                                <input type="hidden" name="commentNo" value="${comment.commentNo}">
+		                                <textarea class="form-control" rows="3" name="commentContent" id="editContent-${comment.commentNo}">${comment.commentContent}</textarea>
+		                                <button class="btn btn-primary mt-2" type="submit">저장</button>
+		                                <button class="btn btn-secondary mt-2" type="button" onclick="cancelEdit(${comment.commentNo})">취소</button>
+		                            </form>
+		                        </div>
+		                        
                         <!-- 댓글 날짜 -->
                         <div class="comment-meta pb-2">
                             <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
@@ -203,7 +214,7 @@
                                     </a>
                                     <!-- 드롭다운 메뉴 -->
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">댓글 수정</a></li>
+                                        <li><a class="dropdown-item" href="${path}/board/updatecomment.do?commentNo=${comment.commentNo}">댓글 수정</a></li>
                                         <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                     </ul>
@@ -220,6 +231,17 @@
 	                                </c:otherwise>
 	                            </c:choose>
 	                        </div>
+	                        
+	                        <!-- 댓글 수정 폼 (숨김 처리) -->
+		                        <div class="edit-form" id="editForm-${comment.commentNo}" style="display: none;">
+		                            <form action="${path}/board/updatecomment.do" method="POST">
+		                                <input type="hidden" name="commentNo" value="${comment.commentNo}">
+		                                <textarea class="form-control" rows="3" name="commentContent" id="editContent-${comment.commentNo}">${comment.commentContent}</textarea>
+		                                <button class="btn btn-primary mt-2" type="submit">저장</button>
+		                                <button class="btn btn-secondary mt-2" type="button" onclick="cancelEdit(${comment.commentNo})">취소</button>
+		                            </form>
+		                        </div>
+		                        
                             <div class="comment-meta pb-2">
                                 <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
                                  <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
@@ -285,13 +307,39 @@
 		</div>
 		
 
-
+		
 		
         
         
 </section>
 	<script>
+	
+	 // 댓글 수정 버튼 클릭 시 실행되는 함수
+    function editComment(commentNo, currentContent) {
+        // 댓글 내용과 수정 폼을 토글
+        const commentContent = document.getElementById('commentContent-' + commentNo);
+        const editForm = document.getElementById('editForm-' + commentNo);
+        
+        // 수정 폼을 보이게 하고 댓글 내용을 숨김
+        commentContent.style.display = 'none';
+        editForm.style.display = 'block';
+        
+        // 기존 댓글 내용을 textarea에 채워넣기
+        document.getElementById('editContent-' + commentNo).value = currentContent;
+    }
 
+    // 댓글 수정 취소 버튼 클릭 시 실행되는 함수
+    function cancelEdit(commentNo) {
+        const commentContent = document.getElementById('commentContent-' + commentNo);
+        const editForm = document.getElementById('editForm-' + commentNo);
+        
+        // 수정 폼 숨기고 댓글 내용 보이게 처리
+        commentContent.style.display = 'block';
+        editForm.style.display = 'none';
+    }
+	
+	
+	
 	//  대댓글 기능 스크립트.
 	$(".btn-insert2").click(e => {
 	    const $parent = $(e.target).parents("div.comment");
@@ -367,7 +415,7 @@ document.getElementById('reportForm').addEventListener('submit', function(event)
 </script>
 
 	
-</script>
+
 
 
 

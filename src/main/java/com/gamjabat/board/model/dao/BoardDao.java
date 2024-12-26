@@ -152,6 +152,8 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
     }
     
-
+    public int updateBoardComment(SqlSession session, BoardComments comment) {
+        return session.update("comments.updateBoardComment", comment);
+    }
 }
     

@@ -258,7 +258,22 @@ public class BoardService{
 	     session.close();    
 	     
 	     return result;
-
 	 }
-
+	 
+	 public int updateBoardComment(String commentNo, String commentContent) {
+		 SqlSession session = getSession();
+		 
+	 	BoardComments comment = new BoardComments();
+	    comment.setCommentNo(commentNo);
+	    comment.setCommentContent(commentContent);
+	    
+	     int result=dao.updateBoardComment(session, comment);
+	     
+	     if(result>0) {session.commit();}
+	     else {session.rollback();}
+	     
+	     session.close();    
+	     
+	     return result;
+	 }
 }
