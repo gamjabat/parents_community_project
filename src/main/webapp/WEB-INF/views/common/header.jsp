@@ -24,11 +24,11 @@
       		</a>
       	</div>
       	<div class="search-container">
-    		<form class="search-form" action="#" method="post">
-        		<input type="text" class="search-input" placeholder="검색어를 입력하세요">
-        		<div class="search-button">
+    		<form class="search-form" action="${path }/board/searchKeyword.do">
+        		<input type="text" class="search-input" name="keyword" placeholder="검색어를 입력하세요" value="${param.keyword != null ? param.keyword : ''}">
+        		<button class="search-button" type="submit">
             		<i class="fas fa-search"></i>
-        		</div>
+        		</button>
     		</form>
 		</div>
       

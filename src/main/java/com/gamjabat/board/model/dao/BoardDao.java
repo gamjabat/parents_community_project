@@ -127,5 +127,18 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllByMemberNoCount", memberNo);
     }
     
+    public List<Board> selectBoardAllLikeKeyword(SqlSession session, Map<String, Object> param){	
+    	int cPage = (int)param.get("cPage");
+		int numPerPage = (int)param.get("numPerPage");
+		String keyword = (String)param.get("keyword");
+    	
+    	return session.selectList("board.selectBoardAllLikeKeyword", Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage, "keyword", keyword));
+
+    }
+    
+    public int selectBoardAllLikeKeywordCount(SqlSession session, String keyword){	
+    	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
+    }
+    
 }
     
