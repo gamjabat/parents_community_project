@@ -323,10 +323,10 @@
 const heartIcon = document.getElementById("heart-icon");
 
 // 현재 상태 (true: 좋아요, false: 좋아요 해제)
-let isLiked = false;
+/* let isLiked = false; */
 
 // 클릭 이벤트 리스너 추가
-heartIcon.addEventListener("click", () => {
+/* heartIcon.addEventListener("click", () => {
     // 상태 토글
     isLiked = !isLiked;
 
@@ -346,7 +346,7 @@ heartIcon.addEventListener("click", () => {
             </svg>
         `;
     }
-});
+}); */
 
 document.getElementById('reportForm').addEventListener('submit', function(event) {
   event.preventDefault(); // 기본 제출 방지
@@ -402,7 +402,7 @@ const likeCount = document.getElementById("likeCount");
 
 // 하트 클릭 시 좋아요 상태 토글
 heartIcon1.addEventListener("click", () => {
-    isLikeStatus = !isLikeStatus; // 상태 토글
+    //isLikeStatus = !isLikeStatus; // 상태 토글
     updateLikeStatus(); // 서버로 요청 보내기
 });
 
@@ -428,7 +428,7 @@ function updateLikeStatus() {
          if(isLikeStatus==1||isLikeStatus==0){   
          	updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
          	const count=data.newLikeCount;
-         	$(".heart-icon+span").text("좋아요 "+count);
+         	$("#heart-icon+span").text("좋아요 "+count);
          }
          else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
     })
