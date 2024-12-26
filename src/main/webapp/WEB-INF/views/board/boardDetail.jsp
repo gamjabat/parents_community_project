@@ -11,7 +11,6 @@
 	<div class="board-container px-4">
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
-            	<input type="hidden" name="currentBoardNo" value="${board.boardNo }"/>
             	<div>
 	                <h5><strong>[${board.categoryName}]</strong> <strong>${board.title}</strong></h5>
             	</div>
@@ -261,6 +260,7 @@
 		      </div>
 		      <div class="modal-body">
 		        <form id="reportForm" action="${path }/board/report.do" method="post" onsubmit="return fn_invalidate();">
+		        	<input type="hidden" name="currentBoardNo" value="${param.boardNo}" />
 		        	<input type="hidden" name="boardNo" value="${boardNo || ''}">
 		        	<input type="hidden" name="commentNo" value="${commentNo || ''}">
 		          <div class="mb-3">
@@ -319,11 +319,6 @@
 	});
 	
 	
-
-<<<<<<< HEAD
-	//아이콘을 담고 있는 요소 선택
-	const heartIcon = document.getElementById("heart-icon");
-=======
 //아이콘을 담고 있는 요소 선택
 const heartIcon = document.getElementById("heart-icon");
 
@@ -353,28 +348,6 @@ const heartIcon = document.getElementById("heart-icon");
     }
 }); */
 
-document.getElementById('reportForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // 기본 제출 방지
-
-  // 폼 데이터 가져오기
-  const reason = document.getElementById('reportReason').value;
-  const details = document.getElementById('reportDetails').value;
-
-  // 예제: 데이터 콘솔 출력
-  console.log('신고 사유:', reason);
-  console.log('신고 상세 내용:', details);
-
-  // 모달 닫기
-  const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
-  reportModal.hide();
-
-  // 사용자에게 알림
-  alert('신고가 접수되었습니다.');
-});
-</script>
-
->>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
-	
 	// 현재 상태 (true: 좋아요, false: 좋아요 해제)
 	let isLiked = false;
 	
