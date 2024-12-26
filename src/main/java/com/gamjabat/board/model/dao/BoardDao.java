@@ -48,14 +48,14 @@ public class BoardDao {
      
     
     public int insertBoardComment(SqlSession session,BoardComments bc) {
-		return session.insert("board.insertBoardComment",bc);
+		return session.insert("comments.insertBoardComment",bc);
 	}
 
     
-    	//감자가 추가한 comments 코드입니다. 구현중.
-    	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
-    	return session.selectList("board.selectBoardComment",boardNo);
-    	}
+	//감자가 추가한 comments 코드입니다.
+	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
+		return session.selectList("comments.selectBoardComment",boardNo);
+	}
     
     	
     public List<Board> selectBoardAllByMemberNo(SqlSession session, Map<String, Object> param){	
