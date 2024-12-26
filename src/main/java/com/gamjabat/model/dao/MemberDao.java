@@ -1,5 +1,6 @@
 package com.gamjabat.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,4 +26,7 @@ public class MemberDao {
 	public int updateMemberInfo(SqlSession session, Map<String, Object> param) {
 		return session.update("member.updateMemberInfo", param);
 	}
+	public List<Map<String, Object>> selectTopLikedMembers(SqlSession session) {
+        return session.selectList("member.selectTopLikedMembers");
+    }
 }
