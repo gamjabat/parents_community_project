@@ -112,7 +112,7 @@ public class BoardService{
 			return comments;
 			
 		}
-<<<<<<< HEAD
+
 
 	 // 파일 추가
 	  public String uploadFile(HttpServletRequest request) throws ServiceException {
