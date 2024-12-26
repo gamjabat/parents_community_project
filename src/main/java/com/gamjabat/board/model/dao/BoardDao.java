@@ -167,6 +167,9 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
     }
     
+    public List<Board> selectBoardsByType(SqlSession session, Map<String, Object> param) {
+        return session.selectList("board.selectBoardsByType", param);
+    }
 
 
 }

@@ -287,6 +287,13 @@ public class BoardService{
 	     return result;
 
 	 }
+	 
+	public List<Board> selectBoardsByType(Map<String, Object> param) {
+	 	SqlSession session = getSession();
+		List<Board> boards = dao.selectBoardsByType(session, param);
+		session.close();
+		return boards;
+	}
 
 
 }
