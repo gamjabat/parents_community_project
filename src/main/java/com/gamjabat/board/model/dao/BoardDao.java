@@ -171,6 +171,9 @@ public class BoardDao {
         return session.selectList("board.selectBoardsByType", param);
     }
 
+    public int updateBoardComment(SqlSession session, BoardComments comment) {
+        return session.update("comments.updateBoardComment", comment);
+    }
 
 }
     
