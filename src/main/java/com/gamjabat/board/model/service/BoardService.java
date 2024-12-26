@@ -225,13 +225,22 @@ public class BoardService{
 			int count = dao.selectBoardAllByMemberNoCount(session, memberNo);
 			session.close();
 			return count;
-		}
+	}
 			
 
 	 
-	 public void deleteBoardComment(String commentNo) {
+	 public int deleteBoardComment(String commentNo) {
 		 SqlSession session = getSession();
-	     dao.deleteBoardComment(session, commentNo);
-	    }
+		 
+	     int result=dao.deleteBoardComment(session, commentNo);
+	     
+	     if(result>0) {session.commit();}
+	     else {session.rollback();}
+	     
+	     session.close();    
+	     
+	     return result;
+
+	 }
 
 }

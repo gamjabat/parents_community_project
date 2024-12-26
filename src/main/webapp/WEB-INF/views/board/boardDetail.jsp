@@ -157,21 +157,28 @@
                                 <!-- 드롭다운 메뉴 -->
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-                                    <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
+                                    <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                 </ul>
                             </div>
                         </div>
                         <!-- 댓글 내용 -->
-                        <div class="comment-content">
-                            ${comment.commentContent}
-                        </div>
+                         <div class="comment-content">
+                                <c:choose>
+                                    <c:when test="${comment.isDeleted eq 'Y'}">
+                                        <p class="deleted-comment">삭제되었습니다.</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${comment.commentContent}
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                         <!-- 댓글 날짜 -->
                         <div class="comment-meta pb-2">
                             <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
                             <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
                           
-                            <button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">대댓글 쓰기</button>
+                            <button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">답글</button>
                         </div>
                     </div>
                 </c:if>
@@ -197,16 +204,27 @@
                                     <!-- 드롭다운 메뉴 -->
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-                                        <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
+                                        <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                     </ul>
                                 </div>
                             </div> 
-                            <div class="comment-content">
-                                ${comment.commentContent}
-                            </div>
+                            <!-- 댓글 내용 -->
+                             <div class="comment-content">
+	                            <c:choose>
+	                                <c:when test="${comment.isDeleted eq 'Y'}">
+	                                    <p class="deleted-comment">삭제되었습니다.</p>
+	                                </c:when>
+	                                <c:otherwise>
+	                                    ${comment.commentContent}
+	                                </c:otherwise>
+	                            </c:choose>
+	                        </div>
                             <div class="comment-meta pb-2">
                                 <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
+                                 <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
+                          
+                            	<button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">답글</button>
                             </div>
                         </div>
                     </div>

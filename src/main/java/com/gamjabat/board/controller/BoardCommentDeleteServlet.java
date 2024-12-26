@@ -29,17 +29,18 @@ public class BoardCommentDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String commentNo=request.getParameter("commentNo");	
+			String commentNo=request.getParameter("commentNo");
+			String boardNo=request.getParameter("commentBoardNo");
 			
 			   if (commentNo != null && !commentNo.isEmpty()) {
 			 
 			            // 댓글 삭제
 			            BoardService boardService = new BoardService();
 			            boardService.deleteBoardComment(commentNo);
-			            response.sendRedirect(request.getContextPath() + "/board/boarddetail.do");
+			            response.sendRedirect(request.getContextPath() + "/board/boarddetail.do?boardNo="+boardNo);
 			            
 			   } else {
-		        	response.sendRedirect(request.getContextPath() + "/board/boarddetail.do");
+				   response.sendRedirect(request.getContextPath() + "/board/boarddetail.do?boardNo="+boardNo);
 		        }
 		}
 		  

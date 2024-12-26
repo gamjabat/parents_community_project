@@ -132,10 +132,10 @@ public class BoardDao {
     }
     
     	
-    public void deleteBoardComment(SqlSession session, String commnetNo) {
+    public int deleteBoardComment(SqlSession session, String commnetNo) {
         
-        session.delete("board.deleteBoard", commnetNo);
-        session.commit();
+        return session.update("comments.deleteBoardComment", commnetNo);
+        
     }
 }
     
