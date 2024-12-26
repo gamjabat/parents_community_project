@@ -42,13 +42,24 @@
     <nav class="category-bar">
 		<ul class="main-nav">
 			<li class="home">
-				<a href="">전체게시판</a>
+				<a href="${path}/board.do">전체게시판</a>
 			</li>
 			<li id="notice">
 				<a href="">공지사항</a>
 			</li>
 			<li>
-				<a href="${path}/board.do">게시판</a>
+				<a href="#" id="board-menu">게시판</a>
+				<ul class="dropdown" id="category-dropdown">
+					 <li><a href="${path}/board/boardcategory.do?category=CAT-1">공지</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-2">잡담</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-3">책</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-4">진학</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-5">진로</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-6">유아</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-7">입시</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-8">정보</a></li>
+				     <li><a href="${path}/board/boardcategory.do?category=CAT-9">질문</a></li>
+				</ul>
 			</li>
 		</ul>
 	</nav>

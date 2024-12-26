@@ -286,6 +286,28 @@ public class BoardService{
 	     
 	     return result;
 	 }
+	 
+
+	 
+		   
+
+
+	    public List<Board> getBoardsByCategory(String typeNo) {
+	        SqlSession session = getSession();
+	        List<Board> boardList = dao.selectBoardsByCategory(session, typeNo);
+	        session.close();
+	        return boardList;
+	    }
+		
+
+
+	public List<Board> selectBoardsByType(Map<String, Object> param) {
+	 	SqlSession session = getSession();
+		List<Board> boards = dao.selectBoardsByType(session, param);
+		session.close();
+		return boards;
+	}
+
 
 	 
 	 public int updateBoardComment(String commentNo, String commentContent) {

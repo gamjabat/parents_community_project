@@ -46,7 +46,7 @@
                 <tr>
                     <td>${board.boardNo}</td>
 			        <td><a href="${path}/board/boarddetail.do?boardNo=${board.boardNo}">[${board.categoryName}]  ${board.title}</a></td>
-			         <td>${board.writerNickname}</td>		      
+			         <td>${board.writerNickname==null?"익명":board.writerNickname}</td>		      
 			        <td><fmt:formatDate value="${board.createdAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			        <td>${board.likeCount}</td>
 			        <td>${board.viewCount}</td>
