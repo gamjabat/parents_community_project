@@ -287,6 +287,19 @@ public class BoardService{
 	     return result;
 
 	 }
+	 
+	 
+		   
+
+
+	    public List<Board> getBoardsByCategory(String typeNo) {
+	        SqlSession session = getSession();
+	        List<Board> boardList = dao.selectBoardsByCategory(session, typeNo);
+	        session.close();
+	        return boardList;
+	    }
+		
+
 
 
 }

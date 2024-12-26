@@ -37,7 +37,7 @@
             <div class="board-meta text-muted py-1 mb-3">
             	<div class="w-100">
             		<div class="w-100">
-				    <span>작성자: ${board.writerNickname} | </span>
+				    <span>작성자: ${board.writerNickname==null?"익명":board.writerNickname} | </span>
 				    <span>작성일: <fmt:formatDate value="${board.createdAt}" pattern="yyyy.MM.dd HH:mm"/></span>
 				</div>
             	</div>

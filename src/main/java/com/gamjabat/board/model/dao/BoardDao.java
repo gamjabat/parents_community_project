@@ -167,6 +167,10 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
     }
     
+    
+    public List<Board> selectBoardsByCategory(SqlSession session, String typeNo) {
+        return session.selectList("board.selectBoardsByCategory", typeNo);
+    }
 
 
 }

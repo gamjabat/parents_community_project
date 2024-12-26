@@ -241,5 +241,63 @@ footer>div{
 	width: 100%;
 }
 
+
+
+
+
+/* 게시판 항목 스타일 */
+.main-nav li {
+    position: relative; /* 드롭다운을 표시하기 위해 위치 설정 */
+}
+
+#board-menu {
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#board-menu:hover {
+    color: rgba(90,139,99,0.5); /* 마우스 올릴 때 색상 변화 */
+}
+
+/* 드롭다운 기본 숨기기 */
+#category-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; /* 부모 요소 아래에 배치 */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 드롭다운 항목 */
+#category-dropdown li {
+    padding: 5px 20px;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+#category-dropdown li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+#category-dropdown li a:hover {
+    background-color: rgba(90,139,99,0.5); /* 마우스 올릴 때 배경색 */
+    color: #ffffff; /* 링크 색상 */
+}
+
+/* 마우스 올릴 때 드롭다운 표시 */
+.main-nav li:hover #category-dropdown {
+    display: block; /* 드롭다운 표시 */
+}
+
  
  
