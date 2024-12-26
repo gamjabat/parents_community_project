@@ -33,6 +33,71 @@ public class BoardEditServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+    	
+    	 String boardNo = request.getParameter("boardNo");
+
+    	    // 세션에서 로그인한 사용자 정보 가져오기
+    	    Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+    	    if (loginMember == null) {
+    	        response.sendRedirect(request.getContextPath() + "/login.do");
+    	        return;
+    	    }
+
+    	    BoardService boardService = new BoardService();
+    	    String writerMemberNo = boardService.getWriterMemberNo(boardNo);
+
+    	    // 로그 출력
+    	    System.out.println("로그인된 사용자: " + loginMember);
+    	    System.out.println("로그인된 사용자 NO: " + loginMember.getMemberNo());
+    	    System.out.println("게시글 작성자 NO: " + writerMemberNo);
+    	    System.out.println("게시글 번호: " + boardNo);
+
+    	    // 작성자인지 확인
+    	    if (!loginMember.getMemberNo().equals(writerMemberNo)) {
+    	        System.out.println("작성자가 아닙니다. 접근 권한 없음.");
+    	        response.sendRedirect(request.getContextPath() + "/board.do");
+    	        return;
+    	    } else {
+    	        System.out.println("작성자가 맞습니다. 수정 권한 있음.");
+    	    }
+
+    	    Board board = boardService.selectByBoardNo(boardNo);
+    	    request.setAttribute("board", board);
+    	    request.getRequestDispatcher("/WEB-INF/views/board/boardEdit.jsp").forward(request, response);
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	/*
     	String boardNo = request.getParameter("boardNo");
 
         // 세션에서 로그인한 사용자 정보 가져오기
@@ -52,7 +117,7 @@ public class BoardEditServlet extends HttpServlet {
         }
 
         request.setAttribute("board", board);
-        request.getRequestDispatcher("/WEB-INF/views/board/boardEdit.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/board/boardEdit.jsp").forward(request, response);*/
     }
 	     
 

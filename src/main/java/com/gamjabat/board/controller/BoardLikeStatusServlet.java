@@ -37,7 +37,8 @@ public class BoardLikeStatusServlet extends HttpServlet {
         String memberNo = request.getParameter("memberNo"); // 현재 로그인한 사용자 ID (세션에서 가져올 수도 있음)
 
         BoardService service = new BoardService();
-        boolean isLiked = service.isLiked(boardNo, memberNo);
+        int isLiked = service.isLiked(boardNo, memberNo);
+        int newLikeCount = service.getLikeCount(boardNo);
 
         // JSON 형식으로 응답 반환
         response.setContentType("application/json");
@@ -46,7 +47,7 @@ public class BoardLikeStatusServlet extends HttpServlet {
 
         JSONObject jsonResponse = new JSONObject();
         jsonResponse.put("isLiked", isLiked);
-
+        jsonResponse.put("newLikeCount", newLikeCount);
         out.print(jsonResponse.toString());
         out.flush();
     }

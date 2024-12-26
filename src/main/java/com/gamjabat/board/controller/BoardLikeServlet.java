@@ -123,12 +123,13 @@ public class BoardLikeServlet extends HttpServlet {
 	    JSONObject jsonResponse = new JSONObject();
 	 // 실패한 경우 응답에 error 메시지 포함
 	    try {
-	        boolean isSuccess = service.toggleLike(boardNo, memberNo);
+	        int isSuccess = service.toggleLike(boardNo, memberNo);
 	        int newLikeCount = service.getLikeCount(boardNo);
 	        jsonResponse.put("success", isSuccess);
 	        jsonResponse.put("newLikeCount", newLikeCount);
 	        out.print(jsonResponse.toString());
 	    } catch (Exception e) {
+	    	e.printStackTrace();
 	        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	        jsonResponse.put("success", false); // 응답에 success 필드 포함
 	        jsonResponse.put("error", "Error processing like toggle: " + e.getMessage());

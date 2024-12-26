@@ -91,27 +91,35 @@ public class BoardDao {
     	        return count != null && count > 0;
     	    }
 
-    	    public void addLike(SqlSession session, String boardNo, String memberNo) {
+    	    public int addLike(SqlSession session, String boardNo, String memberNo) {
     	        // 좋아요 추가 로직
-    	        session.insert("board.addLike", Map.of("boardNo", boardNo, "memberNo", memberNo));
-    	        session.update("board.increaseLikeCount", boardNo);
+    	        return session.insert("board.addLike", Map.of("boardNo", boardNo, "memberNo", memberNo));
+    	        
     	    }
 
-    	    public void removeLike(SqlSession session, String boardNo, String memberNo) {
+    	    public int removeLike(SqlSession session, String boardNo, String memberNo) {
     	        // 좋아요 삭제 로직
-    	        session.delete("board.removeLike", Map.of("boardNo", boardNo, "memberNo", memberNo));
-    	        session.update("board.decreaseLikeCount", boardNo);
+    	        return session.delete("board.removeLike", Map.of("boardNo", boardNo, "memberNo", memberNo));
+    	        
     	    }
-
+    	    
+    	    public int decreseLike(SqlSession session, String boardNo) {
+    	    	return session.update("board.decreaseLikeCount", boardNo);
+    	    }
+    	    
+    	    public int increaseLikeCount(SqlSession session, String boardNo) {
+    	    	return session.update("board.increaseLikeCount", boardNo);
+    	    }
+    	    
     	    public int getLikeCount(SqlSession session, String boardNo) {
     	        return session.selectOne("board.getLikeCount", boardNo);
     	    }
     	    
     	    
-    	    public boolean checkIfLiked(SqlSession session, String boardNo, String memberNo) {
+    	    public int checkIfLiked(SqlSession session, String boardNo, String memberNo) {
     	        int likeCount = session.selectOne("board.checkIfLiked", 
     	            Map.of("boardNo", boardNo, "memberNo", memberNo));
-    	        return likeCount > 0;
+    	        return likeCount;
     	    }
     	    
     	    
@@ -131,6 +139,13 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllByMemberNoCount", memberNo);
     }
     
+
+    public String getWriterMemberNo(SqlSession session, String boardNo) {
+        return session.selectOne("board.getWriterMemberNo", boardNo);
+    }
+
+    
+
 
     	
     public int deleteBoardComment(SqlSession session, String commnetNo) {
@@ -152,8 +167,10 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
     }
     
+
     public int updateBoardComment(SqlSession session, BoardComments comment) {
         return session.update("comments.updateBoardComment", comment);
     }
+
 }
     
