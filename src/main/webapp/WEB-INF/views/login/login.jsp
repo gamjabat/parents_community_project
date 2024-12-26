@@ -18,7 +18,7 @@
 			<div class="login-message">에듀라에 오신 것을</div>
 			<div class="login-message">환영합니다!</div>
 		</div>
-		<form class="right-panel" method="post" action="${path }/login/loginend.do">
+		<form class="right-panel" method="post" action="${path}/login/loginend.do">
 			<input class="login-input" type="text" id="userId" name="memberId" placeholder="ID">
 			<input class="login-input" type="password" id="userPwd" name="password" placeholder="PASSWORD">
 			<span id="inputEmptyCheck" class="error"></span>
@@ -30,20 +30,5 @@
 			<button id="loginBtn">LOGIN</button>
 		</form>
 	</div>
-	<script>
-		/* $("#loginBtn").on("click",e=>{
-			
-		    const userId = $("#userId").val();
-		    const userPwd =$("#userPwd").val();
-		    
-			
-			if(userId==''|| userPwd==''){
-				$("#inputEmptyCheck").text('아이디/비밀번호를 입력하세요');
-				
-			}else{
-				location.assign("${path}/login/loginCheck.do?userId="+userId+"&userPwd="+userPwd);			
-			}
-		}); */
-  </script>
 </body>
 </html>
