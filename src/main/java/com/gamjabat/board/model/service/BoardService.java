@@ -225,7 +225,21 @@ public class BoardService{
 			int count = dao.selectBoardAllByMemberNoCount(session, memberNo);
 			session.close();
 			return count;
-		}
+	 }
+	 
+	 public List<Board> selectBoardAllLikeKeyword(Map<String, Object> param){
+		 	SqlSession session = getSession();
+			List<Board> boards = dao.selectBoardAllLikeKeyword(session, param);
+			session.close();
+			return boards;
+	 }
+	 
+	 public int selectBoardAllLikeKeywordCount(String keyword) {
+			SqlSession session = getSession();
+			int count = dao.selectBoardAllLikeKeywordCount(session, keyword);
+			session.close();
+			return count;
+	 }
 			
 
 }
