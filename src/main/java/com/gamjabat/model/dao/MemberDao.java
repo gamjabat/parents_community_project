@@ -19,7 +19,10 @@ public class MemberDao {
 		return session.selectOne("member.selectMemberById", id);
 	}
 	
-	public Member selectMemberByNameAndEmail(SqlSession session, Map<String, String> param) {
-		return session.selectOne("member.selectMemberByNameAndEmail", param);
+	public Member selectMemberToFindIdPwd(SqlSession session, Map<String, String> param) {
+		return session.selectOne("member.selectMemberToFindIdPwd", param);
+	}
+	public int updateMemberInfo(SqlSession session, Map<String, Object> param) {
+		return session.update("member.updateMemberInfo", param);
 	}
 }

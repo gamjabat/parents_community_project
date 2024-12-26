@@ -1,4 +1,4 @@
-package com.gamjabat.controller.mypage;
+package com.gamjabat.controller.login;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,16 +16,16 @@ import com.gamjabat.model.dto.member.Member;
 import com.gamjabat.service.member.MemberService;
 
 /**
- * Servlet implementation class UpdateMemberInfoServlet
+ * Servlet implementation class NewPasswordEndServlet
  */
-@WebServlet("/member/updateMemberInfo.do")
-public class UpdateMemberInfoServlet extends HttpServlet {
+@WebServlet("/login/newpasswordend.do")
+public class NewPasswordEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMemberInfoServlet() {
+    public NewPasswordEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,40 +36,27 @@ public class UpdateMemberInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		PasswordEncoding pe = new PasswordEncoding(request);
-		String passwordInput = request.getParameter("password");
-		String password = "";
-		if (request.getParameter("password").equals("")) {
-		    password = null; // 필요 시 null로 처리
-		} else {
-			password = pe.getParameter("password");
-		}
-		String phone = request.getParameter("phone").equals("")?null:request.getParameter("phone");
-		String address = request.getParameter("address").equals("")?null:request.getParameter("address");
+		
+		String password = pe.getParameter("password");
 		
 		HttpSession session = request.getSession();
-		Member loginMember = (Member)session.getAttribute("loginMember");
-		
-		//동적쿼리로 업데이트 구현
-		
-		System.out.println(passwordInput+"input"+password+ "p"+phone+ "a"+address);
+		String memberNo = (String) session.getAttribute("findPwdMemberNo");
 		
 		Map<String, Object> param = new HashMap<>();
 		
-		param.put("memberNo", loginMember.getMemberNo());
+		param.put("memberNo", memberNo);
 		param.put("memberPwd", password);
-		param.put("phone", phone);
-		param.put("address", address);
 		
 		int result = new MemberService().updateMemberInfo(param);
 		
-		String msg, loc = "/member/mypagepwcheck.do";
+		String msg, loc = "/login/findpasswordend.do";
 		
 		if(result > 0) {
-			msg = "회원 정보 수정이 완료되었습니다.";
-			Member m = new MemberService().selectMemberById(loginMember.getMemberId());
-			session.setAttribute("loginMember", m);
+			msg = "새로운 비밀번호로 설정 되었습니다. 로그인 페이지로 이동합니다.";
+			loc = "/login/loginpage.do";
 		}else {
-			msg = "회원 정보 수정이 실패 되었습니다. 다시 시도해주세요.";
+			msg = "새로운 비밀번호 설정이 실패되었습니다. 다시 시도해주세요.";
+			loc= "/login/findpassword.do";
 		}
 		
 		request.setAttribute("msg", msg);
@@ -78,6 +65,7 @@ public class UpdateMemberInfoServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

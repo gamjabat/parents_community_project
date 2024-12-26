@@ -40,11 +40,20 @@ public class MemberService {
 		return m;
 	}
 	
-	public Member selectMemberByNameAndEmail(Map<String, String> param) {
+	public Member selectMemberToFindIdPwd(Map<String, String> param) {
 		SqlSession session = getSession();
-		Member m = dao.selectMemberByNameAndEmail(session, param);
+		Member m = dao.selectMemberToFindIdPwd(session, param);
 		session.close();
 		return m;
+	}
+	
+	public int updateMemberInfo(Map<String, Object> param) {
+		SqlSession session = getSession();
+		int result = dao.updateMemberInfo(session, param);
+		if (result > 0) session.commit();
+		else session.rollback();
+		session.close();
+		return result;
 	}
 	
 }
