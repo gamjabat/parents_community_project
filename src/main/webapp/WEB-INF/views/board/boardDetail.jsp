@@ -12,7 +12,7 @@
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
             	<div>
-	                <h5><strong>[잡담]</strong> <strong>${board.title}</strong></h5>
+	                <h5><strong>[${board.categoryName}]</strong> <strong>${board.title}</strong></h5>
             	</div>
             	 <!-- 드롭다운 -->
 		        <div class="dropdown">
@@ -35,7 +35,7 @@
             <div class="board-meta text-muted py-1 mb-3">
             	<div class="w-100">
             		<div class="w-100">
-				    <span>작성자: "a" | </span>
+				    <span>작성자: ${board.writerNickname} | </span>
 				    <span>작성일: <fmt:formatDate value="${board.createdAt}" pattern="yyyy.MM.dd HH:mm"/></span>
 				</div>
             	</div>
@@ -45,7 +45,7 @@
 						  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
 						  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
 						</svg>
-		                <span class="fw-bold"> 조회수 1 </span>
+		                <span class="fw-bold"> 조회수 ${board.viewCount+1} </span>
             		</div>
 	                <div class="d-flex justify-content-center align-items-center px-1">
 	                	<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chat-left-dots mx-1" viewBox="0 0 16 16">
@@ -157,7 +157,7 @@
                                 <!-- 드롭다운 메뉴 -->
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-                                    <li><a class="dropdown-item" href="#">댓글 삭제</a></li>
+                                    <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                 </ul>
                             </div>
@@ -197,7 +197,7 @@
                                     <!-- 드롭다운 메뉴 -->
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">댓글 수정</a></li>
-                                        <li><a class="dropdown-item" href="">댓글 삭제</a></li>
+                                        <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                     </ul>
                                 </div>
@@ -273,18 +273,8 @@
         
 </section>
 	<script>
-	
-	/* $(".btn-insert2").click(e=>{
-		
-		const $parent=$(e.target).parents("div.comment");
-		console.log($parent);
-		const $form=$(".comment-input>form").clone();
-		console.log($form);
-		
-		$parent.after($form);
-	}) */
 
-	
+	//  대댓글 기능 스크립트.
 	$(".btn-insert2").click(e => {
 	    const $parent = $(e.target).parents("div.comment");
 	    console.log($parent);
@@ -337,51 +327,6 @@ heartIcon.addEventListener("click", () => {
         `;
     }
 });
-/* 
-
- document.addEventListener("DOMContentLoaded", () => {
-    // "대댓글 쓰기" 버튼에 이벤트 리스너 추가
-    document.querySelectorAll(".sub-comment-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            // 부모 .comment 요소 찾기
-            const commentElement = btn.closest(".comment");
-
-            // 대댓글 입력 요소가 이미 있는지 확인
-            const existingSubCommentForm = commentElement.querySelector(".sub-comment.comment-form");
-
-            if (existingSubCommentForm) {
-                // 이미 존재하면 제거 (토글 기능)
-                existingSubCommentForm.remove();
-            } else {
-                // 새 대댓글 입력 요소 생성
-                const subCommentForm = document.createElement("div");
-                subCommentForm.classList.add("sub-comment", "d-flex", "flex-row", "comment-form");
-
-                subCommentForm.innerHTML = `
-                    <div class="mx-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-                        </svg>
-                    </div>
-                    <div class="comment-form pb-3 mb-3">
-                        <div class="d-flex justify-content-between">
-                            <div class="fs-6 fw-bold me-2">닉네임</div>
-                        </div>
-                        <div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
-                            <textarea></textarea>
-                            <div class="comment-btn ms-2 d-flex align-items-center justify-content-center">등록</div>
-                        </div>
-                    </div>
-                `;
-
-                // 새 요소를 comment의 마지막 자식으로 추가
-                commentElement.appendChild(subCommentForm);
-            }
-        });
-    });
-});
-
- */
 
 document.getElementById('reportForm').addEventListener('submit', function(event) {
   event.preventDefault(); // 기본 제출 방지
@@ -405,4 +350,84 @@ document.getElementById('reportForm').addEventListener('submit', function(event)
 
 	
 </script>
+
+
+
+<!-- AJAX 하트 기능 추가 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch(`${path}/board/isLiked.do?boardNo=${board.boardNo}&memberNo=${sessionScope.loginMember.memberNo}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('서버 상태 이상'); // 서버에서 200 OK가 아닌 경우 에러 처리
+        }
+        return response.json();
+    })
+    .then(data => {
+        isLikeStatus = data.isLiked; // 좋아요 상태 변수 업데이트
+        updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
+    })
+    .catch(error => console.error('좋아요 상태 로드 실패:', error));
+});
+
+const heartIcon1 = document.getElementById("heart-icon"); // 아이디 중복 문제 해결
+const likeCount = document.getElementById("likeCount");
+
+// 하트 클릭 시 좋아요 상태 토글
+heartIcon1.addEventListener("click", () => {
+    isLikeStatus = !isLikeStatus; // 상태 토글
+    updateLikeStatus(); // 서버로 요청 보내기
+});
+
+function updateLikeStatus() {
+    fetch(`${path}/board/toggleLike.do`, {
+        method: 'POST', // 메소드를 명시적으로 POST로 설정
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            boardNo: "BD_0085", // 실제 boardNo를 동적으로 전달
+            memberNo: "MB_0106" // 실제 memberNo를 동적으로 전달
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('좋아요 상태 변경 실패'); // 서버 에러 처리
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            likeCount.textContent = `좋아요 ${data.newLikeCount}`;
+            updateHeartIcon(isLikeStatus);
+        } else {
+            console.error('좋아요 토글 실패:', data.error);
+            alert('좋아요 변경 실패');
+        }
+    })
+    .catch(error => {
+        console.error('좋아요 상태 업데이트 중 오류:', error);
+        alert('네트워크 오류');
+    });
+}
+
+
+
+// 하트 아이콘 업데이트 함수
+function updateHeartIcon(isLikeStatus) {
+    heartIcon1.innerHTML = isLikeStatus ? 
+    `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+    </svg>` : 
+    `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+    </svg>`;
+}
+</script>
+
+
+
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
