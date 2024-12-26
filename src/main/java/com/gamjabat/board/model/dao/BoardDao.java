@@ -53,10 +53,14 @@ public class BoardDao {
 	}
 
     
+
+    
+
 	//감자가 추가한 comments 코드입니다.
 	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
 		return session.selectList("comments.selectBoardComment",boardNo);
 	}
+
     
 
 
@@ -127,6 +131,14 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllByMemberNoCount", memberNo);
     }
     
+
+    	
+    public int deleteBoardComment(SqlSession session, String commnetNo) {
+        
+        return session.update("comments.deleteBoardComment", commnetNo);
+        
+    }
+
     public List<Board> selectBoardAllLikeKeyword(SqlSession session, Map<String, Object> param){	
     	int cPage = (int)param.get("cPage");
 		int numPerPage = (int)param.get("numPerPage");
@@ -140,5 +152,6 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardAllLikeKeywordCount", keyword);
     }
     
+
 }
     

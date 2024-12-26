@@ -39,6 +39,7 @@ public class BoardCommentInsertServlet extends HttpServlet {
 		String writer=request.getParameter("commentMemberNo");
 		String bcRef=request.getParameter("parentCommentNo");  
 			
+		
 		BoardComments bc=BoardComments.builder()
 				.commentBoardNo(boardNo)
 				.commentLevel(level)

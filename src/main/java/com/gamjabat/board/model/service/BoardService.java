@@ -225,7 +225,10 @@ public class BoardService{
 			int count = dao.selectBoardAllByMemberNoCount(session, memberNo);
 			session.close();
 			return count;
-	 }
+
+	}
+
+	 
 	 
 	 public List<Board> selectBoardAllLikeKeyword(Map<String, Object> param){
 		 	SqlSession session = getSession();
@@ -240,6 +243,22 @@ public class BoardService{
 			session.close();
 			return count;
 	 }
+
 			
+
+	 
+	 public int deleteBoardComment(String commentNo) {
+		 SqlSession session = getSession();
+		 
+	     int result=dao.deleteBoardComment(session, commentNo);
+	     
+	     if(result>0) {session.commit();}
+	     else {session.rollback();}
+	     
+	     session.close();    
+	     
+	     return result;
+
+	 }
 
 }
