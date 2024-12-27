@@ -38,16 +38,10 @@ public class BoardWriteDataServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         // content = content.replaceAll("<[^>]*>", ""); // HTML 태그 제거
-        String tagsInput = request.getParameter("tags");  // 'tags' 파라미터 값을 먼저 변수에 저장
-        String[] hashtags;  // 배열 선언
+        String tagsInput = request.getParameter("tag");  // 'tags' 파라미터 값을 먼저 변수에 저장
+        String[] tags = tagsInput.split(",\\s*");
 
-        // 태그 입력이 null이 아니면 split, null이면 빈 배열 할당
-        if (tagsInput != null && !tagsInput.isEmpty()) {
-            hashtags = tagsInput.split(",");
-        } else {
-            hashtags = new String[0];  // 태그가 없는 경우 빈 배열을 할당
-        }
-
+    
 //        String boardNo = "2";
         int boardLikeCount = 0; // 좋아요 수 초기값
         int viewCount = 0; // 조회수 초기값
@@ -86,12 +80,17 @@ public class BoardWriteDataServlet extends HttpServlet {
                 .isDeleted(isDeleted)
                 .memberNo(memberNo)
                 .boardTypeNumber(boardTypeNumber)
+                .tag(tags)
                 .build();
         
 
         // 서비스 클래스를 이용하여 데이터베이스에 저장
         BoardService service = new BoardService();
         int result = service.insertBoard(insertBoard);
+        
+        // 해시태그
+        
+        int tagResult = service.insertBoardWithHashtags(insertBoard);
 
  
         // 리다이렉트~~~~~~~~~~~~~~~~~~ 홈으로!

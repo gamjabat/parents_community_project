@@ -33,7 +33,7 @@ public class BoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 페이징 처리
+		/*// 페이징 처리
 				int cPage;
 				try {
 					cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -107,7 +107,7 @@ public class BoardServlet extends HttpServlet {
 				}
 				pageBar+="</ul";
 				
-				request.setAttribute("pageBar", pageBar);
+				request.setAttribute("pageBar", pageBar);*/
 
 		
 		

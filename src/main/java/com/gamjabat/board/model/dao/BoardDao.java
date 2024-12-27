@@ -217,7 +217,7 @@ public class BoardDao {
 	}
 
 
-    
+    // 게시물 페이징 처리
     public List<Board> selectPagingBoard(SqlSession session, Map<String, Integer> param) {
     		int cPage = param.get("cPage");
     		int numPerPage = param.get("numPerPage");
@@ -229,6 +229,13 @@ public class BoardDao {
     
     public int selectBoardCount(SqlSession session) {
     	return session.selectOne("board.selectBoardCount");
+    }
+
+    
+    // 태그 처리
+    
+    public int insertHashtag(SqlSession session, String hashtag) {
+        return session.insert("board.insertHashtag", hashtag);
     }
 
 }

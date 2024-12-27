@@ -376,5 +376,28 @@ public class BoardService{
 
 	}
 
+	 // 태그처리
+	 public int insertBoardWithHashtags(Board board) {
+		    SqlSession session = getSession();
+		    int result = 0;
+
+		    try {
+		        // 태그 저장
+		        if (result > 0 && board.getTag() != null) {
+		            for (String tag : board.getTag()) {
+		                result += dao.insertHashtag(session, tag.trim());
+		            }
+		        }
+
+		        if (result > 0) {
+		            session.commit();
+		        } else {
+		            session.rollback();
+		        }
+		    } finally {
+		        session.close();
+		    }
+		    return result;
+		}
 
 }
