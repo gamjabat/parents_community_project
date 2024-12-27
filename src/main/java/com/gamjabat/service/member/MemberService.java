@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.model.dao.MemberDao;
+import com.gamjabat.model.dto.likes.Likes;
 import com.gamjabat.model.dto.member.Member;
 
 public class MemberService {
@@ -63,5 +65,20 @@ public class MemberService {
         session.close();
         return result;
     }
+	
+	public List<Likes> selectLikeAllByMemberNo(Map<String, Object> param){
+	 	SqlSession session = getSession();
+		List<Likes> likes = dao.selectLikeAllByMemberNo(session, param);
+		session.close();
+		return likes;
+	 }
+	 
+	 public int selectLikeAllByMemberNoCount(String memberNo) {
+			SqlSession session = getSession();
+			int count = dao.selectLikeAllByMemberNoCount(session, memberNo);
+			session.close();
+			return count;
+	
+	}
 	
 }
