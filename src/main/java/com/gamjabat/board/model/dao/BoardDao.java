@@ -3,6 +3,7 @@ package com.gamjabat.board.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.board.model.dto.Attachment;
@@ -17,8 +18,9 @@ public class BoardDao {
 	}
 	
 	
-	public List<Board> selectBoardAll(SqlSession session) {
-		return session.selectList("board.selectBoardsAll");
+	public List<Board> selectBoardAll(SqlSession session,Map<String, Integer> param) {
+		return session.selectList("board.selectBoardsAll",null,new RowBounds(
+				(param.get("cPage")-1)*param.get("numPerPage"),param.get("numPerPage")));
 	}
 	
 	
@@ -211,6 +213,11 @@ public class BoardDao {
 		return session.selectOne("comments.selectBoardCommentCountAll",boardNo);
 	}
 
+
+    
+    
+    
+    // 게시물 페이징 처리
     public List<Board> selectPagingBoard(SqlSession session, Map<String, Integer> param) {
     		int cPage = param.get("cPage");
     		int numPerPage = param.get("numPerPage");
@@ -220,8 +227,49 @@ public class BoardDao {
     	
     }
     
+    // 게시물 총합 개수
+    
     public int selectBoardCount(SqlSession session) {
     	return session.selectOne("board.selectBoardCount");
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    // 태그 처리
+    
+    public int checkHashtagExists(SqlSession session, String tag) {
+        return session.selectOne("board.checkHashtagExists", tag);
+    }
+
+    public int insertHashtag(SqlSession session, Map<String,String> tag) {
+        return session.insert("board.insertHashtag", tag);
+    }
+
+    // 태그넘버와 게시물 넘버
+    
+    public int insertBoardHashtag(SqlSession session, Map<String, String> param) {
+        return session.insert("board.insertBoardHashtag", param);
+    }
+
+    public String insertHashtagAndGetId(SqlSession session, String tag) {
+        int result = session.insert("board.insertHashtag", tag);
+        if (result > 0) {
+            return session.selectOne("board.getLastHashtagId", tag);
+        } else {
+            throw new RuntimeException("Hashtag insertion failed for tag: " + tag);
+        }
+    }
+    
+    public int linkHashtagToBoard(SqlSession session, Map<String, String> params) {
+        return session.insert("board.linkHashtagToBoard", params);
+    }
+
+
+    
 }

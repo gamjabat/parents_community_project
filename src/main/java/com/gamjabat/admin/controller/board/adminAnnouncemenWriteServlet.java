@@ -61,6 +61,7 @@ public class adminAnnouncemenWriteServlet extends HttpServlet {
 	        // 서비스 클래스를 이용하여 데이터베이스에 저장
 	        AdminBoardService service = new AdminBoardService();
 	        int result = service.insertAnnounceBoard(insertBoard);
+
 	 
 	        response.sendRedirect(request.getContextPath() + "/board.do" );
 		

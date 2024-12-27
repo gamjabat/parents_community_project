@@ -82,8 +82,9 @@
 			<p>${board.content}</p>
             <!-- 해시태그 -->
             <div class="hashtag-container d-flex flex-row justify-content-start">
-            	<div>#인사</div>
-            	<div>#인사</div>
+            	 <c:forEach var="hashtag" items="${hashtags}">
+      			 	 <div>#${hashtag}</div>
+    			</c:forEach>		
             </div>
             <!-- 좋아요 및 댓글 입력 -->
             <div class="board-stats my-3 d-flex align-items-center">
