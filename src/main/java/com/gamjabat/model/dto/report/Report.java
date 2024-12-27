@@ -32,4 +32,10 @@ public class Report {
 	private String reportBoardNo;
 	// 신고당한 댓글
 	private String reportCommentNo;
+	
+	private String writerNickname;
+	private String commentBoardNo;
+	private String boardIsDeleted;  
+    private String commentIsDeleted;  
+    private String commentBoardIsDeleted;
 }

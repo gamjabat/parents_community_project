@@ -1,27 +1,27 @@
-package com.gamjabat.admin.controller.report;
+package com.gamjabat.controller.mypage;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.gamjabat.admin.model.dto.ReportBoard;
-import com.gamjabat.admin.model.service.report.AdminReportService;
+import com.gamjabat.model.dto.report.Report;
+import com.gamjabat.service.report.ReportService;
 
 /**
- * Servlet implementation class ReportCheckServlet
+ * Servlet implementation class MypageReportDetailServlet
  */
-@WebServlet("/admin/reportCheck.do")
-public class ReportCheckServlet extends HttpServlet {
+@WebServlet(name = "MypageReportDetailServlet" , urlPatterns = {"/member/reportdetail.do"})
+public class MypageReportDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportCheckServlet() {
+    public MypageReportDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,23 +30,17 @@ public class ReportCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
 		String reportNo = request.getParameter("reportNo");
 		
-		//신고글 정보 가져오기
-		ReportBoard reportBoard = new AdminReportService().selectReportBoardByNo(reportNo);
+		HttpSession session = request.getSession();
+		
+		Report report = new ReportService().selectReport(reportNo);
+		
+		session.setAttribute("report", report);
 		
 		
-		reportBoard.setReportFromContent(reportBoard.getReportFromContent().split("글내용:")[0]
-									+"<br><br>글 내용 <br>"
-									+reportBoard.getReportFromContent().split("글내용:")[1]);
-		
-		System.out.println("reportBoard:::"+reportBoard);
-		
-		request.setAttribute("reportBoard", reportBoard);
-		request.getRequestDispatcher("/WEB-INF/views/admin/board/reportProcessing.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("/WEB-INF/views/member/mypageReportDetail.jsp")
+		.forward(request, response);
 	}
 
 	/**
