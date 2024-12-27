@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.gamjabat.model.dto.likes.Likes;
 import com.gamjabat.model.dto.member.Member;
 
 public class MemberDao {
@@ -28,5 +29,18 @@ public class MemberDao {
 	}
 	public List<Map<String, Object>> selectTopLikedMembers(SqlSession session) {
         return session.selectList("member.selectTopLikedMembers");
+    }
+	
+	public List<Likes> selectLikeAllByMemberNo(SqlSession session, Map<String, Object> param){	
+    	int cPage = (int)param.get("cPage");
+		int numPerPage = (int)param.get("numPerPage");
+		String memberNo = (String)param.get("memberNo");
+    	
+    	return session.selectList("member.selectLikeAllByMemberNo", Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage, "memberNo", memberNo));
+
+    }
+    
+    public int selectLikeAllByMemberNoCount(SqlSession session, String memberNo){	
+    	return session.selectOne("member.selectLikeAllByMemberNoCount", memberNo);
     }
 }

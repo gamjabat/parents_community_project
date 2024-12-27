@@ -27,4 +27,19 @@ public class AdminBoardService {
 		List<ReportBoard> reportBoard = boardDao.selectReportBoardAll(session, param);
 		return reportBoard;
 	}
+
+	public int updateReportProcessing(Map<String, String> param) {
+		SqlSession session = getSession();
+		
+		int result = boardDao.updateReportProcessing(session,param);
+		
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		session.close();
+		
+		
+		return result;
+	}
 }
