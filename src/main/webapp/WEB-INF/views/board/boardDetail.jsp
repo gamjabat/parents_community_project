@@ -6,8 +6,9 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>	
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/board/boardDetail.css">
-<section id="main-container">
 
+<section id="main-container">
+${pageBar}
 	<div class="board-container px-4">
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
@@ -53,7 +54,7 @@
 						  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
 						  <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
 						</svg>
-		                <span class="fw-bold"> 댓글 2</span>
+		                <span class="fw-bold"> 댓글 </span>
 	                </div>
                 </div>
             </div>
@@ -240,10 +241,16 @@
             </c:forEach>
         </c:if>
     </div>
+    	<div id="pageBar">
+    <c:out value="${pageBar}" escapeXml="false" />
+</div>  
 </div>
 
+
+ 
+	        
             <!-- 페이지네이션 -->
-            <nav aria-label="Page navigation" class="mt-4">
+<!--             <nav aria-label="Page navigation" class="mt-4">
                 <ul class="pagination justify-content-center">
                     <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -255,7 +262,7 @@
                 </ul>
             </nav>
         </div>
-       
+        -->
         
         <!-- 신고 모달 -->
 		<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
@@ -292,7 +299,6 @@
 		      </div>
 		    </div>
 		  </div>
-		  
 		</div>
 		
 </section>
@@ -342,7 +348,7 @@
     
     
     
-	//  대댓글 기능 스크립트.
+ //  대댓글 기능 스크립트.
 	$(".btn-insert2").click(e => {
 	    const $parent = $(e.target).parents("div.comment");
 	    console.log($parent);
@@ -364,7 +370,7 @@
 	    // 생성한 폼을 댓글 아래에 추가
 	    $parent.after($form);
 	});
-	
+
 	
 //아이콘을 담고 있는 요소 선택
 const heartIcon = document.getElementById("heart-icon");
@@ -398,9 +404,9 @@ const heartIcon = document.getElementById("heart-icon");
 	// 현재 상태 (true: 좋아요, false: 좋아요 해제)
 	let isLiked = false;
 	
-<<<<<<< HEAD
 
-=======
+
+
 	// 클릭 이벤트 리스너 추가
 	heartIcon.addEventListener("click", () => {
 	    // 상태 토글
@@ -502,6 +508,10 @@ const heartIcon = document.getElementById("heart-icon");
 	});
 
 </script>
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
 
 
 

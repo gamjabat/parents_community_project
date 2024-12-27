@@ -1,6 +1,7 @@
 package com.gamjabat.board.model.service;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
+import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -273,7 +274,7 @@ public class BoardService{
 		}
 
 	 
-	 
+	 //댓글 삭제
 	 public int deleteBoardComment(String commentNo) {
 		 SqlSession session = getSession();
 		 
@@ -287,10 +288,6 @@ public class BoardService{
 	     return result;
 	 }
 	 
-
-	 
-		   
-
 
 	    public List<Board> getBoardsByCategory(String typeNo) {
 	        SqlSession session = getSession();
@@ -309,7 +306,7 @@ public class BoardService{
 	}
 
 
-	 
+	 //댓글 수정
 	 public int updateBoardComment(String commentNo, String commentContent) {
 		 SqlSession session = getSession();
 		 
@@ -327,6 +324,29 @@ public class BoardService{
 	     return result;
 	 }
 	 
+
+	 public List<BoardComments> selectBoardCommentByNo(Map<String,Object> param) {
+			SqlSession session=getSession();  
+			List<BoardComments> comments=dao.selectBoardCommentByNo(session,param); 
+			session.close();
+			return comments;
+			
+		}
+	 
+	 public int selectBoardCommentCountAll(String boardNo) {
+			SqlSession session=getSession();
+			int count=dao.selectBoardCommentCountAll(session,boardNo);
+			session.close();
+			return count;
+		}
+	 
+	 public int selectBoardCommentCount() {
+			SqlSession session=getSession();
+			int count=dao.selectBoardCommentCount(session);
+			session.close();
+			return count;
+		}
+
 	 
 	 public List<Board> selectPagingBoard(Map<String, Integer> param) {
 		 SqlSession session = getSession();
@@ -355,5 +375,6 @@ public class BoardService{
 			return count;
 
 	}
+
 
 }

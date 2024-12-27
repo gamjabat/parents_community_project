@@ -47,7 +47,7 @@ public class BoardDao {
        
 
      
-    
+    //댓글 인서트 코드
     public int insertBoardComment(SqlSession session,BoardComments bc) {
 		return session.insert("comments.insertBoardComment",bc);
 	}
@@ -56,7 +56,7 @@ public class BoardDao {
 
     
 
-	//감자가 추가한 comments 코드입니다.
+   //댓글 리스트 코드
 	public List<BoardComments> selectBoardComment(SqlSession session, String boardNo) {
 		return session.selectList("comments.selectBoardComment",boardNo);
 	}
@@ -160,7 +160,7 @@ public class BoardDao {
     
 
 
-    	
+    //댓글 삭제
     public int deleteBoardComment(SqlSession session, String commnetNo) {
         
         return session.update("comments.deleteBoardComment", commnetNo);
@@ -187,14 +187,35 @@ public class BoardDao {
     }
 
 
+
     public List<Board> selectBoardsByType(SqlSession session, Map<String, Object> param) {
         return session.selectList("board.selectBoardsByType", param);
-
     }
-
+    
+    //댓글 수정
     public int updateBoardComment(SqlSession session, BoardComments comment) {
         return session.update("comments.updateBoardComment", comment);
     }
+
+    
+    //댓글 페이징 처리
+    public List<BoardComments> selectBoardCommentByNo(SqlSession session,Map<String,Object> param) {
+		int cPage=(Integer)(param.get("cPage"));
+		int numPerPage=(Integer)(param.get("numPerPage"));
+		String boardNo=(String)param.get("boardNo");
+		
+		return session.selectList("comments.selectBoardCommentByNo", Map.of("start",(cPage-1)*numPerPage+1,"end",cPage*numPerPage,"boardNo",param.get("boardNo"))); 
+	}
+   //댓글 페이징 카운터
+    public int selectBoardCommentCountAll(SqlSession session, String boardNo) {
+		return session.selectOne("comments.selectBoardCommentCountAll",boardNo);
+	}
+    
+  //댓글 페이징 카운터
+    public int selectBoardCommentCount(SqlSession session) {
+		return session.selectOne("comments.selectBoardCommentCount");
+	}
+
 
     
     public List<Board> selectPagingBoard(SqlSession session, Map<String, Integer> param) {
@@ -209,7 +230,5 @@ public class BoardDao {
     public int selectBoardCount(SqlSession session) {
     	return session.selectOne("board.selectBoardCount");
     }
-    
-    
+
 }
-    
