@@ -46,7 +46,7 @@ public class SearchKeywordServlet extends HttpServlet {
 		try {
 			numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
 		} catch(NumberFormatException e) {
-			numPerPage = 10;
+			numPerPage = 20;
 		}
 		
 		String keyword = request.getParameter("keyword");
