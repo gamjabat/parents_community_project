@@ -7,7 +7,6 @@
 <link rel="stylesheet"
 	href="${path}/resources/css/board/boardDetail.css">
 <section id="main-container">
-
 	<div class="board-container px-4">
 		<!-- 제목 -->
 		<div class="d-flex justify-content-between py-1">
@@ -17,11 +16,11 @@
 				</h3>
 				
 				<h5>신고글 번호 : ${reportBoard.reportNo}</h5>
-				<h5>신고한 사용자id : ${reportBoard.reportMemberId}</h5>
+				<h5>신고한 사용자 : ${reportBoard.reportMemberId}</h5>
 				<h5>신고글 유형 : ${reportBoard.reportBoardType}</h5>
-				<h5>신고당한 글 내용   <br>
+				<h5>신고당한 글<br>   
 						${reportBoard.reportFromContent}</h5>
-				<h5>신고접수 내용 :  ${reportBoard.reportContent}</h5>
+				<h5>신고접수 내용<br>${reportBoard.reportContent}</h5>
 			</div>
 			<!-- 신고 모달 -->
 			<div class="modal fade" id="reportModal" tabindex="-1"
@@ -40,21 +39,21 @@
 		        	<input type="hidden" name="commentNo" value="${commentNo || ''}"> --%>
 								<div class="mb-3">
 		        				<input type="hidden" name="reportNo" value="${reportBoard.reportNo}">
-									<label for="reportReason" class="form-label">신고 처리유형</label> <select
-										class="form-select" id="reportReason" name="reason" required>
+									<label for="reportReason" class="form-label">신고 처리유형</label><br> 
+									<select class="form-select" id="reportReason" name="reason" required>
 										<option value="" selected disabled>신고조치 상태를 선택하세요</option>
 										<option value="RHS-3">신고반려</option>
 										<option value="RHS-4">신고승인처리</option>
 									</select>
 								</div>
 								<div class="mb-3">
-									<label for="reportDetails" class="form-label">처리 내용</label>
+									<label for="reportDetails" class="form-label">처리 내용</label><br>
 									<textarea class="form-control" id="reportDetails"
 										name="details" rows="3" placeholder="처리 내용을 입력하세요"></textarea>
 								</div>
 								<div class="text-center">
 									<button type="submit" class="btn btn-danger">신고처리</button>
-									<button type="button" class="btn btn-secondary me-2"
+									<button type="button" onclick="javasciprt:window.close();" class="btn btn-secondary me-2"
 										data-bs-dismiss="modal">취소</button>
 								</div>
 							</form>

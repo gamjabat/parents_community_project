@@ -20,18 +20,21 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"
 	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="${path}/resources/css/admin/board/adminBoardwrite.css">
+	    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="${path}/resources/css/admin/board/adminBoardwrite.css">
 </head>
 <body>
 	<header class="admin-header">
 		<h1>학부모 커뮤니티 관리자 페이지</h1>
 		<nav>
 			<ul>
-				<li><a href="#users">사용자 관리</a></li>
-				<li><a href="#posts">게시글 관리</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/admin/board/adminWrite.do">공지글
-						관리</a></li>
+					href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#users">사용자관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#posts">게시글관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/board/adminWrite.do">공지글관리</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -41,15 +44,18 @@
 
 		<!-- 섹션 1: 카테고리 & 제목 입력 -->
 		<div class="section">
-			<form action="${path }/board/boardwriteend.do" method="post">
+			<form action="${path }/admin/board/adminWriteAnnouncement.do"
+				method="post">
 
 				<!-- 로그인한 사용자의 멤버 번호를 전송하기 위한 숨겨진 입력 필드 -->
 				<input type="hidden" name="memberNo"
 					value="${sessionScope.loginMember.memberNo}" />
 
-				<div class="form-group" style="text-align:left">
+				<div class="form-group" style="text-align: left">
 					<label for="category"><h3>공지사항</h3></label>
-						<button id="submit-btn" >등록</button>
+					<div class="button-container">
+						<button id="submit-btn">등록</button>
+					</div>
 				</div>
 
 				<div class="form-group">
@@ -58,8 +64,6 @@
 						name="title">
 				</div>
 		</div>
-
-		<!-- 섹션 2: 내용 입력 -->
 		<div class="section">
 			<div class="form-group">
 				<label for="editor-container">내용을 입력해 주세요.</label>
@@ -67,30 +71,16 @@
 				<input id="content" type="hidden" name="content" />
 			</div>
 		</div>
-
-		<!-- 섹션 3: 태그 입력 -->
-		<!-- 		<div class="section tags-input"> 클래스 추가
-		    <div class="form-group">
-		        <label for="tags">#태그를 입력해 주세요.</label>
-		        <input type="text" id="tags" class="form-control" placeholder="#태그를 입력해 주세요." name="tag">
-		    </div>
-		</div> -->
-
-
-		<!-- 등록 버튼 -->
-		<div class="button-container">
-			<button id="submit-btn">등록</button>
-		</div>
 		</form>
 	</div>
-	
+
 	<footer>
 		<p>&copy; 2024 학부모 커뮤니티</p>
 	</footer>
 
-	<!-- <!-- Quill.js 라이브러리 
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
+	<!--  Quill.js 라이브러리 -->
+<!-- 	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+	<script>
         var quill = new Quill('#editor-container', {
             theme: 'snow',
             placeholder: '   내용을 입력해 주세요...',
@@ -106,10 +96,10 @@
     </script> -->
 
 
-	<!-- Quill.js 라이브러리 -->
-	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-	<script>
-/*     var quill = new Quill('#editor-container', {
+<!-- Quill.js 라이브러리 -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    var quill = new Quill('#editor-container', {
         theme: 'snow',
         placeholder: '내용을 입력해 주세요...',
         modules: {
@@ -122,36 +112,38 @@
         }
     });
 
-    function imageHandler() {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'file');
-      input.setAttribute('accept', 'image/*');
-      input.click();
-      input.onchange = async () => {
-        const file = input.files[0];
-        if (file) {
-          const formData = new FormData();
-          formData.append('image', file);
-          try {
-            const response = await fetch('${path}/board/boardattachment.do', {
-              method: 'POST',
-              body: formData
-            });
-            const data = await response.json();
-            const range = this.quill.getSelection(true);
-            this.quill.insertEmbed(range.index, 'image', data.imageUrl);
-          } catch (error) {
-            console.error('Failed to upload image:', error);
-          }
-        }
-      };
-    }
- */
-    document.getElementById('submit-btn').addEventListener('click', function() {
-        var content = quill.root.innerHTML;
-        document.getElementById("content").value = content;
-    });
-</script>
+
+		     function imageHandler() {
+		         const input = document.createElement('input');
+		         input.setAttribute('type', 'file');
+		         input.setAttribute('accept', 'image/*');
+		         input.click();
+		         input.onchange = async () => {
+		           const file = input.files[0];
+		           if (file) {
+		             const formData = new FormData();
+		             formData.append('image', file);
+		             try {
+		               const response = await fetch('${path}/board/boardattachment.do', {
+		                 method: 'POST',
+		                 body: formData
+		               });
+		               const data = await response.json();
+		               const range = this.quill.getSelection(true);
+		               this.quill.insertEmbed(range.index, 'image', data.imageUrl);
+		             } catch (error) {
+		               console.error('Failed to upload image:', error);
+		             }
+		           }
+		         };
+		       }
+		 
+		document.getElementById('submit-btn').addEventListener('click',
+				function() {
+					var content = quill.root.innerHTML;
+					document.getElementById("content").value = content;
+				});
+	</script>
 
 
 </body>

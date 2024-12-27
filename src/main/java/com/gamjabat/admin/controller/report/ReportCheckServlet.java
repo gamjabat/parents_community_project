@@ -37,6 +37,11 @@ public class ReportCheckServlet extends HttpServlet {
 		//신고글 정보 가져오기
 		ReportBoard reportBoard = new AdminReportService().selectReportBoardByNo(reportNo);
 		
+		
+		reportBoard.setReportFromContent(reportBoard.getReportFromContent().split("글내용:")[0]
+									+"<br><br>글 내용 <br>"
+									+reportBoard.getReportFromContent().split("글내용:")[1]);
+		
 		System.out.println("reportBoard:::"+reportBoard);
 		
 		request.setAttribute("reportBoard", reportBoard);
