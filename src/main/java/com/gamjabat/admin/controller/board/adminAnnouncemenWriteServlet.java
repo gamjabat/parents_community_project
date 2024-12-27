@@ -1,4 +1,4 @@
-xpackage com.gamjabat.admin.controller.board;
+package com.gamjabat.admin.controller.board;
 
 import java.io.IOException;
 import java.sql.Timestamp;
