@@ -24,4 +24,8 @@ public class ReportDao {
     public int selectReportAllByMemberNoCount(SqlSession session, String memberNo){	
     	return session.selectOne("report.selectReportAllByMemberNoCount", memberNo);
     }
+    
+    public Report selectReport(SqlSession session, String reportNo){	
+    	return session.selectOne("report.selectReport", reportNo);
+    }
 }

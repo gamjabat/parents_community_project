@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+/* 바디 레이아웃 */
+.mypage-container {
+    display: flex;
+   	width : 100%;
+    max-width: 100%;
+    min-height: 70%;
+    background-color: #F6F2ED;
+}
+
+/* 사이드바 타이틀 */
+.mypage-texttitle {
+	font-size : 20px;
+	font-weight: bold;
+	color : #5c8f51;
+}
+
+/* 사이드바 크키 */
+.mypage-sidebar {
+    width: 20%;
+    height: 100%;
+    background-color: rgba(90, 139, 99, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    border-right: 1px solid #ddd;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+}
+
+
+.mypage-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mypage-sidebar li {
+    margin-bottom: 10px;
+}
+
+.mypage-sidebar a {
+	font-size: 15px;
+	font-weight: 400;
+    text-decoration: none;
+    color: #333;
+}
+
+.active-sidebar a{
+	color: #5c8f51;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.mypage-sidebar a:hover {
+    color: #5c8f51;
+    font-weight: 600;
+}
+
+
+/* 메인 콘텐츠 스타일 */
+.mypage-content {
+    width : 100%;
+	display : flex;
+	flex-direction: column;
+  	align-items: center;
+}
+
+.mypage-content h2 {
+	font-size: 25px;
+	font-weight: bold;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom : 30px;
+    color: #5c8f51;
+}
+
+/* 신고 상세 내용 카드 스타일 */
+.report-content {
+    width: 70%;
+    border: 1px solid #5c8f51;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.report-content div {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.report-content div span {
+    font-weight: bold;
+    color: #5c8f51;
+}
+
+.report-content a {
+    text-decoration: none;
+    color: #5c8f51;
+    font-weight: bold;
+}
+
+.report-content a:hover {
+    text-decoration: underline;
+    color: #3E6F40;
+}
+
+/* 삭제된 게시물 경고 */
+.report-warning {
+    font-size: 14px;
+    color: red;
+    margin-top: 10px;
+}
+
+.page-btn{
+	display: flex;
+	align-items: center;
+	justify-content: center !important;
+}
+
+.page-btn>button{
+	white-space: nowrap;
+	width: auto;
+	border-radius: 15px;
+	
+}
+

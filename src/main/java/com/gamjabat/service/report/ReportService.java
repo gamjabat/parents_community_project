@@ -34,4 +34,11 @@ public class ReportService {
 		session.close();
 		return count;
 	}
+	 
+	 public Report selectReport(String reportNo) {
+			SqlSession session = getSession();
+			Report report = dao.selectReport(session, reportNo);
+			session.close();
+			return report;
+		}
 }
