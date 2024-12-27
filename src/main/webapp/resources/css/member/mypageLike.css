@@ -81,7 +81,7 @@
 }
 
 .like-content {
-	width: 80%;
+	width: 90%;
     height: 80%;
 	border-style: solid;
 	border-width: 1px;
@@ -89,10 +89,11 @@
 	border-color: #5c8f51;
 }
 
-thead {
-	font-size: 12px;
+thead th {
+	font-size: 15px;
 	text-align: center;
-	box-shadow: 1px 1px 1px #5c8f51;
+	border-bottom: 2px solid #5c8f51;
+	padding: 10px 0px;
 }
 
 tbody {
