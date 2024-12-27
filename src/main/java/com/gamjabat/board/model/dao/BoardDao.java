@@ -143,6 +143,19 @@ public class BoardDao {
     public String getWriterMemberNo(SqlSession session, String boardNo) {
         return session.selectOne("board.getWriterMemberNo", boardNo);
     }
+    
+    public List<BoardComments> selectCommentsAllByMemberNo(SqlSession session, Map<String, Object> param){	
+    	int cPage = (int)param.get("cPage");
+		int numPerPage = (int)param.get("numPerPage");
+		String memberNo = (String)param.get("memberNo");
+    	
+    	return session.selectList("comments.selectCommentsAllByMemberNo", Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage, "memberNo", memberNo));
+
+    }
+    
+    public int selectCommentsAllByMemberNoCount(SqlSession session, String memberNo){	
+    	return session.selectOne("comments.selectCommentsAllByMemberNoCount", memberNo);
+    }
 
     
 
@@ -172,9 +185,9 @@ public class BoardDao {
     public List<Board> selectBoardsByCategory(SqlSession session, String typeNo) {
         return session.selectList("board.selectBoardsByCategory", typeNo);
     }
-    
-        
-        
+
+
+
     public List<Board> selectBoardsByType(SqlSession session, Map<String, Object> param) {
         return session.selectList("board.selectBoardsByType", param);
     }
@@ -183,6 +196,7 @@ public class BoardDao {
     public int updateBoardComment(SqlSession session, BoardComments comment) {
         return session.update("comments.updateBoardComment", comment);
     }
+
     
     //댓글 페이징 처리
     public List<BoardComments> selectBoardCommentByNo(SqlSession session,Map<String,Object> param) {
@@ -201,5 +215,20 @@ public class BoardDao {
     public int selectBoardCommentCount(SqlSession session) {
 		return session.selectOne("comments.selectBoardCommentCount");
 	}
-}
+
+
     
+    public List<Board> selectPagingBoard(SqlSession session, Map<String, Integer> param) {
+    		int cPage = param.get("cPage");
+    		int numPerPage = param.get("numPerPage");
+    		
+    		return session.selectList("board.selectPagingBoard", 
+    				Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage ));
+    	
+    }
+    
+    public int selectBoardCount(SqlSession session) {
+    	return session.selectOne("board.selectBoardCount");
+    }
+
+}

@@ -105,24 +105,26 @@
 					<tr>
 						<th>신고글 id</th>
 						<th>신고한 회원id</th>
-						<th>신고당한 회원id</th>
-						<th>글 유형</th>
 						<th>신고 내용</th>
+						<th>글 유형</th>
+						<th>신고 유형</th>
 						<th>신고 날짜</th>
-						<th>처리중</th>
+						<th>처리상태</th>
+						<th>신고처리</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:if test="${not empty reportBoards}">
 						<c:forEach var="rboard" items="${reportBoards}">
-							<tr>
+							<tr data-no="${rboard.reportNo}">
 								<td>${rboard.reportNo}</td>
-								<td>${reboard.reportMemberId}</td>
-								<td>${rboard.reportReasonCode}</td>
-								<td>${rboard.reportTitle}</td>
+								<td>${rboard.reportMemberId}</td>
 								<td>${rboard.reportContent}</td>
+								<td>${rboard.reportBoardType}</td>
+								<td>${rboard.reportReasonCode}</td>
 								<td>${rboard.createdAt}</td>
 								<td>${rboard.status}</td>
+								<td><button class="reportcheck-btn" onclick="openReportPopup(this)">신고처리</button></td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -132,13 +134,6 @@
 		    	${pageBar }
 		    </div>
 		</section>
-<!-- 		<div class="pagination">
-			<a href="#" class="page-link">&lt;&lt;</a> <a href="#"
-				class="page-link">&lt;</a> <a href="#" class="page-link active">1</a>
-			<a href="#" class="page-link">2</a> <a href="#" class="page-link">3</a>
-			<a href="#" class="page-link">&gt;</a> <a href="#" class="page-link">&gt;&gt;</a>
-		</div> -->
-
 	</main>
 
 	<footer>
@@ -149,17 +144,6 @@
 		function openPopup(button) {
 			// 클릭된 행(row) 가져오기
 			const row = button.closest("tr");
-
-			// 사용자 데이터 추출
-			/*         const userData = {
-			 id: row.dataset.id,
-			 name: row.dataset.name,
-			 email: row.dataset.email,
-			 joinDate: row.dataset.joinDate,
-			 status: row.dataset.status,
-			 posts: row.dataset.posts,
-			 comments: row.dataset.comments
-			 }; */
 
 			// 사용자 데이터 추출
  			const userData = {
@@ -177,7 +161,6 @@
 			const popupH = 450;
 			const left = Math.ceil((window.screen.width - popupW) / 2);
 			const top = Math.ceil((window.screen.height - popupH) / 2);
-
 			open(
 					popupUrl,
 					"_blank",
@@ -191,34 +174,48 @@
 							+ top
 							+ ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		}
-		
-		
 		const hideDeclaration=()=>{
 			$("#declaration-table").hide();
 			$("#inquiry-table").show();
 		}
-		
 		const hideInquery=()=>{
 			$("#inquiry-table").hide();
 			$("#declaration-table").show();
 		}
 		
+		function openReportPopup(button){
+			// 클릭된 행(row) 가져오기
+			const row = button.closest("tr");
+
+			// 사용자 데이터 추출
+ 			const reportData = {
+				reportNo : row.dataset.no,
+			}; 
+			 
+			 
+
+			// 팝업 URL에 데이터 전달 (쿼리스트링 사용)
+			const popupUrl = `${pageContext.request.contextPath}/admin/reportCheck.do?reportNo=\${reportData.reportNo}`
+			// 팝업 열기
+
+			const popupW = 500;
+			const popupH = 800;
+			const left = Math.ceil((window.screen.width - popupW) / 2);
+			const top = Math.ceil((window.screen.height - popupH) / 2);
+			open(
+					popupUrl,
+					"_blank",
+					"width="
+							+ popupW
+							+ ',height='
+							+ popupH
+							+ 'left='
+							+ left
+							+ ',top='
+							+ top
+							+ ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		
-		
-/* 		const inqueryDetailSearch = ()=>{
-			console.log('inquery 상세 클릭 ')
-		
-		
-		} */
-		
-/*  		const searchInqueryboard=()=>{
-			$.get("${pageContext.request.contextPath}/admin/searchInqueryboard.do")
-			.done(data=>{
-				data.forEach(v=>JSON.parse(v));			
-			})
-			.fail(response=>{console.log(response)})
-			
-		}  */
+		}
 		
 		
 		

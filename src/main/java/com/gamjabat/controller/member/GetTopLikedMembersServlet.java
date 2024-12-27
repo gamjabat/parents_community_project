@@ -1,7 +1,8 @@
-package com.gamjabat.board.controller;
+package com.gamjabat.controller.member;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamjabat.board.model.dto.Board;
-import com.gamjabat.board.model.service.BoardService;
+import com.gamjabat.service.member.MemberService;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class BoardCategoryServlet
+ * Servlet implementation class GetTopLikedMembersServlet
  */
-@WebServlet("/board/boardcategory.do")
-public class BoardCategoryServlet extends HttpServlet {
+@WebServlet("/member/gettoplikedmembers.do")
+public class GetTopLikedMembersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardCategoryServlet() {
+    public GetTopLikedMembersServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +32,14 @@ public class BoardCategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		// URL에서 카테고리 파라미터 가져오기
-        String categoryName = request.getParameter("category"); 
-        
-        BoardService boardService = new BoardService();
-        List<Board> boardList;
+		MemberService memberService = new MemberService();
+        List<Map<String, Object>> topLikedMembers = memberService.selectTopLikedMembers();
 
-        
-        boardList = boardService.getBoardsByCategory(categoryName);
-      
-   
-        request.setAttribute("board", boardList);
+        // JSON으로 변환 후 응답
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
-        // 게시판 페이지로 포워딩
-        request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
-        
-        
-        
-        
+        new Gson().toJson(topLikedMembers, response.getWriter());
 	}
 
 	/**

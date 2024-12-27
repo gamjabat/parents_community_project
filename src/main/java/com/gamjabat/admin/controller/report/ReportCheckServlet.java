@@ -1,7 +1,6 @@
-package com.gamjabat.board.controller;
+package com.gamjabat.admin.controller.report;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamjabat.board.model.dto.Board;
-import com.gamjabat.board.model.service.BoardService;
+import com.gamjabat.admin.model.dto.ReportBoard;
+import com.gamjabat.admin.model.service.report.AdminReportService;
 
 /**
- * Servlet implementation class BoardCategoryServlet
+ * Servlet implementation class ReportCheckServlet
  */
-@WebServlet("/board/boardcategory.do")
-public class BoardCategoryServlet extends HttpServlet {
+@WebServlet("/admin/reportCheck.do")
+public class ReportCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardCategoryServlet() {
+    public ReportCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +30,19 @@ public class BoardCategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		// URL에서 카테고리 파라미터 가져오기
-        String categoryName = request.getParameter("category"); 
-        
-        BoardService boardService = new BoardService();
-        List<Board> boardList;
 
-        
-        boardList = boardService.getBoardsByCategory(categoryName);
-      
-   
-        request.setAttribute("board", boardList);
-
-        // 게시판 페이지로 포워딩
-        request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
-        
-        
-        
-        
+		
+		String reportNo = request.getParameter("reportNo");
+		
+		//신고글 정보 가져오기
+		ReportBoard reportBoard = new AdminReportService().selectReportBoardByNo(reportNo);
+		
+		
+		
+		
+	
+	
+	
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.gamjabat.service.member;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -55,5 +56,12 @@ public class MemberService {
 		session.close();
 		return result;
 	}
+	
+	public List<Map<String, Object>> selectTopLikedMembers() {
+        SqlSession session = getSession();
+        List<Map<String, Object>> result = dao.selectTopLikedMembers(session);
+        session.close();
+        return result;
+    }
 	
 }

@@ -324,6 +324,7 @@ public class BoardService{
 	     return result;
 	 }
 	 
+
 	 public List<BoardComments> selectBoardCommentByNo(Map<String,Object> param) {
 			SqlSession session=getSession();  
 			List<BoardComments> comments=dao.selectBoardCommentByNo(session,param); 
@@ -345,5 +346,35 @@ public class BoardService{
 			session.close();
 			return count;
 		}
+
+	 
+	 public List<Board> selectPagingBoard(Map<String, Integer> param) {
+		 SqlSession session = getSession();
+		 List<Board> board = dao.selectPagingBoard(session, param);
+		 session.close();
+		 return board;
+	 }
+	 
+	 public int selectBoardCount() {
+		 SqlSession session = getSession();
+		 int count = dao.selectBoardCount(session);
+		 session.close();
+		 return count;
+	 }
+	 public List<BoardComments> selectCommentsAllByMemberNo(Map<String, Object> param){
+		 	SqlSession session = getSession();
+			List<BoardComments> comments = dao.selectCommentsAllByMemberNo(session, param);
+			session.close();
+			return comments;
+	 }
+	 
+	 public int selectCommentsAllByMemberNoCount(String memberNo) {
+			SqlSession session = getSession();
+			int count = dao.selectCommentsAllByMemberNoCount(session, memberNo);
+			session.close();
+			return count;
+
+	}
+
 
 }

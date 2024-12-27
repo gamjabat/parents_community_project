@@ -23,8 +23,8 @@ public class ReportBoard {
 	// 신고상태
 	private String reportStatus;
 	private String createdAt;
-	private String updatedAt;
-	private String deletedAt;
+	private Timestamp updatedAt;
+	private Timestamp deletedAt;
 	private boolean isDeleted;
 	private String postNo;
 	// 신고한 사용자 정보
@@ -34,4 +34,6 @@ public class ReportBoard {
 	// 신고당한 댓글
 	//private Comment reportCommentNo;
 	private String status;
+	private String reportBoardType;
+	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
 <c:set var="path" value="${pageContext.request.contextPath }"/>	
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -26,41 +27,35 @@
 		     		  <thead>
 		     		 	 <tr class="comment-col">
 				            <th scope="col">No</th>
-				            <th scope="col">내용</th>
-				            <th scope="col">작성자</th>
+				            <th scope="col">게시글 제목</th>
+				            <th scope="col">댓글 내용</th>
 				            <th scope="col">작성일</th>
 				            <th scope="col">좋아요</th>
-				            <th scope="col">조회수</th>
 		       			 </tr>
 		       		 </thead>
 		       		 <tbody>
-		     		 	 <tr>
-				            <td>1</td>
-				            <td>댓글잼.</td>
-				            <td>감자</td>
-				            <td>2024-12-18</td>
-				            <td>2</td>
-				            <td>3</td>
-		       			 </tr>
-		       			 <tr>
-				            <td>2</td>
-				            <td>모르겠어요.</td>
-				            <td>감자</td>
-				            <td>2024-12-18</td>
-				            <td>2</td>
-				            <td>3</td>
-		       			 </tr>
-		       			 <tr>
-				            <td>3</td>
-				            <td>뷁</td>
-				            <td>감자</td>
-				            <td>2024-12-18</td>
-				            <td>242955</td>
-				            <td>3904494</td>
-		       			 </tr>
+		       		 	<c:if test="${not empty myComments }">
+		       		 		<c:forEach var="c" items="${myComments }" varStatus="idx">
+				     		 	 <tr>
+						            <td>${idx.index + 1}</td>
+						            <td><a href="${path}/board/boarddetail.do?boardNo=${c.BOARDNO}">${c.BOARDTITLE}</a></td>
+						            <td><a href="${path}/board/boarddetail.do?boardNo=${c.BOARDNO}">${c.COMMENTCONTENT}</a></td>
+						            <td>${fn:substring(c.COMMENTCREATEDAT, 0, 19)}</td>
+						            <td>${c.COMMENTLIKECOUNT }</td>
+				       			 </tr>
+		       		 		</c:forEach>
+		       		 	</c:if>
+		       		 	<c:if test="${empty myComments }">
+		       		 		<tr>
+		       		 			<td colspan="6" class="no-content">작성하신 댓글이 없습니다.</td>
+		       		 		</tr>
+		       		 	</c:if>
 		       		 </tbody>
 	     		 </table>
      		 </div>
+     		 <div id="pageBar">
+	        	${pageBar }
+	         </div>
      	</div>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

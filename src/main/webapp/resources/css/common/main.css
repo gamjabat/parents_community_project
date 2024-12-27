@@ -20,8 +20,9 @@
 }
 
 /* 테이블 */
-table{
-	width: 100%;
+table {
+    table-layout: fixed; /* 테이블 레이아웃 고정 */
+    width: 100%; /* 테이블 전체 너비 */
 }
 
 table>tbody *, .list-title *{
@@ -55,24 +56,12 @@ table>tbody *, .list-title *{
 	color : #5A8B63 !important; 
 }
 
-/* 더보기 버튼 */
-.more-list{
-	font-size: small;
-	font-weight: normal;
-}
-
-.more-list:hover{
-	cursor: pointer;
-}
-
-/* 카테고리명 */
-.boardcategory{
-	width: 20%;
-}
 
 /* 게시글 제목 */
 .boardtitle{
-	width : 60%;
+	overflow: hidden !important;
+	white-space: nowrap !important;
+	text-overflow: ellipsis !important;
 }
 
 .boardlist tr{
@@ -81,15 +70,15 @@ table>tbody *, .list-title *{
 
 /* 좋아요수, 조회수 */
 .likecount, .viewcount{
-	width: 10%;
+	padding-left: 0 !important;
 }
 
 /* 아이콘 크기 설정 */
 .likecount svg, .viewcount svg {
-    width: 16px; /* 아이콘 너비 */
-    height: 16px; /* 아이콘 높이 */
-    fill: currentColor; /* SVG 색상 상속 */
-    flex-shrink: 0; /* 아이콘 축소 방지 */
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
 }
 
 /* 로그인 박스 */
@@ -125,11 +114,14 @@ table>tbody *, .list-title *{
   	justify-content: center;
 }
 
-.table-hover td {
-    vertical-align: middle; /* 세로 중앙 정렬 */
-    text-align: center; /* 가로 중앙 정렬 */
-    padding: 10px; /* 셀 내부 간격 */
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+.table-hover td, .table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px;
+    white-space: nowrap;
+	font-size: 15px;
+
 }
+
 
 

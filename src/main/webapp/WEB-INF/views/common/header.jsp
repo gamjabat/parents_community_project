@@ -45,12 +45,11 @@
 				<a href="${path}/board.do">전체게시판</a>
 			</li>
 			<li id="notice">
-				<a href="">공지사항</a>
+				<a href="${path}/board/boardcategory.do?category=CAT-1">공지사항</a>
 			</li>
 			<li>
 				<a href="#" id="board-menu">게시판</a>
 				<ul class="dropdown" id="category-dropdown">
-					 <li><a href="${path}/board/boardcategory.do?category=CAT-1">공지</a></li>
 				     <li><a href="${path}/board/boardcategory.do?category=CAT-2">잡담</a></li>
 				     <li><a href="${path}/board/boardcategory.do?category=CAT-3">책</a></li>
 				     <li><a href="${path}/board/boardcategory.do?category=CAT-4">진학</a></li>
