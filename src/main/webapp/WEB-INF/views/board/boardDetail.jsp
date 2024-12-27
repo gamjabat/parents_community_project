@@ -129,9 +129,7 @@
 		                </form>
 	                	</div>
 	           		 </div>
-            	
-            	
-            	
+
             	
           <!-- 댓글시작  -->  	
   <div id="tbl-comment">

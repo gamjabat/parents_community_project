@@ -64,13 +64,13 @@ public class BoardDetailServlet extends HttpServlet {
 //				
 //				
 	    //감자의 페이징 처리 로직입니다.
-	    List<BoardComments> comments=new BoardService().selectBoardComment(boardNo);
-	    request.setAttribute("comments", comments);
+//	    List<BoardComments> comments=new BoardService().selectBoardComment(boardNo);
+//	    request.setAttribute("comments", comments);
 //		HttpSession session = request.getSession();
 //		session.setAttribute("loginMember", m);
 	    // boardDetail.jsp 페이지로 forward 메소드를 사용하여 요청과 응답을 전달
 	    
-	    
+	   
 	    int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -86,7 +86,8 @@ public class BoardDetailServlet extends HttpServlet {
 		}
 
 		Map<String,Object> param=Map.of("cPage",cPage,"numPerPage",numPerPage,"boardNo",boardNo);
-
+		List<BoardComments> comments=new BoardService().selectBoardCommentByNo(param);
+		request.setAttribute("comments", comments);
 		//pageBar생성하기
 		int totalData=new BoardService().selectBoardCommentCountAll(boardNo);
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
@@ -95,8 +96,8 @@ public class BoardDetailServlet extends HttpServlet {
 		int pageEnd= pageNo+pageBarSize-1;
 		
 		
-		int commentscount=new BoardService().selectBoardCommentCountAll(boardNo);
-		request.setAttribute("commentscount", commentscount);
+		//int commentscount=new BoardService().selectBoardCommentCountAll(boardNo);
+		request.setAttribute("commentscount", totalData);
 		
 		String pageBar="<ul class='pagination justify-content-center'>";   //태그를 만들어서 쓴다.
 		
@@ -145,7 +146,7 @@ public class BoardDetailServlet extends HttpServlet {
 			pageBar+="<li class='page-item'>";
 			pageBar+="<a class='page-link' href='"+ 
 					
-					request.getRequestURI()                     
+					request.getRequestURI()                     	
 					+ "?cPage="+(pageNo) // 요청하는페이지가 그 페이지가 된다 -를 지워서
 					+"&numPerPage="+numPerPage
 					+"&boardNo="+boardNo
@@ -157,10 +158,7 @@ public class BoardDetailServlet extends HttpServlet {
 		
 		request.setAttribute("pageBar", pageBar);
 		
-		
-		
-		
-		
+	
 		request.getRequestDispatcher("/WEB-INF/views/board/boardDetail.jsp")   //
 		.forward(request, response);
 		

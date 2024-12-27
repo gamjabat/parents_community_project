@@ -202,7 +202,7 @@ public class BoardDao {
     public List<BoardComments> selectBoardCommentByNo(SqlSession session,Map<String,Object> param) {
 		int cPage=(Integer)(param.get("cPage"));
 		int numPerPage=(Integer)(param.get("numPerPage"));
-		String boardNo=(String)param.get("boardNo");
+//		String boardNo=(String)param.get("boardNo"); 필요없음 ㅋ
 		
 		return session.selectList("comments.selectBoardCommentByNo", Map.of("start",(cPage-1)*numPerPage+1,"end",cPage*numPerPage,"boardNo",param.get("boardNo"))); 
 	}
