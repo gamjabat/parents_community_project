@@ -116,7 +116,7 @@
             	<!-- 로그인 완료 후에만 보임 -->
             	<div class="comment-form pb-3 mb-3">
 	                	<div class="d-flex justify-content-between">
-		                	<div class="fs-6 fw-bold me-2">${sessionScope.loginMember.memberId}</div>
+		                	<div class="fs-6 fw-bold me-2">${board.writerNickname==null?"익명":board.writerNickname}</div>
 	                	</div>
 	                	<div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
 	                	<form action="${path}/board/insertcomment.do" method="post">
@@ -143,7 +143,7 @@
                     <div class="comment">
                         <!-- 작성자 아이디 -->
                         <div class="d-fle	x justify-content-between">
-                            <div class="fs-6 fw-bold me-2">${comment.commentMemberNo}</div>
+                            <div class="fs-6 fw-bold me-2">${comment.writerNickname==null?"익명":comment.writerNickname}</div>
                             <!-- 드롭다운 -->
                             <div class="dropdown">
                                 <!-- 아이콘 버튼 -->
@@ -193,7 +193,7 @@
                         </div>
                         <div class="comment d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between">
-                                <div class="fs-6 fw-bold me-2">${comment.commentMemberNo}</div>
+                                <div class="fs-6 fw-bold me-2">${comment.writerNickname==null?"익명":comment.writerNickname}</div>
                                 <!-- 드롭다운 -->
                                 <div class="dropdown">
                                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
