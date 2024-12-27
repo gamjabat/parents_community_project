@@ -26,8 +26,9 @@
 		<h1>학부모 커뮤니티 관리자 페이지</h1>
 		<nav>
 			<ul>
-				<li><a href="#users">사용자 관리</a></li>
-				<li><a href="#posts">게시글 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#users">사용자 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#posts">게시글 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/board/adminWrite.do">공지글 관리</a></li>
 			</ul>
 		</nav>
 	</header>

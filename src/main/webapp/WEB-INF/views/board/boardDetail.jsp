@@ -116,7 +116,7 @@
             	<!-- 로그인 완료 후에만 보임 -->
             	<div class="comment-form pb-3 mb-3">
 	                	<div class="d-flex justify-content-between">
-		                	<div class="fs-6 fw-bold me-2">${sessionScope.loginMember.memberId}</div>
+		                	<div class="fs-6 fw-bold me-2">${board.writerNickname==null?"익명":board.writerNickname}</div>
 	                	</div>
 	                	<div class="comment-input px-2 mt-1 d-flex flex-row align-items-center justify-content-center w-100">
 	                	<form action="${path}/board/insertcomment.do" method="post">
@@ -129,9 +129,7 @@
 		                </form>
 	                	</div>
 	           		 </div>
-            	
-            	
-            	
+
             	
           <!-- 댓글시작  -->  	
   <div id="tbl-comment">
@@ -143,7 +141,7 @@
                     <div class="comment">
                         <!-- 작성자 아이디 -->
                         <div class="d-fle	x justify-content-between">
-                            <div class="fs-6 fw-bold me-2">${comment.commentMemberNo}</div>
+                            <div class="fs-6 fw-bold me-2">${comment.writerNickname==null?"익명":comment.writerNickname}</div>
                             <!-- 드롭다운 -->
                             <div class="dropdown">
                                 <!-- 아이콘 버튼 -->
@@ -193,7 +191,7 @@
                         </div>
                         <div class="comment d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between">
-                                <div class="fs-6 fw-bold me-2">${comment.commentMemberNo}</div>
+                                <div class="fs-6 fw-bold me-2">${comment.writerNickname==null?"익명":comment.writerNickname}</div>
                                 <!-- 드롭다운 -->
                                 <div class="dropdown">
                                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -341,7 +339,7 @@
     
     
  //  대댓글 기능 스크립트.
-	$(".btn-insert2").click(e => {
+/* 	$(".btn-insert2").click(e => {
 	    const $parent = $(e.target).parents("div.comment");
 	    console.log($parent);
 	    const $form = $(".comment-input>form").clone();
@@ -362,10 +360,10 @@
 	    // 생성한 폼을 댓글 아래에 추가
 	    $parent.after($form);
 	});
-
+ */
 	
 //아이콘을 담고 있는 요소 선택
-const heartIcon = document.getElementById("heart-icon");
+/* const heartIcon = document.getElementById("heart-icon"); */
 
 // 현재 상태 (true: 좋아요, false: 좋아요 해제)
 /* let isLiked = false; */

@@ -25,4 +25,7 @@ public class BoardComments {
 		    private String commentMemberNo;    // 댓글 작성자 (MEMBER 테이블의 MEMBER_NO 참조)
 		    private String parentCommentNo;    // 부모 댓글 (COMMENTS 테이블의 COMMENT_NO 참조)
 		    private String commentBoardNo;     // 댓글이 속한 게시글 (BOARD 테이블의 BOARD_NO 참조)
+		    
+		    
+		    private String writerNickname;     //닉네임.
 	}
