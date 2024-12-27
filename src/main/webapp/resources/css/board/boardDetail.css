@@ -81,7 +81,7 @@
 		background-color: #5A8B63;
 	    border-radius: 10px; 
 	    color: white;
-	    width: 50px !important;
+	    width: 75px !important;
 	    height: 30px !important;
 	    display: flex;
 	    align-items: center !important; /* 수직 중앙 정렬 */
@@ -96,9 +96,9 @@
 		background-color: #4A7354;
 	}
 	
-	.comment-form{
+/* 	.comment-form{
 		border-bottom: 1px solid #ADB5BD;
-	}
+	} */
 	
 	.comment-input>textarea{
 		flex:1;
@@ -146,14 +146,9 @@
 		padding: 20px !important;
 	}
 	
-	/* div#pageBar{margin-top:10px; text-align:center; background-color:rgba(0, 188, 212, 0.3);}
-	div#pageBar span.cPage{color: #0066FF;}
- */
-	#pageBar {
-    margin-top: 20px;
-    text-align: center;
+
+	.commentspagebox {
+	justify-content: center !important;
 	}
 
-	#pageBar ul.pagination {
-    display: inline-block;
-	}
+	
