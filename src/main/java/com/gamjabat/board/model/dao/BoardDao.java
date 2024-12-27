@@ -171,6 +171,8 @@ public class BoardDao {
     
     public List<Board> selectBoardsByCategory(SqlSession session, String typeNo) {
         return session.selectList("board.selectBoardsByCategory", typeNo);
+    }
+    
 
     public List<Board> selectBoardsByType(SqlSession session, Map<String, Object> param) {
         return session.selectList("board.selectBoardsByType", param);
@@ -181,5 +183,20 @@ public class BoardDao {
         return session.update("comments.updateBoardComment", comment);
     }
 
+    
+    public List<Board> selectPagingBoard(SqlSession session, Map<String, Integer> param) {
+    		int cPage = param.get("cPage");
+    		int numPerPage = param.get("numPerPage");
+    		
+    		return session.selectList("board.selectPagingBoard", 
+    				Map.of("start",(cPage-1)*numPerPage+1, "end", cPage*numPerPage ));
+    	
+    }
+    
+    public int selectBoardCount(SqlSession session) {
+    	return session.selectOne("board.selectBoardCount");
+    }
+    
+    
 }
     

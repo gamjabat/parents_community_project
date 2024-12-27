@@ -326,5 +326,19 @@ public class BoardService{
 	     
 	     return result;
 	 }
-
+	 
+	 
+	 public List<Board> selectPagingBoard(Map<String, Integer> param) {
+		 SqlSession session = getSession();
+		 List<Board> board = dao.selectPagingBoard(session, param);
+		 session.close();
+		 return board;
+	 }
+	 
+	 public int selectBoardCount() {
+		 SqlSession session = getSession();
+		 int count = dao.selectBoardCount(session);
+		 session.close();
+		 return count;
+	 }
 }

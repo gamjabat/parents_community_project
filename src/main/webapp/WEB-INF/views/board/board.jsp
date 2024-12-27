@@ -58,7 +58,7 @@
  
 
  
-<div class="pagination">
+<!--  <div class="pagination">
     <a href="#" class="page-link">&lt;&lt;</a>
     <a href="#" the class="page-link">&lt;</a>
     <a href="#" class="page-link active">1</a>
@@ -66,8 +66,12 @@
     <a href="#" class="page-link">3</a>
     <a href="#" class="page-link">&gt;</a>
     <a href="#" class="page-link">&gt;&gt;</a>
-</div>
+</div> -->
 
+
+<div class="pagination">
+    <c:out value="${pageBar}" />
+</div>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

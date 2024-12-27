@@ -44,7 +44,7 @@ public class BoardCategoryServlet extends HttpServlet {
         boardList = boardService.getBoardsByCategory(categoryName);
       
    
-        request.setAttribute("boardList", boardList);
+        request.setAttribute("board", boardList);
 
         // 게시판 페이지로 포워딩
         request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
