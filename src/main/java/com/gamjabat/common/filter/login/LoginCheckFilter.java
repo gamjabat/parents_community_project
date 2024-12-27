@@ -33,6 +33,7 @@ import com.gamjabat.service.member.MemberService;
 			,"MypageLikeServlet"
 			,"MypagePwCheckServlet"
 			,"UpdateMemberInfoServlet"
+			,"MypageReportServlet"
 		} )
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
