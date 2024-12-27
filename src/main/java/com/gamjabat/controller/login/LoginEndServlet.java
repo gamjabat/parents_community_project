@@ -60,7 +60,7 @@ public class LoginEndServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", invlidMember);
 
-			if (memberId.equals("admin")) {
+			if (memberId.equals("admin123")) {
 				request.getRequestDispatcher("/admin/main.do").forward(request, response);
 			} else {
 				request.getRequestDispatcher("/main/login.do").forward(request, response);

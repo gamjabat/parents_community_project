@@ -28,4 +28,8 @@ public class AdminBoardDao {
 		
 	}
 
+	public ReportBoard selectReportBoardByNo(SqlSession session, String reportNo) {
+		return session.selectOne("admin.selectReportBoardByNo",reportNo);
+	}
+
 }

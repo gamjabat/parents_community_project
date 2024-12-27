@@ -502,7 +502,6 @@ const heartIcon = document.getElementById("heart-icon");
 	});
 
 </script>
->>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
 
 
 
