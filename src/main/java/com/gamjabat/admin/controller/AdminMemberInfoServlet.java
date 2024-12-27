@@ -31,15 +31,8 @@ public class AdminMemberInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
-		
-		System.out.println("memberId ::::"+memberId);
-		
 		Member searchMember = new AdminMemberService().selectMemberById(memberId);
-		
-		System.out.println("searchMember++::"+searchMember);
-		http://localhost:8080/parents_community_project/admin/memberInfo.do?memberNo=MB_0001&memberId=john_doe
 		request.setAttribute("member", searchMember);
-		
 		request.getRequestDispatcher("/WEB-INF/views/admin/member/memberInfo.jsp").forward(request, response);
 	
 	}

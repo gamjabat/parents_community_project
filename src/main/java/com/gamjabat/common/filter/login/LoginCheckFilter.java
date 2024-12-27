@@ -57,24 +57,15 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-		
 		HttpSession session  = request.getSession();
 		
 		if(session.getAttribute("loginMember")==null) {
-			System.out.println("로그인실패 !!!!!!");
-
 			// 로그인 실패
 			request.setAttribute("msg", "로그인후 이용가능합니다. 로그인하세요.");
 			request.setAttribute("loc", "/login/loginpage.do");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}
-		
-		
-		
-		
 		chain.doFilter(request, response);
-
 	}
 
 	/**

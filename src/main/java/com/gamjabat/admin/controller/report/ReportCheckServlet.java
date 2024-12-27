@@ -42,7 +42,6 @@ public class ReportCheckServlet extends HttpServlet {
 									+"<br><br>글 내용 <br>"
 									+reportBoard.getReportFromContent().split("글내용:")[1]);
 		
-		System.out.println("reportBoard:::"+reportBoard);
 		
 		request.setAttribute("reportBoard", reportBoard);
 		request.getRequestDispatcher("/WEB-INF/views/admin/board/reportProcessing.jsp").forward(request, response);
