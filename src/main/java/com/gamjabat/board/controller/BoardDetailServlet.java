@@ -95,7 +95,10 @@ public class BoardDetailServlet extends HttpServlet {
 		int pageEnd= pageNo+pageBarSize-1;
 		
 		
-		String pageBar="<ul class='pagination justify-content-end'>";   //태그를 만들어서 쓴다.
+		int commentscount=new BoardService().selectBoardCommentCountAll(boardNo);
+		request.setAttribute("commentscount", commentscount);
+		
+		String pageBar="<ul class='pagination justify-content-center'>";   //태그를 만들어서 쓴다.
 		
 		if(pageNo==1) { 
 			pageBar+="<li class='page-item disabled'>"; // 첫번쨰 페이지라 안눌리게 만듬.
@@ -153,7 +156,10 @@ public class BoardDetailServlet extends HttpServlet {
 		pageBar+="</ul>";
 		
 		request.setAttribute("pageBar", pageBar);
-	
+		
+		
+		
+		
 		
 		request.getRequestDispatcher("/WEB-INF/views/board/boardDetail.jsp")   //
 		.forward(request, response);
