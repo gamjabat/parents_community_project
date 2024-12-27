@@ -70,7 +70,7 @@
 
 
 <div class="pagination">
-    <c:out value="${pageBar}" />
+    <c:out value="${pageBar}" escapeXml="false"/>
 </div>
 
 

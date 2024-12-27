@@ -38,8 +38,7 @@
                 <label for="category">카테고리를 선택해 주세요.</label>
               <div class="select-container" style="padding:0;">
                 <select id="category" class="form-control " name="category">
-                
-                	<option value="CAT-1">공지</option>
+
                     <option value="CAT-2">잡담</option>
                     <option value="CAT-3">책</option>
                     <option value="CAT-4">진학</option>

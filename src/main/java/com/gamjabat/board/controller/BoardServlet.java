@@ -33,7 +33,7 @@ public class BoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*// 페이징 처리
+			// 페이징 처리
 				int cPage;
 				try {
 					cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -45,7 +45,7 @@ public class BoardServlet extends HttpServlet {
 				try {
 					numPerPage =Integer.parseInt(request.getParameter("numPerPage"));
 				}catch(NumberFormatException e) {
-					numPerPage=5;
+					numPerPage=10;
 				}
 				Map<String, Integer> param = Map.of("cPage", cPage, "numPerPage", numPerPage);
 				
@@ -53,18 +53,18 @@ public class BoardServlet extends HttpServlet {
 				
 				int totalData = new BoardService().selectBoardCount();
 				int totalPage=(int)Math.ceil((double)totalData/numPerPage);
-				int pageBarSize=15; // 페이지바에 출력될 숫자의 개수
+				int pageBarSize=5; // 페이지바에 출력될 숫자의 개수
 				int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
 				int pageEnd = pageNo + pageBarSize+1;
 				
-				String pageBar="<ul class>=`pagination justify-content-end`>";
+				String pageBar="<ul class='pagination justify-content-end'>";
 				
 				if(pageNo==1) {
 					pageBar+="<li class = 'page-item disabled'>";
 					pageBar+="<a class = 'page-link' href='#'>이전</a>";
 					pageBar+="</li>";
 				}else {
-					pageBar+="<li class = 'page-item disabled'>";
+					pageBar+="<li class = 'page-item'>";
 					pageBar+="<a class = 'page-link' href='"+
 							  request.getRequestURI()
 							  +"?cPage="+(pageNo-1)
@@ -76,10 +76,10 @@ public class BoardServlet extends HttpServlet {
 				while(!(pageNo>pageEnd||pageNo>totalPage)) {
 					if(pageNo==cPage) {
 						pageBar+="<li class = 'page-item disabled'>";
-						pageBar+="<a class = 'page-link' href='#'>"+pageNo+"{</a>";
+						pageBar+="<a class = 'page-link' href='#'>"+pageNo+"</a>";
 						pageBar+="</li>";
 					}else {
-						pageBar+="<li class = 'page-item disabled'>";
+						pageBar+="<li class = 'page-item'>";
 						pageBar+="<a class = 'page-link' href='"+
 								  request.getRequestURI()
 								  +"?cPage="+(pageNo)
@@ -97,7 +97,7 @@ public class BoardServlet extends HttpServlet {
 					pageBar+="</li>";
 					
 				}else {
-					pageBar+="<li class = 'page-item disabled'>";
+					pageBar+="<li class = 'page-item'>";
 					pageBar+="<a class = 'page-link' href='"+
 							  request.getRequestURI()
 							  +"?cPage="+(pageNo)
@@ -105,14 +105,14 @@ public class BoardServlet extends HttpServlet {
 							  +"'>다음</a>";
 					pageBar+="</li>";
 				}
-				pageBar+="</ul";
+				pageBar+="</ul>";
 				
-				request.setAttribute("pageBar", pageBar);*/
+				request.setAttribute("pageBar", pageBar);
 
 		
 		
 		
-        List<Board> board = new BoardService().selectBoardAll();
+        List<Board> board = new BoardService().selectBoardAll(param);
         request.setAttribute("board", board);
         
         

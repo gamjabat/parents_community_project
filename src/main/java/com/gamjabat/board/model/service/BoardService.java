@@ -1,15 +1,15 @@
 package com.gamjabat.board.model.service;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
-import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,22 +29,43 @@ public class BoardService{
 	
 	private BoardDao dao = new BoardDao();
 	
-	public int insertBoard(Board b) {
+	public int insertBoard(Board b,String[] tags) {
 	
-	SqlSession session = getSession();
-	int result = dao.insertBoard(session, b);
+		SqlSession session = getSession();
+		int result=0;
+		try {
+			 result = dao.insertBoard(session, b);
+			if(result>0 && tags.length>0) {
+				for(String tag : tags) {
+					Map<String,String> tagMap=new HashMap<>();
+					tagMap.put("tag", tag);
+					result=dao.insertHashtag(session,tagMap);
+					if(result>0) {
+						result=dao.linkHashtagToBoard(session,Map.of("tag",tagMap.get("tagCode"),"boardNo",b.getBoardNo()));
+						if(result==0) {
+							session.rollback();
+							return 0;
+						}
+					}
+				}
+				session.commit();
+			}else {
+				return 0;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.rollback();
+			return 0;
+		}finally {
+			session.close();
+		}
+		return result;
+	}
 	
-	if(result>0) session.commit();
-	else session.rollback();
-	session.close();
-	
-	return result;
-}
-	
-	public List<Board> selectBoardAll() {
+	public List<Board> selectBoardAll(Map<String, Integer> param) {
 		
 		SqlSession session = getSession();
-		List<Board> boards = dao.selectBoardAll(session);
+		List<Board> boards = dao.selectBoardAll(session,param);
 		session.close();
 		return boards;
 		
@@ -341,6 +362,8 @@ public class BoardService{
 		}
 
 	 
+	 
+	 // 게시물 페이징바
 	 public List<Board> selectPagingBoard(Map<String, Integer> param) {
 		 SqlSession session = getSession();
 		 List<Board> board = dao.selectPagingBoard(session, param);
@@ -348,12 +371,25 @@ public class BoardService{
 		 return board;
 	 }
 	 
+	 // 게시물 페이징바(관련) 행의 총 개수 
 	 public int selectBoardCount() {
 		 SqlSession session = getSession();
 		 int count = dao.selectBoardCount(session);
 		 session.close();
 		 return count;
 	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 public List<BoardComments> selectCommentsAllByMemberNo(Map<String, Object> param){
 		 	SqlSession session = getSession();
 			List<BoardComments> comments = dao.selectCommentsAllByMemberNo(session, param);
@@ -369,28 +405,55 @@ public class BoardService{
 
 	}
 
-	 // 태그처리
-	 public int insertBoardWithHashtags(Board board) {
+	
+	 
+	
+	 
+	 // 게시물 저장 및 번호 호환
+	 
+	 public String insertBoardAndGetId(Board board) {
 		    SqlSession session = getSession();
-		    int result = 0;
+		    int result = dao.insertBoard(session, board);
+		    String boardNo = board.getBoardNo(); // MyBatis의 selectKey 활용
+		    if (result > 0) {
+		        session.commit();
+		    } else {
+		        session.rollback();
+		    }
+		    session.close();
+		    return boardNo;
+		}
 
+	 // 해시태그 저장 및 번호 반환
+	 
+	 public List<String> insertHashtags(List<String> tags) {
+		    SqlSession session = getSession();
+		    List<String> hashtagNos = new ArrayList<>();
+		    for (String tag : tags) {
+		        String hashtagNo = dao.insertHashtagAndGetId(session, tag);
+		        hashtagNos.add(hashtagNo);
+		    }
+		    session.commit();
+		    session.close();
+		    return hashtagNos;
+		}
+
+	 public int linkHashtagToBoard(String boardNo, List<String> hashtagNos) {
+		    SqlSession session = getSession();
+		    int count = 0; // 연결된 행의 수를 저장
 		    try {
-		        // 태그 저장
-		        if (result > 0 && board.getTag() != null) {
-		            for (String tag : board.getTag()) {
-		                result += dao.insertHashtag(session, tag.trim());
-		            }
+		        for (String hashtagNo : hashtagNos) {
+		            Map<String, String> params = Map.of("boardNo", boardNo, "hashtagNo", hashtagNo);
+		            count += dao.linkHashtagToBoard(session, params); // DAO 호출
 		        }
-
-		        if (result > 0) {
-		            session.commit();
-		        } else {
-		            session.rollback();
-		        }
+		        session.commit();
 		    } finally {
 		        session.close();
 		    }
-		    return result;
+		    return count; // 성공적으로 삽입된 행의 개수 반환
 		}
+
+
+
 
 }

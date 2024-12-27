@@ -38,8 +38,8 @@ public class BoardWriteDataServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         // content = content.replaceAll("<[^>]*>", ""); // HTML 태그 제거
-        String tagsInput = request.getParameter("tag");  // 'tags' 파라미터 값을 먼저 변수에 저장
-        String[] tags = tagsInput.split(",\\s*");
+        String tagString = request.getParameter("tag");  // 'tags' 파라미터 값을 먼저 변수에 저장
+        String[] tags = tagString.split(","); // ','로 태그 분리
 
     
 //        String boardNo = "2";
@@ -68,6 +68,12 @@ public class BoardWriteDataServlet extends HttpServlet {
             .boardTypeNumber(boardTypeNumber)
             .build();*/
         
+        
+  
+
+        
+        
+        
         Board insertBoard = Board.builder()
         		//.boardNo(boardNo)
                 .title(title)
@@ -86,15 +92,23 @@ public class BoardWriteDataServlet extends HttpServlet {
 
         // 서비스 클래스를 이용하여 데이터베이스에 저장
         BoardService service = new BoardService();
-        int result = service.insertBoard(insertBoard);
+        int result = service.insertBoard(insertBoard, tags);
+        
+ 
+        
         
         // 해시태그
         
-        int tagResult = service.insertBoardWithHashtags(insertBoard);
+       // int tagResult = service.insertOnlyHashtags(tags);
 
  
         // 리다이렉트~~~~~~~~~~~~~~~~~~ 홈으로!
         response.sendRedirect(request.getContextPath() + "/board.do" );
+        
+        
+//        request.setAttribute("hashtags", result);
+//        request.getRequestDispatcher("/WEB-INF/views/board/boardDetail.jsp").forward(request, response);
+        
         
     }
 
