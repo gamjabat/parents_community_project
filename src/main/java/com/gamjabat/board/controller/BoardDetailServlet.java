@@ -2,6 +2,7 @@ package com.gamjabat.board.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,25 +56,111 @@ public class BoardDetailServlet extends HttpServlet {
         service.increaseViewCount(boardNo);
         
 	    }
-//		Member m = Member.builder()
+//		
+//	    Member m = Member.builder()
 //				.memberId("jbag")
 //				.memberNo("MB_0012")
 //				.build();
 //				
 //				
-	    //감자가 추가한 comments 코드입니다. 구현중.
+	    //감자의 페이징 처리 로직입니다.
 	    List<BoardComments> comments=new BoardService().selectBoardComment(boardNo);
 	    request.setAttribute("comments", comments);
 //		HttpSession session = request.getSession();
 //		session.setAttribute("loginMember", m);
 	    // boardDetail.jsp 페이지로 forward 메소드를 사용하여 요청과 응답을 전달
-	    request.getRequestDispatcher(getServletContext().getInitParameter("viewpath") + "/board/boardDetail.jsp").forward(request, response);
+	    
+	    
+	    int cPage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e){
+			cPage=1;
+		}
+		
+		int numPerPage;
+		try {
+			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
+		} catch (NumberFormatException e) {
+			numPerPage=5;
+		}
+
+		Map<String,Object> param=Map.of("cPage",cPage,"numPerPage",numPerPage,"boardNo",boardNo);
+
+		//pageBar생성하기
+		int totalData=new BoardService().selectBoardCommentCountAll(boardNo);
+		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
+		int pageBarSize=5; // 페이지바에 출력될 숫자의 개수
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;   //페이지바의 시작번호 1식증가하면서 맞춰준다.
+		int pageEnd= pageNo+pageBarSize-1;
+		
+		
+		String pageBar="<ul class='pagination justify-content-end'>";   //태그를 만들어서 쓴다.
+		
+		if(pageNo==1) { 
+			pageBar+="<li class='page-item disabled'>"; // 첫번쨰 페이지라 안눌리게 만듬.
+			pageBar+="<a class='page-link' href='#'>이전</a>";  
+			pageBar+="</li>";
+			
+		} else {
+			pageBar+="<li class='page-item'>";
+			pageBar+="<a class='page-link' href='"+ 
+					
+					request.getRequestURI()    // 두개의 값을 보낸다.
+					+ "?cPage="+(pageNo-1)
+					+"&numPerPage="+numPerPage //다수값일때 &로 보낸다.
+					+"'>이전</a>";  
+			
+			pageBar+="</li>";
+		}
+
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {   //클릭되면 안됀당.
+				pageBar+="<li class='page-item disabled'>";
+				pageBar+="<a class='page-link' href='#'>"+pageNo+"</a>";   // 숫자가 들어감.
+				pageBar+="</li>";
+			} else {
+				pageBar+="<li class='page-item'>";
+				pageBar+="<a class='page-link' href='"+ 
+						
+						request.getRequestURI()                     
+						+ "?cPage="+(pageNo) // 요청하는페이지가 그 페이지가 된다 -를 지워서
+						+"&numPerPage="+numPerPage
+						+"&boardNo="+boardNo
+						+"'>"+pageNo+"</a>";  // 숫자가 들어감.
+				
+				pageBar+="</li>";
+			}
+			pageNo++; //no값을 증가하면서 위 숫자값에 들어가게 됨. 
+		}
+		if(pageNo>totalPage) {
+			pageBar+="<li class='page-item disabled'>";
+			pageBar+="<a class='page-link' href='#'>다음</a>";   // 숫자가 들어감.
+			pageBar+="</li>";
+			
+		} else {
+			pageBar+="<li class='page-item'>";
+			pageBar+="<a class='page-link' href='"+ 
+					
+					request.getRequestURI()                     
+					+ "?cPage="+(pageNo) // 요청하는페이지가 그 페이지가 된다 -를 지워서
+					+"&numPerPage="+numPerPage
+					+"&boardNo="+boardNo
+					+"'>다음</a>";  // 숫자가 들어감.
+			
+			pageBar+="</li>";
+		}
+		pageBar+="</ul>";
+		
+		request.setAttribute("pageBar", pageBar);
 	
-	 
-	
+		
+		request.getRequestDispatcher("/WEB-INF/views/board/boardDetail.jsp")   //
+		.forward(request, response);
+		
+
 	}
-		
-		
+
 		
 		/* 팀장님이 만든 부분
 		request.getRequestDispatcher(getServletContext().getInitParameter("viewpath")+"/board/boardDetail.jsp")
