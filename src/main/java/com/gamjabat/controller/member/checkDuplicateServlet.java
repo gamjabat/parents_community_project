@@ -15,7 +15,7 @@ import com.gamjabat.service.member.MemberService;
 /**
  * Servlet implementation class IdDuplicateServlet
  */
-@WebServlet("/member/idduplicate.do")
+//@WebServlet("/member/idduplicate.do")
 public class checkDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

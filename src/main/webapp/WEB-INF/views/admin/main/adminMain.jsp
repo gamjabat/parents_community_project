@@ -80,7 +80,6 @@
 						<th>문의 제목</th>
 						<th>문의 내용</th>
 						<th>문의 날짜</th>
-						<th>처리상태</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -93,8 +92,7 @@
 									<td>${board.inqueryCode}</td>
 									<td>${board.inqueryTitle}</td>
 									<td>${board.inqueryContent}</td>
-									<td>${board.createDate}</td>
-									<td>${board.status}</td>
+									<td>${board.createdAt}</td>
 								</tr>
 							</a>
 						</c:forEach>

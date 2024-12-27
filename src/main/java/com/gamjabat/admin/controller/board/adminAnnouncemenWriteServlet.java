@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamjabat.board.model.dto.Board;
-import com.gamjabat.board.model.service.BoardService;
+import com.gamjabat.admin.model.service.board.AdminBoardService;
+import com.gamjabat.admin.model.dto.Board;
 
 /**
  * Servlet implementation class adminAnnouncemenWriteServlet
@@ -59,8 +59,8 @@ public class adminAnnouncemenWriteServlet extends HttpServlet {
 	                .build();
 
 	        // 서비스 클래스를 이용하여 데이터베이스에 저장
-	        BoardService service = new BoardService();
-	        int result = service.insertBoard(insertBoard);
+	        AdminBoardService service = new AdminBoardService();
+	        int result = service.insertAnnounceBoard(insertBoard);
 	 
 	        response.sendRedirect(request.getContextPath() + "/board.do" );
 		
