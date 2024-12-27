@@ -31,7 +31,7 @@
         <div class="input-group d-flex flex-column ">
 	        <div class="input-group id-group d-flex flex-row w-100" style="gap: 10px;">
 		        <input type="text" id="id" name="id" placeholder="아이디 입력" class="form-control">
-		        <button type="button" id="check-id-btn" class="btn btn-secondary" onclick="checkDuplicate();">중복 확인</button>
+		        <button type="button" id="check-id-btn" class="btn btn-secondary" onclick="checkId();">중복 확인</button>
 		    </div>
 	        <small class="error"></small>
         </div>
@@ -363,7 +363,7 @@ $(document).ready(function () {
     }
 	
 	
-	const checkDuplicate=()=> {
+	const checkId=()=> {
 	    const idInput = document.getElementById("id");
 	    const idError = document.querySelector('.id-group').nextElementSibling;
 	    const idValue = idInput.value.trim();
@@ -392,6 +392,48 @@ $(document).ready(function () {
 	        }
 	    });
 	}
+	
+	const checkDuplicate=()=> {
+	    const nicknameInput = document.getElementById("nickname");
+	    const nicknameValue = idInput.value.trim();
+	    const phoneInput = document.getElementById("phone");
+	    const phoneValue = phoneInput.value.trim();
+	    const emailInput = document.getElementById("email");
+	    const emailValue = emailInput.value.trim();
+
+	    $.ajax({
+	        url: `${path}/member/checkduplicate.do`, // 서버 요청 URL
+	        type: "POST",
+	        data: { nickname: nicknameValue, phone: phoneValue, email: emailValue }, // 전송 데이터
+	        success: function (response) {
+	            // 서버에서 반환된 JSON 데이터 처리
+	            if (response.nicknameIsDuplicate) {
+	            	alert("입력하신 닉네임이 이미 존재합니다.");
+	            	return false;
+	            } 
+	            
+	            if (response.phoneIsDuplicate) {
+	            	alert("입력하신 전화번호가 이미 존재합니다.");
+	            	return false;
+	            }
+	            
+	            if (response.emailIsDuplicate) {
+	            	alert("입력하신 이메일이 이미 존재합니다.");
+	            	return false;
+	            }
+	            
+	            return true;
+	           
+	        },
+	        error: function () {
+	            alert("데이터 중복 확인 중 문제가 발생했습니다.");
+	            return false;
+	        }
+	    });
+	}
+	
+	
+	
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
