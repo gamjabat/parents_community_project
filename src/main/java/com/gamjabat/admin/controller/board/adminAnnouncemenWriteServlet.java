@@ -1,4 +1,4 @@
-package com.gamjabat.admin.controller.board;
+xpackage com.gamjabat.admin.controller.board;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -60,7 +60,7 @@ public class adminAnnouncemenWriteServlet extends HttpServlet {
 
 	        // 서비스 클래스를 이용하여 데이터베이스에 저장
 	        BoardService service = new BoardService();
-	        int result = service.insertBoard(insertBoard);
+	        /* int result = service.insertBoard(insertBoard); */
 	 
 	        response.sendRedirect(request.getContextPath() + "/board.do" );
 		
