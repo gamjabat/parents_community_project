@@ -32,4 +32,9 @@ public class AdminBoardDao {
 		return session.selectOne("admin.selectReportBoardByNo",reportNo);
 	}
 
+	public int updateReportProcessing(SqlSession session, Map<String, String> param) {
+		return session.update("admin.updateReportProcessing", param);
+				
+	}
+
 }

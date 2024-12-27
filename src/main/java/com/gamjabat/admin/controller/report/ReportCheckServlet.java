@@ -37,12 +37,11 @@ public class ReportCheckServlet extends HttpServlet {
 		//신고글 정보 가져오기
 		ReportBoard reportBoard = new AdminReportService().selectReportBoardByNo(reportNo);
 		
+		System.out.println("reportBoard:::"+reportBoard);
 		
+		request.setAttribute("reportBoard", reportBoard);
+		request.getRequestDispatcher("/WEB-INF/views/admin/board/reportProcessing.jsp").forward(request, response);
 		
-		
-	
-	
-	
 	}
 
 	/**

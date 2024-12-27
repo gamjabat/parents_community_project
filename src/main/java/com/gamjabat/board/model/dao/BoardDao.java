@@ -210,11 +210,6 @@ public class BoardDao {
     public int selectBoardCommentCountAll(SqlSession session, String boardNo) {
 		return session.selectOne("comments.selectBoardCommentCountAll",boardNo);
 	}
-    
-  //댓글 페이징 카운터
-    public int selectBoardCommentCount(SqlSession session) {
-		return session.selectOne("comments.selectBoardCommentCount");
-	}
 
 
     // 게시물 페이징 처리

@@ -332,17 +332,10 @@ public class BoardService{
 			return comments;
 			
 		}
-	 
+	 //댓글 페이지바.
 	 public int selectBoardCommentCountAll(String boardNo) {
 			SqlSession session=getSession();
 			int count=dao.selectBoardCommentCountAll(session,boardNo);
-			session.close();
-			return count;
-		}
-	 
-	 public int selectBoardCommentCount() {
-			SqlSession session=getSession();
-			int count=dao.selectBoardCommentCount(session);
 			session.close();
 			return count;
 		}

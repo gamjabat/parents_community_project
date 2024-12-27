@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${path}/resources/css/board/boardDetail.css">
 
 <section id="main-container">
-${pageBar}
+
 	<div class="board-container px-4">
             <!-- 제목 -->
             <div class="d-flex justify-content-between py-1">
@@ -54,7 +54,7 @@ ${pageBar}
 						  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
 						  <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
 						</svg>
-		                <span class="fw-bold"> 댓글 </span>
+		                <span class="fw-bold"> 댓글 ${commentscount}</span>
 	                </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@ ${pageBar}
 						  <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
 						</svg>
                 	</div>
-	                <span class="fw-bold"> 댓글 2</span>
+	                <span class="fw-bold"> 댓글 ${commentscount}</span>
                 </div>
             </div>
             <hr>
@@ -129,13 +129,6 @@ ${pageBar}
 		                </form>
 	                	</div>
 	           		 </div>
-            	<div class="d-flex justify-content-end">
-	            	<select class="comment-sort form-select form-select-sm" aria-label=".form-select-sm example">
-					  <option selected>최신순</option>
-					  <option value="1">인기순</option>
-					  <option value="2">등록순</option>
-					</select>
-            	</div>
             	
             	
             	
@@ -233,7 +226,6 @@ ${pageBar}
                             <div class="comment-meta pb-2">
                                 <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
                                  <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
-                            	<button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">답글</button>
                             </div>
                         </div>
                     </div>
@@ -241,11 +233,11 @@ ${pageBar}
             </c:forEach>
         </c:if>
     </div>
-    	<div id="pageBar">
-    <c:out value="${pageBar}" escapeXml="false" />
-</div>  
+    
 </div>
 
+	
+  <div class="commentspagebox"> ${pageBar}</div>
 
  
 	        
@@ -508,11 +500,6 @@ const heartIcon = document.getElementById("heart-icon");
 	});
 
 </script>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
-
 
 
 
