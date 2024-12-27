@@ -341,7 +341,7 @@
     
     
  //  대댓글 기능 스크립트.
-	$(".btn-insert2").click(e => {
+/* 	$(".btn-insert2").click(e => {
 	    const $parent = $(e.target).parents("div.comment");
 	    console.log($parent);
 	    const $form = $(".comment-input>form").clone();
@@ -362,10 +362,10 @@
 	    // 생성한 폼을 댓글 아래에 추가
 	    $parent.after($form);
 	});
-
+ */
 	
 //아이콘을 담고 있는 요소 선택
-const heartIcon = document.getElementById("heart-icon");
+/* const heartIcon = document.getElementById("heart-icon"); */
 
 // 현재 상태 (true: 좋아요, false: 좋아요 해제)
 /* let isLiked = false; */

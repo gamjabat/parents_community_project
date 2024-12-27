@@ -65,133 +65,7 @@
 			</div>
 </section>
 <script>
-		/* 
-	 // 댓글 수정 버튼 클릭 시 수정 폼 보이기
-    $(".dropdown-item1").click(function (e) {
-        e.preventDefault(); // 기본 링크 클릭 동작 방지
 
-        const $parent = $(this).closest(".comment"); // 클릭한 댓글 요소 찾기
-        const commentNo = $parent.find("input[name='commentNo']").val(); // 댓글 번호 가져오기
-        const currentContent = $parent.find(".comment-content").text().trim(); // 댓글 내용 가져오기
-        console.log(commentNo);
-        // 수정 폼이 이미 존재하지 않으면 폼 생성
-        if ($parent.find(".edit-form").length === 0) {
-            const $form = `
-                <form class="edit-form" action="${path}/board/updatecomment.do" method="POST">
-			
-                    <input type="hidden" name="commentNo" value="\${commentNo}">
-                    <input type="hidden" name="boardNo" value="${board.boardNo}">
-                    <textarea name="commentContent">\${currentContent}</textarea>
-                    <button type="submit">수정</button>
-                </form>
-            `;
-            $parent.find(".comment-content").html($form); // 댓글 내용 영역에 수정 폼 삽입
-        }
-    });
-
-    // 댓글 수정 폼 제출 처리
-    $(document).on("submit", ".edit-form", function (e) {
-        e.preventDefault(); // 폼의 기본 제출 동작 방지
-
-        const $form = $(this);
-        const commentNo = $form.find("input[name='commentNo']").val();
-        const commentContent = $form.find("textarea[name='commentContent']").val();
-
-        // 서버로 수정된 댓글 전송
-        $.post($form.attr("action"), $form.serialize(), function(response) {
-            // 성공 시 댓글 내용 갱신
-            $form.closest(".comment").find(".comment-content").text(commentContent);
-            alert("댓글이 수정되었습니다.");
-        }).fail(function() {
-            alert("댓글 수정에 실패했습니다.");
-        });
-    });
- */
-    
-    
-/*     
-	//  대댓글 기능 스크립트.
-	$(".btn-insert2").click(e => {
-	    const $parent = $(e.target).parents("div.comment");
-	    console.log($parent);
-	    const $form = $(".comment-input>form").clone();
-	    console.log($form);
-		
-	    
-	    $form.find("button").removeAttr("id").addClass("btn-insert2");
-	    
-	    // commentLevel 값을 설정 (대댓글은 레벨 2)
-	    $form.find("input[name='level']").val('2');
-	    console.log("Level: ", $form.find("input[name='level']").val()); // 로그로 확인
-
-	    // parentCommentNo 값도 설정
-	    const parentCommentNo = $parent.find('input[name="parentCommentNo"]').val();
-	    $form.append('<input type="hidden" name="parentCommentNo" value="' + parentCommentNo + '" />');
-	    console.log("Parent Comment No: ", parentCommentNo); // 로그로 확인
-
-	    // 생성한 폼을 댓글 아래에 추가
-	    $parent.after($form);
-	});
-	 */
-	
-/* //아이콘을 담고 있는 요소 선택
-const heartIcon = document.getElementById("heart-icon"); */
-
-// 현재 상태 (true: 좋아요, false: 좋아요 해제)
-/* let isLiked = false; */
-
-// 클릭 이벤트 리스너 추가
-/* heartIcon.addEventListener("click", () => {
-    // 상태 토글
-    isLiked = !isLiked;
-
-    // 상태에 따라 아이콘 변경
-    if (isLiked) {
-        // 빨간 하트
-        heartIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-            </svg>
-        `;
-    } else {
-        // 빈 하트
-        heartIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
-                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-            </svg>
-        `;
-    }
-}); */
-
-	// 현재 상태 (true: 좋아요, false: 좋아요 해제)
-/* 	let isLiked = false;
-	
-<<<<<<< HEAD
-
-=======
-	// 클릭 이벤트 리스너 추가
-	heartIcon.addEventListener("click", () => {
-	    // 상태 토글
-	    isLiked = !isLiked;
-	
-	    // 상태에 따라 아이콘 변경
-	    if (isLiked) {
-	        // 빨간 하트
-	        heartIcon.innerHTML = `
-	            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
-	                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-	            </svg>
-	        `;
-	    } else {
-	        // 빈 하트
-	        heartIcon.innerHTML = `
-	            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
-	                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-	            </svg>
-	        `;
-	    }
-	});
-	
 	
 	/* 신고 모달 관련 javascript*/
  	document.getElementById('reportForm').addEventListener('submit', function(event) {
@@ -223,9 +97,13 @@ const heartIcon = document.getElementById("heart-icon"); */
 	  }
 	
 	  this.submit();
-	  // 모달 닫기
+	  
+	  opener.location.reload();
+	  
+	  
+ 	  // 모달 닫기
 	  const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
-	  reportModal.hide();
+	  reportModal.hide(); 
 	});
 	
 	document.addEventListener('DOMContentLoaded', () => {

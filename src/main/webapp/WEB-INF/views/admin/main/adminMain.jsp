@@ -28,6 +28,7 @@
 			<ul>
 				<li><a href="#users">사용자 관리</a></li>
 				<li><a href="#posts">게시글 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/board/adminWrite.do">공지글 관리</a></li>
 			</ul>
 		</nav>
 	</header>
