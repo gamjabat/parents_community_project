@@ -183,9 +183,10 @@ public class BoardDao {
     }
     
 
-    
-    public List<Board> selectBoardsByCategory(SqlSession session, String typeNo) {
-        return session.selectList("board.selectBoardsByCategory", typeNo);
+    // 카테고리
+    public List<Board> selectBoardsByCategory(SqlSession session, String typeNo, Map<String, Integer> param) {
+        return session.selectList("board.selectBoardsByCategory",typeNo,new RowBounds(
+				(param.get("cPage")-1)*param.get("numPerPage"),param.get("numPerPage")));
     }
 
 

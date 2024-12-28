@@ -3,7 +3,6 @@ package com.gamjabat.board.model.service;
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -309,10 +308,10 @@ public class BoardService{
 	     return result;
 	 }
 	 
-
-	    public List<Board> getBoardsByCategory(String typeNo) {
+// 카테고리별 검색
+	    public List<Board> getBoardsByCategory(String typeNo, Map<String, Integer> param) {
 	        SqlSession session = getSession();
-	        List<Board> boardList = dao.selectBoardsByCategory(session, typeNo);
+	        List<Board> boardList = dao.selectBoardsByCategory(session, typeNo, param);
 	        session.close();
 	        return boardList;
 	    }
