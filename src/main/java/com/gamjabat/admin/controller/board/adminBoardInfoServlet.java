@@ -31,29 +31,9 @@ public class adminBoardInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
 		String inqueryNo= request.getParameter("inqueryNo");
-		
 		ArrayList<InqueryBoard> inqueryList = new ArrayList<>();
 		
-//		Member inqueryMember = Member.builder().memberId("userId");
-//			
-//			InqueryBoard ib = InqueryBoard.builder()
-//								.inqueryNo(inqueryNo)
-//							
-		
-		
-		
-		
-//		try {
-//			
-//		}catch(NullPointerException e) {
-//			
-//			
-//		}
-		
-		
-	
 	}
 
 	/**

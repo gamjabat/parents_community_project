@@ -42,7 +42,6 @@ public class AdminMainServlet extends HttpServlet {
 		
 		
 				//DB의 member테이블의 전체 데이터를 가져와 출력해주는 기능
-			
 				//Member 페이징 처리 //////////////////////////////////////
 				int cPage;
 				try {
@@ -71,10 +70,6 @@ public class AdminMainServlet extends HttpServlet {
 				int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 				int pageEnd=pageNo+pageBarSize-1;
 				
-				
-				
-				
-				System.out.println("tatal"+totalData+"::"+totalPage+"::"+pageBarSize+"::"+pageNo+"::"+pageEnd);
 				
 				String pageBar="<ul class='pagination justify-content-center'>";
 				
@@ -123,18 +118,6 @@ public class AdminMainServlet extends HttpServlet {
 				}
 				pageBar+="</ul>";
 				
-		
-		
-	//	List<Member> members = memberService.selectMemberAll();
-//		List<>
-		
-		System.out.println("members :: "+ members);
-		System.out.println("inqueryboards :: "+ inqueryboards);
-		System.out.println("페이지 :: "+ pageBar);
-	
-		
-		
-		
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("members", members);
 		request.setAttribute("inqueryboards", inqueryboards);
