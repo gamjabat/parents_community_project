@@ -453,6 +453,24 @@ public class BoardService{
 		}
 
 
+	 // 해시태그 가져오기
+	 
+	 public List<String> selectHashtagsByBoardNo(String boardNo) {
+		    SqlSession session = getSession();
+		    List<String> hashtags = dao.selectHashtagsByBoardNo(session, boardNo);
+		    session.close();
+		    return hashtags;
+		}
+	 
+	 // 해시태그 클릭하면 검색
+	 
+	 public List<Board> getBoardsByContentHashtag(String hashtag) {
+		    SqlSession session = getSession();
+		    List<Board> boards = dao.selectBoardsByContentHashtag(session, hashtag);
+		    session.close();
+		    return boards;
+		}
+
 
 
 }

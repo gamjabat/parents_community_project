@@ -27,7 +27,7 @@
                 <input type="hidden" name="boardNo" value="${board.boardNo}">
                 <div class="form-group">
                     <label for="category">카테고리를 선택해 주세요.</label>
-                    <select id="category" class="form-control" name="category" value="1"> <!-- ${board.category} -->
+                    <select id="category" class="form-control" name="category" value="${board.categoryName}"> <!-- ${board.categoryName} -->
                         <!-- Options reflect the category of the post being edited -->
                         <%-- <c:forEach var="cat" items="${categories}">
                             <option value="${cat}" ${cat == board.category ? 'selected' : ''}>${cat}</option>

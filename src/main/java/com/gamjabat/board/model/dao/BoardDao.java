@@ -272,5 +272,20 @@ public class BoardDao {
     }
 
 
+    // 해시태그 가져오기!@!
+    
+    public List<String> selectHashtagsByBoardNo(SqlSession session, String boardNo) {
+        return session.selectList("board.selectHashtagsByBoardNo", boardNo);
+    }
+    
+    // 해시태그 검색기능
+    
+    public List<Board> selectBoardsByContentHashtag(SqlSession session, String hashtag) {
+        return session.selectList("board.selectBoardsByContentHashtag", hashtag);
+    }
+
+    
+
+    
     
 }

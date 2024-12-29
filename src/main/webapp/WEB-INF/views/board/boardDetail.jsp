@@ -82,9 +82,22 @@
 			<p>${board.content}</p>
             <!-- 해시태그 -->
             <div class="hashtag-container d-flex flex-row justify-content-start">
-            	 <c:forEach var="hashtag" items="${hashtags}">
-      			 	 <div>#${hashtag}</div>
-    			</c:forEach>		
+			<c:forEach var="hashtag" items="${hashtags}">
+			    <div>
+			        <c:url var="encodedUrl" value="/board/hashtag.do">
+			            <c:param name="hashtag" value="${hashtag}" />
+			        </c:url>
+			        <a href="${encodedUrl}">${hashtag}</a>
+			    </div>
+			</c:forEach>
+			
+			<%-- <c:forEach var="hashtag" items="${hashtags}">
+			    <div>
+			        <a href="${path}/board/hashtag.do?hashtag=${fn:escapeXml(hashtag)}">
+			            ${hashtag}
+			        </a>
+			    </div>
+			</c:forEach>	 --%>
             </div>
             <!-- 좋아요 및 댓글 입력 -->
             <div class="board-stats my-3 d-flex align-items-center">
