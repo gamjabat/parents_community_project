@@ -43,4 +43,16 @@ public class MemberDao {
     public int selectLikeAllByMemberNoCount(SqlSession session, String memberNo){	
     	return session.selectOne("member.selectLikeAllByMemberNoCount", memberNo);
     }
+    
+    public boolean isNicknameDuplicate(SqlSession session, String nickname) {
+        return session.selectOne("member.isNicknameDuplicate", nickname) != null;
+    }
+
+    public boolean isPhoneDuplicate(SqlSession session, String phone) {
+        return session.selectOne("member.isPhoneDuplicate", phone) != null;
+    }
+
+    public boolean isEmailDuplicate(SqlSession session, String email) {
+        return session.selectOne("member.isEmailDuplicate", email) != null;
+    }
 }

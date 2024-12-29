@@ -8,18 +8,19 @@
 <link rel="stylesheet" href="${path}/resources/css/common/main.css">
 <link rel="stylesheet" href="${path}/resources/css/login/signUp.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
+
 <section id="main-container" class="d-flex flex-column align-items-center">
 <div class="container d-flex flex-column align-items-center justify-content-center">
         <div class="signup-container">
     <div class="signup-title">회원가입</div>
-    <form method="post" action="${path}/login/signupend.do" onsubmit="return fn_invalidate();">
+    <form id="signup-form" method="post" action="${path}/login/signupend.do">
       <div class="form-group">
         <div class="input-label">
         	<label for="name">이름</label>
         	<span style="color: red;">*</span>
         </div>
         <div class="input-group">
-	        <input type="text" id="name" name="name" placeholder="이름 입력">
+        	<input type="text" id="name" name="name" placeholder="이름 입력">
         </div>
       </div>
 
@@ -29,11 +30,11 @@
         	<span style="color: red;">*</span>
         </div>
         <div class="input-group d-flex flex-column ">
-	        <div class="input-group id-group d-flex flex-row w-100" style="gap: 10px;">
-		        <input type="text" id="id" name="id" placeholder="아이디 입력" class="form-control">
-		        <button type="button" id="check-id-btn" class="btn btn-secondary" onclick="checkId();">중복 확인</button>
-		    </div>
-	        <small class="error"></small>
+        	<div class="input-group id-group d-flex flex-row w-100" style="gap: 10px;">
+        		<input type="text" id="id" name="id" placeholder="아이디 입력" class="form-control">
+        		<button type="button" id="check-id-btn" class="btn btn-secondary" onclick="checkId();">중복 확인</button>
+        	</div>
+        	<small class="error"></small>
         </div>
       </div>
       
@@ -42,7 +43,7 @@
         	<label for="nickname">닉네임</label>
         </div>
         <div class="input-group">
-	        <input type="text" id="nickname" name="nickname" placeholder="닉네임 입력 (선택 사항)">
+        	<input type="text" id="nickname" name="nickname" placeholder="닉네임 입력 (선택 사항)">
         </div>
       </div>
       
@@ -63,8 +64,8 @@
         	<span style="color: red;">*</span>
         </div>
         <div class="input-group d-flex flex-column">
-	        <input type="password" id="confirm-password" placeholder="비밀번호 확인 입력">
-	        <small class="error"></small>
+        	<input type="password" id="confirm-password" placeholder="비밀번호 확인 입력">
+        	<small class="error"></small>
         </div>
       </div>
 
@@ -125,48 +126,48 @@
     </form>
   </div>
 </section>
+
 <script>
-
-$(document).ready(function () {
-    // 생년월일 초기화
-    const currentYear = new Date().getFullYear();
-    const $birthYear = $('#birth-year');
-    const $birthMonth = $('#birth-month');
-    const $birthDay = $('#birth-day');
-
-    // 년도 추가 (1900년부터 현재년도까지)
-    for (let year = currentYear; year >= 1900; year--) {
-        $birthYear.append('<option value="' + year + '">' + year + '년</option>');
-    }
-
-    // 월 추가 (1월부터 12월)
-    for (let month = 1; month <= 12; month++) {
-        $birthMonth.append('<option value="' + month + '">' + month + '월</option>');
-    }
-
-    // 일 추가 (월 선택에 따라 동적으로 변경)
-    $birthMonth.change(function () {
-        const selectedYear = parseInt($birthYear.val(), 10);
-        const selectedMonth = parseInt($birthMonth.val(), 10);
-
-        if (isNaN(selectedYear) || isNaN(selectedMonth)) {
-            $birthDay.empty().append('<option value="">일</option>');
-            return;
-        }
-
-        const daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
-        $birthDay.empty().append('<option value="">일</option>');
-
-        for (let day = 1; day <= daysInMonth; day++) {
-            $birthDay.append('<option value="' + day + '">' + day + '일</option>');
-        }
-    });
-
-    // 년도 변경 시에도 일수 갱신
-    $birthYear.change(function () {
-        $birthMonth.trigger('change');
-    });
-});
+	$(document).ready(function () {
+	    // 생년월일 초기화
+	    const currentYear = new Date().getFullYear();
+	    const $birthYear = $('#birth-year');
+	    const $birthMonth = $('#birth-month');
+	    const $birthDay = $('#birth-day');
+	
+	    // 년도 추가 (1900년부터 현재년도까지)
+	    for (let year = currentYear; year >= 1900; year--) {
+	        $birthYear.append('<option value="' + year + '">' + year + '년</option>');
+	    }
+	
+	    // 월 추가 (1월부터 12월)
+	    for (let month = 1; month <= 12; month++) {
+	        $birthMonth.append('<option value="' + month + '">' + month + '월</option>');
+	    }
+	
+	    // 일 추가 (월 선택에 따라 동적으로 변경)
+	    $birthMonth.change(function () {
+	        const selectedYear = parseInt($birthYear.val(), 10);
+	        const selectedMonth = parseInt($birthMonth.val(), 10);
+	
+	        if (isNaN(selectedYear) || isNaN(selectedMonth)) {
+	            $birthDay.empty().append('<option value="">일</option>');
+	            return;
+	        }
+	
+	        const daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
+	        $birthDay.empty().append('<option value="">일</option>');
+	
+	        for (let day = 1; day <= daysInMonth; day++) {
+	            $birthDay.append('<option value="' + day + '">' + day + '일</option>');
+	        }
+	    });
+	
+	    // 년도 변경 시에도 일수 갱신
+	    $birthYear.change(function () {
+	        $birthMonth.trigger('change');
+	    });
+	});
 
 	$(document).ready(function () {
 	    var area0 = ["서울특별시", "인천광역시", "대전광역시", "광주광역시", "대구광역시", "울산광역시", "부산광역시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주도"];
@@ -212,8 +213,38 @@ $(document).ready(function () {
 	});
 	
 	
+	const checkId = () => {
+	    const idInput = document.getElementById("id");
+	    const idError = document.querySelector('.id-group').nextElementSibling;
+	    const idValue = idInput.value.trim();
 	
-	// 실시간 유효성 검사
+	    if (!idValue) {
+	        idError.textContent = "아이디를 입력해주세요.";
+	        idError.style.color = "red";
+	        return;
+	    }
+	
+	    $.ajax({
+	        url: `${path}/member/idduplicate.do`,
+	        type: "POST",
+	        data: { id: idValue },
+	        success: function (response) {
+	            if (response.isDuplicate) {
+	                idError.textContent = "이미 사용 중인 아이디입니다.";
+	                idError.style.color = "red";
+	            } else {
+	                idError.textContent = "사용 가능한 아이디입니다.";
+	                idError.style.color = "green";
+	            }
+	        },
+	        error: function () {
+	            idError.textContent = "아이디 확인 중 문제가 발생했습니다.";
+	            idError.style.color = "red";
+	        }
+	    });
+	};
+	
+	//실시간 유효성 검사
 	const idInput = document.getElementById('id');
 	const passwordInput = document.getElementById('password');
 	const confirmPasswordInput = document.getElementById('confirm-password');
@@ -222,7 +253,7 @@ $(document).ready(function () {
 	const passwordError = passwordInput.nextElementSibling;
 	const confirmPasswordError = confirmPasswordInput.nextElementSibling;
 	const phoneError = phoneInput.nextElementSibling;
-
+	
 	// 유효성 검사 함수
 	function validateId() {
 	  const idValue = idInput.value.trim();
@@ -258,7 +289,7 @@ $(document).ready(function () {
 		  confirmPasswordError.style.color = 'green';
 		  return true;
 		}
-	
+
 	function validatePhone() {
 		  const phoneValue = phoneInput.value.trim();
 		  const phoneRegex = /^010\d{8}$/; // 010으로 시작하고 11자리 숫자
@@ -270,16 +301,26 @@ $(document).ready(function () {
 		  phoneError.textContent = '';
 		  return true;
 		}
-	
+
 	idInput.addEventListener('input', validateId);
 	passwordInput.addEventListener('input', validatePassword);
 	confirmPasswordInput.addEventListener('input', validateConfirmPassword);
 	phoneInput.addEventListener('input', validatePhone);
+
+
+	document.getElementById("signup-form").addEventListener("submit", async function (event) {
+	    event.preventDefault(); // 기본 동작 방지
 	
-	
-	const fn_invalidate=()=>{
-		
-		const nameInput = document.getElementById('name');
+	    const isValid = await fn_invalidate(); // 유효성 검사 결과
+	    if (isValid) {
+	        this.submit(); // 유효성 검사 통과 시 제출
+	    } else {
+	        console.log("유효성 검사 실패, 제출 중단");
+	    }
+	});
+
+	const fn_invalidate = async () => {
+	    const nameInput = document.getElementById('name');
 	    const idInput = document.getElementById('id');
 	    const passwordInput = document.getElementById('password');
 	    const confirmPasswordInput = document.getElementById('confirm-password');
@@ -288,153 +329,84 @@ $(document).ready(function () {
 	    const birthMonthSelect = document.getElementById('birth-month');
 	    const birthDaySelect = document.getElementById('birth-day');
 	    const phoneInput = document.getElementById('phone');
-	    const idError = document.querySelector('.id-group').nextElementSibling;
-		
-		if (nameInput.value.trim() === "") {
-            alert("이름을 입력해주세요.");
-            nameInput.focus();
-            return false;
-        }
-		
-		if (idInput.value.trim() === "") {
-            alert("아이디를 입력해주세요.");
-            idInput.focus();
-            return false;
-        }
-		
-		if (idError.textContent === "이미 사용 중인 아이디입니다.") {
-	        alert("이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
+	
+	    if (nameInput.value.trim() === "") {
+	        alert("이름을 입력해주세요.");
+	        nameInput.focus();
+	        return false;
+	    }
+	
+	    if (idInput.value.trim() === "") {
+	        alert("아이디를 입력해주세요.");
 	        idInput.focus();
 	        return false;
 	    }
-		
-		if (passwordInput.value.trim() === "") {
-            alert("비밀번호를 입력해주세요.");
-            passwordInput.focus();
-            return false;
-        }
-        if (confirmPasswordInput.value.trim() === "") {
-            alert("비밀번호 확인을 입력해주세요.");
-            confirmPasswordInput.focus();
-            return false;
-        }
-        if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
-            alert("비밀번호가 일치하지 않습니다.");
-            confirmPasswordInput.focus();
-            return false;
-        }
-        if (emailInput.value.trim() === "") {
-            alert("이메일을 입력해주세요.");
-            emailInput.focus();
-            return false;
-        }
-        if (!birthYearSelect.value || !birthMonthSelect.value || !birthDaySelect.value) {
-            alert("생년월일을 모두 선택해주세요.");
-            birthYearSelect.focus();
-            return false;
-        }
-        
-     	// 만 18세 이상 확인
-        const birthYear = parseInt(birthYearSelect.value, 10);
-        const birthMonth = parseInt(birthMonthSelect.value, 10) - 1; // 월은 0부터 시작
-        const birthDay = parseInt(birthDaySelect.value, 10);
-        const today = new Date();
-        const birthDate = new Date(birthYear, birthMonth, birthDay);
-        const age = today.getFullYear() - birthYear;
-
-        if (
-            age < 18 ||
-            (age === 18 &&
-                (today.getMonth() < birthMonth || 
-                (today.getMonth() === birthMonth && today.getDate() < birthDay)))
-        ) {
-            alert("만 18세 이상만 가입할 수 있습니다.");
-            birthYearSelect.focus();
-            return false;
-        }
-        
-        if (phoneInput.value.trim() === "") {
-            alert("전화번호를 입력해주세요.");
-            phoneInput.focus();
-            return false;
-        }
-		
-        return true;
-    }
 	
-	
-	const checkId=()=> {
-	    const idInput = document.getElementById("id");
-	    const idError = document.querySelector('.id-group').nextElementSibling;
-	    const idValue = idInput.value.trim();
-
-	    if (!validateId()) {
-	        return; // 유효성 검사에 실패하면 중복 확인 요청을 하지 않음
+	    if (passwordInput.value.trim() === "") {
+	        alert("비밀번호를 입력해주세요.");
+	        passwordInput.focus();
+	        return false;
 	    }
-
-	    $.ajax({
-	        url: `${path}/member/idduplicate.do`, // 서버 요청 URL
-	        type: "POST",
-	        data: { id: idValue }, // 전송 데이터
-	        success: function (response) {
-	            // 서버에서 반환된 JSON 데이터 처리
-	            if (response.isDuplicate) {
-	                idError.textContent = "이미 사용 중인 아이디입니다.";
-	                idError.style.color = "red";
-	            } else {
-	                idError.textContent = "사용 가능한 아이디입니다.";
-	                idError.style.color = "green";
-	            }
-	        },
-	        error: function () {
-	            idError.textContent = "아이디 확인 중 문제가 발생했습니다.";
-	            idError.style.color = "red";
-	        }
-	    });
-	}
 	
-	const checkDuplicate=()=> {
+	    if (confirmPasswordInput.value.trim() !== passwordInput.value.trim()) {
+	        alert("비밀번호가 일치하지 않습니다.");
+	        confirmPasswordInput.focus();
+	        return false;
+	    }
+	
+	    if (emailInput.value.trim() === "") {
+	        alert("이메일을 입력해주세요.");
+	        emailInput.focus();
+	        return false;
+	    }
+	
+	    if (!birthYearSelect.value || !birthMonthSelect.value || !birthDaySelect.value) {
+	        alert("생년월일을 모두 선택해주세요.");
+	        return false;
+	    }
+	
+	    const isDuplicateValid = await checkDuplicate();
+	    return isDuplicateValid;
+	};
+
+	const checkDuplicate = () => {
 	    const nicknameInput = document.getElementById("nickname");
-	    const nicknameValue = idInput.value.trim();
+	    const nicknameValue = nicknameInput.value.trim();
 	    const phoneInput = document.getElementById("phone");
 	    const phoneValue = phoneInput.value.trim();
 	    const emailInput = document.getElementById("email");
 	    const emailValue = emailInput.value.trim();
-
-	    $.ajax({
-	        url: `${path}/member/checkduplicate.do`, // 서버 요청 URL
-	        type: "POST",
-	        data: { nickname: nicknameValue, phone: phoneValue, email: emailValue }, // 전송 데이터
-	        success: function (response) {
-	            // 서버에서 반환된 JSON 데이터 처리
-	            if (response.nicknameIsDuplicate) {
-	            	alert("입력하신 닉네임이 이미 존재합니다.");
-	            	return false;
-	            } 
-	            
-	            if (response.phoneIsDuplicate) {
-	            	alert("입력하신 전화번호가 이미 존재합니다.");
-	            	return false;
+	
+	    return new Promise((resolve) => {
+	        $.ajax({
+	            url: `${path}/member/checkduplicate.do`,
+	            type: "POST",
+	            data: { nickname: nicknameValue, phone: phoneValue, email: emailValue },
+	            success: function (response) {
+	                if (response.nicknameIsDuplicate) {
+	                    alert("입력하신 닉네임이 이미 존재합니다.");
+	                    nicknameInput.focus();
+	                    resolve(false);
+	                } else if (response.phoneIsDuplicate) {
+	                    alert("입력하신 전화번호가 이미 존재합니다.");
+	                    phoneInput.focus();
+	                    resolve(false);
+	                } else if (response.emailIsDuplicate) {
+	                    alert("입력하신 이메일이 이미 존재합니다.");
+	                    emailInput.focus();
+	                    resolve(false);
+	                } else {
+	                    resolve(true);
+	                }
+	            },
+	            error: function () {
+	                alert("중복 확인 중 오류가 발생했습니다.");
+	                resolve(false);
 	            }
-	            
-	            if (response.emailIsDuplicate) {
-	            	alert("입력하신 이메일이 이미 존재합니다.");
-	            	return false;
-	            }
-	            
-	            return true;
-	           
-	        },
-	        error: function () {
-	            alert("데이터 중복 확인 중 문제가 발생했습니다.");
-	            return false;
-	        }
+	        });
 	    });
-	}
-	
-	
-	
-
+	};
 </script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+ 
