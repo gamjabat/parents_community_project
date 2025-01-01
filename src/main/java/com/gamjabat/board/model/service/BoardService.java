@@ -1,15 +1,13 @@
 package com.gamjabat.board.model.service;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
-import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -369,5 +367,37 @@ public class BoardService{
 
 	}
 
+	 //댓글 좋아요 기능. 
 
+
+	    public int commentisLiked(Map<String,String> param) {
+	        SqlSession session = getSession();
+	        try {
+	        	int result=dao.selectBoardCommentLikeCheck(session,param);
+	        	//result가 있으면 삭제, 없으면 추가
+	        	Map<String, String> param2=new HashMap<>(param);
+	        	if(result==0) { 
+	        		result=dao.insertCommentLike(session,param);
+	        		param2.put("flag", "increment");
+	        		dao.updateLikeCount(session,param2);
+	        		session.commit();
+	        		return 1;
+	        	}else { 
+	        		result=dao.deleteCommentLike(session,param);
+	        		param2.put("flag", "decrement");
+	        		dao.updateLikeCount(session,param2);
+	        		session.commit();
+	        		return 0;
+	        	}
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+	        	session.rollback();
+	        	return 2;
+	        }
+	        finally {
+	            session.close();
+	        }
+	    }
+
+	 
 }

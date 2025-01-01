@@ -103,7 +103,7 @@
                 <div class="d-flex justify-content-center align-items-center px-1">
                 	<div class="icons">
 	                	<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-chat-left-dots mx-1" viewBox="0 0 16 16">
-						  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+						  <pa	th d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
 						  <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
 						</svg>
                 	</div>
@@ -129,7 +129,9 @@
 		                </form>
 	                	</div>
 	           		 </div>
-
+            	
+            	
+            	
             	
           <!-- 댓글시작  -->  	
   <div id="tbl-comment">
@@ -171,14 +173,29 @@
                                 </c:choose>   
                             </div>
                             
+                        <div class="d-flex justify-content-center align-items-center px-1">	
+	            		<div class="icons comment-heart-icon" name="${comment.commentNo }">
+		            	<!-- 빈하트 -->
+	           			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+							<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+						</svg>
+						<!-- 빨간 하트
+						<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+						</svg> -->
+						
+						</div>
+	                <span class="fw-bold">  </span>
+                        
+                    </div>   
                         <!-- 댓글 날짜 -->
                         <div class="comment-meta pb-2">
                             <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
                             <input type="hidden" name="parentCommentNo" value="${comment.commentNo}"/>
-                          
                             <button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">답글</button>
                         </div>
-                    </div>
+    
+                   
                 </c:if>
                 
                 <!-- 대댓글 (레벨 2) -->
@@ -488,6 +505,8 @@ const heartIcon = document.getElementById("heart-icon");
 	            commentNoInput.value = commentNo;
 	            form.appendChild(commentNoInput);
 	        }
+	        
+	        
 	    });
 	
 	    // 모달 닫힐 때 숨겨진 필드 초기화
@@ -513,7 +532,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(data => {
         isLikeStatus = data.isLiked; // 좋아요 상태 변수 업데이트
-        if(isLikeStatus==1||isLikeStatus==0){   
+        if(isLikeStatus==1||isLikeStatus==0){
         	updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
         	const count=data.newLikeCount;
         	$("#heart-icon+span").text("좋아요 "+count);
@@ -568,6 +587,8 @@ function updateLikeStatus() {
 
 
 
+
+
 // 하트 아이콘 업데이트 함수
 function updateHeartIcon(isLikeStatus) {
     heartIcon1.innerHTML = isLikeStatus==1 ? 
@@ -584,5 +605,133 @@ function updateHeartIcon(isLikeStatus) {
 
 
 
+<!-- <!-- 댓글 판 AJAX 하트 기능 추가 -->
+<script> 
+	let likeElement;
+	document.querySelectorAll(".comment-heart-icon").forEach(div=>div.addEventListener("click",(e)=> {
+		const memberNo='${loginMember.memberNo}';
+		const commentNo=e.currentTarget.getAttribute("name");
+		likeElement=e.currentTarget;
+		//console.log("하트클릭",memberNo,commentNo);
+		fetch("${path}/board/commentisLiked.do?memberNo="+memberNo+"&commentNo="+commentNo)
+		.then(response=>response.text())
+		.then(data=>{
+			if(data==1){
+				likeElement.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+			        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+				    </svg>`;
+			}else if(data==0){
+				likeElement.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+			        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+				    </svg>`;
+			}else{
+				alert("좋아요 실패! 잠시 후 다시 시도해보세요!");
+			}
+		})
+	})
+);
 
+<%-- <script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch(`${path}/board/commentisLiked.do?boardNo=${board.boardNo}&memberNo=${sessionScope.loginMember.memberNo}&commentNo=${comment.commentNo}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('서버 상태 이상'); // 서버에서 200 OK가 아닌 경우 에러 처리
+        }
+        return response.json();
+    })
+    .then(data => {
+        commentisLikeStatus = data.commentisLiked; // 좋아요 상태 변수 업데이트
+        if(commentisLikeStatus==1||commentisLikeStatus==0){
+        	commentupdateHeartIcon(commentisLikeStatus); // 하트 아이콘 업데이트
+        	const count=data.commentnewLikeCount;
+        	$("#comment-heart-icon+span").text("좋아요 "+count);
+        }
+        else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
+        
+        
+    })
+    .catch(error => console.error('좋아요 상태 로드 실패:', error));
+});
+
+const heartIcon1 = document.getElementById("comment-heart-icon"); // 아이디 중복 문제 해결
+const likeCount = document.getElementById("likeCount");
+
+// 하트 클릭 시 좋아요 상태 토글
+heartIcon1.addEventListener("click", () => {
+    //isLikeStatus = !isLikeStatus; // 상태 토글
+    commentupdateLikeStatus(); // 서버로 요청 보내기
+});
+
+function commentupdateLikeStatus() {
+    fetch(`${path}/board/commenttoggleLike.do`, {
+        method: 'POST', // 메소드를 명시적으로 POST로 설정
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            boardNo: "${board.boardNo}", // 실제 boardNo를 동적으로 전달
+            memberNo: "${sessionScope.loginMember.memberNo}" // 실제 memberNo를 동적으로 전달
+            commentNo: "${comments.commentNo}"
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('좋아요 상태 변경 실패'); // 서버 에러 처리
+        }
+        return response.json();
+    })
+    .then(data => {
+    	 commentisLikeStatus = data.success; // 좋아요 상태 변수 업데이트
+         if(commentisLikeStatus==1||commentisLikeStatus==0){   
+        	 commentupdateHeartIcon(commentisLikeStatus); // 하트 아이콘 업데이트
+         	const count=data.commentnewLikeCount;
+         	$("#comment-heart-icon+span").text("좋아요 "+count);
+         }
+         else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
+    })
+    .catch(error => {
+        console.error('좋아요 상태 업데이트 중 오류:', error);
+        alert('네트워크 오류');
+    });
+}
+
+
+// 하트 아이콘 업데이트 함수
+function commentupdateHeartIcon(commentisLikeStatus) {
+    heartIcon1.innerHTML = commentisLikeStatus==1 ? 
+    `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+    </svg>` : 
+    `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+    </svg>`;
+}
+
+
+
+const commentheartIcon = document.getElementById("comment-heart-icon");
+//클릭 이벤트 리스너 추가
+commentheartIcon.addEventListener("click", () => {
+    // 상태 토글
+    isLiked = !isLiked;
+
+    // 상태에 따라 아이콘 변경
+    if (isLiked) {
+        // 빨간 하트
+        commentheartIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+            </svg>
+        `;
+    } else {
+        // 빈 하트
+        commentheartIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+            </svg>
+        `;
+    }
+}); --%> 
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
