@@ -100,17 +100,22 @@ public class BoardService{
 	
 	 
 
+	 	
+	 // 게시글 수정하고 등록한 데이터들 처리 
 	 
-	 
-	 
-	 public void updateBoard(Board board) {
-		 SqlSession session = getSession();
-		        dao.updateBoard(session, board);
-		       
+	 public int updateBoard(Board board) {
+		    SqlSession session = getSession(); // 세션 생성
+		    int result = new BoardDao().updateBoard(session, board);
+		    if (result > 0) {
+		        session.commit(); // 성공 시 커밋
+		    } else {
+		        session.rollback(); // 실패 시 롤백
 		    }
-		
+		    session.close(); // 세션 닫기
+		    return result;
+		}
 
-	 
+
 			
 
 	

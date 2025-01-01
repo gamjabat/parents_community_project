@@ -27,7 +27,7 @@ public class BoardDao {
 	
     public Board selectByBoardNo(SqlSession session, String boardNo) {
         
-        return session.selectOne("board.selectByBoardNo", boardNo);
+        return session.selectOne("board.selectByBoardNo1", boardNo);
         	
 	}
 	
@@ -40,13 +40,41 @@ public class BoardDao {
      }
     
     
-    public void updateBoard(SqlSession session, Board board) {
-        
-            session.update("Board.updateBoard", board);
-            session.commit();
+    // 게시글 수정 후 등록한 데이터 처리.
+    public int updateBoard(SqlSession session, Board board) {
+        return session.update("board.updateBoard", board); // SQL 매퍼 호출
+    }
+
     
-     }
-       
+   
+    public int updateTags(SqlSession session, String boardNo, String[] tags) {
+        int result = 0;
+
+        // 기존 태그 삭제
+        result += session.delete("board.deleteTagsByBoardNo", boardNo);
+
+        // 새로운 태그 추가
+        for (String tag : tags) {
+            // 1. 태그가 존재하는지 확인
+            Integer hashtagNo = session.selectOne("board.selectHashtagId", tag.trim());
+            
+            // 2. 태그가 없으면 삽입
+            if (hashtagNo == null) {
+                session.insert("board.insertHashtag", tag.trim());
+                hashtagNo = session.selectOne("board.selectHashtagId", tag.trim());
+            }
+
+            // 3. board_hashtag에 삽입
+            Map<String, Object> param = Map.of(
+                "boardNo", boardNo,
+                "hashtagNo", hashtagNo
+            );
+            result += session.insert("board.insertTag", param);
+        }
+
+        return result;
+    }
+
 
      
     //댓글 인서트 코드

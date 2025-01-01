@@ -46,7 +46,7 @@
 	}
 	
 	/* 해시태그 24.12.28 조금 수정.*/
-	.hashtag-container div{
+	.hashtag-container div a{
 		color: black;
 		text-decoration: none; 
 		margin: 2px;
@@ -57,7 +57,7 @@
 		padding: 5px;
 	}
 	
-	.hashtag-container div:hover{
+	.hashtag-container div a:hover{
 		cursor: pointer;
 		color: #5A8B63;
 	}

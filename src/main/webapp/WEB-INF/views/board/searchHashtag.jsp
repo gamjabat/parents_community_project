@@ -12,7 +12,7 @@
 
 <div class="board-header">
     <div class="board-category">
-        <h2>"${hashtag}" 포함된 게시물은 총 ${resultCount }개의 결과입니다.</h2>
+        <h5>"${hashtag}" 포함된 게시물은 총 ${resultCount }개 입니다.</h5>
     </div>
     
     <c:if test="${sessionScope.loginMember!=null }">

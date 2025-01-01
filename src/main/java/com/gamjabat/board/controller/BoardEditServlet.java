@@ -62,6 +62,8 @@ public class BoardEditServlet extends HttpServlet {
     	    }
 
     	    Board board = boardService.selectByBoardNo(boardNo);
+    	    System.out.println(board.getTag()); // 태그 데이터 확인
+    	    
     	    request.setAttribute("board", board);
     	    request.getRequestDispatcher("/WEB-INF/views/board/boardEdit.jsp").forward(request, response);
     	
