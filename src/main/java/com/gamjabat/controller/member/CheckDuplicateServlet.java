@@ -1,7 +1,7 @@
 package com.gamjabat.controller.member;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gamjabat.service.member.MemberService;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class IdDuplicateServlet
  */
-//@WebServlet("/member/idduplicate.do")
-public class checkDuplicateServlet extends HttpServlet {
+@WebServlet("/member/checkduplicate.do")
+public class CheckDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public checkDuplicateServlet() {
+    public CheckDuplicateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +32,15 @@ public class checkDuplicateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String nickname = request.getParameter("nickname");
-//		String phone = request.getParameter("phone");
-//		String email = request.getParameter("email");
-//		
-//		Map<String, Object> param = new HashMap<>();
-//		
-//		boolean isDuplicate = new MemberService().selectMemberToCheckDuplicate(param);
-//		
-//		boolean isDuplicate = (m != null);
-//
-//        response.setContentType("application/json;charset=utf-8");
-//        response.getWriter().write("{\"isDuplicate\": " + isDuplicate + "}");
+		String nickname = request.getParameter("nickname");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		
+		Map<String, Boolean> result = new MemberService().checkDuplicate(nickname, phone, email);
+
+        response.setContentType("application/json; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(new Gson().toJson(result)); 
 	}
 
 	/**

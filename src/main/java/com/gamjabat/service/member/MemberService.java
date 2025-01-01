@@ -2,12 +2,12 @@ package com.gamjabat.service.member;
 
 import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.gamjabat.board.model.dto.Board;
 import com.gamjabat.model.dao.MemberDao;
 import com.gamjabat.model.dto.likes.Likes;
 import com.gamjabat.model.dto.member.Member;
@@ -74,11 +74,21 @@ public class MemberService {
 	 }
 	 
 	 public int selectLikeAllByMemberNoCount(String memberNo) {
-			SqlSession session = getSession();
-			int count = dao.selectLikeAllByMemberNoCount(session, memberNo);
-			session.close();
-			return count;
+		SqlSession session = getSession();
+		int count = dao.selectLikeAllByMemberNoCount(session, memberNo);
+		session.close();
+		return count;
 	
 	}
+	 
+	 public Map<String, Boolean> checkDuplicate(String nickname, String phone, String email) {
+		SqlSession session = getSession();
+        Map<String, Boolean> result = new HashMap<>();
+        result.put("nicknameIsDuplicate", dao.isNicknameDuplicate(session, nickname));
+        result.put("phoneIsDuplicate", dao.isPhoneDuplicate(session, phone));
+        result.put("emailIsDuplicate", dao.isEmailDuplicate(session, email));
+        session.close();
+        return result;
+	 }
 	
 }
