@@ -54,8 +54,9 @@ public class BoardEditServlet extends HttpServlet {
 
     	    // 작성자인지 확인
     	    if (!loginMember.getMemberNo().equals(writerMemberNo)) {
-    	        System.out.println("작성자가 아닙니다. 접근 권한 없음.");
-    	        response.sendRedirect(request.getContextPath() + "/board.do");
+    	    	request.setAttribute("errorMsg", "게시글 수정 권한이 없습니다.");
+    	        //response.sendRedirect(request.getContextPath() + "/");
+    	    	request.getRequestDispatcher("/WEB-INF/views/board/errorPage.jsp").forward(request, response);
     	        return;
     	    } else {
     	        System.out.println("작성자가 맞습니다. 수정 권한 있음.");
