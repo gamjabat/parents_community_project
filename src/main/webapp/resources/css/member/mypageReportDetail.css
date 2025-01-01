@@ -5,7 +5,7 @@
     display: flex;
    	width : 100%;
     max-width: 100%;
-    min-height: 100%;
+    min-height: 70%;
     background-color: #F6F2ED;
 }
 
@@ -19,6 +19,7 @@
 /* 사이드바 크키 */
 .mypage-sidebar {
     width: 20%;
+    height: 100%;
     background-color: rgba(90, 139, 99, 0.1);
     border-radius: 15px;
     padding: 15px;
@@ -54,20 +55,15 @@
 .mypage-sidebar a:hover {
     color: #5c8f51;
     font-weight: 600;
-    text-decoration: underline;
 }
 
-.mypage-sidebar a:hover {
-    color: #5c8f51;
-    font-weight: 600;
-}
 
-/* 메인콘텐트 설정 */
+/* 메인 콘텐츠 스타일 */
 .mypage-content {
-	width : 100%;
+    width : 100%;
 	display : flex;
 	flex-direction: column;
-	align-items: center;
+  	align-items: center;
 }
 
 .mypage-content h2 {
@@ -80,43 +76,60 @@
     color: #5c8f51;
 }
 
-.like-content {
-	width: 90%;
-    height: 80%;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 15px;
-	border-color: #5c8f51;
+/* 신고 상세 내용 카드 스타일 */
+.report-content {
+    width: 70%;
+    border: 1px solid #5c8f51;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: #333;
+    line-height: 1.6;
 }
 
-thead th {
-	font-size: 15px;
-	text-align: center;
-	border-bottom: 2px solid #5c8f51;
-	padding: 10px 0px;
+.report-content div {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
 }
 
-tbody {
-	font-size: 13px;
-	text-align: center;
+.report-content div span {
+    font-weight: bold;
+    color: #5c8f51;
 }
 
-td{
-	padding: 10px 0;
-	border-bottom: 1px solid #ddd;
-}
-
-.like-table a {
+.report-content a {
     text-decoration: none;
-    color: inherit;
+    color: #5c8f51;
+    font-weight: bold;
 }
 
-.like-table a:hover {
+.report-content a:hover {
     text-decoration: underline;
+    color: #3E6F40;
 }
 
-.no-content{
-	font-size: 15px;
-	padding: 240px 0;
-	border-bottom: none;
+/* 삭제된 게시물 경고 */
+.report-warning {
+    font-size: 14px;
+    color: red;
+    margin-top: 10px;
 }
+
+.page-btn{
+	display: flex;
+	align-items: center;
+	justify-content: center !important;
+}
+
+.page-btn>button{
+	white-space: nowrap;
+	width: auto;
+	border-radius: 15px;
+	
+}
+

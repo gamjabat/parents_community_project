@@ -82,8 +82,22 @@
 			<p>${board.content}</p>
             <!-- 해시태그 -->
             <div class="hashtag-container d-flex flex-row justify-content-start">
-            	<div>#인사</div>
-            	<div>#인사</div>
+			<c:forEach var="hashtag" items="${hashtags}">
+			    <div>
+			        <c:url var="encodedUrl" value="/board/hashtag.do">
+			            <c:param name="hashtag" value="${hashtag}" />
+			        </c:url>
+			        <a href="${encodedUrl}">${hashtag}</a>
+			    </div>
+			</c:forEach>
+			
+			<%-- <c:forEach var="hashtag" items="${hashtags}">
+			    <div>
+			        <a href="${path}/board/hashtag.do?hashtag=${fn:escapeXml(hashtag)}">
+			            ${hashtag}
+			        </a>
+			    </div>
+			</c:forEach>	 --%>
             </div>
             <!-- 좋아요 및 댓글 입력 -->
             <div class="board-stats my-3 d-flex align-items-center">
@@ -356,7 +370,7 @@
     
     
  //  대댓글 기능 스크립트.
-	$(".btn-insert2").click(e => {
+/* 	$(".btn-insert2").click(e => {
 	    const $parent = $(e.target).parents("div.comment");
 	    console.log($parent);
 	    const $form = $(".comment-input>form").clone();
@@ -377,10 +391,10 @@
 	    // 생성한 폼을 댓글 아래에 추가
 	    $parent.after($form);
 	});
-
+ */
 	
 //아이콘을 담고 있는 요소 선택
-const heartIcon = document.getElementById("heart-icon");
+/* const heartIcon = document.getElementById("heart-icon"); */
 
 // 현재 상태 (true: 좋아요, false: 좋아요 해제)
 /* let isLiked = false; */

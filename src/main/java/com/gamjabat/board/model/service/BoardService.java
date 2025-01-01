@@ -4,6 +4,7 @@ import static com.gamjabat.common.SqlSessionTemplate.getSession;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,22 +28,43 @@ public class BoardService{
 	
 	private BoardDao dao = new BoardDao();
 	
-	public int insertBoard(Board b) {
+	public int insertBoard(Board b,String[] tags) {
 	
-	SqlSession session = getSession();
-	int result = dao.insertBoard(session, b);
+		SqlSession session = getSession();
+		int result=0;
+		try {
+			 result = dao.insertBoard(session, b);
+			if(result>0 && tags.length>0) {
+				for(String tag : tags) {
+					Map<String,String> tagMap=new HashMap<>();
+					tagMap.put("tag", tag);
+					result=dao.insertHashtag(session,tagMap);
+					if(result>0) {
+						result=dao.linkHashtagToBoard(session,Map.of("tag",tagMap.get("tagCode"),"boardNo",b.getBoardNo()));
+						if(result==0) {
+							session.rollback();
+							return 0;
+						}
+					}
+				}
+				session.commit();
+			}else {
+				return 0;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.rollback();
+			return 0;
+		}finally {
+			session.close();
+		}
+		return result;
+	}
 	
-	if(result>0) session.commit();
-	else session.rollback();
-	session.close();
-	
-	return result;
-}
-	
-	public List<Board> selectBoardAll() {
+	public List<Board> selectBoardAll(Map<String, Integer> param) {
 		
 		SqlSession session = getSession();
-		List<Board> boards = dao.selectBoardAll(session);
+		List<Board> boards = dao.selectBoardAll(session,param);
 		session.close();
 		return boards;
 		
@@ -78,17 +100,22 @@ public class BoardService{
 	
 	 
 
+	 	
+	 // 게시글 수정하고 등록한 데이터들 처리 
 	 
-	 
-	 
-	 public void updateBoard(Board board) {
-		 SqlSession session = getSession();
-		        dao.updateBoard(session, board);
-		       
+	 public int updateBoard(Board board) {
+		    SqlSession session = getSession(); // 세션 생성
+		    int result = new BoardDao().updateBoard(session, board);
+		    if (result > 0) {
+		        session.commit(); // 성공 시 커밋
+		    } else {
+		        session.rollback(); // 실패 시 롤백
 		    }
-		
+		    session.close(); // 세션 닫기
+		    return result;
+		}
 
-	 
+
 			
 
 	
@@ -286,10 +313,10 @@ public class BoardService{
 	     return result;
 	 }
 	 
-
-	    public List<Board> getBoardsByCategory(String typeNo) {
+// 카테고리별 검색
+	    public List<Board> getBoardsByCategory(String typeNo, Map<String, Integer> param) {
 	        SqlSession session = getSession();
-	        List<Board> boardList = dao.selectBoardsByCategory(session, typeNo);
+	        List<Board> boardList = dao.selectBoardsByCategory(session, typeNo, param);
 	        session.close();
 	        return boardList;
 	    }
@@ -339,6 +366,8 @@ public class BoardService{
 		}
 
 	 
+	 
+	 // 게시물 페이징바
 	 public List<Board> selectPagingBoard(Map<String, Integer> param) {
 		 SqlSession session = getSession();
 		 List<Board> board = dao.selectPagingBoard(session, param);
@@ -346,12 +375,25 @@ public class BoardService{
 		 return board;
 	 }
 	 
+	 // 게시물 페이징바(관련) 행의 총 개수 
 	 public int selectBoardCount() {
 		 SqlSession session = getSession();
 		 int count = dao.selectBoardCount(session);
 		 session.close();
 		 return count;
 	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 public List<BoardComments> selectCommentsAllByMemberNo(Map<String, Object> param){
 		 	SqlSession session = getSession();
 			List<BoardComments> comments = dao.selectCommentsAllByMemberNo(session, param);
@@ -367,7 +409,78 @@ public class BoardService{
 
 	}
 
+<<<<<<< HEAD
 	 //댓글 좋아요 기능. 
+=======
+	
+	 
+	
+	 
+	 // 게시물 저장 및 번호 호환
+	 
+	 public String insertBoardAndGetId(Board board) {
+		    SqlSession session = getSession();
+		    int result = dao.insertBoard(session, board);
+		    String boardNo = board.getBoardNo(); // MyBatis의 selectKey 활용
+		    if (result > 0) {
+		        session.commit();
+		    } else {
+		        session.rollback();
+		    }
+		    session.close();
+		    return boardNo;
+		}
+
+	 // 해시태그 저장 및 번호 반환
+	 
+	 public List<String> insertHashtags(List<String> tags) {
+		    SqlSession session = getSession();
+		    List<String> hashtagNos = new ArrayList<>();
+		    for (String tag : tags) {
+		        String hashtagNo = dao.insertHashtagAndGetId(session, tag);
+		        hashtagNos.add(hashtagNo);
+		    }
+		    session.commit();
+		    session.close();
+		    return hashtagNos;
+		}
+
+	 public int linkHashtagToBoard(String boardNo, List<String> hashtagNos) {
+		    SqlSession session = getSession();
+		    int count = 0; // 연결된 행의 수를 저장
+		    try {
+		        for (String hashtagNo : hashtagNos) {
+		            Map<String, String> params = Map.of("boardNo", boardNo, "hashtagNo", hashtagNo);
+		            count += dao.linkHashtagToBoard(session, params); // DAO 호출
+		        }
+		        session.commit();
+		    } finally {
+		        session.close();
+		    }
+		    return count; // 성공적으로 삽입된 행의 개수 반환
+		}
+
+
+	 // 해시태그 가져오기
+	 
+	 public List<String> selectHashtagsByBoardNo(String boardNo) {
+		    SqlSession session = getSession();
+		    List<String> hashtags = dao.selectHashtagsByBoardNo(session, boardNo);
+		    session.close();
+		    return hashtags;
+		}
+	 
+	 // 해시태그 클릭하면 검색
+	 
+	 public List<Board> getBoardsByContentHashtag(String hashtag) {
+		    SqlSession session = getSession();
+		    List<Board> boards = dao.selectBoardsByContentHashtag(session, hashtag);
+		    session.close();
+		    return boards;
+		}
+
+
+>>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
 
 
 	    public int commentisLiked(Map<String,String> param) {

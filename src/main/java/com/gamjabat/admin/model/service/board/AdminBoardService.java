@@ -11,6 +11,7 @@ import com.gamjabat.admin.model.dao.board.AdminBoardDao;
 import com.gamjabat.admin.model.dto.InqueryBoard;
 import com.gamjabat.admin.model.dto.Member;
 import com.gamjabat.admin.model.dto.ReportBoard;
+import com.gamjabat.admin.model.dto.Board;
 
 public class AdminBoardService {
 	AdminBoardDao boardDao = new AdminBoardDao();
@@ -39,6 +40,17 @@ public class AdminBoardService {
 		
 		session.close();
 		
+		
+		return result;
+	}
+
+	public int insertAnnounceBoard(Board insertBoard) {
+		SqlSession session = getSession();
+		int result = boardDao.insertAnnounceBoard(session, insertBoard);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		session.close();
 		
 		return result;
 	}

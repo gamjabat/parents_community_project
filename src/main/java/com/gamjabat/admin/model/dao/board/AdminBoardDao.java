@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.admin.model.dto.InqueryBoard;
 import com.gamjabat.admin.model.dto.ReportBoard;
+import com.gamjabat.admin.model.dto.Board;
 
 public class AdminBoardDao {
 
@@ -35,6 +36,11 @@ public class AdminBoardDao {
 	public int updateReportProcessing(SqlSession session, Map<String, String> param) {
 		return session.update("admin.updateReportProcessing", param);
 				
+	}
+
+
+	public int insertAnnounceBoard(SqlSession session, Board insertBoard) {
+		return session.insert("admin.insertAnnounceBoard", insertBoard);
 	}
 
 }

@@ -1,27 +1,27 @@
-package com.gamjabat.admin.controller;
+package com.gamjabat.controller.mypage;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.gamjabat.admin.model.dto.Member;
-import com.gamjabat.admin.model.service.member.AdminMemberService;
+import com.gamjabat.model.dto.report.Report;
+import com.gamjabat.service.report.ReportService;
 
 /**
- * Servlet implementation class AdminMemberInfoServlet
+ * Servlet implementation class MypageReportDetailServlet
  */
-@WebServlet("/admin/memberInfo.do")
-public class AdminMemberInfoServlet extends HttpServlet {
+@WebServlet(name = "MypageReportDetailServlet" , urlPatterns = {"/member/reportdetail.do"})
+public class MypageReportDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberInfoServlet() {
+    public MypageReportDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +30,17 @@ public class AdminMemberInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		Member searchMember = new AdminMemberService().selectMemberById(memberId);
-		request.setAttribute("member", searchMember);
-		request.getRequestDispatcher("/WEB-INF/views/admin/member/memberInfo.jsp").forward(request, response);
-	
+		String reportNo = request.getParameter("reportNo");
+		
+		HttpSession session = request.getSession();
+		
+		Report report = new ReportService().selectReport(reportNo);
+		
+		session.setAttribute("report", report);
+		
+		
+		request.getRequestDispatcher("/WEB-INF/views/member/mypageReportDetail.jsp")
+		.forward(request, response);
 	}
 
 	/**

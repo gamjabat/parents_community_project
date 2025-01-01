@@ -12,9 +12,7 @@
 
 <div class="board-header">
     <div class="board-category">
-        <button class="btn-category">전체글</button>
-        <button class="btn-category hot">HOT</button>
-        <span class="category-depth"></span>
+        <h5>"${hashtag}" 포함된 게시물은 총 ${resultCount }개 입니다.</h5>
     </div>
     
     <c:if test="${sessionScope.loginMember!=null }">
@@ -46,7 +44,7 @@
                 <tr>
                     <td>${board.boardNo}</td>
 			        <td><a href="${path}/board/boarddetail.do?boardNo=${board.boardNo}">[${board.categoryName}]  ${board.title}</a></td>
-			         <td>${board.writerNickname==null?"익명":board.writerNickname}</td>		      
+			        <td>${board.writerNickname!=null?board.writerNickname:'익명' }</td>		      
 			        <td><fmt:formatDate value="${board.createdAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			        <td>${board.likeCount}</td>
 			        <td>${board.viewCount}</td>
@@ -58,20 +56,10 @@
  
 
  
-<!--  <div class="pagination">
-    <a href="#" class="page-link">&lt;&lt;</a>
-    <a href="#" the class="page-link">&lt;</a>
-    <a href="#" class="page-link active">1</a>
-    <a href="#" class="page-link">2</a>
-    <a href="#" class="page-link">3</a>
-    <a href="#" class="page-link">&gt;</a>
-    <a href="#" class="page-link">&gt;&gt;</a>
-</div> -->
+<div id="pageBar">
+	        	${pageBar }
+	        	</div>
 
-
-<div class="pagination">
-    <c:out value="${pageBar}" escapeXml="false"/>
-</div>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

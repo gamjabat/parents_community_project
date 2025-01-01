@@ -36,7 +36,6 @@ public class ReportProcessingServlet extends HttpServlet {
 		String reason = request.getParameter("reason");
 		String reportNo = request.getParameter("reportNo");
 		
-		System.out.println("프로세싱 ::"+processingContent+"사유::"+reason+"asdf:: "+ reportNo);
 		
 		Map<String, String> param = new HashMap<>();
 		param.put("pContent", processingContent);

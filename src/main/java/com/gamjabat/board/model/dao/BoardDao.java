@@ -3,6 +3,7 @@ package com.gamjabat.board.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.gamjabat.board.model.dto.Attachment;
@@ -17,15 +18,16 @@ public class BoardDao {
 	}
 	
 	
-	public List<Board> selectBoardAll(SqlSession session) {
-		return session.selectList("board.selectBoardsAll");
+	public List<Board> selectBoardAll(SqlSession session,Map<String, Integer> param) {
+		return session.selectList("board.selectBoardsAll",null,new RowBounds(
+				(param.get("cPage")-1)*param.get("numPerPage"),param.get("numPerPage")));
 	}
 	
 	
 	
     public Board selectByBoardNo(SqlSession session, String boardNo) {
         
-        return session.selectOne("board.selectByBoardNo", boardNo);
+        return session.selectOne("board.selectByBoardNo1", boardNo);
         	
 	}
 	
@@ -38,13 +40,41 @@ public class BoardDao {
      }
     
     
-    public void updateBoard(SqlSession session, Board board) {
-        
-            session.update("Board.updateBoard", board);
-            session.commit();
+    // 게시글 수정 후 등록한 데이터 처리.
+    public int updateBoard(SqlSession session, Board board) {
+        return session.update("board.updateBoard", board); // SQL 매퍼 호출
+    }
+
     
-     }
-       
+   
+    public int updateTags(SqlSession session, String boardNo, String[] tags) {
+        int result = 0;
+
+        // 기존 태그 삭제
+        result += session.delete("board.deleteTagsByBoardNo", boardNo);
+
+        // 새로운 태그 추가
+        for (String tag : tags) {
+            // 1. 태그가 존재하는지 확인
+            Integer hashtagNo = session.selectOne("board.selectHashtagId", tag.trim());
+            
+            // 2. 태그가 없으면 삽입
+            if (hashtagNo == null) {
+                session.insert("board.insertHashtag", tag.trim());
+                hashtagNo = session.selectOne("board.selectHashtagId", tag.trim());
+            }
+
+            // 3. board_hashtag에 삽입
+            Map<String, Object> param = Map.of(
+                "boardNo", boardNo,
+                "hashtagNo", hashtagNo
+            );
+            result += session.insert("board.insertTag", param);
+        }
+
+        return result;
+    }
+
 
      
     //댓글 인서트 코드
@@ -181,9 +211,10 @@ public class BoardDao {
     }
     
 
-    
-    public List<Board> selectBoardsByCategory(SqlSession session, String typeNo) {
-        return session.selectList("board.selectBoardsByCategory", typeNo);
+    // 카테고리
+    public List<Board> selectBoardsByCategory(SqlSession session, String typeNo, Map<String, Integer> param) {
+        return session.selectList("board.selectBoardsByCategory",typeNo,new RowBounds(
+				(param.get("cPage")-1)*param.get("numPerPage"),param.get("numPerPage")));
     }
 
 
@@ -211,6 +242,11 @@ public class BoardDao {
 		return session.selectOne("comments.selectBoardCommentCountAll",boardNo);
 	}
 
+
+    
+    
+    
+    // 게시물 페이징 처리
     public List<Board> selectPagingBoard(SqlSession session, Map<String, Integer> param) {
     		int cPage = param.get("cPage");
     		int numPerPage = param.get("numPerPage");
@@ -220,6 +256,8 @@ public class BoardDao {
     	
     }
     
+    // 게시물 총합 개수
+    
     public int selectBoardCount(SqlSession session) {
     	return session.selectOne("board.selectBoardCount");
     }
@@ -228,6 +266,7 @@ public class BoardDao {
     
     
     
+<<<<<<< HEAD
     //댓글 좋아요 라인.
     public int selectBoardCommentLikeCheck(SqlSession session, Map<String,String> param) {
     	return session.selectOne("comments.selectBoardCommentLike",param);
@@ -261,6 +300,56 @@ public class BoardDao {
     
     
     
+=======
+    
+    
+    
+    
+    // 태그 처리
+    
+    public int checkHashtagExists(SqlSession session, String tag) {
+        return session.selectOne("board.checkHashtagExists", tag);
+    }
+
+    public int insertHashtag(SqlSession session, Map<String,String> tag) {
+        return session.insert("board.insertHashtag", tag);
+    }
+
+    // 태그넘버와 게시물 넘버
+    
+    public int insertBoardHashtag(SqlSession session, Map<String, String> param) {
+        return session.insert("board.insertBoardHashtag", param);
+    }
+
+    public String insertHashtagAndGetId(SqlSession session, String tag) {
+        int result = session.insert("board.insertHashtag", tag);
+        if (result > 0) {
+            return session.selectOne("board.getLastHashtagId", tag);
+        } else {
+            throw new RuntimeException("Hashtag insertion failed for tag: " + tag);
+        }
+    }
+    
+    public int linkHashtagToBoard(SqlSession session, Map<String, String> params) {
+        return session.insert("board.linkHashtagToBoard", params);
+    }
+
+
+    // 해시태그 가져오기!@!
+    
+    public List<String> selectHashtagsByBoardNo(SqlSession session, String boardNo) {
+        return session.selectList("board.selectHashtagsByBoardNo", boardNo);
+    }
+    
+    // 해시태그 검색기능
+    
+    public List<Board> selectBoardsByContentHashtag(SqlSession session, String hashtag) {
+        return session.selectList("board.selectBoardsByContentHashtag", hashtag);
+    }
+
+    
+
+>>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
     
     
 }

@@ -1,27 +1,23 @@
-package com.gamjabat.admin.controller;
+package com.gamjabat.admin.controller.board;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamjabat.admin.model.dto.Member;
-import com.gamjabat.admin.model.service.member.AdminMemberService;
-
 /**
- * Servlet implementation class AdminMemberInfoServlet
+ * Servlet implementation class adminAnnounceWriteServlet
  */
-@WebServlet("/admin/memberInfo.do")
-public class AdminMemberInfoServlet extends HttpServlet {
+@WebServlet("/admin/board/adminWrite.do")
+public class adminAnnounceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberInfoServlet() {
+    public adminAnnounceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +26,7 @@ public class AdminMemberInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		Member searchMember = new AdminMemberService().selectMemberById(memberId);
-		request.setAttribute("member", searchMember);
-		request.getRequestDispatcher("/WEB-INF/views/admin/member/memberInfo.jsp").forward(request, response);
-	
+		request.getRequestDispatcher("/WEB-INF/views/admin/board/adminWriteAnnouncement.jsp").forward(request, response);
 	}
 
 	/**

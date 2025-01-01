@@ -80,7 +80,7 @@
     color: #5c8f51;
 }
 
-.like-content {
+.report-content {
 	width: 90%;
     height: 80%;
 	border-style: solid;
@@ -106,12 +106,12 @@ td{
 	border-bottom: 1px solid #ddd;
 }
 
-.like-table a {
+.report-table a {
     text-decoration: none;
     color: inherit;
 }
 
-.like-table a:hover {
+.report-table a:hover {
     text-decoration: underline;
 }
 

@@ -17,6 +17,7 @@
 	            	<li><a href="${path}/member/mypageboardlist.do">나의 게시글</a></li>
 	            	<li><a href="${path}/member/mypagecomment.do">나의 댓글</a></li>
 	            	<li class="active-sidebar"><a href="${path}/member/mypagelike.do">나의 좋아요</a></li>
+	            	<li><a href="${path}/member/mypagereport.do">나의 신고내역</a></li>
 		     	</ul>
 		 </div>
     	 <div class="mypage-content">

@@ -2,9 +2,6 @@ package com.gamjabat.admin.model.dto;
 
 import java.sql.Timestamp;
 
-import com.gamjabat.board.model.dto.Board;
-//github.com/gamjabat/parents_community_project.git
-import com.gamjabat.model.dto.member.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
