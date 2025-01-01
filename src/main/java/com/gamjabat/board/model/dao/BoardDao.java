@@ -264,9 +264,7 @@ public class BoardDao {
 
     
     
-    
-    
-<<<<<<< HEAD
+
     //댓글 좋아요 라인.
     public int selectBoardCommentLikeCheck(SqlSession session, Map<String,String> param) {
     	return session.selectOne("comments.selectBoardCommentLike",param);
@@ -281,29 +279,7 @@ public class BoardDao {
     	return session.update("comments.updateLikeCount",param);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-=======
-    
-    
-    
+
     
     // 태그 처리
     
@@ -349,7 +325,5 @@ public class BoardDao {
 
     
 
->>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
-    
     
 }

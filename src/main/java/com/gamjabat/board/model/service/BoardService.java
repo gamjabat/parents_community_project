@@ -409,10 +409,7 @@ public class BoardService{
 
 	}
 
-<<<<<<< HEAD
-	 //댓글 좋아요 기능. 
-=======
-	
+
 	 
 	
 	 
@@ -480,7 +477,7 @@ public class BoardService{
 		}
 
 
->>>>>>> branch 'dev' of https://github.com/gamjabat/parents_community_project.git
+
 
 
 	    public int commentisLiked(Map<String,String> param) {
