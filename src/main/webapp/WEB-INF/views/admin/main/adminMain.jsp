@@ -17,17 +17,20 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.7.1.js"
-	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-	crossorigin="anonymous"></script>
+
 </head>
 <body>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<header class="admin-header">
 		<h1>학부모 커뮤니티 관리자 페이지</h1>
 		<nav>
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#users">사용자 관리</a></li>
-				<li><a href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#posts">게시글 관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#users">사용자
+						관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/main.do?cPage=1&numPerPage=5#posts">게시글
+						관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/board/adminWrite.do">공지글 관리</a></li>
 			</ul>
 		</nav>
@@ -49,7 +52,7 @@
 					<c:if test="${not empty members}">
 						<c:forEach var="member" items="${members}">
 							<tr data-no="${member.memberNo}" data-id="${member.memberId}">
-								<td >${member.memberNo}</td>
+								<td>${member.memberNo}</td>
 								<td>${member.memberName}</td>
 								<td>${member.email}</td>
 								<td><button class="details-btn" onclick="openPopup(this)">상세정보</button></td>
@@ -58,18 +61,20 @@
 					</c:if>
 				</tbody>
 			</table>
-		    <div id="pageBar">
-		    	${pageBar }
-		    </div>
+			<div id="pageBar">${pageBar }</div>
 		</section>
 		<section id="posts">
 			<h2>게시글 관리</h2>
 			<nav>
-				<button type="button" 
+				<!-- 				<button type="button" 
 				onclick="hideDeclaration();"
 					class="btn btn-primary">문의글</button>
 				<button type="button" class="btn btn-danger"
 					onclick="hideInquery();">신고글</button>
+ -->
+				<button type="button" onclick="requestInqueryBoard();"
+					class="btn btn-primary">문의글</button>
+				<button type="button" onclick="requestReportBoard();"  class="btn btn-danger" >신고글</button>
 			</nav>
 			<table id="inquiry-table">
 				<thead>
@@ -83,7 +88,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${not empty inqueryboards}">
+ 					<c:if test="${not empty inqueryboards}">
 						<c:forEach var="board" items="${inqueryboards}">
 							<a href="javascript:inqueryDetailSearch();">
 								<tr>
@@ -113,7 +118,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${not empty reportBoards}">
+				<%-- 	<c:if test="${not empty reportBoards}">
 						<c:forEach var="rboard" items="${reportBoards}">
 							<tr data-no="${rboard.reportNo}">
 								<td>${rboard.reportNo}</td>
@@ -123,15 +128,14 @@
 								<td>${rboard.reportReasonCode}</td>
 								<td>${rboard.createdAt}</td>
 								<td>${rboard.status}</td>
-								<td><button class="reportcheck-btn" onclick="openReportPopup(this)">신고처리</button></td>
+								<td><button class="reportcheck-btn"
+										onclick="openReportPopup(this)">신고처리</button></td>
 							</tr>
 						</c:forEach>
-					</c:if>
+					</c:if> --%>
 				</tbody>
 			</table>
-			<div id="pageBar">
-		    	${pageBar }
-		    </div>
+			<div id="bpageBar">${pageBar }</div>
 		</section>
 	</main>
 
@@ -173,14 +177,7 @@
 							+ top
 							+ ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		}
-		const hideDeclaration=()=>{
-			$("#declaration-table").hide();
-			$("#inquiry-table").show();
-		}
-		const hideInquery=()=>{
-			$("#inquiry-table").hide();
-			$("#declaration-table").show();
-		}
+
 		
 		function openReportPopup(button){
 			// 클릭된 행(row) 가져오기
@@ -216,8 +213,77 @@
 		
 		}
 		
+
+		/* 		const hideDeclaration=()=>{
+		$("#declaration-table").hide();
+		$("#inquiry-table").show();
+	}
+	const hideInquery=()=>{
+		$("#inquiry-table").hide();
+		$("#declaration-table").show();
+	} */
+	
 		
-		
+		const requestInqueryBoard = ()=>{
+			$("#declaration-table>tbody").innerHTML="";
+			$("#declaration-table").hide();
+
+			$.ajax({
+				url: '${pageContext.request.contextPath}/admin/board/requestInqueryBoard.do',
+				type:"post",
+				success : function(result){
+					
+					let $resultIqr ='';
+					let $tr='';
+						for(let ib of result){
+							$resultIqr+=`<tr><td data-no="">\${ib.inqueryNo}</td>
+								<td>\${ib.inqueryMember}</td>
+								<td>\${ib.inqueryCode}</td>
+								<td>\${ib.inqueryTitle}</td>
+								<td>\${ib.inqueryContent}</td>
+								<td>\${ib.createdAt}</td></tr>`
+								
+								$("#inquiry-table>tbody").append($resultIqr);
+						} 
+					}
+				});
+			
+				$("#inquiry-table").show();
+			
+			};
+			
+		const requestReportBoard= ()=>{
+			$.ajax({
+				url: '${pageContext.request.contextPath}/admin/board/requestReportBoard.do',
+				type:"post",
+				success : function(result){
+					$("#inquiry-table>tbody").innerHTML="";
+
+					$("#inquiry-table").hide();
+
+					
+					let $resultRep ='';
+					let $tr='';
+						for(let reboard of result){
+							$resultRep+=`<tr data-no="\${reboard.reportNo}">
+								<td>\${reboard.reportNo}</td>
+								<td>\${reboard.reportMemberId}</td>
+								<td>\${reboard.reportContent}</td>
+								<td>\${reboard.reportBoardType}</td>
+								<td>\${reboard.reportReasonCode}</td>
+								<td>\${reboard.createdAt}</td>
+								<td>\${reboard.status}</td>
+								<td><button class="reportcheck-btn"
+										onclick="openReportPopup(this)">신고처리</button></td>
+							</tr>`
+								
+								$("#declaration-table>tbody").append($resultRep);
+						} 
+					}
+				});
+			$("#declaration-table").show();
+			
+			};
 	</script>
 </body>
 </html>

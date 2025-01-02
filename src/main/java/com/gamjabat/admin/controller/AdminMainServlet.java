@@ -61,7 +61,7 @@ public class AdminMainServlet extends HttpServlet {
 				
 				List<Member> members=memberService.selectMemberAll(param);
 				List<InqueryBoard> inqueryboards = boardService.selectInqueryBoardAll(param); 
-				List<ReportBoard> reportBoards = boardService.selectReportBoardAll(param); 
+				//List<ReportBoard> reportBoards = boardService.selectReportBoardAll(param); 
 				
 				//pageBar생성하기
 				int totalData=new AdminMemberService().selectMemberCount();
@@ -121,7 +121,7 @@ public class AdminMainServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("members", members);
 		request.setAttribute("inqueryboards", inqueryboards);
-		request.setAttribute("reportBoards", reportBoards);
+//		request.setAttribute("reportBoards", reportBoards);
 		
 		
 
