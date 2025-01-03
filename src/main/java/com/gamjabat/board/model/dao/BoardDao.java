@@ -27,7 +27,7 @@ public class BoardDao {
 	
     public Board selectByBoardNo(SqlSession session, String boardNo) {
         
-        return session.selectOne("board.selectByBoardNo", boardNo);
+        return session.selectOne("board.selectByBoardNo1", boardNo);
         	
 	}
 	
@@ -40,13 +40,41 @@ public class BoardDao {
      }
     
     
-    public void updateBoard(SqlSession session, Board board) {
-        
-            session.update("Board.updateBoard", board);
-            session.commit();
+    // 게시글 수정 후 등록한 데이터 처리.
+    public int updateBoard(SqlSession session, Board board) {
+        return session.update("board.updateBoard", board); // SQL 매퍼 호출
+    }
+
     
-     }
-       
+   
+    public int updateTags(SqlSession session, String boardNo, String[] tags) {
+        int result = 0;
+
+        // 기존 태그 삭제
+        result += session.delete("board.deleteTagsByBoardNo", boardNo);
+
+        // 새로운 태그 추가
+        for (String tag : tags) {
+            // 1. 태그가 존재하는지 확인
+            Integer hashtagNo = session.selectOne("board.selectHashtagId", tag.trim());
+            
+            // 2. 태그가 없으면 삽입
+            if (hashtagNo == null) {
+                session.insert("board.insertHashtag", tag.trim());
+                hashtagNo = session.selectOne("board.selectHashtagId", tag.trim());
+            }
+
+            // 3. board_hashtag에 삽입
+            Map<String, Object> param = Map.of(
+                "boardNo", boardNo,
+                "hashtagNo", hashtagNo
+            );
+            result += session.insert("board.insertTag", param);
+        }
+
+        return result;
+    }
+
 
      
     //댓글 인서트 코드
@@ -87,7 +115,7 @@ public class BoardDao {
  	    }
     	
     	
-    	 public boolean isLiked(SqlSession session, String boardNo, String memberNo) {
+    	 	public boolean isLiked(SqlSession session, String boardNo, String memberNo) {
     	        // MyBatis를 사용하여 좋아요 여부 확인
     	        Integer count = session.selectOne("board.isLiked", Map.of("boardNo", boardNo, "memberNo", memberNo));
     	        return count != null && count > 0;
@@ -236,11 +264,22 @@ public class BoardDao {
 
     
     
+
+    //댓글 좋아요 라인.
+    public int selectBoardCommentLikeCheck(SqlSession session, Map<String,String> param) {
+    	return session.selectOne("comments.selectBoardCommentLike",param);
+    }
+    public int insertCommentLike(SqlSession session, Map<String,String> param) {
+    	return session.insert("comments.insertCommentLike",param);
+    }
+    public int deleteCommentLike(SqlSession session, Map<String,String> param) {
+    	return session.delete("comments.deleteCommentLike",param);
+    }
+    public int updateLikeCount(SqlSession session, Map<String,String> param) {
+    	return session.update("comments.updateLikeCount",param);
+    }
     
-    
-    
-    
-    
+
     
     // 태그 처리
     
@@ -271,6 +310,20 @@ public class BoardDao {
         return session.insert("board.linkHashtagToBoard", params);
     }
 
+
+    // 해시태그 가져오기!@!
+    
+    public List<String> selectHashtagsByBoardNo(SqlSession session, String boardNo) {
+        return session.selectList("board.selectHashtagsByBoardNo", boardNo);
+    }
+    
+    // 해시태그 검색기능
+    
+    public List<Board> selectBoardsByContentHashtag(SqlSession session, String hashtag) {
+        return session.selectList("board.selectBoardsByContentHashtag", hashtag);
+    }
+
+    
 
     
 }

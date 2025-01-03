@@ -45,8 +45,10 @@
 		font-size: 10px;
 	}
 	
-	/* 해시태그 */
-	.hashtag-container div{
+	/* 해시태그 24.12.28 조금 수정.*/
+	.hashtag-container div a{
+		color: black;
+		text-decoration: none; 
 		margin: 2px;
 		border-radius: 10px;
 		background-color: #D9D9D9;
@@ -55,7 +57,7 @@
 		padding: 5px;
 	}
 	
-	.hashtag-container div:hover{
+	.hashtag-container div a:hover{
 		cursor: pointer;
 		color: #5A8B63;
 	}
@@ -150,5 +152,9 @@
 	.commentspagebox {
 	justify-content: center !important;
 	}
+	
+	
+
+	
 
 	

@@ -21,8 +21,6 @@ import com.gamjabat.service.member.MemberService;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-
-//@WebFilter(servletNames= {"loginEndServlet"})
 @WebFilter(
 		servletNames = {
 			"BoardCommentInsertServlet"

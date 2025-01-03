@@ -48,7 +48,11 @@ public class BoardDetailServlet extends HttpServlet {
 	    BoardService service = new BoardService();
         // 데이터베이스에서 게시물 상세 정보를 조회
         Board board = new BoardService().selectByBoardNo(boardNo); // boardService는 게시물 정보를 가져오는 서비스 클래스의 인스턴스
-
+        
+        // 해시태그 데이터 가져오기
+        List<String> hashtags = service.selectHashtagsByBoardNo(boardNo);
+        request.setAttribute("hashtags", hashtags);
+        
         // 조회된 게시물 정보를 request 객체에 속성으로 설정
         request.setAttribute("board", board);
 	    

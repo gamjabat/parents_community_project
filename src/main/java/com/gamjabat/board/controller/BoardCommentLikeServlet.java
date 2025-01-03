@@ -1,7 +1,6 @@
-package com.gamjabat.controller.member;
+package com.gamjabat.board.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamjabat.service.member.MemberService;
-import com.google.gson.Gson;
+import com.gamjabat.board.model.service.BoardService;
 
 /**
- * Servlet implementation class IdDuplicateServlet
+ * Servlet implementation class BoardLikeServlet
  */
-@WebServlet("/member/checkduplicate.do")
-public class CheckDuplicateServlet extends HttpServlet {
+@WebServlet("/board/commentisLiked.do")
+public class BoardCommentLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckDuplicateServlet() {
+    public BoardCommentLikeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +30,21 @@ public class CheckDuplicateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nickname = request.getParameter("nickname");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
 		
-		Map<String, Boolean> result = new MemberService().checkDuplicate(nickname, phone, email);
-
-        response.setContentType("application/json; charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.write(new Gson().toJson(result)); 
+		String memberNo=request.getParameter("memberNo");
+		String commentNo=request.getParameter("commentNo");
+		int result=new BoardService().commentisLiked(Map.of("memberNo",memberNo,"commentNo",commentNo));
+		System.out.println(result);
+		response.setContentType("text/plain;charset=utf-8");
+		//0 : 삭제, 1 : 추가,  2 : 에러
+		response.getWriter().print(result);
+	
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		doGet(request,response);
 	}
 
 }

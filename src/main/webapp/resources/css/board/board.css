@@ -86,6 +86,7 @@ body {
 
 .board-table th,
 .board-table td {
+	height: 60px;
     padding: 5px;
     text-align: center;
     border: none; /* 셀 개별 테두리 제거 */

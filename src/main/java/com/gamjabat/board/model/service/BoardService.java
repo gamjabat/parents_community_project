@@ -100,17 +100,22 @@ public class BoardService{
 	
 	 
 
+	 	
+	 // 게시글 수정하고 등록한 데이터들 처리 
 	 
-	 
-	 
-	 public void updateBoard(Board board) {
-		 SqlSession session = getSession();
-		        dao.updateBoard(session, board);
-		       
+	 public int updateBoard(Board board) {
+		    SqlSession session = getSession(); // 세션 생성
+		    int result = new BoardDao().updateBoard(session, board);
+		    if (result > 0) {
+		        session.commit(); // 성공 시 커밋
+		    } else {
+		        session.rollback(); // 실패 시 롤백
 		    }
-		
+		    session.close(); // 세션 닫기
+		    return result;
+		}
 
-	 
+
 			
 
 	
@@ -404,7 +409,7 @@ public class BoardService{
 
 	}
 
-	
+
 	 
 	
 	 
@@ -453,6 +458,56 @@ public class BoardService{
 		}
 
 
+	 // 해시태그 가져오기
+	 
+	 public List<String> selectHashtagsByBoardNo(String boardNo) {
+		    SqlSession session = getSession();
+		    List<String> hashtags = dao.selectHashtagsByBoardNo(session, boardNo);
+		    session.close();
+		    return hashtags;
+		}
+	 
+	 // 해시태그 클릭하면 검색
+	 
+	 public List<Board> getBoardsByContentHashtag(String hashtag) {
+		    SqlSession session = getSession();
+		    List<Board> boards = dao.selectBoardsByContentHashtag(session, hashtag);
+		    session.close();
+		    return boards;
+		}
 
 
+
+
+
+	    public int commentisLiked(Map<String,String> param) {
+	        SqlSession session = getSession();
+	        try {
+	        	int result=dao.selectBoardCommentLikeCheck(session,param);
+	        	//result가 있으면 삭제, 없으면 추가
+	        	Map<String, String> param2=new HashMap<>(param);
+	        	if(result==0) { 
+	        		result=dao.insertCommentLike(session,param);
+	        		param2.put("flag", "increment");
+	        		dao.updateLikeCount(session,param2);
+	        		session.commit();
+	        		return 1;
+	        	}else { 
+	        		result=dao.deleteCommentLike(session,param);
+	        		param2.put("flag", "decrement");
+	        		dao.updateLikeCount(session,param2);
+	        		session.commit();
+	        		return 0;
+	        	}
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+	        	session.rollback();
+	        	return 2;
+	        }
+	        finally {
+	            session.close();
+	        }
+	    }
+
+	 
 }
