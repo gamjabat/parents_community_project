@@ -14,15 +14,9 @@
     <div class="board-category">
         <h5>"${keyword }"로 검색한 총 ${boardCount }개의 결과입니다.</h2>
     </div>
-    
     <c:if test="${sessionScope.loginMember!=null }">
-    <a href="${path}/boardwrite.do" class="write-btn">글쓰기</a>
-    </c:if>    
-    <c:if test="${sessionScope.loginMember == null}">
-    <p class="info-message">로그인 상태에서만 게시글을 작성할 수 있습니다.</p>
-	</c:if>
-    
-  
+    	<a href="${path}/boardwrite.do" class="write-btn">글쓰기</a>
+    </c:if>  
 </div>
 
 
