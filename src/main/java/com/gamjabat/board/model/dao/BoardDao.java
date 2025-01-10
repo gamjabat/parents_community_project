@@ -262,9 +262,6 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardCount");
     }
 
-    
-    
-
     //댓글 좋아요 라인.
     public int selectBoardCommentLikeCheck(SqlSession session, Map<String,String> param) {
     	return session.selectOne("comments.selectBoardCommentLike",param);
