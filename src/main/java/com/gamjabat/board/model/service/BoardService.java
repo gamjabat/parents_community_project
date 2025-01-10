@@ -415,7 +415,7 @@ public class BoardService{
 
 	}
 
-	
+
 	 
 	
 	 
@@ -484,4 +484,36 @@ public class BoardService{
 
 
 
+
+
+	    public int commentisLiked(Map<String,String> param) {
+	        SqlSession session = getSession();
+	        try {
+	        	int result=dao.selectBoardCommentLikeCheck(session,param);
+	        	//result가 있으면 삭제, 없으면 추가
+	        	Map<String, String> param2=new HashMap<>(param);
+	        	if(result==0) { 
+	        		result=dao.insertCommentLike(session,param);
+	        		param2.put("flag", "increment");
+	        		dao.updateLikeCount(session,param2);
+	        		session.commit();
+	        		return 1;
+	        	}else { 
+	        		result=dao.deleteCommentLike(session,param);
+	        		param2.put("flag", "decrement");
+	        		dao.updateLikeCount(session,param2);
+	        		session.commit();
+	        		return 0;
+	        	}
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+	        	session.rollback();
+	        	return 2;
+	        }
+	        finally {
+	            session.close();
+	        }
+	    }
+
+	 
 }

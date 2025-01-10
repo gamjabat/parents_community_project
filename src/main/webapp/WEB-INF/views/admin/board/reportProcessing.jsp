@@ -14,7 +14,6 @@
 				<h3 >
 					<strong>신고처리</strong>
 				</h3>
-				
 				<h5>신고글 번호 : ${reportBoard.reportNo}</h5>
 				<h5>신고한 사용자 : ${reportBoard.reportMemberId}</h5>
 				<h5>신고글 유형 : ${reportBoard.reportBoardType}</h5>
@@ -60,7 +59,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 </section>
 <script>

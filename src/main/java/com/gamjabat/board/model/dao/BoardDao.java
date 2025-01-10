@@ -115,7 +115,7 @@ public class BoardDao {
  	    }
     	
     	
-    	 public boolean isLiked(SqlSession session, String boardNo, String memberNo) {
+    	 	public boolean isLiked(SqlSession session, String boardNo, String memberNo) {
     	        // MyBatis를 사용하여 좋아요 여부 확인
     	        Integer count = session.selectOne("board.isLiked", Map.of("boardNo", boardNo, "memberNo", memberNo));
     	        return count != null && count > 0;
@@ -262,7 +262,21 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardCount");
     }
 
+    //댓글 좋아요 라인.
+    public int selectBoardCommentLikeCheck(SqlSession session, Map<String,String> param) {
+    	return session.selectOne("comments.selectBoardCommentLike",param);
+    }
+    public int insertCommentLike(SqlSession session, Map<String,String> param) {
+    	return session.insert("comments.insertCommentLike",param);
+    }
+    public int deleteCommentLike(SqlSession session, Map<String,String> param) {
+    	return session.delete("comments.deleteCommentLike",param);
+    }
+    public int updateLikeCount(SqlSession session, Map<String,String> param) {
+    	return session.update("comments.updateLikeCount",param);
+    }
     
+
     public int selectBoardCountCate(SqlSession session, String cateName) {
     	
     	return session.selectOne("board.selectBoardCountCate", cateName);
@@ -271,9 +285,7 @@ public class BoardDao {
     
     
     
-    
-    
-    
+
     
     // 태그 처리
     
@@ -319,6 +331,5 @@ public class BoardDao {
 
     
 
-    
     
 }
