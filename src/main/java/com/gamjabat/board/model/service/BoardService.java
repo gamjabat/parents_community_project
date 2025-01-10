@@ -383,6 +383,12 @@ public class BoardService{
 		 return count;
 	 }
 	 
+	 public int selectBoardCountByCate(String cateName) {
+		 SqlSession session = getSession();
+		 int count = dao.selectBoardCountCate(session, cateName);
+		 session.close();
+		 return count;
+	 }
 	 
 	 
 	 

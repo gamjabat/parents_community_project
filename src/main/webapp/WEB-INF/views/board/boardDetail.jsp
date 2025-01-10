@@ -58,7 +58,7 @@
 	                </div>
                 </div>
             </div>
-            <!-- 첨부파일 -->
+            <!-- 첨부파일 
             <div class="file-attachment">
             	<div class="p-1">
 	            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
@@ -72,7 +72,7 @@
 					</svg>
 					<span class="px-1">고양이.jpg</span>
             	</div>
-            </div>
+            </div>-->
             <!-- 이미지 -->
             <!-- <div class="text-center mb-3">
                 <img src="https://via.placeholder.com/200" alt="고양이 이미지" class="img-fluid rounded">

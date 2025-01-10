@@ -263,6 +263,11 @@ public class BoardDao {
     }
 
     
+    public int selectBoardCountCate(SqlSession session, String cateName) {
+    	
+    	return session.selectOne("board.selectBoardCountCate", cateName);
+
+    }
     
     
     
