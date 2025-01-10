@@ -32,7 +32,6 @@ public class BoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 			// 페이징 처리
 				int cPage;
 				try {
@@ -114,13 +113,12 @@ public class BoardServlet extends HttpServlet {
 		
         List<Board> board = new BoardService().selectBoardAll(param);
         request.setAttribute("board", board);
+        request.setAttribute("categoryName", "전체");
         
         
         // 게시판 페이지로 포워딩
         request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
-        
-       
-        
+
 	}
 
 	/**

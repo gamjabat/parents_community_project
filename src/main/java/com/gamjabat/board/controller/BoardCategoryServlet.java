@@ -31,9 +31,7 @@ public class BoardCategoryServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		// 페이징 처리
 		int cPage;
 		try {
@@ -109,61 +107,15 @@ public class BoardCategoryServlet extends HttpServlet {
 		pageBar+="</ul>";
 		
 		request.setAttribute("pageBar", pageBar);
-		
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		// URL에서 카테고리 파라미터 가져오기
-        String categoryName = request.getParameter("category"); 
+        String categoryCode = request.getParameter("category"); 
         
         BoardService boardService = new BoardService();
         List<Board> boardList;
 
         
-        boardList = boardService.getBoardsByCategory(categoryName, param);
+        boardList = boardService.getBoardsByCategory(categoryCode, param);
       
    
         request.setAttribute("board", boardList);

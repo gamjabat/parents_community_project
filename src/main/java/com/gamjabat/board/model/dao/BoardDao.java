@@ -322,8 +322,4 @@ public class BoardDao {
     public List<Board> selectBoardsByContentHashtag(SqlSession session, String hashtag) {
         return session.selectList("board.selectBoardsByContentHashtag", hashtag);
     }
-
-    
-
-    
 }
