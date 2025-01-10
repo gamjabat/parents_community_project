@@ -382,7 +382,14 @@ public class BoardService{
 		 session.close();
 		 return count;
 	 }
-	 
+
+	 public int selectBoardCountByCate(String cateName) {
+		 SqlSession session = getSession();
+		 int count = dao.selectBoardCountCate(session, cateName);
+		 session.close();
+		 return count;
+	 }
+
 	 public List<BoardComments> selectCommentsAllByMemberNo(Map<String, Object> param){
 		 	SqlSession session = getSession();
 			List<BoardComments> comments = dao.selectCommentsAllByMemberNo(session, param);

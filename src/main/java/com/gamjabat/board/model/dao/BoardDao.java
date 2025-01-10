@@ -262,9 +262,6 @@ public class BoardDao {
     	return session.selectOne("board.selectBoardCount");
     }
 
-    
-    
-
     //댓글 좋아요 라인.
     public int selectBoardCommentLikeCheck(SqlSession session, Map<String,String> param) {
     	return session.selectOne("comments.selectBoardCommentLike",param);
@@ -278,6 +275,15 @@ public class BoardDao {
     public int updateLikeCount(SqlSession session, Map<String,String> param) {
     	return session.update("comments.updateLikeCount",param);
     }
+    
+
+    public int selectBoardCountCate(SqlSession session, String cateName) {
+    	
+    	return session.selectOne("board.selectBoardCountCate", cateName);
+
+    }
+    
+    
     
 
     
