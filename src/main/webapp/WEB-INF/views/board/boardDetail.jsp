@@ -65,14 +65,14 @@
 					  <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z"/>
 					</svg>
 					<span class="px-1">고양이.jpg</span> -->
-            	</div>
+            	
             	<div class="p-1">
 	            	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
 					  <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z"/>
 					</svg>
 					<span class="px-1">고양이.jpg</span> -->
             	</div>
-            </div>-->
+            
             <!-- 이미지 -->
             <!-- <div class="text-center mb-3">
                 <img src="https://via.placeholder.com/200" alt="고양이 이미지" class="img-fluid rounded">
@@ -144,9 +144,13 @@
 		                </form>
 	                	</div>
 	           		 </div>
-            	
-            	
-            	
+	           		 </div> 
+	          
+	           		
+	           		 
+	           		
+          
+        	
             	
           <!-- 댓글시작  -->  	
   <div id="tbl-comment">
@@ -161,7 +165,7 @@
                             <div class="fs-6 fw-bold me-2">${comment.writerNickname==null?"익명":comment.writerNickname}</div>
                             <!-- 드롭다운 -->
                            <c:if test="${sessionScope.loginMember!=null }">
-                            <c:if test="${comment.isDeleted ne 'Y'}">
+                        
                             <div class="dropdown">
                                 <!-- 아이콘 버튼 -->
                                 <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -178,7 +182,7 @@
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-comment-no="${comment.commentNo}">댓글 신고</a></li>
                                 </ul>
                             </div>
-                           </c:if>
+                
                           </c:if>
                         </div>
                         <!-- 댓글 내용 -->
@@ -236,7 +240,7 @@
                                 <c:if test="${sessionScope.loginMember!=null }">
                                 
                                 <div class="dropdown">
-                                	 <c:if test="${comment.isDeleted ne 'Y'}">
+                           
                                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
                                             <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
@@ -249,9 +253,7 @@
                                         <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
                                     </ul>
-                                     </c:if>
-                                </div>
-                             
+                                </div> 
                               </c:if> 
                             </div> 
                             <!-- 댓글 내용 -->
@@ -278,128 +280,7 @@
             </c:forEach>
         </c:if>
     </div>
-</div><div id="tbl-comment">
-    <div class="comments">
-        <c:if test="${not empty comments}">
-            <c:forEach var="comment" items="${comments}">
-                <!-- 댓글 (레벨 1) -->
-                <c:if test="${comment.commentLevel == 1}">
-                    <div class="comment" data-comment-no="${comment.commentNo}">
-                        <!-- 작성자 아이디 -->
-                        <div class="d-flex justify-content-between">
-                            <div class="fs-6 fw-bold me-2">${comment.writerNickname == null ? "익명" : comment.writerNickname}</div>
-                            <!-- 드롭다운 -->
-                            <c:if test="${sessionScope.loginMember != null}">
-                       
-                                    <div class="dropdown">
-                                        <!-- 아이콘 버튼 -->
-                                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
-                                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-                                            </svg>
-                                        </a>
-                                        <!-- 드롭다운 메뉴 -->
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item1" href="${path}/board/updataecomment.do?commentContent=${comment.commentContent}&commentNo=${comment.commentNo}')">댓글 수정</a></li>
-                                          
-                                                <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
-                                               
-                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-comment-no="${comment.commentNo}">댓글 신고</a></li>
-                                        </ul>
-                                    </div>
-                               
-                            </c:if>
-                        </div>
-                        <!-- 댓글 내용 -->
-                        <div class="comment-content">
-                            <c:choose>
-                                <c:when test="${comment.isDeleted eq 'Y'}">
-                                    <p class="deleted-comment">삭제되었습니다.</p>
-                                </c:when>
-                                <c:otherwise>
-                                    <input type="hidden" name="commentNo" value="${comment.commentNo}">
-                                    ${comment.commentContent}
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-                        <!-- 좋아요 버튼 -->
-                        <div id="heart-btn" class="heart-btn">
-                            <c:if test="${comment.isDeleted ne 'Y'}">
-                                <div class="icons comment-heart-icon" name="${comment.commentNo}">
-                                    <!-- 빈하트 -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
-                                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                                    </svg>
-                                </div>
-                            </c:if>
-                        </div>
-                        <!-- 댓글 날짜 -->
-                        <div class="comment-meta pb-2">
-                            <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
-                            <input type="hidden" name="parentCommentNo" value="${comment.commentNo}">
-                            <c:if test="${comment.isDeleted ne 'Y'}">
-                                <button class="comment-btn ms-2 d-flex align-items-center justify-content-center btn-insert2">답글</button>
-                            </c:if>
-                        </div>
-                    </div>
-                    <!-- 대댓글 컨테이너 추가 -->
-                    <div class="sub-comment-container"></div>
-                </c:if>
-                <!-- 대댓글 (레벨 2) -->
-                <c:if test="${comment.commentLevel == 2}">
-                    <div class="sub-comment d-flex flex-row">
-                        <div class="mx-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-                            </svg>
-                        </div>
-                        <div class="comment d-flex flex-column flex-grow-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="fs-6 fw-bold me-2">${comment.writerNickname == null ? "익명" : comment.writerNickname}</div>
-                                <!-- 드롭다운 -->
-                                <c:if test="${sessionScope.loginMember != null}">
-                              
-                                    <div class="dropdown">
-                                        
-                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
-                                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a.5.5.5 0 1 1 0-3 1.5 1.5.5 0 0 1 0 3"/>
-                                                </svg>
-                                            </a>
-                                            <!-- 드롭다운 메뉴 -->
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                      
-                                                <li><a class="dropdown-item" href="${path}/board/deletecomment.do?commentNo=${comment.commentNo}&commentBoardNo=${board.boardNo}" onclick="return confirm('이 댓글을 삭제하시겠습니까?');">댓글 삭제</a></li>
-                              
-                                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal">댓글 신고</a></li>
-                                            </ul>
-                                    	</div>                                    
-                                </c:if>
-                            </div>
-                            <!-- 댓글 내용 -->
-                            <div class="comment-content">
-                                <c:choose>
-                                    <c:when test="${comment.isDeleted eq 'Y'}">
-                                        <p class="deleted-comment">삭제되었습니다.</p>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <input type="hidden" name="commentNo" value="${comment.commentNo}">
-                                        ${comment.commentContent}
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                            <div class="comment-meta pb-2">
-                                <div class="d-flex align-items-end justify-content-center">${comment.createdAt}</div>
-                                <input type="hidden" name="parentCommentNo" value="${comment.commentNo}">
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
-            </c:forEach>
-        </c:if>
-    </div>
 </div>
-
 
 <%-- 	
   <div class="commentspagebox"> ${pageBar}</div>  --%>
@@ -440,8 +321,11 @@
 		    </div>
 		  </div>
 		</div>
-		
+		</div>
 </section>
+
+
+
 	<script>
 	/* 대댓글 */
 	$(document).on("click", ".btn-insert2", function (e) {
