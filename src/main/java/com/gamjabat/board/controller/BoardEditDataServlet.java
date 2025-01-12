@@ -40,8 +40,6 @@ public class BoardEditDataServlet extends HttpServlet {
         String category = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-       // String tagString = request.getParameter("tag"); // 태그 문자열
-        //String[] tags = tagString.split(","); // 태그 분리
 
         Timestamp updated_at = new Timestamp(System.currentTimeMillis()); // 수정 시각
 
@@ -52,7 +50,6 @@ public class BoardEditDataServlet extends HttpServlet {
             .title(title)
             .content(content)
             .updatedAt(updated_at)
-            //.tag(tags)
             .build();
 
         // 서비스 호출하여 업데이트 수행
@@ -69,11 +66,6 @@ public class BoardEditDataServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(request, response);
         }
     }
-	
-	    
-	
-	
-	
 	
 
 	/**

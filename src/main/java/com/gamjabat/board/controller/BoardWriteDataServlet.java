@@ -37,12 +37,10 @@ public class BoardWriteDataServlet extends HttpServlet {
         String boardTypeNumber = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        // content = content.replaceAll("<[^>]*>", ""); // HTML 태그 제거
         String tagString = request.getParameter("tag");  // 'tags' 파라미터 값을 먼저 변수에 저장
         String[] tags = tagString.split(","); // ','로 태그 분리
 
     
-//        String boardNo = "2";
         int boardLikeCount = 0; // 좋아요 수 초기값
         int viewCount = 0; // 조회수 초기값
         Timestamp created_at = new Timestamp(System.currentTimeMillis()); // 생성 시각
@@ -52,27 +50,7 @@ public class BoardWriteDataServlet extends HttpServlet {
         
     
      // 요청에서 memberNo 파라미터 값을 읽어와서 사용
-        String memberNo = request.getParameter("memberNo"); 
-        
-        
-        /* Board insertBoard = Board.builder()
-            .category(category)
-            .title(title)
-            .content(content)
-            .likeCount(boardLikeCount)
-            .viewCount(viewCount)
-            .createdAt(created_at)
-            .updatedAt(updated_at)
-            .isDeleted(isDeleted)
-            .memberNo(member_No)
-            .boardTypeNumber(boardTypeNumber)
-            .build();*/
-        
-        
-  
-
-        
-        
+        String memberNo = request.getParameter("memberNo");  
         
         Board insertBoard = Board.builder()
         		//.boardNo(boardNo)
@@ -93,29 +71,11 @@ public class BoardWriteDataServlet extends HttpServlet {
         // 서비스 클래스를 이용하여 데이터베이스에 저장
         BoardService service = new BoardService();
         int result = service.insertBoard(insertBoard, tags);
-        
- 
-        
-        
-        // 해시태그
-        
-       // int tagResult = service.insertOnlyHashtags(tags);
 
- 
-        // 리다이렉트~~~~~~~~~~~~~~~~~~ 홈으로!
         response.sendRedirect(request.getContextPath() + "/board.do" );
-        
-        
-//        request.setAttribute("hashtags", result);
-//        request.getRequestDispatcher("/WEB-INF/views/board/boardDetail.jsp").forward(request, response);
-        
-        
+
     }
 
-	
-	
-		
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

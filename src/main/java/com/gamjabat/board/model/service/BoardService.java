@@ -78,13 +78,6 @@ public class BoardService{
 	}
 	 
 	 
-	 
-	/* public void deleteBoard(String boardNo) {
-		 SqlSession session = getSession();
-	     dao.deleteBoard(session, boardNo);
-	    }*/
-	 
-	 
 	 public void deleteBoard(String boardNo) {
 	        SqlSession session = getSession();
 	        try {
@@ -98,9 +91,6 @@ public class BoardService{
 	        }
 	    }
 	
-	 
-
-	 	
 	 // 게시글 수정하고 등록한 데이터들 처리 
 	 
 	 public int updateBoard(Board board) {
@@ -114,9 +104,6 @@ public class BoardService{
 		    session.close(); // 세션 닫기
 		    return result;
 		}
-
-
-			
 
 	
 	 public int insertBoardComment(BoardComments bc) {
@@ -142,7 +129,6 @@ public class BoardService{
 	 // 파일 추가
 	  public String uploadFile(HttpServletRequest request) throws ServiceException {
 	        String imageUrl = null;
-//	        SqlSession session = getSession();
 
 	        try {
 	            if (!ServletFileUpload.isMultipartContent(request)) {

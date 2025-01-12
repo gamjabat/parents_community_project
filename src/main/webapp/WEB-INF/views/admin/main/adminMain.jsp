@@ -66,12 +66,6 @@
 		<section id="posts">
 			<h2>게시글 관리</h2>
 			<nav>
-				<!-- 				<button type="button" 
-				onclick="hideDeclaration();"
-					class="btn btn-primary">문의글</button>
-				<button type="button" class="btn btn-danger"
-					onclick="hideInquery();">신고글</button>
- -->
 				<button type="button" onclick="requestInqueryBoard();"
 					class="btn btn-primary">문의글</button>
 				<button type="button" onclick="requestReportBoard();"  class="btn btn-danger" >신고글</button>
@@ -118,21 +112,6 @@
 					</tr>
 				</thead>
 				<tbody>
-				<%-- 	<c:if test="${not empty reportBoards}">
-						<c:forEach var="rboard" items="${reportBoards}">
-							<tr data-no="${rboard.reportNo}">
-								<td>${rboard.reportNo}</td>
-								<td>${rboard.reportMemberId}</td>
-								<td>${rboard.reportContent}</td>
-								<td>${rboard.reportBoardType}</td>
-								<td>${rboard.reportReasonCode}</td>
-								<td>${rboard.createdAt}</td>
-								<td>${rboard.status}</td>
-								<td><button class="reportcheck-btn"
-										onclick="openReportPopup(this)">신고처리</button></td>
-							</tr>
-						</c:forEach>
-					</c:if> --%>
 				</tbody>
 			</table>
 			<div id="bpageBar">${pageBar }</div>
@@ -212,17 +191,6 @@
 							+ ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
 		
 		}
-		
-
-		/* 		const hideDeclaration=()=>{
-		$("#declaration-table").hide();
-		$("#inquiry-table").show();
-	}
-	const hideInquery=()=>{
-		$("#inquiry-table").hide();
-		$("#declaration-table").show();
-	} */
-	
 		
 		const requestInqueryBoard = ()=>{
 			$("#declaration-table>tbody").innerHTML="";

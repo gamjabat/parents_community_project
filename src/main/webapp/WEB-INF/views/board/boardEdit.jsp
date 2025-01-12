@@ -73,13 +73,7 @@
 			    </div>
 			</div> 
 			
-            <!-- 섹션 3: 태그 입력 
-            <div class="section tags-input">
-                <div class="form-group">
-                    <label for="tags">#태그를 입력해 주세요.</label>
-                    <input type="text" id="tags" class="form-control" placeholder="#태그를 입력해 주세요." name="tag" value="${board.tag}">
-                </div>
-            </div> -->
+
 
             <!-- 등록 버튼 -->
             <div class="button-container">

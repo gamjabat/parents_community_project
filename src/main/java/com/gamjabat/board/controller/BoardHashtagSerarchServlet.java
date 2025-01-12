@@ -36,7 +36,6 @@ public class BoardHashtagSerarchServlet extends HttpServlet {
 		
 		String rawHashtag  = request.getParameter("hashtag");
 		 if (rawHashtag  == null || rawHashtag .isEmpty()) {
-		        System.out.println("Hashtag is missing or empty!");
 		        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid hashtag parameter");
 		        return;
 		    }
@@ -46,8 +45,6 @@ public class BoardHashtagSerarchServlet extends HttpServlet {
 		    if (hashtag.startsWith("#")) {
 		        hashtag = hashtag.substring(1); // 앞에 # 제거
 		    }
-		    
-		System.out.println("Received hashtag: " + hashtag);
 		    
         BoardService service = new BoardService();
 

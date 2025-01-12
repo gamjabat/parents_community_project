@@ -55,7 +55,6 @@ public class BoardEditServlet extends HttpServlet {
     	    // 작성자인지 확인
     	    if (!loginMember.getMemberNo().equals(writerMemberNo)) {
     	    	request.setAttribute("errorMsg", "게시글 수정 권한이 없습니다.");
-    	        //response.sendRedirect(request.getContextPath() + "/");
     	    	request.getRequestDispatcher("/WEB-INF/views/board/errorPage.jsp").forward(request, response);
     	        return;
     	    } else {

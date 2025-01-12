@@ -81,23 +81,6 @@
         </div>
 		</form>
     </div>
-
-   <!-- <!-- Quill.js 라이브러리 
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
-        var quill = new Quill('#editor-container', {
-            theme: 'snow',
-            placeholder: '   내용을 입력해 주세요...',
-            modules: {
-                toolbar: [['bold', 'italic', 'underline'], [{ 'header': 1 }, { 'header': 2 }], [{ 'list': 'ordered' }, { 'list': 'bullet' }], ['link', 'image']]
-            }
-        });
-        document.getElementById('submit-btn').addEventListener('click', function() {
-            var content = quill.root.innerHTML;
-            document.getElementById("content").value=content;
-           
-        });
-    </script> -->
     
     
 <!-- Quill.js 라이브러리 -->

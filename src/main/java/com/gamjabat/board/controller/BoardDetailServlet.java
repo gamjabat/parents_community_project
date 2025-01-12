@@ -60,20 +60,6 @@ public class BoardDetailServlet extends HttpServlet {
         service.increaseViewCount(boardNo);
         
 	    }
-//		
-//	    Member m = Member.builder()
-//				.memberId("jbag")
-//				.memberNo("MB_0012")
-//				.build();
-//				
-//				
-	    //감자의 페이징 처리 로직입니다.
-//	    List<BoardComments> comments=new BoardService().selectBoardComment(boardNo);
-//	    request.setAttribute("comments", comments);
-//		HttpSession session = request.getSession();
-//		session.setAttribute("loginMember", m);
-	    // boardDetail.jsp 페이지로 forward 메소드를 사용하여 요청과 응답을 전달
-	    
 	   
 	    int cPage;
 		try {
@@ -102,7 +88,6 @@ public class BoardDetailServlet extends HttpServlet {
 		int pageEnd= pageNo+pageBarSize-1;
 		
 		
-		//int commentscount=new BoardService().selectBoardCommentCountAll(boardNo);
 		request.setAttribute("commentscount", totalData);
 		
 		String pageBar="<ul class='pagination justify-content-center'>";   //태그를 만들어서 쓴다.
@@ -171,16 +156,6 @@ public class BoardDetailServlet extends HttpServlet {
 
 	}
 
-		
-		/* 팀장님이 만든 부분
-		request.getRequestDispatcher(getServletContext().getInitParameter("viewpath")+"/board/boardDetail.jsp")
-		.forward(request, response); 
-		
-		
-	}*/
-	
-		
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

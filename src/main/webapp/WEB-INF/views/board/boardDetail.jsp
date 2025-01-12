@@ -58,27 +58,11 @@
 	                </div>
                 </div>
             </div>
-            <!-- 첨부파일 
-            <div class="file-attachment">
-            	<div class="p-1">
-	            	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
-					  <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z"/>
-					</svg>
-					<span class="px-1">고양이.jpg</span> -->
             	
             	<div class="p-1">
-	            	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
-					  <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z"/>
-					</svg>
-					<span class="px-1">고양이.jpg</span> -->
             	</div>
             
-            <!-- 이미지 -->
-            <!-- <div class="text-center mb-3">
-                <img src="https://via.placeholder.com/200" alt="고양이 이미지" class="img-fluid rounded">
-            </div> -->
-            <!-- 내용 -->
-            <!-- 내용 -->
+            
 			<p>${board.content}</p>
             <!-- 해시태그 -->
             <div class="hashtag-container d-flex flex-row justify-content-start">
@@ -90,14 +74,6 @@
 			        <a href="${encodedUrl}">${hashtag}</a>
 			    </div>
 			</c:forEach>
-			
-			<%-- <c:forEach var="hashtag" items="${hashtags}">
-			    <div>
-			        <a href="${path}/board/hashtag.do?hashtag=${fn:escapeXml(hashtag)}">
-			            ${hashtag}
-			        </a>
-			    </div>
-			</c:forEach>	 --%>
             </div>
             <!-- 좋아요 및 댓글 입력 -->
             <div class="board-stats my-3 d-flex align-items-center">
@@ -107,10 +83,6 @@
 	           			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
 							<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
 						</svg>
-						<!-- 빨간 하트
-						<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
-						  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-						</svg> -->
 					</div>
 	                <span class="fw-bold"> 좋아요 1 </span>
            		</div>
@@ -282,8 +254,7 @@
     </div>
 </div>
 
-<%-- 	
-  <div class="commentspagebox"> ${pageBar}</div>  --%>
+
 
         <!-- 신고 모달 -->
 		<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
@@ -340,8 +311,6 @@
 	        return;
 	    }
 
-	    console.log("부모 댓글 번호:", parentCommentNo);
-
 	    // 대댓글 컨테이너 찾기
 	    let $subCommentContainer = $parentComment.find(".sub-comment-container");
 
@@ -375,7 +344,6 @@
         const $parent = $(this).closest(".comment"); // 클릭한 댓글 요소 찾기
         const commentNo = $parent.find("input[name='commentNo']").val(); // 댓글 번호 가져오기
         const currentContent = $parent.find(".comment-content").text().trim(); // 댓글 내용 가져오기
-        console.log(commentNo);
         // 수정 폼이 이미 존재하지 않으면 폼 생성
         if ($parent.find(".edit-form").length === 0) {
             const $form = `
@@ -408,69 +376,7 @@
             alert("댓글 수정에 실패했습니다.");
         });
     });
-    
-    
-    
- 	
 	
-//아이콘을 담고 있는 요소 선택
-/* const heartIcon = document.getElementById("heart-icon"); */
-
-// 현재 상태 (true: 좋아요, false: 좋아요 해제)
-/* let isLiked = false; */
-
-// 클릭 이벤트 리스너 추가
-/* heartIcon.addEventListener("click", () => {
-    // 상태 토글
-    isLiked = !isLiked;
-
-    // 상태에 따라 아이콘 변경
-    if (isLiked) {
-        // 빨간 하트
-        heartIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-            </svg>
-        `;
-    } else {
-        // 빈 하트
-        heartIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
-                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-            </svg>
-        `;
-    }
-}); */
-
-	/* // 현재 상태 (true: 좋아요, false: 좋아요 해제)
-	let isLiked = false;
-	
-
-
-
-	// 클릭 이벤트 리스너 추가
-	heartIcon.addEventListener("click", () => {
-	    // 상태 토글
-	    isLiked = !isLiked;
-	
-	    // 상태에 따라 아이콘 변경
-	    if (isLiked) {
-	        // 빨간 하트
-	        heartIcon.innerHTML = `
-	            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
-	                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-	            </svg>
-	        `;
-	    } else {
-	        // 빈 하트
-	        heartIcon.innerHTML = `
-	            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
-	                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-	            </svg>
-	        `;
-	    }
-	});
-	 */
 	
 	/* 신고 모달 관련 javascript*/
 	document.getElementById('reportForm').addEventListener('submit', function(event) {
@@ -514,9 +420,6 @@
 	        const button = event.relatedTarget; // 모달을 열 때 클릭한 버튼
 	        const boardNo = button.getAttribute('data-board-no'); // 글번호
 	        const commentNo = button.getAttribute('data-comment-no'); // 댓글번호
-	
-	        console.log('신고 대상 글번호:', boardNo);
-	        console.log('신고 대상 댓글번호:', commentNo);
 	
 	        // 숨겨진 input에 글번호나 댓글번호 설정
 	        const form = document.getElementById('reportForm');
@@ -646,7 +549,6 @@ function updateHeartIcon(isLikeStatus) {
 		const memberNo='${loginMember.memberNo}';
 		const commentNo=e.currentTarget.getAttribute("name");
 		likeElement=e.currentTarget;
-		//console.log("하트클릭",memberNo,commentNo);
 		fetch("${path}/board/commentisLiked.do?memberNo="+memberNo+"&commentNo="+commentNo)
 		.then(response=>response.text())
 		.then(data=>{

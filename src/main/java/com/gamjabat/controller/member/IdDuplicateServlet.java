@@ -31,7 +31,6 @@ public class IdDuplicateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("id");
-		System.out.println(memberId);
 		
 		Member m = new MemberService().selectMemberById(memberId);
 		

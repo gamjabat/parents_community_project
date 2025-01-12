@@ -39,10 +39,6 @@ public class AdminMainServlet extends HttpServlet {
 		AdminMemberService memberService = new AdminMemberService();
 		AdminBoardService boardService = new AdminBoardService();
 		
-		
-		
-				//DB의 member테이블의 전체 데이터를 가져와 출력해주는 기능
-				//Member 페이징 처리 //////////////////////////////////////
 				int cPage;
 				try {
 					cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -61,7 +57,6 @@ public class AdminMainServlet extends HttpServlet {
 				
 				List<Member> members=memberService.selectMemberAll(param);
 				List<InqueryBoard> inqueryboards = boardService.selectInqueryBoardAll(param); 
-				//List<ReportBoard> reportBoards = boardService.selectReportBoardAll(param); 
 				
 				//pageBar생성하기
 				int totalData=new AdminMemberService().selectMemberCount();
@@ -121,9 +116,6 @@ public class AdminMainServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("members", members);
 		request.setAttribute("inqueryboards", inqueryboards);
-//		request.setAttribute("reportBoards", reportBoards);
-		
-		
 
 		request.getRequestDispatcher("/WEB-INF/views/admin/main/adminMain.jsp").forward(request, response);
 	}

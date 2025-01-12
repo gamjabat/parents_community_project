@@ -45,7 +45,6 @@ public class adminAnnouncemenWriteServlet extends HttpServlet {
 	        String isDeleted = "N"; // 삭제 여부 초기값
 	        
 	        Board insertBoard = Board.builder()
-	        		//.boardNo(boardNo)
 	                .title(title)
 	                .content(content)
 	                .likeCount(boardLikeCount)

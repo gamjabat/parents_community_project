@@ -62,30 +62,10 @@
         <p><strong>이메일:</strong>${member.email}<span id="popup-id"></span></p>
         <p><strong>연락처:</strong>${member.phone}<span id="popup-id"></span></p>
         <p><strong>주소:</strong>${member.address}<span id="popup-id"></span></p>
-     <%--    <p><strong>생일:</strong>${member.birthday}<span id="popup-id"></span></p>
-        <p><strong>가입일:</strong>${member.createDate}<span id="popup-id"></span></p>
-        <p><strong>정보수정일:</strong>${member.updateDate}<span id="popup-id"></span></p>
-        <p><strong>탈퇴여부:</strong>${member.isDelete?"탈퇴":"미탈퇴"}<span id="popup-id"></span></p>
-        <p><strong>탈퇴일:</strong>${member.deleteDate!=null?member.deleteDate:""}<span id="popup-id"></span></p> --%>
         <div id="btn_container">
         	<button onclick="window.close()">닫기</button>
         </div> 
     </main>
-    <script>
-   /*      // URL에서 데이터 가져오기
-        const params = new URLSearchParams(window.location.search);
-    
-        // 데이터 추출 및 HTML 요소에 삽입
-         document.getElementById("popup-id").innerText += params.get("id");
-         document.getElementById("popup-name").textContent = params.get("name");
-         document.getElementById("popup-email").textContent = params.get("email");
-        document.getElementById("popup-join-date").textContent = params.get("joinDate");
-         document.getElementById("popup-status").textContent = params.get("status");
-         document.getElementById("popup-posts").textContent = params.get("posts");
-         document.getElementById("popup-comments").textContent = params.get("comments"); */
-         
-         
-    </script>
     
 </body>
 </html>

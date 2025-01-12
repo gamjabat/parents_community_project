@@ -33,16 +33,15 @@ public class BoardCommentUpdateServlet extends HttpServlet {
 	        String commentContent = request.getParameter("commentContent");
 	        String boardNo = request.getParameter("boardNo");
 			
-			   if (commentNo != null && !commentNo.isEmpty()) {
-			 
-			            // 댓글 삭제
-			            BoardService boardService = new BoardService();
-			            boardService.updateBoardComment(commentNo,commentContent);
-			            response.sendRedirect(request.getContextPath() + "/board/boarddetail.do?boardNo="+boardNo);
-			            
-			   } else {
-				   response.sendRedirect(request.getContextPath() + "/board/boarddetail.do?boardNo="+boardNo);
-		        }
+		   if (commentNo != null && !commentNo.isEmpty()) {
+	            // 댓글 삭제
+	            BoardService boardService = new BoardService();
+	            boardService.updateBoardComment(commentNo,commentContent);
+	            response.sendRedirect(request.getContextPath() + "/board/boarddetail.do?boardNo="+boardNo);
+		            
+		   } else {
+			   response.sendRedirect(request.getContextPath() + "/board/boarddetail.do?boardNo="+boardNo);
+	        }
 		}
 		  
 

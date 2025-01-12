@@ -49,10 +49,6 @@ public class UpdateMemberInfoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
-		//동적쿼리로 업데이트 구현
-		
-		System.out.println(passwordInput+"input"+password+ "p"+phone+ "a"+address);
-		
 		Map<String, Object> param = new HashMap<>();
 		
 		param.put("memberNo", loginMember.getMemberNo());

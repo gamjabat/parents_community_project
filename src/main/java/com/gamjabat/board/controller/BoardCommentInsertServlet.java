@@ -56,8 +56,6 @@ public class BoardCommentInsertServlet extends HttpServlet {
 
 		request.getRequestDispatcher(getServletContext().getInitParameter("viewpath") + "/common/msg.jsp")
 				.forward(request, response);
-
-//		response.sendRedirect(loc);
 	}
 
 	/**

@@ -30,11 +30,6 @@ public class Board {
 	    private String memberNo;
 	    private String boardTypeNumber;
 	    
-	    /*private String category;
-	    private String[] hashTag;*/
-	    
-
-
 	}
 
 	

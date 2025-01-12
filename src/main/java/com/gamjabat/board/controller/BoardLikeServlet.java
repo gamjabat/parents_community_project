@@ -34,44 +34,6 @@ public class BoardLikeServlet extends HttpServlet {
 	 */
 	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 String action = request.getParameter("action");
-	        String boardNo = request.getParameter("boardNo");
-	        String memberNo = request.getParameter("memberNo");
-
-	        BoardService service = new BoardService();
-	        response.setContentType("application/json");
-	        PrintWriter out = response.getWriter();
-	        JSONObject jsonResponse = new JSONObject();
-
-	        // 파라미터 유효성 검사
-	        if (boardNo == null || boardNo.isEmpty() || memberNo == null || memberNo.isEmpty()) {
-	            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-	            jsonResponse.put("error", "Invalid boardNo or memberNo");
-	            out.print(jsonResponse.toString());
-	            return;
-	        }
-
-	        try {
-	            if ("isLiked".equals(action)) {
-	                boolean isLiked = service.isLiked(boardNo, memberNo);
-	                jsonResponse.put("isLiked", isLiked);
-	            } else if ("toggleLike".equals(action)) {
-	                boolean isSuccess = service.toggleLike(boardNo, memberNo);
-	                int newLikeCount = service.getLikeCount(boardNo);
-	                jsonResponse.put("success", isSuccess);
-	                jsonResponse.put("newLikeCount", newLikeCount);
-	            } else {
-	                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-	                jsonResponse.put("error", "Invalid action");
-	            }
-	        } catch (Exception e) {
-	            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-	            jsonResponse.put("error", e.getMessage());
-	            e.printStackTrace();
-	        } finally {
-	            out.print(jsonResponse.toString());
-	            out.flush();
-	        }
 	    }*/
 	
 
