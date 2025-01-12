@@ -125,11 +125,66 @@
     }
 
     document.getElementById('submit-btn').addEventListener('click', function() {
+    	if (!validateForm()) {
+            event.preventDefault(); // 유효성 검사를 통과하지 못하면 폼 제출 중단
+        }
+    	
         var content = quill.root.innerHTML;
         document.getElementById("content").value = content;
     });
 </script> 
-    
+
+<script>
+    // 폼 유효성 검사 함수
+    function validateForm() {
+        // 카테고리 선택 확인
+        const category = document.getElementById("category").value;
+        if (!category) {
+            alert("카테고리를 선택해 주세요.");
+            document.getElementById("category").focus();
+            return false;
+        }
+
+        // 제목 입력 확인
+        const title = document.getElementById("title").value.trim();
+        if (!title) {
+            alert("제목을 입력해 주세요.");
+            document.getElementById("title").focus();
+            return false;
+        }
+
+        // 내용 입력 확인
+        const content = quill.root.innerHTML.trim(); // Quill의 내용을 가져옴
+        if (content === "<p><br></p>" || content === "") {
+            alert("내용을 입력해 주세요.");
+            return false;
+        }
+        document.getElementById("content").value = content; // 내용을 숨겨진 input에 저장
+
+        // 태그 입력 확인
+        const tags = document.getElementById("tags").value.trim();
+
+	     // 태그 입력 확인
+	     if (!tags) {
+	         alert("태그를 입력해 주세요. 예: #책,#도서관,#책추천");
+	         document.getElementById("tags").focus();
+	         return false; // 입력값이 없으면 폼 제출 중단
+	     }
+	     
+        if (tags) {
+            const tagPattern = /^#([a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+)(,#([a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+))*$/;
+            if (!tagPattern.test(tags)) {
+                alert("태그는 #으로 시작하며 쉼표로 구분해야 합니다. 예: #책,#도서관,#책추천");
+                document.getElementById("tags").focus();
+                return false;
+            }
+        }
+
+        return true; // 모든 유효성 검사를 통과하면 true 반환
+    }
+
+</script>
+
     
 </body>
 </html>

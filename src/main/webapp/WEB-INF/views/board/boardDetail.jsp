@@ -15,23 +15,23 @@
             	<div>
 	                <h5><strong>[${board.categoryName}]</strong> <strong>${board.title}</strong></h5>
             	</div>
-            	 <!-- 드롭다운 -->
-		        <div class="dropdown">
-		            <!-- 아이콘 버튼 -->
-		            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-		                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
-		                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-		                </svg>
-		            </a>
-		            <!-- 드롭다운 메뉴 -->
-		            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		                <c:if test="${sessionScope.loginMember!=null }">
-			                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
-			                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
-			                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-board-no="${board.boardNo}">글 신고</a></li>
-   					 	</c:if>
-		            </ul>
-		        </div>
+		        <c:if test="${sessionScope.loginMember!=null }">
+	            	 <!-- 드롭다운 -->
+			        <div class="dropdown">
+			            <!-- 아이콘 버튼 -->
+			            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots dropdown-icon" viewBox="0 0 16 16">
+			                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+			                </svg>
+			            </a>
+			            <!-- 드롭다운 메뉴 -->
+			            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				                <li><a class="dropdown-item" href="${path}/board/edit.do?boardNo=${board.boardNo}">글 수정</a></li>
+				                <li><a class="dropdown-item" href="${path}/board/delete.do?boardNo=${board.boardNo}" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">글 삭제</a></li>
+				                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reportModal" data-board-no="${board.boardNo}">글 신고</a></li>
+			            </ul>
+			        </div>
+   				</c:if>
             </div>
             <!-- 게시글 정보 -->
             <div class="board-meta text-muted py-1 mb-3">
