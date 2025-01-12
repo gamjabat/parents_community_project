@@ -25,6 +25,8 @@ import com.gamjabat.service.member.MemberService;
 		servletNames = {
 			"BoardCommentInsertServlet"
 			,"BoardCommentDeleteServlet"
+			,"BoardCommentLikeServlet"
+			,"BoardCommentUpdateServlet"
 			,"MypageBoardListServlet"
 			,"MypageCommentServlet"
 			,"MypageInfoUpdateServlet"
@@ -33,7 +35,9 @@ import com.gamjabat.service.member.MemberService;
 			,"UpdateMemberInfoServlet"
 			,"MypageReportServlet"
 			,"MypageReportDetailServlet"
+			
 		} )
+
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
     /**

@@ -86,8 +86,10 @@ public class BoardDetailServlet extends HttpServlet {
 		try {
 			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
 		} catch (NumberFormatException e) {
-			numPerPage=5;
+			numPerPage=30;
 		}
+		
+		
 
 		Map<String,Object> param=Map.of("cPage",cPage,"numPerPage",numPerPage,"boardNo",boardNo);
 		List<BoardComments> comments=new BoardService().selectBoardCommentByNo(param);

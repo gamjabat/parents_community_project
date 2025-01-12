@@ -14,7 +14,7 @@ import com.gamjabat.board.model.service.BoardService;
 /**
  * Servlet implementation class BoardLikeServlet
  */
-@WebServlet("/board/commentisLiked.do")
+@WebServlet(name = "BoardCommentLikeServlet", asyncSupported = true, urlPatterns = { "/board/commentisLiked.do" })
 public class BoardCommentLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
