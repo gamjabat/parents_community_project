@@ -277,6 +277,15 @@ public class BoardDao {
     }
     
 
+    public int selectBoardCountCate(SqlSession session, String cateName) {
+    	
+    	return session.selectOne("board.selectBoardCountCate", cateName);
+
+    }
+    
+    
+    
+
     
     // 태그 처리
     
@@ -319,8 +328,4 @@ public class BoardDao {
     public List<Board> selectBoardsByContentHashtag(SqlSession session, String hashtag) {
         return session.selectList("board.selectBoardsByContentHashtag", hashtag);
     }
-
-    
-
-    
 }

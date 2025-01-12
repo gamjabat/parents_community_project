@@ -12,22 +12,17 @@
 
 <div class="board-header">
     <div class="board-category">
-        <button class="btn-category">전체글</button>
-        <button class="btn-category hot">HOT</button>
-        <span class="category-depth"></span>
+    	<c:if test="${categoryName != null }">
+        	<div class="btn-category">${categoryName } 게시판</div>
+        </c:if>
+        <c:if test="${categoryName == null }">
+        	<div class="btn-category">${board[0].categoryName } 게시판</div>
+        </c:if>
     </div>
-    
     <c:if test="${sessionScope.loginMember!=null }">
-    <a href="${path}/boardwrite.do" class="write-btn">글쓰기</a>
-    </c:if>    
-    <c:if test="${sessionScope.loginMember == null}">
-    <p class="info-message">로그인 상태에서만 게시글을 작성할 수 있습니다.</p>
-	</c:if>
-    
-  
+    	<a href="${path}/boardwrite.do" class="write-btn">글쓰기</a>
+    </c:if>   
 </div>
-
-
 
 <div class="board-container">
     <table class="board-table">

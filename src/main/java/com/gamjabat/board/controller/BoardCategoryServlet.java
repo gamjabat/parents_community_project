@@ -32,8 +32,8 @@ public class BoardCategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		// URL에서 카테고리 파라미터 가져오기
+        String categoryName = request.getParameter("category"); 
 		// 페이징 처리
 		int cPage;
 		try {
@@ -52,7 +52,7 @@ public class BoardCategoryServlet extends HttpServlet {
 		
 		// pageBar 생성하기
 		
-		int totalData = new BoardService().selectBoardCount();
+		int totalData = new BoardService().selectBoardCountByCate(categoryName);
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
 		int pageBarSize=5; // 페이지바에 출력될 숫자의 개수
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -70,6 +70,7 @@ public class BoardCategoryServlet extends HttpServlet {
 					  request.getRequestURI()
 					  +"?cPage="+(pageNo-1)
 					  +"&numPerPage=" + numPerPage
+					  +"&category="+categoryName
 					  +"'>이전</a>";
 			pageBar+="</li>";
 		}
@@ -85,6 +86,7 @@ public class BoardCategoryServlet extends HttpServlet {
 						  request.getRequestURI()
 						  +"?cPage="+(pageNo)
 						  +"&numPerPage=" + numPerPage
+						  +"&category="+categoryName
 						  +"'>"+pageNo+"</a>";
 				pageBar+="</li>";
 		
@@ -103,62 +105,14 @@ public class BoardCategoryServlet extends HttpServlet {
 					  request.getRequestURI()
 					  +"?cPage="+(pageNo)
 					  +"&numPerPage=" + numPerPage
+					  +"&category="+categoryName
 					  +"'>다음</a>";
 			pageBar+="</li>";
 		}
 		pageBar+="</ul>";
 		
 		request.setAttribute("pageBar", pageBar);
-		
-		
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		// URL에서 카테고리 파라미터 가져오기
-        String categoryName = request.getParameter("category"); 
-        
         BoardService boardService = new BoardService();
         List<Board> boardList;
 
